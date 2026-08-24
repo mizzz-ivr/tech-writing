@@ -5,8 +5,6 @@ topics:
   - ai-development
   - individual-development
   - github
-source_repositories:
-  - https://github.com/ivRooom/Herta
 published:
   qiita: null
   zenn: null
@@ -343,7 +341,15 @@ AIにコードを書いてもらうところから始めましたが、最近は
 
 でも「Repository is the Source of Truth」は、今のところかなり残りそうなルールです。
 
-## 参考
+## 関連・参考資料
 
-- Herta: https://github.com/ivRooom/Herta
-- Command Palette Hybrid / Vector Search Issue: https://github.com/ivRooom/Herta/issues/267
+今回の運用と近い考え方や、AIコーディングエージェントへRepositoryのコンテキストを渡す方法を考えるうえで参考になる公開資料です。
+
+- [リポジトリこそがSSOTであり、コンテキストである](https://zenn.dev/gyu07/articles/ff7613864b23bc)
+  - Repositoryそのものをコーディングエージェントの現在コンテキストとして捉える、かなり近いテーマの記事です。
+- [Context Engineering for Coding Agents - Martin Fowler](https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html)
+  - コーディングエージェントに「何を見せるか」を設計するContext Engineeringについて整理されています。
+- [AIに毎回プロジェクトを説明するのをやめる — AGENTS.mdで、コーディングエージェントに「リポジトリの歩き方」を1枚で渡す実践ガイド - Qiita](https://qiita.com/akira_papa_AI/items/3fd7d14fc53d13a27f4a)
+  - Repository内にエージェント向けのルールを置き、毎回同じ説明をしない運用の実践例です。
+- [Adding repository custom instructions for GitHub Copilot in your IDE - GitHub Docs](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions-in-your-ide/add-repository-instructions-in-your-ide?tool=vscode)
+  - Repository-wide instructionsやAGENTS.mdなど、Repository固有のコンテキストをAIへ渡す公式ドキュメントです。
