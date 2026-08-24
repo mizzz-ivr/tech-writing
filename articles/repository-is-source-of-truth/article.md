@@ -1,12 +1,12 @@
 ---
 title: "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話"
-status: review
+status: published
 topics:
   - ai-development
   - individual-development
   - github
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e
   zenn: null
 ---
 
