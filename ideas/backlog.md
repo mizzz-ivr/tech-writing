@@ -25,6 +25,14 @@
 - [ ] 個人開発にSBOMとGrypeを入れてみた話
 - [ ] CIをDefinition of DoneとしてAI開発エージェントに守らせる
 
+## Cloudflare / Infrastructure
+
+- [ ] 2026年版：Cloudflare Email Sending SMTPで独自ドメインメールを送信した話
+  - mizzz.jpで実際に設定・検証してから記事化する
+  - 2022年の「Cloudflare Email Routing + Gmail SMTP」方式との差分を扱う
+  - SMTP、SPF、DKIM、DMARC、Workers Paid、Betaの注意点を実測ベースで書く
+  - 調査・実施ログ: `articles/cloudflare-email-sending-smtp/notes.md`
+
 ## 投稿ペース
 
 - 目安: 3〜7日に1本
