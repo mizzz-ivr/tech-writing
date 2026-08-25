@@ -4,33 +4,47 @@
 
 実施前の調査・記事化準備。
 
-mizzz.jp でCloudflare Email Sending SMTPを実際に設定し、送受信・認証・迷惑メール判定まで確認してから `article.md` を作る。
+ブランド / Identity / Domain / Contact Architectureの正本に合わせ、**主系メールドメインは `ivrm.jp`、`mizzz.jp` はlegacy互換**として進める。
 
-## 今回の実環境
+## Source of Truth
 
-- Domain: `mizzz.jp`
+Notion:
+
+- Brand / Identity / Domain / Contact Architecture 2026-08-25
+- 公開ブランドのルート: `ivrm.jp`
+- 個人ポートフォリオ canonical: `mizzz.ivrm.jp`
+- `mizzz.jp`: Webの主URLではなく、旧リンク互換とメール資産のため維持
+
+メールアドレス:
+
+- `contact@ivrm.jp` — ivRooom / Team / Community / Project
+- `mizzz@ivrm.jp` — Personal / Developer identity
+- `security@ivrm.jp` — Security
+- `contact@mizzz.jp` — legacy alias
+
+## 今回の実環境・方針
+
 - Registrar: ムームードメイン
 - Authoritative DNS / Nameserver: Cloudflare
-- Inbound mail: 現在正常稼働中。送信設定時に既存MXを壊さない
 - Lolipop: 解約済み。古い設計資料から除外する
-- Outbound mail: Cloudflare Email Service / Email Sending SMTPを採用
+- Outbound: Cloudflare Email Service / Email Sending SMTP
+- Primary sending domain: `ivrm.jp`
+- Legacy domain: `mizzz.jp`
 
-受信経路の具体的なMX・転送先はCloudflareの現行設定で確認してから記事へ記載する。推測で書かない。
+受信経路の具体的なMX / 転送先 / Routing状態はCloudflareの現行設定で確認してから記載する。推測しない。
 
 ## 記事の核
 
-2022年に公開されたQiita記事では、Cloudflare Email Routingで独自ドメイン宛メールを受信し、送信はGmailの `smtp.gmail.com` とGoogleアプリパスワードを利用していた。
+2022年の参考記事ではCloudflare Email Routingで受信し、送信はGmail SMTP + Googleアプリパスワードだった。
 
-2026年6月、Cloudflare Email Serviceに認証付きSMTP submissionが追加されたため、送信側もCloudflareへ寄せられるようになった。
+2026年にはCloudflare Email ServiceのAuthenticated SMTP submissionが利用できるため、送信側もCloudflareへ寄せられる。
 
-今回の記事では、mizzz.jpで実際に移行してみて、2022年方式から何が変わったのかを記録する。
+今回の記事では単なるSMTP設定手順ではなく、**ブランド整理で主メールドメインを `ivrm.jp` に決めたうえで、legacyの `mizzz.jp` を無駄に主系へ残さない**ところまで含める。
 
 参考記事:
 - https://qiita.com/rokuosan/items/e3415ea30ad5e48d3b0f
 
-## 2026-08-25時点で公式確認できた仕様
-
-Cloudflare Email Service SMTP:
+## SMTP仕様メモ
 
 ```text
 Host: smtp.mx.cloudflare.net
@@ -42,135 +56,109 @@ Password: Cloudflare API Token
 Required permission: Email Sending: Edit
 ```
 
-重要:
+公式確認事項:
 
-- `587` + STARTTLS は非対応
-- outbound submissionで25番ポートは使わない
 - sender domainはEmail SendingへOnboard済みである必要がある
-- SMTP submissionもREST API / Workers bindingと同じ送信pipelineを通る
-- DKIM / ARC signingとDelivery Logsを利用できる
+- SMTP submissionはCloudflare Email Serviceのdelivery pipelineを通る
+- Delivery Logsを確認できる
 - API TokenはSecretとして扱う
 
-公式:
-- https://developers.cloudflare.com/email-service/api/send-emails/smtp/
-- https://developers.cloudflare.com/email-service/examples/email-sending/smtp/
-- https://developers.cloudflare.com/email-service/get-started/send-emails/
-- https://developers.cloudflare.com/changelog/product/email-service/
+## 今回の作業順
 
-## 料金メモ
+### Phase 0: 変更前状態を確定
 
-2026-08-25時点:
+- [ ] `ivrm.jp` のMX / SPF / DKIM / DMARCを記録
+- [ ] `mizzz.jp` のMX / SPF / DKIM / DMARCを記録
+- [ ] Email Routing / Email Serviceの現在状態を確認
+- [ ] `mizzz@ivrm.jp` の受信可否確認
+- [ ] `contact@ivrm.jp` の受信可否確認
+- [ ] `security@ivrm.jp` の受信可否確認
+- [ ] `contact@mizzz.jp` の受信可否確認
+- [ ] 現在のrouting / destinationを非公開メモとして確認
+- [ ] 変更前の受信テスト
 
-- arbitrary recipientsへのEmail SendingはWorkers Paidが必要
-- Workers Paidは3,000通/月を含む
-- 超過は1,000通あたり$0.35
-- Email RoutingのinboundはFree / PaidともUnlimited
+### Phase 1: `ivrm.jp` を主系としてOnboard
 
-公式:
-- https://developers.cloudflare.com/email-service/platform/pricing/
+- [ ] Email Service → Email Sendingで `ivrm.jp` をOnboard
+- [ ] Onboard前DNS previewを撮影
+- [ ] 実際に追加されたDNSを記録
+- [ ] 既存受信用MXが壊れていないことを確認
+- [ ] SPF重複がないことを確認
+- [ ] DKIM / DMARC状態確認
 
-「Cloudflareだけで無料」は現在の要件だと正確ではない。2022年記事との差分として記事内で明示する。
+### Phase 2: SMTP送信
 
-## 設定前に記録すること
-
-- [ ] Cloudflare DNSの現在のMX
-- [ ] SPF
-- [ ] DKIM
-- [ ] DMARC
-- [ ] 現在使えている独自ドメイン受信アドレス
-- [ ] 転送先 / 受信経路
-- [ ] 変更前の受信テスト結果
-
-Secret、Token、個人用転送先など公開不要な値は記事メモにも残さない。
-
-## 実施予定
-
-- [ ] Cloudflare Dashboardで `mizzz.jp` を Email Service → Email Sending にOnboard
-- [ ] Onboard時にCloudflareが要求したDNSレコードを記録
-- [ ] 既存の受信用MXが変更されていないことを確認
 - [ ] `Email Sending: Edit` の専用API Tokenを作成
-- [ ] curl等で最小SMTP送信テスト
-- [ ] Gmail等の実使用クライアントへSMTPを設定
-- [ ] Gmail宛に送信
-- [ ] Outlook等の別プロバイダ宛にも送信
-- [ ] 受信メールヘッダーでSPF / DKIM / DMARCを確認
-- [ ] Cloudflare Delivery LogsとMessage-IDを確認
-- [ ] 送信設定後もmizzz.jp宛の受信が正常なことを確認
-- [ ] 迷惑メール判定を確認
-- [ ] 詰まった点をその場で追記
+- [ ] Tokenはパスワードマネージャーへ保存しGit / Notion / 記事へ残さない
+- [ ] curlで `mizzz@ivrm.jp` → 検証用外部アドレスへ送信
+- [ ] Delivery Logs確認
+- [ ] SPF / DKIM / DMARC確認
+- [ ] Gmail / Outlook等で到着・迷惑メール判定確認
 
-## Gmail等へ登録する場合の値
+### Phase 3: 用途別Fromを確認
 
-```text
-SMTP server: smtp.mx.cloudflare.net
-Port: 465
-SSL/TLS: enabled (Implicit TLS)
-Username: api_token
-Password: <Cloudflare API Token>
-From: <使用する @mizzz.jp アドレス>
-```
+- [ ] `contact@ivrm.jp` の送信要件確認
+- [ ] `security@ivrm.jp` の送信要件確認
+- [ ] 問い合わせフォームのFrom / Reply-To設計確認
 
-記事・スクリーンショットではAPI Tokenを絶対に表示しない。
+### Phase 4: legacy `mizzz.jp` を判断
 
-## DNSで特に確認すること
+- [ ] `contact@mizzz.jp` が受信onlyで十分か判断
+- [ ] 旧名義からの送信が必要なら `mizzz.jp` もEmail SendingへOnboard
+- [ ] 不要なら送信ドメインを増やさずlegacy受信のみ維持
 
-- 既存の受信用MXをEmail Sending導入だけを理由に削除しない
-- SPF TXTを複数作らない
-- Cloudflareが追加する送信用レコードと既存レコードの整合を取る
-- DKIMは実際にOnboardで発行されたselector / valueを記録する
-- DMARCは現在設定を確認してから変更する
-
-この部分は実際のmizzz.jp設定完了後に、具体的なレコード種別と確認結果へ更新する。
-
-## 記事タイトル候補
+## 記事タイトル
 
 第一候補:
 
 > 2026年版：Cloudflare Email Sending SMTPで独自ドメインメールを送信する
 
-候補:
+記事内では実環境として `ivrm.jp` / `mizzz.jp` の役割分担を扱うが、タイトルは特定ブランドに閉じず一般化する。
 
-- Cloudflareだけで独自ドメインメールを送信する — Email Sending SMTPを試した
-- Gmail SMTPをやめてCloudflare Email Sending SMTPへ移行した
-- 2022年のCloudflare Email Routing構成を2026年版に更新してみた
+## 記事構成
 
-「無料」はWorkers Paid要件があるためタイトルへ入れない。
-
-## 記事構成案
-
-1. 受信はできていたが、mizzz.jp名義で送信もしたくなった
-2. 2022年のQiita記事を参考にした
-3. 調べると2026年にはCloudflare自身のSMTPが増えていた
-4. mizzz.jpの現在構成
-5. Email SendingをOnboardする
-6. API Tokenを作る
-7. `smtp.mx.cloudflare.net:465` で最小テスト
-8. Gmail等のクライアントへ設定する
-9. SPF / DKIM / DMARCを確認する
-10. 2022年方式と2026年方式を比較する
-11. Workers Paid / Beta / Secret管理の注意点
-12. 実際に運用してみた結論
-
-## 2022年方式との比較表用メモ
-
-| 項目 | 2022年参考記事 | 今回の2026年構成 |
-|---|---|---|
-| 受信 | Cloudflare Email Routing | 現行受信経路を維持・確認 |
-| 送信SMTP | `smtp.gmail.com` | `smtp.mx.cloudflare.net` |
-| 送信認証 | Googleアプリパスワード | Cloudflare API Token |
-| SMTP Port | Gmail側設定 | `465` / Implicit TLS |
-| 送信基盤 | Gmail | Cloudflare Email Service |
-| Cloudflare Email Sending | 当時なし | 2026年6月にSMTP Beta追加 |
-| 費用 | Gmail利用前提で無料構成 | arbitrary recipientsはWorkers Paid必要 |
+1. 独自ドメイン受信はある。次は送信経路を作りたい
+2. 2022年のCloudflare Email Routing + Gmail SMTP方式
+3. 2026年のCloudflare Email Sending SMTP
+4. 先に主メールドメインを `ivrm.jp` に決めた
+5. `ivrm.jp` / `mizzz.jp` の変更前DNSを記録
+6. `ivrm.jp` をEmail SendingへOnboard
+7. API Tokenを作る
+8. `smtp.mx.cloudflare.net:465` で `mizzz@ivrm.jp` から送る
+9. Delivery Logs / SPF / DKIM / DMARCを確認
+10. 既存受信を再確認
+11. `mizzz.jp` を送信可能にする必要があるか判断
+12. 2022年方式との比較
+13. 制約・料金・Secret管理
+14. 実際に使ってみた結論
 
 ## 公開判断
 
-設定手順だけではなく、少なくとも以下が揃ってから公開する。
+最低限以下が揃ってから公開する。
 
-- 実際の送信成功
-- 送信後も受信が壊れていない
-- SPF / DKIM / DMARCの確認結果
-- Delivery Logsの確認
-- 実際に詰まった点が1つ以上ある、または「特に詰まらなかった」ことを検証内容付きで説明できる
+- `ivrm.jp` のOnboard実測
+- `mizzz@ivrm.jp` から実際に送信成功
+- SPF / DKIM / DMARCの実測結果
+- Delivery Logs確認
+- 変更後も受信が壊れていない
+- `contact@mizzz.jp` をlegacyとしてどう扱うか決定
+- 実作業で詰まった点、または詰まらなかった理由を検証結果付きで説明できる
 
-STYLE_GUIDEの方針どおり、一般的なCloudflare SMTPの説明だけの記事にはしない。
+## Secret / 公開情報ルール
+
+記事・GitHub・Notion・スクリーンショットへ載せないもの:
+
+- API Token
+- password
+- 個人用destination address
+- 不要なAccount ID / Zone ID
+- 公開不要なMessage-ID
+- Billing情報
+
+## 公式参考資料
+
+- https://developers.cloudflare.com/email-service/get-started/send-emails/
+- https://developers.cloudflare.com/email-service/api/send-emails/smtp/
+- https://developers.cloudflare.com/email-service/configuration/domains/
+- https://developers.cloudflare.com/email-service/platform/pricing/
+- https://developers.cloudflare.com/changelog/product/email-service/
