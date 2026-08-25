@@ -63,19 +63,87 @@ Required permission: Email Sending: Edit
 - Delivery Logsを確認できる
 - API TokenはSecretとして扱う
 
+## 2026-08-25 Phase 0 実測
+
+Cloudflare Dashboardの変更前スクリーンショットを取得済み。**無加工画像にはdestination address等が含まれるため、公開用assetsへはまだ追加しない。公開時にマスク / cropしたコピーを使用する。**
+
+### `ivrm.jp` DNS
+
+確認できたもの:
+
+- Cloudflare Email Routing用MX: `route1.mx.cloudflare.net` / `route2.mx.cloudflare.net` / `route3.mx.cloudflare.net`
+- root SPF: `v=spf1 include:_spf.mx.cloudflare.net ~all`
+- Cloudflare DKIM (`cf2024-1._domainkey...`) が存在
+- `_dmarc.ivrm.jp` が存在し、現状 `p=none`
+- `send.ivrm.jp` にAmazon SESのfeedback MXが存在
+- `send.ivrm.jp` にAmazon SESをincludeするSPFが存在
+- `resend._domainkey...` のレコードが存在
+
+**重要:** `ivrm.jp` にはCloudflare Email Routing以外の既存送信系DNSが残っているため、Email Sending Onboard時に無条件で削除・置換しない。特にSES / Resend系の現行利用有無を別途確認する。
+
+スクリーンショットは33件中1〜25件表示のため内部証跡としては十分。ただし公開記事ではA / CNAME等の無関係なレコードやorigin IPが写るため、MX / TXT中心にfilterまたはcropした公開用画像を作る。
+
+### `mizzz.jp` DNS
+
+確認できたもの:
+
+- Cloudflare Email Routing用MX: `route1.mx.cloudflare.net` / `route2.mx.cloudflare.net` / `route3.mx.cloudflare.net`
+- root SPF: `v=spf1 include:_spf.mx.cloudflare.net ~all`
+- Cloudflare DKIM (`cf2024-1._domainkey...`) が存在
+- `_dmarc.mizzz.jp` が存在し、現状 `p=none`
+- DNSレコードは全8件が1画面に収まっており、変更前証跡として良好
+
+### Email Routing
+
+`ivrm.jp`:
+
+- Email Routing: 有効
+- DNS records: ロック済み
+- `mizzz@ivrm.jp` routing rule: 存在 / 有効
+- `contact@ivrm.jp` routing rule: 存在 / 有効
+- `security@ivrm.jp` routing rule: 存在 / 有効
+- その他の用途別aliasも複数存在
+- Catch-allは有効で、未一致メールはDropする設定
+
+`mizzz.jp`:
+
+- Email Routing: 有効
+- DNS records: ロック済み
+- `contact@mizzz.jp` routing rule: 存在 / 有効
+- Catch-all: 無効
+
+Destination Addresses:
+
+- account共有のverified destinationが複数存在することを確認
+- 実アドレスは記事 / GitHubへ記録しない
+
+### スクリーンショット評価
+
+取得済み6枚のうち、記事素材候補として優先するもの:
+
+1. `ivrm.jp` 変更前DNS — 内部証跡OK。公開時はMX/TXT中心にcrop/filter
+2. `mizzz.jp` 変更前DNS — そのまま構成説明に使いやすい。公開時に不要情報をマスク
+3. `mizzz.jp` Email Routing rule — legacy aliasの現状説明に有効
+4. `ivrm.jp` Email Routing rules —主系の現行alias構成説明に有効
+
+Destination Addresses一覧の2枚は内容が重複するため、記事では原則1枚も使わず、必要な場合だけ1枚を強くマスクして補助画像にする。
+
+Routing ruleが存在することは確認できたが、**実際に現在メールが配送されることまではスクリーンショットだけでは証明できない**。次に変更前受信テストを実施する。
+
 ## 今回の作業順
 
 ### Phase 0: 変更前状態を確定
 
-- [ ] `ivrm.jp` のMX / SPF / DKIM / DMARCを記録
-- [ ] `mizzz.jp` のMX / SPF / DKIM / DMARCを記録
-- [ ] Email Routing / Email Serviceの現在状態を確認
+- [x] `ivrm.jp` のMX / SPF / DKIM / DMARCを記録
+- [x] `mizzz.jp` のMX / SPF / DKIM / DMARCを記録
+- [x] Email Routing / Email Serviceの現在状態を確認
 - [ ] `mizzz@ivrm.jp` の受信可否確認
 - [ ] `contact@ivrm.jp` の受信可否確認
 - [ ] `security@ivrm.jp` の受信可否確認
 - [ ] `contact@mizzz.jp` の受信可否確認
-- [ ] 現在のrouting / destinationを非公開メモとして確認
+- [x] 現在のrouting / destinationを非公開メモとして確認
 - [ ] 変更前の受信テスト
+- [ ] Email Sendingの変更前Overviewを撮影
 
 ### Phase 1: `ivrm.jp` を主系としてOnboard
 
