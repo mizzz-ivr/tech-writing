@@ -4,7 +4,31 @@
 
 ## 次に着手
 
+- [ ] GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた
+  - 本文: review
+  - スクリーンショット4枚: 撮影済み
+  - 残り: Qiita画像アップロード / Preview / 公開
 - [ ] 個人開発でもPRを切ってCIを通すようにしている理由
+
+## Profile Signal シリーズ
+
+- [ ] GitHubプロフィールをライブな開発ダッシュボードにしてみる
+  - LIVE SIGNAL
+  - CURRENT FOCUS
+  - DEV PULSE
+  - NOW BUILDING
+  - ACTIVITY STREAM
+- [ ] 自作GitHubプロフィール機能をGitHub ActionとしてOSS化してみた
+  - Widget selector
+  - Preset
+  - Theme
+  - Marker
+  - 導入手順
+- [ ] GitHub ActionsだけでWeekly / Monthly開発レポートを自動生成する
+  - Weekly recap
+  - Monthly report
+  - Achievements
+  - CI / Project health
 
 ## AI開発 / 開発運用
 
