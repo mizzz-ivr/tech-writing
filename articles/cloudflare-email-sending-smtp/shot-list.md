@@ -11,32 +11,56 @@
 - ブラウザ全画面ではなく説明対象UIが読める範囲へトリミングする
 - 作業前 / 作業後を同じ粒度で撮る
 - 元画像は加工前も保持し、公開用コピーのみマスクする
+- 無加工原本は公開Repositoryのassetsへ置かない
 
-## 必須画像 10枚
+## 取得済みBefore素材
+
+- [x] `ivrm.jp` DNS一覧
+- [x] `mizzz.jp` DNS一覧
+- [x] `ivrm.jp` Email Routing rules
+- [x] `mizzz.jp` Email Routing rule
+- [x] Destination Addresses一覧（内部証跡。公開記事では原則不使用）
+- [x] Email Sending変更前Overview / Workers Paid要求画面
+
+## 必須画像
+
+### 00-email-sending-workers-paid-gate.png
+
+**状態:** 取得済み
+
+**タイミング:** Freeプランのまま `Email Sending` を最初に開いた時
+
+**撮るもの:** 「メール送信は現在、Workers Paidプランでのみ利用可能」と表示される画面。
+
+**記事で伝えること:** 今回の実環境ではEmail Sending有効化前にWorkers Paidが実装gateになった。
+
+**公開時:** Account / Billing情報が不要に写っていないか再確認する。
 
 ### 01-before-ivrm-dns.png
 
-**タイミング:** 何も変更する前
+**状態:** 原本取得済み
 
-**撮るもの:** `ivrm.jp` のメール関連DNS。MX / SPF / DKIM / DMARCが分かる範囲。
+**撮るもの:** `ivrm.jp` のメール関連DNS。MX / SPF / DKIM / DMARC、必要に応じてSES / Resend系既存レコードが分かる範囲。
 
-**記事で伝えること:** 主メールドメイン `ivrm.jp` の変更前状態を保存した。
+**記事で伝えること:** 既存受信と既存送信DNSを把握してから変更した。
+
+**公開時:** MX / TXT中心にcropし、無関係なA / CNAME / origin IPを除外する。
 
 ### 02-before-mizzz-dns.png
 
-**タイミング:** 何も変更する前
+**状態:** 原本取得済み
 
 **撮るもの:** `mizzz.jp` のメール関連DNS。
 
-**記事で伝えること:** `mizzz.jp` はlegacy aliasとして維持するため、こちらも変更前状態を記録した。
+**記事で伝えること:** `mizzz.jp` はlegacy aliasとして維持するため、変更前状態も記録した。
 
 ### 03-onboard-ivrm-domain.png
 
-**タイミング:** `Email Sending > Onboard Domain`
+**タイミング:** Workers Paid採用後、`Email Sending > Onboard Domain`
 
 **撮るもの:** `ivrm.jp` を選択する画面。
 
-**記事で伝えること:** 送信の主系は `ivrm.jp` から構築した。
+**記事で伝えること:** 送信ドメインは `ivrm.jp` から構築した。
 
 **注意:** Confirm / Doneを押す前に撮る。
 
@@ -68,11 +92,13 @@
 
 ### 07-curl-smtp-success.png
 
-**タイミング:** `mizzz@ivrm.jp` から最初のSMTP送信に成功した時
+**タイミング:** `ivmz@ivrm.jp` から最初のSMTP送信に成功した時
 
 **撮るもの:** `curl` 実行と成功が分かるターミナル。
 
 **マスク:** Token、検証先アドレス。
+
+**記事で伝えること:** Unified Personal / Generalの送信元として `ivmz@ivrm.jp` を成立させた。
 
 ### 08-delivery-logs.png
 
@@ -94,27 +120,50 @@
 
 **タイミング:** `ivrm.jp` Email Sending設定完了後
 
-**撮るもの:** 変更前に受信できていたアドレスへ外部から送って正常受信できたことが分かる画面。
+**撮るもの:** 変更前に受信できていたアドレスへ外部から送って正常受信できたことが分かる代表画面。
 
 **記事で伝えること:** 送信追加によって既存受信を壊していない。
 
+## 受信Identity確認用素材
+
+Inbox全体のスクリーンショットは不要。代表1枚だけでよい。
+
+受信結果は文章 / 表で次を記録する。
+
+- `ivmz@ivrm.jp` — Unified Personal / General
+- `ivuru@ivrm.jp` — person-facing
+- `mizzz@ivrm.jp` — Developer / OSS
+- `contact@ivrm.jp` — ivRooom / Team
+- `security@ivrm.jp` — Security
+- `contact@mizzz.jp` — legacy
+
+複数宛先を1通で同報してよいが、各Toとしてroutingされたことを個別に確認する。
+
 ## 追加で撮る可能性がある画像
 
-### 11-contact-ivrm-send.png
+### 11-ivuru-send.png
 
-`contact@ivrm.jp` を実際の送信元として使う場合のみ。
+`ivuru@ivrm.jp` を「いゔる。」として実際の送信元に使う検証を記事に載せる場合。
 
-### 12-security-ivrm-send.png
+### 12-mizzz-send.png
 
-`security@ivrm.jp` の送信経路を用意する場合のみ。公開画面に不要なセキュリティ運用情報を含めない。
+`mizzz@ivrm.jp` をDeveloper / OSS用途の送信元として確認する場合。
 
-### 13-mizzz-legacy-decision.png
+### 13-contact-ivrm-send.png
+
+`contact@ivrm.jp` をivRooom / Teamの送信元として使う場合。
+
+### 14-security-ivrm-send.png
+
+`security@ivrm.jp` の送信経路を用意する場合。不要なセキュリティ運用情報を含めない。
+
+### 15-mizzz-legacy-decision.png
 
 `mizzz.jp` をEmail SendingへOnboardする場合のみ。
 
-記事上は「legacy aliasを受信onlyにした」ならスクリーンショット不要。送信も残す判断をした場合だけ、追加Onboardの差分を撮る。
+`contact@mizzz.jp` を受信onlyにした場合はスクリーンショット不要。送信も残す場合だけ追加Onboardの差分を撮る。
 
-### 14-error-and-fix.png
+### 16-error-and-fix.png
 
 設定中にエラーが発生した場合は最優先で残す。
 
@@ -125,8 +174,9 @@
 - TLS / port設定ミス
 - DNS verification待ち
 - SPF重複
+- 既存SES / Resend系DNSとの競合
 
-### 15-email-sending-overview.png
+### 17-email-sending-overview.png
 
 最終的なEmail Sending domain status一覧。記事の完了状態を示す必要がある場合のみ使う。
 
@@ -141,22 +191,25 @@
 
 ## 作業順 = 撮影順
 
-1. `ivrm.jp` 変更前DNS → `01`
-2. `mizzz.jp` 変更前DNS → `02`
-3. `ivrm.jp` Email Sending Onboard → `03`
-4. DNS追加preview → `04`
-5. `ivrm.jp` Onboard完了・DNS確認 → `05`
-6. API Token権限設定 → `06`
-7. `mizzz@ivrm.jp` からcurl SMTP送信 → `07`
-8. Delivery Logs → `08`
-9. 受信メール認証結果 → `09`
-10. 既存受信の再テスト → `10`
-11. 用途別Fromを追加するなら `11` / `12`
-12. `mizzz.jp` 送信を残す場合だけ `13`
-13. エラーが起きたらその場で `14`
+1. `ivrm.jp` 変更前DNS → `01` ✅
+2. `mizzz.jp` 変更前DNS → `02` ✅
+3. Email Sending Free / Workers Paid gate → `00` ✅
+4. `ivmz@ivrm.jp` を含む受信Identityを完成・受信確認
+5. Workers Paid採用判断
+6. 採用する場合 `ivrm.jp` Email Sending Onboard → `03`
+7. DNS追加preview → `04`
+8. `ivrm.jp` Onboard完了・DNS確認 → `05`
+9. API Token権限設定 → `06`
+10. `ivmz@ivrm.jp` からcurl SMTP送信 → `07`
+11. Delivery Logs → `08`
+12. 受信メール認証結果 → `09`
+13. 既存受信の再テスト → `10`
+14. 用途別Fromを記事に載せる場合 `11`〜`14`
+15. `mizzz.jp` 送信を残す場合だけ `15`
+16. エラーが起きたらその場で `16`
 
-## 最初に絶対やること
+## 次に絶対やること
 
-**Onboard前に `01` と `02` を撮る。**
+**Email Sending Onboardより先に `ivmz@ivrm.jp` のEmail Routingを作り、`ivmz` / `ivuru` / `mizzz` / `contact` / `security` / legacyの受信を実測する。**
 
-今回の記事では「主系を `ivrm.jp` に寄せ、`mizzz.jp` をlegacyとして必要最小限に残した」という判断自体が重要なので、2ドメインのbefore状態が記事の根拠になる。
+その後でWorkers Paidを採用するか判断し、採用した場合だけOnboardへ進む。
