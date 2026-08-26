@@ -6,11 +6,7 @@ Qiita公開用スクリーンショット。2026-08-26撮影済み。
 
 ### 01. Profile README — TODAY全体
 
-ファイル名:
-
-`01-today-activity-overview.jpg`
-
-含まれているもの:
+ファイル名: `01-today-activity-overview.jpg`
 
 - `TODAY // Activity overview`
 - 2026-08-26 JST
@@ -20,21 +16,11 @@ Qiita公開用スクリーンショット。2026-08-26撮影済み。
 - 3 ISSUES DONE
 - Today's signal
 
-用途:
-
-記事冒頭の完成イメージ。この記事の主役として最初に掲載する。
-
-注意:
-
-撮影後もActivityは変化しているため、本文では「撮影時点の実測」と明記する。
+記事冒頭の完成イメージとして掲載する。撮影後もActivityは変化しているため、本文では「撮影時点の実測」と明記する。
 
 ### 02. GitHub Actions — Success
 
-ファイル名:
-
-`02-actions-success.jpg`
-
-含まれているもの:
+ファイル名: `02-actions-success.jpg`
 
 - `Update profile activity #5`
 - Triggered via Schedule
@@ -42,17 +28,11 @@ Qiita公開用スクリーンショット。2026-08-26撮影済み。
 - Status: Success
 - `update-profile-activity` Job success
 
-用途:
-
 GitHub Actionsによる自動更新が実運用で動作している裏付けとして掲載する。
 
 ### 03. Profile Signal — LIVE SIGNAL
 
-ファイル名:
-
-`03-live-signal.jpg`
-
-含まれているもの:
+ファイル名: `03-live-signal.jpg`
 
 - `LIVE SIGNAL // Development status`
 - BUILDING
@@ -60,19 +40,11 @@ GitHub Actionsによる自動更新が実運用で動作している裏付けと
 - 2 DAY STREAK
 - last public activity 19:00 JST
 
-用途:
-
-記事後半の「TODAYからProfile Signalへ拡張した」で掲載する。
-
-Qiita #2ではこの機能を本題として詳しく扱うため、第1弾では仕組みの概要だけに留める。
+記事後半の「TODAYからProfile Signalへ拡張した」で掲載する。Qiita #2ではこの機能を本題として詳しく扱う。
 
 ### 04. Profile Signal — CURRENT FOCUS
 
-ファイル名:
-
-`04-current-focus.jpg`
-
-含まれているもの:
+ファイル名: `04-current-focus.jpg`
 
 - `CURRENT FOCUS // What is moving now`
 - `mizzz-ivr/ivmz-home`
@@ -80,8 +52,6 @@ Qiita #2ではこの機能を本題として詳しく扱うため、第1弾で�
 - score 118 / 101 events
 - TODAY'S STACK
 - TypeScript / CSS / JavaScript
-
-用途:
 
 Profile Signal Phase 1が記事執筆中に実装・Mergeまで進んだことを見せる締めの画像。
 
@@ -108,7 +78,7 @@ Profile Signal Phase 1
 OSS / Template化構想
 ```
 
-`article.md` には現在、次のPlaceholderを配置済み。
+`article.md` には以下のPlaceholderを配置済み。
 
 ```text
 <!-- QIITA_IMAGE: 01-today-activity-overview.jpg -->
@@ -117,26 +87,13 @@ OSS / Template化構想
 <!-- QIITA_IMAGE: 04-current-focus.jpg -->
 ```
 
-Qiita公開画面へ4枚をアップロード後、各PlaceholderをQiitaが発行する画像Markdownへ置換する。
+Qiitaへ4枚をアップロード後、各PlaceholderをQiitaが発行する画像Markdownへ置換する。
 
-## Repository tree画像
+## 今回使わない画像
 
-当初候補だったRepository treeのスクリーンショットは今回は不要。
+Repository treeのスクリーンショットは不要。記事内のtext treeで十分伝わる。
 
-以下は記事内のtext treeで十分伝わるため、画像を増やさない。
-
-```text
-data/activity/YYYY/MM/YYYY-MM-DD.json
-assets/activity-7d.svg
-scripts/update-profile-activity.py
-.github/workflows/update-readme.yml
-```
-
-## Placeholder → 実データ比較
-
-初回Placeholder画像が手元に残っていなくても記事成立に影響なし。
-
-本文で、Merge直後はPlaceholder、Scheduled Workflow後に実データへ置換された経緯を説明する。
+Placeholder → 実データ比較も、初回Placeholder画像がなくても本文説明だけで成立するため必須にしない。
 
 ## Publicチェック
 
