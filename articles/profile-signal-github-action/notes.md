@@ -20,6 +20,7 @@ Merge済み:
 - PR #21 Operations / Project Health / CI Signal
 - PR #22 History / DEV RECAP
 - PR #23 config-driven local GitHub Action / Dogfooding
+- PR #24 Release ZIP installation package
 
 PR #23 Merge後:
 
@@ -27,9 +28,22 @@ PR #23 Merge後:
 - main workflow_dispatch success確認済み
 - 24 tests success
 
-進行中:
+PR #24:
 
-- PR #24 `feat: package Profile Signal for Release ZIP installation`
+- merged: 2026-08-27 JST
+- `.profile-signal/` self-contained runtime追加
+- Release ZIP builder追加
+- generic config / workflow / install guide追加
+- Package CI success
+- clean fixtureへRelease ZIP展開 → full runtime実行 success
+- `minimal`相当で`assets/`無しでもstaging可能なfixture success
+- Existing Profile regression / Public API preview success
+- Codex review 3件修正・resolve済み
+
+次:
+
+- `Profile Signal release` workflow_dispatchで `v0.1.0` を発行する
+- Release ZIP assetを確認する
 
 ## Qiita series
 
@@ -159,7 +173,7 @@ Release ZIPのdefault運用ではAPI Secret不要。
 
 ## Package validation
 
-PR #24では2種類のCIを通す。
+PR #24で2種類のCIを通した。
 
 ### Existing profile regression
 
@@ -180,12 +194,32 @@ README.mdを1行だけ作成
   ↓
 usernameをmizzz-ivrへ置換
   ↓
+presetをCIだけfullへ変更
+  ↓
 .profile-signal/src/orchestrator.py 実行
   ↓
-README marker / state v4 / SVG検証
+7 README marker / state v4 / CI / history / SVG検証
 ```
 
+さらに`minimal` preset相当で`assets/`が存在しない場合でも、配布Workflowのstagingが失敗しないfixtureを追加した。
+
 これで「自分のRepositoryにたまたま依存して動いた」状態を避ける。
+
+## Review fixes
+
+PR #24のCodex Reviewで見つかった内容:
+
+1. workflow_dispatchをfeature branchから実行した場合にmainへ誤pushし得る
+2. `minimal` presetで`assets/`が無いと`git add assets`が失敗する
+3. `0.1.0`入力時にbuilderだけ`v0.1.0`へ正規化され、後段のarchive pathとズレる
+
+対応:
+
+- consumer repositoryのdefault branchをcheckout / push targetとして利用
+- generated pathは存在するものだけstage
+- release versionをWorkflowの最初に1回正規化し、build / release / asset pathで共通利用
+
+3 threadともresolve済み。
 
 ## Release publishing
 
@@ -230,12 +264,13 @@ Workflowが:
 - [x] main workflow_dispatchでlocal Action経由の更新成功
 - [x] Qiita #2公開
 - [x] 第3弾からQiita #2へリンク
-- [ ] PR #24 CI success
-- [ ] PR #24 Merge
+- [x] PR #24 CI success
+- [x] PR #24 Merge
+- [x] Release ZIPをclean fixtureへ導入した結果を確認
+- [x] 記事をRelease/Forkモデルへ更新
 - [ ] `v0.1.0` Release作成
 - [ ] Release ZIP asset確認
-- [ ] Release ZIPをclean fixtureへ導入した結果を最終確認
-- [ ] 記事をRelease/Forkモデルへ最終更新
+- [ ] mainで`.profile-signal` runtime経由のscheduled / workflow_dispatch更新を確認
 - [ ] Screenshot追加
 
 ## Tags
