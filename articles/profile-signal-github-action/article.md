@@ -10,6 +10,12 @@ published:
 
 # 自作GitHubプロフィールWidgetをGitHub Actionとして配布できる形にしてみた
 
+前回の記事では、`TODAY` から始めたGitHubプロフィールを `LIVE SIGNAL`、`CURRENT FOCUS`、`DEV PULSE`、`NOW BUILDING`、`ACTIVITY STREAM` まで広げて、ライブな開発ダッシュボードにしました。
+
+第2弾の記事はこちらです。
+
+https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
+
 GitHubプロフィールに `TODAY` を作って、そこから `LIVE SIGNAL`、`CURRENT FOCUS`、`DEV PULSE`、`NOW BUILDING`、`ACTIVITY STREAM`、`DEV RECAP` まで増やしていきました。
 
 最初は完全に自分用でした。
