@@ -1,7 +1,7 @@
 ---
 title: "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた"
-status: draft
-topics: [GitHub, GitHubActions, GitHubAPI, Python]
+status: review
+topics: [GitHub, GitHubActions, GitHubAPI, Python, 個人開発]
 source_repositories: [mizzz-ivr/mizzz-ivr]
 published:
   qiita: null
@@ -10,41 +10,34 @@ published:
 
 # GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた
 
-GitHubのプロフィールREADMEを更新していて、ふと思いました。
+GitHubのプロフィールREADMEを整理していて、ふと思いました。
 
 プロフィールには「何を作っているか」は書いてあるけど、**今日実際に何をしていたのかは分からない**。
 
-Featured Repositoryや技術スタックは自己紹介としては便利です。ただ、自分の場合は複数の個人開発を並行して触っているので、昨日と今日で一番触っているRepositoryが違うことも珍しくありません。
+自分は複数の個人開発を並行して触っているので、昨日と今日で一番触っているRepositoryが違うことも珍しくありません。Featured Repositoryや技術スタックだけでは、その日の開発の動きまでは見えませんでした。
 
-そこでプロフィール上部に、こんなブロックを自動表示することにしました。
+そこでプロフィール上部に、`TODAY // Activity overview` というブロックを追加しました。
+
+<!-- QIITA_IMAGE: 01-today-activity-overview.jpg -->
+
+画像を撮った2026-08-26 19:00 JST前後では、次のような状態でした。
 
 ```text
-TODAY // Activity overview
-
-87  COMMITS
-13  PRS OPENED
- 3  ISSUES CREATED
- 1  ISSUES DONE
-
-Today's signal
-- COMMIT ...
-- PR ...
-- ISSUE ...
+264  COMMITS
+ 16  PRS OPENED
+  5  ISSUES CREATED
+  3  ISSUES DONE
 ```
 
-数値は手入力ではありません。
+この数字は固定値ではなく、その日の公開GitHub Activityから自動生成しています。その後もActivityが増えれば数字は更新されます。
 
-GitHub ActionsがGitHub APIからその日の公開Activityを取得し、README、7日グラフ、日次JSONを自動更新しています。
+READMEだけでなく、日次JSONと7日グラフもRepository内へ保存し、GitHub Actionsから定期更新する構成にしました。
 
-今回は、この仕組みを作るときに考えたことと、実際の構成をまとめます。
+## 欲しかったのは累計Statsではなく「今日」だった
 
-## 最初はGitHub Stats系のカードを置こうとしていた
+GitHubプロフィールを動的に見せる仕組み自体はいろいろあります。
 
-GitHubプロフィールを動的に見せる方法自体はいろいろあります。
-
-ただ、自分が今回欲しかったのは累計Starsや言語比率ではありませんでした。
-
-見たかったのはもっと短い時間軸です。
+ただ、今回見たかったのは累計Starsや言語比率ではありませんでした。
 
 - 今日どれくらいCommitしたか
 - 今日PRを何件作ったか
@@ -52,13 +45,13 @@ GitHubプロフィールを動的に見せる方法自体はいろいろあり�
 - 今日完了したIssueはいくつか
 - 直近では何を触っていたか
 
-そして、表示するだけでなく、後から週次・月次で振り返れるようにしたかった。
+という、かなり短い時間軸です。
 
-そのため外部のStatsサービスを貼るのではなく、**GitHub Actionsで自分用のActivityデータを作る**ことにしました。
+さらに、READMEへ表示して終わりではなく、後からWeekly / Monthlyで振り返れるようにしたかったので、外部のStatsカードを貼るのではなく、GitHub Actionsで自分用のActivityデータを作ることにしました。
 
-## 構成
+## 全体構成
 
-今の構成はかなり単純です。
+最初の実装はかなり単純です。
 
 ```text
 GitHub Search API
@@ -74,7 +67,7 @@ GitHub Actions
 mainへ自動commit
 ```
 
-利用しているのは基本的にGitHub内の機能だけです。
+使っているものはほぼGitHub内で完結しています。
 
 - Profile README
 - GitHub REST Search API
@@ -84,15 +77,13 @@ mainへ自動commit
 
 別サーバーやDBは使っていません。
 
-GitHubのプロフィールREADMEは、自分のユーザー名と同名のPublic Repositoryのルートに`README.md`を置くとプロフィールへ表示できます。
-
-## 「今日」はJSTで切りたかった
+## 「今日」はJSTで切る
 
 最初に気をつけたのが日付でした。
 
-自分は日本時間で活動しているので、READMEに表示する「今日」も`Asia/Tokyo`基準にしたい。
+自分は日本時間で活動しているので、READMEに表示する「今日」も `Asia/Tokyo` 基準にしたい。
 
-そのため、まずJSTの0:00〜23:59:59を作ってからUTCへ変換しています。
+そこでJSTの0:00〜23:59:59を作ってからUTCへ変換しています。
 
 ```python
 def zulu(value: datetime) -> str:
@@ -105,7 +96,7 @@ def utc_window(day: date) -> str:
     return f"{zulu(start_local)}..{zulu(end_local)}"
 ```
 
-例えば2026-08-26 JSTなら、検索に使うUTC範囲は次のようになります。
+例えば2026-08-26 JSTなら、検索範囲は次のUTCになります。
 
 ```text
 2026-08-25T15:00:00Z
@@ -113,7 +104,7 @@ def utc_window(day: date) -> str:
 2026-08-26T14:59:59Z
 ```
 
-ActionsのCron側も現在はtimezoneを指定しています。
+Actions側もtimezoneを指定しています。
 
 ```yaml
 on:
@@ -123,13 +114,13 @@ on:
   workflow_dispatch:
 ```
 
-毎日1回ではなく3時間ごとにしたのは、朝の数字が夜まで残り続けるのを避けたかったからです。
+毎日1回ではなく3時間ごとにしたのは、朝に集計した数字が夜まで残り続けるのを避けたかったからです。
 
-ただし毎回Commitを作るわけではありません。生成結果に変更がなければ何もしません。
+ただし、実行のたびにCommitを増やすわけではありません。生成結果に変更がなければ何もしません。
 
 ## Commit / PR / Issueをどう数えているか
 
-現在は4種類をSearch APIから取得しています。
+現在のTODAY Collectorは4種類をSearch APIから取得しています。
 
 ```python
 commits = search(
@@ -157,13 +148,13 @@ issues_completed = search(
 )
 ```
 
-ここで表示している数値には意味を固定しています。
+数字だけ表示すると意味が曖昧になるので、それぞれの定義は固定しています。
 
 ### COMMITS
 
-指定したJST日付範囲で、Commit Searchに`author:<username>`としてヒットした公開Commit数です。
+指定したJST日付範囲で、Commit Searchに `author:<username>` としてヒットしたPublic Commit数です。
 
-Contribution Graphの数字そのものではありません。
+これはGitHub Contribution Graphの数字そのものではありません。
 
 ### PRS OPENED
 
@@ -175,19 +166,17 @@ Contribution Graphの数字そのものではありません。
 
 ### ISSUES DONE
 
-自分が作成したIssueのうち、その日に`reason:completed`でCloseされたPublic Issue数です。
+自分が作成したIssueのうち、その日に `reason:completed` でCloseされたPublic Issue数です。
 
-これは「自分がClose操作したIssue数」ではありません。
+つまり「自分がClose操作したIssue数」とは限りません。
 
-数字だけ出すと後で意味が曖昧になるので、この定義はコード側でもREADME側でも崩さないようにしています。
+このあたりを曖昧にして「今日のContribution数」と書かないようにしています。
 
-## README全体を生成し直さない
+## README全体を自動生成し直さない
 
-プロフィールREADMEには手書きの自己紹介やFeatured Repositoryもあります。
+プロフィールREADMEには、自動生成したい部分だけでなく、手書きの自己紹介やFeatured Repositoryもあります。
 
-Activity更新のたびにREADME全体を生成する構成にはしたくありませんでした。
-
-そこで、自動更新する範囲だけMarkerで囲っています。
+Activity更新のたびにREADME全体を書き換える構成にはしたくなかったので、自動更新する範囲だけMarkerで囲いました。
 
 ```md
 <!-- DAILY-ACTIVITY:START -->
@@ -199,7 +188,7 @@ Activity更新のたびにREADME全体を生成する構成にはしたくあり
 <!-- DAILY-ACTIVITY:END -->
 ```
 
-Python側ではこの2つのMarker間だけを置換します。
+Python側ではMarker間だけを置換します。
 
 ```python
 start = text.index(START_MARKER)
@@ -207,15 +196,15 @@ end = text.index(END_MARKER, start) + len(END_MARKER)
 updated = text[:start] + block + text[end:]
 ```
 
-これなら、それ以外のプロフィールを普通に手編集できます。
+これなら、それ以外のREADMEは普通に手編集できます。
 
-このMarker方式は、あとで機能をパーツ化するときにもそのまま使えそうです。
+後でWidgetを増やしたときも、このMarker方式をそのまま流用できました。
 
-## 日次JSONも一緒に残す
+## 日次JSONを残す
 
 READMEだけ更新すると、昨日の数字は消えてしまいます。
 
-そこでActivityは日別JSONとしてRepositoryにも残しています。
+そこでActivityは日別JSONとしてRepositoryにも保存しています。
 
 ```text
 data/
@@ -226,7 +215,7 @@ data/
          └─ 2026-08-26.json
 ```
 
-中身は例えばこんな形です。
+イメージはこんな形です。
 
 ```json
 {
@@ -235,21 +224,21 @@ data/
   "timezone": "Asia/Tokyo",
   "scope": "public",
   "metrics": {
-    "commits": 87,
-    "prs_opened": 13,
-    "issues_created": 3,
-    "issues_completed": 1
+    "commits": 264,
+    "prs_opened": 16,
+    "issues_created": 5,
+    "issues_completed": 3
   }
 }
 ```
 
-1ファイルへ追記し続けるのではなく、1日1ファイルにしました。
+ここにある数値も、この記事用に固定したサンプルではなく、スクリーンショット撮影時点の実測例です。
 
-理由は単純で、Gitの差分が読みやすいからです。
+1ファイルへ追記し続けず、1日1ファイルにしたのはGitの差分を読みやすくするためです。
 
-このJSONがあることで、現在は7日グラフを生成できていますし、今後はWeekly / Monthly Reportにも使えます。
+この履歴を使って、現在は7日グラフも生成しています。今後のWeekly / Monthly Reportの入力にもできます。
 
-## 昨日分も毎回取り直している
+## 昨日分も毎回取り直す
 
 定期実行では今日だけでなく昨日も再取得しています。
 
@@ -258,17 +247,17 @@ today_snapshot = write_snapshot(today, collect_day(today), now)
 write_snapshot(yesterday, collect_day(yesterday), now)
 ```
 
-これは日付変更直前のActivityや、検索結果への反映が少し遅れたケースを翌日の実行で拾いやすくするためです。
+日付変更直前のActivityや、検索結果への反映が少し遅れたケースを翌日の実行でも拾いやすくするためです。
 
-現在の実装では、今日4検索 + 昨日4検索の計8 Search API requestです。
+現在のTODAY実装では、今日4検索 + 昨日4検索で1回あたり8 Search API requestです。
 
-APIを無駄に叩かないことも、この構成では意識しています。
+Widgetを増やすたびにAPIを好き勝手に叩く構成にはせず、今後はCollectorを共通化していく予定です。
 
 ## Public-onlyを最初から仕様にした
 
 このプロフィールは誰でも見られます。
 
-そのためCollectorは、意図的に認証なしでPublic GitHub APIを読んでいます。
+そのためTODAY Collectorは、意図的に認証なしでPublic GitHub APIを読んでいます。
 
 ```python
 headers = {
@@ -278,17 +267,13 @@ headers = {
 }
 ```
 
-Private Repository名やPrivate Issue titleなどを、一度取得してから表示時に隠す設計にはしていません。
+Private Repository名やPrivate Issue titleを一度取得して、表示するときだけmaskする方式にはしていません。
 
-**最初からPrivate dataを取得しない**ようにしました。
+**最初からPrivate dataを取得しない**方針です。
 
-これは自分の中ではかなり重要でした。
+Activity表示のためにPrivate Repositoryの情報をPublic READMEやJSONへ誤ってCommitするのは、一番避けたかったことでした。
 
-プロフィール生成処理で一番避けたいのは、便利なActivity表示を作った結果、Private Repositoryの情報を誤ってPublic READMEやJSONへCommitしてしまうことです。
-
-Public dataだけなら認証なしREST APIも利用できます。ただしGitHub REST APIにはRate Limitがあり、Search endpointには通常のREST APIとは別の制限もあります。
-
-そのため、今後Widgetを増やすときも「WidgetごとにAPIを好き勝手に叩く」構成にはしない予定です。
+Public dataだけでもGitHub REST APIのRate Limitはあるので、リクエスト数を抑えることも意識しています。
 
 ## GitHub Actionsから自動Commitする
 
@@ -303,7 +288,7 @@ fi
 
 プロフィールRepositoryでは他にも自動更新Workflowが動いているため、Pushが競合する可能性があります。
 
-そのためPush失敗時は最新mainへRebaseしてRetryしています。
+そのためPushに失敗したら最新mainへRebaseしてRetryしています。
 
 ```bash
 for attempt in 1 2 3; do
@@ -316,44 +301,67 @@ for attempt in 1 2 3; do
 done
 ```
 
-小さいところですが、自動生成系Workflowを複数動かすなら入れておいて良かった部分です。
+小さい部分ですが、自動生成系Workflowを複数動かすなら入れておいて良かった処理でした。
+
+実際のScheduled runも正常終了しています。
+
+<!-- QIITA_IMAGE: 02-actions-success.jpg -->
+
+スクリーンショットでは `Update profile activity` がSchedule起動され、`update-profile-activity` JobがSuccessになっています。
 
 ## 実際に動かしてみて
 
-最初にPRをMergeした直後は、READMEにはまだPlaceholderだけが表示されていました。
+最初にTODAY機能をMergeした直後は、READMEにはPlaceholderだけが表示されていました。
 
 Workflowは3時間ごとのScheduleなので、次の実行で初めて実データへ置き換わります。
 
-その後、プロフィールを確認すると今日の数値と直近Commit、7日グラフまで自動で表示されました。
+その後はプロフィールを開くだけで、その日の数値・直近Commit・7日グラフが見えるようになりました。
 
-自分で毎日更新するなら絶対に続かないので、プロフィールを開くだけで「今日は結構触っていたな」と分かるのは思った以上に楽しいです。
+自分で毎日READMEを書き換える方式なら確実に続かないので、「プロフィールを見たら今日の開発量も勝手に更新されている」という状態は思っていた以上に楽しいです。
 
-一方で、今の実装にもまだ課題があります。
+一方でTODAYだけでは、まだ分からないこともありました。
 
-- Commit / PR / Issueを別々のSearchで取っている
-- Activityの意味はContribution Graphとは一致しない
-- 直近Activityリストは件数を絞っている
-- 7日分を貯めるまではグラフの履歴が薄い
-- Projectごとの「今一番触っているもの」はまだ分からない
+- 今、一番動いているRepositoryはどれか
+- 直近で開発中なのか、しばらく離れているのか
+- 連続して活動している日数
+- 今日のActivity強度
+- 今触っているRepositoryで使われている言語
 
-最後の点が特に気になったので、現在は次の機能を作り始めています。
+そこで、記事を書いている途中で次のPhaseまで実装しました。
+
+## TODAYからProfile Signalへ拡張した
+
+TODAY実装の次に、`Profile Signal` として `LIVE SIGNAL` と `CURRENT FOCUS` を追加しました。
+
+このPhaseは記事執筆中の2026-08-26に実装・CI確認を行い、mainへMerge済みです。
+
+`LIVE SIGNAL` では、開発状態・Activity強度・Streakを1行にまとめています。
+
+<!-- QIITA_IMAGE: 03-live-signal.jpg -->
+
+撮影時点では次の状態でした。
 
 ```text
-LIVE SIGNAL
-● BUILDING | 🌩️ STORM | 🔥 BUILD STREAK
-
-CURRENT FOCUS
-今一番触っているRepository
-+ TODAY'S STACK
+● BUILDING
+🌩️ STORM
+🔥 2 DAY STREAK
 ```
 
-この先は単なるActivity Counterではなく、GitHubプロフィールを小さな開発ダッシュボードにしていく予定です。
+`CURRENT FOCUS` はPublic GitHub Eventsへ重みを付けて、今一番動いているRepositoryを判定します。
 
-## この仕組み自体をテンプレート化したい
+<!-- QIITA_IMAGE: 04-current-focus.jpg -->
 
-実装しているうちに、自分のプロフィールだけで終わらせるより、好きなWidgetだけ選べる形にしたくなってきました。
+撮影時点では `mizzz-ivr/ivmz-home` が34%でCurrent Focusになり、Repository language dataから `TypeScript / CSS / JavaScript` をTODAY'S STACKとして表示していました。
 
-最終的にはこんな設定だけで使えるGitHub Actionにしたいと考えています。
+この部分はTODAYのSearch API集計とは別のAnalytics層として実装しています。いきなり既存Collectorを全面改修せず、動いているTODAYを残したまま段階的に拡張しました。
+
+今後はこの2系統をNormalized Activity Modelへまとめる予定です。
+
+## 好きなWidgetだけ使える形で配布したい
+
+ここまで作ると、自分のプロフィール専用スクリプトで終わらせるより、好きなパーツだけ選べる形にしたくなりました。
+
+最終的には、例えばこんな設定だけで使えるGitHub Actionを考えています。
 
 ```yaml
 profile:
@@ -372,44 +380,46 @@ widgets:
     days: 7
 ```
 
-README側はMarkerを好きな場所へ置くだけです。
+README側にはWidgetごとのMarkerを置きます。
 
 ```md
 <!-- PROFILE-SIGNAL:FOCUS:START -->
 <!-- PROFILE-SIGNAL:FOCUS:END -->
 ```
 
-ここまでできれば、Profile READMEのテンプレートというより、**公開GitHub Activityからプロフィール用Widgetを生成する小さなGitHub Action**として配布できます。
+こうすれば、TODAYだけ欲しい人、Current Focusだけ欲しい人、全部使いたい人を同じ仕組みで扱えます。
 
-今は自分のプロフィールをDogfooding環境として先に作っています。
+自分のプロフィールを先にDogfooding環境として使い、安定したWidgetからGitHub Actionとして切り出していく予定です。
 
 ## 今のところの結論
 
 GitHubプロフィールは、完成した自己紹介を置いておく場所だと思っていました。
 
-でも実際にActivityを自動表示してみると、少し印象が変わりました。
+でもActivityを自動表示してみると、少し印象が変わりました。
 
-「何が作れるか」だけでなく、**今何を作っているか**も見せられる。
+「何が作れるか」だけでなく、**今何を作っているか**も見える場所にできます。
 
-しかもGitHub ActionsとGitHub APIだけでかなり遊べます。
+今回はTODAYのActivity Counterから始めましたが、日次JSONを残しておいたことで7日グラフやProfile Signalへの拡張にもつながりました。
 
-今後はCurrent Focus、Build Streak、Dev Pulse、Project Healthなどを追加しつつ、表示がごちゃつかないようWidgetとして整理していく予定です。
+最初から大きなDashboardを作るより、まず1日分を正しく集計して履歴を残すところから始めたのは良かったと思っています。
 
-そして、ある程度安定したら誰でも一部だけ持っていける形でOSS化します。
+次はDEV PULSE、NOW BUILDING、ACTIVITY STREAMを追加しながら、Widgetを選択できるGitHub Actionとして切り出していきます。
 
 ## 参考
 
-- [Managing your profile README - GitHub Docs](https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme)
-- [Filtering and searching issues and pull requests - GitHub Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/filtering-and-searching-issues-and-pull-requests)
-- [Events that trigger workflows - GitHub Docs](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
-- [Rate limits for the REST API - GitHub Docs](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+- GitHub Docs — Managing your profile README
+  - https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme
+- GitHub Docs — Filtering and searching issues and pull requests
+  - https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/filtering-and-searching-issues-and-pull-requests
+- GitHub Docs — Events that trigger workflows
+  - https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows
+- GitHub Docs — Rate limits for the REST API
+  - https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
 
 <!--
-公開前:
-- STYLE_GUIDE.md を確認
-- mizzz-ivr/mizzz-ivr の最新main / Workflow / READMEを再確認
-- 記事内の実測値を公開時点へ更新
-- Profile Signal Phase 1の実装状態に合わせて「現在作り始めている」部分を調整
-- Secret / Private Repository情報がスクリーンショットにないことを確認
-- Qiita Markdownでtable / details / code blockを確認
+Qiita公開時:
+- QIITA_IMAGEコメント4箇所をQiitaへアップロードした画像Markdownへ置換
+- 公開直前にmizzz-ivr/mizzz-ivr mainを再確認
+- Activity値は撮影時点の例であることを維持
+- Secret / Private Repository / 不要なAccount情報が画像にないことを再確認
 -->
