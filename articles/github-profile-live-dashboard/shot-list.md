@@ -1,123 +1,121 @@
 # Shot List — GitHub Profile Live Dashboard
 
-Qiita #2公開用スクリーンショット候補。
+Qiita #2公開用スクリーンショット。最終版は3枚に集約する。
 
-## 必須
+## 01. Profile dashboard overview
 
-### 01. Profile dashboard overview
+Qiita用名:
 
-含めるもの:
+`01-profile-dashboard-overview.jpg`
 
+元画像:
+
+`IMG_0183.jpeg`
+
+含まれるもの:
+
+- GitHub Profile全景
 - LIVE SIGNAL
 - TODAY
-- CURRENT FOCUS
-- DEV PULSE
-- NOW BUILDING
-- ACTIVITY STREAM
-
-1枚に全部入らない場合は2枚へ分ける。
+- CURRENT FOCUS + TODAY'S STACK
+- DEV PULSE上部
 
 目的:
 
-- Qiita #1のTODAY単体からDashboardへ発展したことを最初に見せる。
+Qiita #1のTODAY単体から、プロフィール全体がLive Dashboardへ発展したことを冒頭で見せる。
 
-### 02. LIVE SIGNAL
+撮影時点: 2026-08-26 22:02 JST前後。
 
-含めるもの:
+## 02. DEV PULSE + CI SIGNAL
 
-- DEV STATUS
-- CODE WEATHER
-- BUILD STREAK
+Qiita用名:
+
+`02-dev-pulse-ci-signal.jpg`
+
+元画像:
+
+`IMG_0184.jpeg`
+
+含まれるもの:
+
+- DEV PULSE 7-day SVG
+- `C 345 · PR 19 · ISSUE 10`
+- activity 374
+- ATTENTION
+- 56% PASS RATE
+- 15 / 27 PASSED / EVALUATED
+- 3 REPOS WITH CI
+
+目的:
+
+Daily JSONを7日グラフへ再利用したことと、Phase 3でCI SIGNALを同じWidgetへ統合したことを1枚で見せる。
 
 注意:
 
-- CODE WEATHERは生産性評価ではなく演出であることを本文で説明する。
+- CI値は撮影時点の実測例。
+- ATTENTIONをRepository品質の絶対評価として説明しない。
 
-### 03. CURRENT FOCUS + TODAY'S STACK
+## 03. NOW BUILDING + PROJECT HEALTH + ACTIVITY STREAM
 
-含めるもの:
+Qiita用名:
 
-- Focus Repository
-- weighted activity share
-- score / event count
-- language stack
+`03-now-building-health-activity-stream.jpg`
 
-### 04. DEV PULSE
+元画像:
 
-含めるもの:
+`IMG_0185.jpeg`
 
-- 7-day SVG
-- Phase 3 Merge後はCI SIGNAL部分も含める
-
-### 05. NOW BUILDING
-
-含めるもの:
-
-- top 3 active repositories
-- share / score / events
-- Phase 3 Merge後はPROJECT HEALTH / repo CIも含める
-
-### 06. ACTIVITY STREAM
-
-含めるもの:
-
-- timestamp
-- event type
-- repository
-- normalized summary
-
-## Phase 3 Merge後に必須
-
-### 07. PROJECT HEALTH + CI SIGNAL
-
-できれば04 / 05と兼用する。
-
-見せたいもの:
+含まれるもの:
 
 ```text
-DEV PULSE
-CI SIGNAL
-PASS RATE
-PASSED / EVALUATED
-REPOS WITH CI
+01 mizzz-ivr/ivmz-home
+ATTENTION · CI 0/10 · 0%
 
-NOW BUILDING
-HEALTHY / WATCH / ATTENTION / ACTIVE
-per-repo CI pass ratio
+02 ivRooom/Herta
+WATCH · CI 5/7 · 71%
+
+03 mizzz-ivr/mizzz-ivr
+HEALTHY · CI 10/10 · 100%
 ```
 
-CI結果は時間で変わるので、記事中では撮影時点の実測例として扱う。
+加えてACTIVITY STREAM:
 
-## 任意
+- PR #21 merged
+- PR #7 opened
+- tech-writing push
 
-### 08. state JSON
+目的:
 
-`data/profile-signal-state.json`の一部。
+NOW BUILDING / PROJECT HEALTH / ACTIVITY STREAMを別々のスクリーンショットにせず、情報密度を抑えて統合した完成形を見せる。
 
-見せたいkey:
+## Article placeholder mapping
 
-- status
-- code_weather
-- streak
-- current_focus
-- dev_pulse
-- now_building
-- activity_stream
-- ci_signal
+```text
+<!-- QIITA_IMAGE: 01-profile-dashboard-overview.jpg -->
+<!-- QIITA_IMAGE: 02-dev-pulse-ci-signal.jpg -->
+<!-- QIITA_IMAGE: 03-now-building-health-activity-stream.jpg -->
+```
 
-スクリーンショットよりコードブロックで十分なら省略。
+Qiitaへアップロード後、発行された画像Markdownへ置換する。
 
-### 09. GitHub Actions validation success
+## 不採用になった個別Screenshot
 
-Phase 3 PRのCI success。
+以下は3枚へ統合できたため省略する。
 
-Qiita #1でもActions画面を使っているため、第2弾では優先度低め。
+- LIVE SIGNAL単体
+- CURRENT FOCUS単体
+- DEV PULSE単体
+- NOW BUILDING単体
+- ACTIVITY STREAM単体
+- PROJECT HEALTH / CI SIGNAL追加カット
+
+記事の画像枚数を増やすより、実際のプロフィール構成が伝わる3枚を優先する。
 
 ## Mask / Crop checklist
 
-- [ ] Secret / Tokenなし
-- [ ] Private Repository名なし
-- [ ] Private Issue / PR titleなし
-- [ ] Browserの不要なAccount UIなし
-- [ ] Notificationなど第三者情報なし
-- [ ] 数値・Health / CI状態の撮影日時をnotesへ記録
+- [x] Secret / Tokenなし
+- [x] Private Repository名なし
+- [x] Private Issue / PR titleなし
+- [x] Notificationなど第三者情報なし
+- [x] 数値・Health / CI状態を撮影時点の例として扱う
+- [ ] Qiita upload後のPreviewで可読性確認
