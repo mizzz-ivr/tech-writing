@@ -1,81 +1,115 @@
-# Shot List — Profile Signal GitHub Action
+# Shot List — Profile Signal Release / Fork distribution
 
 Qiita #3用。
 
 ## Required
 
-### 01. PR #23 local Action CI success
+### 01. 完成形Profile overview
+
+保存済み:
+
+- `IMG_3769.jpeg`
+
+用途:
+
+- 冒頭で「最終的に何が動いているか」を見せる完成形プレビュー
+
+注意:
+
+- 縦長なので記事本文へ原寸では貼らない
+- 小さめのプレビューとして使う
+- 直後にGitHubプロフィール本体へのリンクを置く
+- 各Widgetの詳細画像は第2弾で既に見せているため、第3弾では重複させない
+
+### 02. PR #24 Release package CI success
 
 見せたいもの:
 
-- `Generate Profile Signal preview through local action` success
-- validation success
+- `Profile Signal release` workflow
+- `Build release archive` success
+- `Smoke test extracted install` success
 - Secret / Tokenが映らない範囲
 
 目的:
 
-- Python直呼びではなくComposite Action経由で実データ生成まで通っていることを示す。
+- Release ZIPを作っただけではなく、clean fixtureへ展開して実行できたことを示す
 
-### 02. `.github/profile-signal.yml`
+### 03. GitHub Release `v0.1.0`
 
-見せたい部分:
-
-```yaml
-preset: full
-theme: signal
-widgets:
-  ...
-```
-
-Screenshotよりコードブロックで十分なら省略可。
-
-### 03. Preset examples
-
-Repository treeで:
+見せたいもの:
 
 ```text
-examples/minimal.yml
-examples/standard.yml
-examples/full.yml
-examples/terminal.yml
+Profile Signal v0.1.0
+profile-signal-v0.1.0.zip
 ```
 
-が見える状態。
+目的:
 
-### 04. External install
+- 実際の配布導線を示す
 
-`mizzz-ivr/profile-signal`切り出し後に必須。
+### 04. Release ZIP導入後のRepository tree
 
-Consumer側Workflow:
+見せたい構成:
+
+```text
+.profile-signal/
+.github/profile-signal.yml
+.github/workflows/profile-signal.yml
+README.md
+```
+
+可能ならWorkflowの次の部分も同じ画面またはコードブロックで示す。
+
+```yaml
+uses: ./.profile-signal
+```
+
+目的:
+
+- 外部Action呼び出しではなく、利用者自身のProfile Repository内で完結することを示す
+
+## Optional
+
+### 05. Config / Preset
+
+```yaml
+preset: standard
+theme: signal
+```
+
+Screenshotよりコードブロックで十分なら省略。
+
+### 06. Marker auto insert before / after
+
+導入前の短いREADMEと、初回実行後のREADME diff。
+
+### 07. Fork導線
+
+Forkは補助導線なので、スクリーンショットは必須ではない。
+
+記事では:
+
+- Release ZIP = 推奨
+- Fork = Showcase全体を参考にしたい人向け
+
+と文章で説明すれば十分。
+
+## 不要になったScreenshot
+
+外部Repositoryから:
 
 ```yaml
 uses: mizzz-ivr/profile-signal@v1
 ```
 
-が見える画面。
+と呼ぶ画面は不要。
 
-### 05. External profile result
-
-Sample / fixture Profile READMEで、Action導入後のWidget表示。
-
-自分のProfile Screenshotだけだと「自分専用」から脱した証明にならないため、v1公開記事では優先度高。
-
-## Optional
-
-### 06. Theme comparison
-
-signal / minimal / terminalを並べる。
-
-Qiita記事内で縦に3枚置くより、1枚の比較画像へまとめられると良い。
-
-### 07. Marker auto insert before/after
-
-導入前READMEと、Action初回実行後READMEのdiff。
+今回の配布モデルでは採用しない。
 
 ## Safety
 
 - [ ] Token / Secretなし
 - [ ] Private Repositoryなし
 - [ ] third-party notificationなし
-- [ ] test consumerに個人情報なし
 - [ ] `GITHUB_TOKEN`値やAuthorization headerなし
+- [ ] Release assetに個人READMEや秘密情報が含まれていない
