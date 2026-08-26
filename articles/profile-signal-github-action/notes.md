@@ -1,10 +1,12 @@
-# Notes — Profile Signal GitHub Action OSS化
+# Notes — Profile Signal Release / Fork配布
 
 ## Article focus
 
 単にComposite Actionの書き方を説明する記事にはしない。
 
-自分用のProfile README generatorを、他Repositoryから使えるcontractへ変えていった実体験を中心にする。
+自分用のProfile README generatorを、**Release ZIPを自分のProfile Repositoryへ入れて使えるruntime**へ変えた実体験を中心にする。
+
+外部Repositoryから `uses: owner/repo@v1` で直接呼ぶモデルは採用しない。
 
 ## Verified GitHub state — 2026-08-27
 
@@ -19,14 +21,17 @@ Merge済み:
 - PR #22 History / DEV RECAP
 - PR #23 config-driven local GitHub Action / Dogfooding
 
-PR #23:
+PR #23 Merge後:
 
-- merged: 2026-08-27 JST
 - local Composite Action経由へWorkflow切替済み
-- PR CI success
+- main workflow_dispatch success確認済み
 - 24 tests success
 
-### Qiita series
+進行中:
+
+- PR #24 `feat: package Profile Signal for Release ZIP installation`
+
+## Qiita series
 
 公開済み:
 
@@ -35,31 +40,90 @@ PR #23:
 2. GitHubプロフィールをライブな開発ダッシュボードにしてみた
    - https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
 
-第3弾article冒頭から第2弾へ「前回の続き」としてリンクする。
+第3弾article冒頭から第2弾へ「前回の続き」としてリンク済み。
 
-## PR #23 implementation
+## Distribution decision
 
-Added:
-
-```text
-.github/profile-signal.yml
-profile-signal-action/action.yml
-profile-signal-action/src/orchestrator.py
-profile-signal-action/README.md
-profile-signal-action/examples/minimal.yml
-profile-signal-action/examples/standard.yml
-profile-signal-action/examples/full.yml
-profile-signal-action/examples/terminal.yml
-tests/test_profile_signal_action.py
-```
-
-Workflowのgeneratorは4 script直呼びからlocal actionへ変更。
+### 不採用
 
 ```yaml
-uses: ./profile-signal-action
-with:
-  config: .github/profile-signal.yml
+uses: mizzz-ivr/profile-signal@v1
 ```
+
+を利用者Repositoryから直接呼ぶ方式。
+
+理由:
+
+- Profile Signalは汎用CI ActionというよりProfile Repositoryに常駐するruntime / templateに近い
+- 利用者自身のRepository内に実行コードがある方が透明性が高い
+- 外部Repository availabilityへ毎回依存しない
+- Release単位で更新内容を確認してから取り込める
+- Fork / Release配布の方がREADME customizationと相性が良い
+
+### 採用
+
+```text
+GitHub Release ZIP
+        ↓
+利用者の GitHub Profile Repository
+        ↓
+.profile-signal/
+.github/profile-signal.yml
+.github/workflows/profile-signal.yml
+        ↓
+uses: ./.profile-signal
+```
+
+Release ZIPを推奨導入経路とする。
+
+Forkはshowcase全体を参考にしたい人向けの補助導線。個人プロフィール固有の文章・画像まで入るため、初回導入の推奨にはしない。
+
+## PR #24 package
+
+```text
+.profile-signal/
+├─ action.yml
+├─ LICENSE
+├─ src/orchestrator.py
+└─ scripts/
+   ├─ update-profile-activity.py
+   ├─ profile_signal.py
+   ├─ update-profile-signal.py
+   ├─ profile_signal_operations.py
+   └─ profile_signal_history.py
+
+distribution/
+├─ profile-signal.yml
+├─ profile-signal-workflow.yml
+└─ INSTALL.md
+```
+
+Release builder:
+
+```text
+scripts/build-profile-signal-release.py
+```
+
+Release ZIPにはREADME本体を含めない。
+利用者の既存READMEを上書きしないことを最優先する。
+
+## Release ZIP install contract
+
+1. Release ZIPをDownload
+2. Profile Repository rootへ展開
+3. `.github/profile-signal.yml` のusernameを変更
+4. preset / theme / widgetを選ぶ
+5. commit / push
+6. `Actions → Profile Signal → Run workflow`
+7. README / assets / dataの生成を確認
+
+Workflowでは:
+
+```yaml
+uses: ./.profile-signal
+```
+
+を使う。
 
 ## Preset contract
 
@@ -76,93 +140,103 @@ with:
 
 Themeはデータ収集ではなくRenderer concernとして扱う。
 
-## Widgets
-
-- live_signal
-- today
-- current_focus
-- dev_pulse
-- now_building
-- activity_stream
-- dev_recap
-
-Configのwidget overrideがpresetより優先。
-
 ## Marker UX
 
-- enabled markerがない → `auto_insert_markers: true` なら指定anchor前へ自動追加
-- disabled markerがある → defaultでは中身だけ空にしてpairを維持
+- enabled markerがない → `auto_insert_markers: true` なら自動追加
+- release configの`insert_before`は空をdefaultにする
+  - 利用者READMEの見出しを勝手に推測しない
+  - defaultではREADME末尾へ追加
+- disabled markerがある → 中身だけ空にしてpairを維持
 - 再enable時に同じ位置へ復帰可能
 
 ## Privacy
 
 v0では `privacy.public_only: true` が必須。
-
 falseはエラー。
 
 Private dataを取得して後段でmaskする設計にはしない。
+Release ZIPのdefault運用ではAPI Secret不要。
 
-## CI proof
+## Package validation
 
-PR #23 CI:
+PR #24では2種類のCIを通す。
 
-- 24 tests success
-- local composite action step success
-- Public API preview success
-- Profile Signal state schema v4
-- Daily snapshots
-- Weekly reports
-- Monthly reports
-- DEV RECAP
-- README seven sections
+### Existing profile regression
+
+- existing unit tests
+- real Public GitHub API preview
+- README 7 Widget
+- Weekly / Monthly / DEV RECAP
 - SVG parse
 
-Action log:
+### Release fixture smoke test
 
 ```text
-Profile Signal action refreshed:
-user=mizzz-ivr
-preset=full
-theme=signal
-widgets=live_signal,today,current_focus,dev_pulse,now_building,activity_stream,dev_recap
+build ZIP
+  ↓
+clean temporary directoryへextract
+  ↓
+README.mdを1行だけ作成
+  ↓
+usernameをmizzz-ivrへ置換
+  ↓
+.profile-signal/src/orchestrator.py 実行
+  ↓
+README marker / state v4 / SVG検証
 ```
 
-## Distribution target
+これで「自分のRepositoryにたまたま依存して動いた」状態を避ける。
 
-第一候補:
+## Release publishing
+
+`.github/workflows/profile-signal-release.yml` のworkflow_dispatchでversionを指定する。
+
+例:
 
 ```text
-mizzz-ivr/profile-signal
+v0.1.0
 ```
 
-理由:
+Workflowが:
 
-- 個人Profile READMEから発展したOSS
-- Qiita authorとownerが揃う
-- ProfileからLive Demoへ直接辿れる
-- ivRooom org固有のプロダクトに見せすぎない
+- deterministic ZIP生成
+- ZIP integrity check
+- GitHub Release作成
+- ZIP asset添付
 
-2026-08-27時点ではRepository未作成。
+まで行う。
 
-## Connector limitation
+## Screenshot strategy
 
-現在のGitHub連携では新規Repository creation actionが提供されていない。
+保存済みのプロフィール全景Screenshotは縦長。
+記事本文へ原寸で貼ると読みにくいので、次の扱いにする。
 
-そのためChatGPT側では、current repo内でportable staging packageまで実装済み。Repository作成後に移行する。
+- 冒頭: 完成形の縮小プレビューとして1枚
+- 本文: GitHubプロフィール本体へのリンクを併記
+- 配布説明: Release / ZIP / CIの短いScreenshotを優先
 
-記事ではこの制約は必須説明ではない。OSS設計の判断として「先にlocal actionでdogfoodした」を中心にする。
+### Required screenshots
+
+1. 完成形Profile overview（保存済み画像）
+2. PR #24 / package smoke test success
+3. GitHub Release `v0.1.0` + ZIP asset
+4. Release ZIPを展開したRepository tree / `uses: ./.profile-signal`
+
+外部Action呼び出しScreenshotは不要。
 
 ## Before publish
 
 - [x] PR #23 Merge
-- [ ] main scheduled / workflow_dispatchでlocal Action経由の更新成功
-- [ ] `mizzz-ivr/profile-signal` Repository作成
-- [ ] Action package移行
-- [ ] external installation smoke test
-- [ ] `v1` tag / release
-- [ ] README / config reference更新
-- [ ] 実際のexternal `uses: mizzz-ivr/profile-signal@v1` screenshot
-- [ ] Action Marketplace対応をするか判断
+- [x] main workflow_dispatchでlocal Action経由の更新成功
+- [x] Qiita #2公開
+- [x] 第3弾からQiita #2へリンク
+- [ ] PR #24 CI success
+- [ ] PR #24 Merge
+- [ ] `v0.1.0` Release作成
+- [ ] Release ZIP asset確認
+- [ ] Release ZIPをclean fixtureへ導入した結果を最終確認
+- [ ] 記事をRelease/Forkモデルへ最終更新
+- [ ] Screenshot追加
 
 ## Tags
 
