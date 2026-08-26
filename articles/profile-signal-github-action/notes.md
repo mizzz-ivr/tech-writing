@@ -6,7 +6,7 @@
 
 自分用のProfile README generatorを、他Repositoryから使えるcontractへ変えていった実体験を中心にする。
 
-## Verified GitHub state — 2026-08-26
+## Verified GitHub state — 2026-08-27
 
 ### `mizzz-ivr/mizzz-ivr`
 
@@ -17,14 +17,27 @@ Merge済み:
 - PR #20 Visual Widgets
 - PR #21 Operations / Project Health / CI Signal
 - PR #22 History / DEV RECAP
+- PR #23 config-driven local GitHub Action / Dogfooding
 
-進行中:
+PR #23:
 
-- PR #23 `feat: dogfood Profile Signal as a config-driven GitHub Action`
-- mergeable: true
-- CI success
+- merged: 2026-08-27 JST
+- local Composite Action経由へWorkflow切替済み
+- PR CI success
+- 24 tests success
 
-### PR #23 implementation
+### Qiita series
+
+公開済み:
+
+1. GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた
+   - https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a
+2. GitHubプロフィールをライブな開発ダッシュボードにしてみた
+   - https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
+
+第3弾article冒頭から第2弾へ「前回の続き」としてリンクする。
+
+## PR #23 implementation
 
 Added:
 
@@ -129,17 +142,19 @@ mizzz-ivr/profile-signal
 - ProfileからLive Demoへ直接辿れる
 - ivRooom org固有のプロダクトに見せすぎない
 
+2026-08-27時点ではRepository未作成。
+
 ## Connector limitation
 
 現在のGitHub連携では新規Repository creation actionが提供されていない。
 
-そのためChatGPT側では、まずcurrent repo内でportable staging packageまで実装してから、Repository作成後に移行する。
+そのためChatGPT側では、current repo内でportable staging packageまで実装済み。Repository作成後に移行する。
 
 記事ではこの制約は必須説明ではない。OSS設計の判断として「先にlocal actionでdogfoodした」を中心にする。
 
 ## Before publish
 
-- [ ] PR #23 Merge
+- [x] PR #23 Merge
 - [ ] main scheduled / workflow_dispatchでlocal Action経由の更新成功
 - [ ] `mizzz-ivr/profile-signal` Repository作成
 - [ ] Action package移行
