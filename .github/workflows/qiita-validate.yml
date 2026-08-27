@@ -1,0 +1,34 @@
+name: Validate Qiita articles
+
+on:
+  pull_request:
+    paths:
+      - "public/**/*.md"
+      - "qiita.config.json"
+      - "scripts/validate_qiita_articles.py"
+      - "tests/test_validate_qiita_articles.py"
+      - "requirements.txt"
+      - ".github/workflows/qiita-validate.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qiita-validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run validator unit tests
+        run: python -m unittest discover -s tests -p "test_validate_qiita_articles.py" -v
+      - name: Validate Qiita article front matter
+        run: python scripts/validate_qiita_articles.py
