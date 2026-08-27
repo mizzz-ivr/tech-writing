@@ -221,7 +221,15 @@ def refresh_metrics(articles: list[Article]) -> dict[str, Any]:
                 else:
                     metrics = fetch_zenn(url)
                 row["platforms"][platform] = {"url": url, **metrics}
-            except (ValueError, LookupError, OSError, urllib.error.URLError, json.JSONDecodeError) as exc:
+            except (
+                AttributeError,
+                TypeError,
+                ValueError,
+                LookupError,
+                OSError,
+                urllib.error.URLError,
+                json.JSONDecodeError,
+            ) as exc:
                 row["platforms"][platform] = {"url": url, "error": str(exc)}
                 result["errors"].append({"slug": article.slug, "platform": platform, "error": str(exc)})
         result["articles"].append(row)
@@ -300,7 +308,7 @@ def published_articles(articles: list[Article]) -> list[Article]:
 
 
 def cadence_summary(articles: list[Article]) -> tuple[str, str]:
-    dates = sorted({article.effective_published_at for article in articles if article.effective_published_at})
+    dates = sorted(article.effective_published_at for article in articles if article.effective_published_at)
     if not dates:
         return "-", "-"
     last = dates[-1]
