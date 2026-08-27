@@ -63,8 +63,8 @@ QIITA_TOKEN
 2. GitHub Repository Secret `QIITA_TOKEN` を設定する。
 3. GitHub Actionsから `Sync Qiita articles` を手動実行する。
 4. Workflowが `qiita pull` を実行する。
-5. 差分があれば `sync/qiita-articles-<run-id>` branchを作成する。
-6. Workflowが同期PRを作成する。
+5. 差分があれば `sync/qiita-articles-<run-id>-<attempt>` branchを作成する。
+6. Workflowが同期PRを作成する。Repository設定でGitHub ActionsからのPR作成が禁止されている場合は、branch pushまで成功扱いとし、Actions Summaryに表示されたリンクから手動PRを作成する。
 7. `public/*.md` の `id`、`title`、`tags`、`private`、本文をQiita上の記事と照合する。
 8. 問題がなければ同期PRをmainへmergeする。
 9. `Publish Qiita articles` workflowが実行され、既存IDの記事として同期されることを確認する。
@@ -203,9 +203,12 @@ Qiita CLIでは削除復旧できません。Qiita側の仕様に従って復旧
 - Trigger: 手動のみ
 - Qiitaからの取得: `qiita pull`
 - mainへの直接push: しない
-- 差分がある場合: 専用branch + PRを作成
+- 差分がある場合: 専用branchを作成してpushする
+- GitHub ActionsからPR作成できる場合: 同期PRを自動作成する
+- Repository設定でPR作成が禁止されている場合: workflowを失敗させずwarning + Actions Summaryへ手動PRリンクを出す
+- 上記以外の `gh pr create` エラー: workflowをfailureにして異常を隠さない
 
-GitHub ActionsからPR作成がRepository設定で禁止されている場合は、ActionsのWorkflow permissionsでPR作成を許可するか、生成されたsync branchから手動でPRを作成します。
+Repository全体のActions権限を緩和しなくても同期を継続できるようにし、PR作成不可だけを既知のfallbackとして扱います。
 
 ## Troubleshooting
 
@@ -217,7 +220,9 @@ Repository Secret名が正確に `QIITA_TOKEN` になっていること、Token�
 
 - `Sync Qiita articles` workflowのログを確認する。
 - `No changes` なら同期差分はありません。
-- branchは作成されたがPR作成だけ失敗した場合、RepositoryのWorkflow permissionsでGitHub ActionsからのPR作成が許可されているか確認する。
+- Actions Summaryに `Qiita sync branch created` が表示された場合、branch pushは成功済みです。表示された `Open a pull request` リンクからPRを作成します。
+- `GitHub Actions is not permitted to create or approve pull requests` は既知のfallback対象であり、branch push成功後はworkflow自体をfailureにしません。
+- それ以外のPR作成エラーはworkflow failureとして調査します。
 
 ### 既存記事が新規記事として作られそう
 
