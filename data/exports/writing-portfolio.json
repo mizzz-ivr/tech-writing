@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-28",
+  "summary": {
+    "published_articles": 4,
+    "last_published_at": "2026-08-27",
+    "coverage_windows_days": [
+      30,
+      90,
+      365
+    ]
+  },
+  "coverage": {
+    "domains": [
+      {
+        "value": "developer-productivity",
+        "published_count": 3,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "devops",
+        "published_count": 2,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "ai",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      }
+    ],
+    "languages": [
+      {
+        "value": "Python",
+        "published_count": 2,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      }
+    ],
+    "technologies": [
+      {
+        "value": "GitHub Actions",
+        "published_count": 3,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub API",
+        "published_count": 2,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub Events API",
+        "published_count": 1,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub Issues",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub Pull Requests",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "GitHub Search API",
+        "published_count": 1,
+        "last_published_at": "2026-08-26",
+        "days_since_last": 2,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      }
+    ],
+    "portfolio_signals": [
+      {
+        "value": "automation",
+        "published_count": 2,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "ai-assisted-development",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "architecture",
+        "published_count": 1,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "ci-cd",
+        "published_count": 1,
+        "last_published_at": "2026-08-26",
+        "days_since_last": 2,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "development-process",
+        "published_count": 1,
+        "last_published_at": "2026-08-24",
+        "days_since_last": 4,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      }
+    ]
+  },
+  "recent_articles": [
+    {
+      "slug": "ai-runtime-safety-boundary",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "published_at": "2026-08-27",
+      "article_type": "tech",
+      "level": null,
+      "topics": [
+        "typescript",
+        "生成ai",
+        "openai",
+        "security",
+        "architecture"
+      ],
+      "domains": [],
+      "languages": [],
+      "technologies": [],
+      "portfolio_signals": [],
+      "source_repositories": [],
+      "published": {
+        "zenn": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary"
+      }
+    },
+    {
+      "slug": "github-profile-live-dashboard",
+      "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+      "published_at": "2026-08-27",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "topics": [
+        "GitHub",
+        "GitHubActions",
+        "GitHubAPI",
+        "Python",
+        "個人開発"
+      ],
+      "domains": [
+        "devops",
+        "developer-productivity"
+      ],
+      "languages": [
+        "Python"
+      ],
+      "technologies": [
+        "GitHub Actions",
+        "GitHub API",
+        "GitHub Events API"
+      ],
+      "portfolio_signals": [
+        "automation",
+        "architecture"
+      ],
+      "source_repositories": [
+        "mizzz-ivr/mizzz-ivr"
+      ],
+      "published": {
+        "qiita": "https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630"
+      }
+    },
+    {
+      "slug": "github-profile-daily-activity",
+      "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+      "published_at": "2026-08-26",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "topics": [
+        "GitHub",
+        "GitHubActions",
+        "GitHubAPI",
+        "Python",
+        "個人開発"
+      ],
+      "domains": [
+        "devops",
+        "developer-productivity"
+      ],
+      "languages": [
+        "Python"
+      ],
+      "technologies": [
+        "GitHub Actions",
+        "GitHub API",
+        "GitHub Search API"
+      ],
+      "portfolio_signals": [
+        "automation",
+        "ci-cd"
+      ],
+      "source_repositories": [
+        "mizzz-ivr/mizzz-ivr"
+      ],
+      "published": {
+        "qiita": "https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a"
+      }
+    },
+    {
+      "slug": "repository-is-source-of-truth",
+      "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+      "published_at": "2026-08-24",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "topics": [
+        "ai-development",
+        "individual-development",
+        "github"
+      ],
+      "domains": [
+        "ai",
+        "developer-productivity"
+      ],
+      "languages": [],
+      "technologies": [
+        "GitHub",
+        "GitHub Issues",
+        "GitHub Pull Requests",
+        "GitHub Actions"
+      ],
+      "portfolio_signals": [
+        "development-process",
+        "ai-assisted-development"
+      ],
+      "source_repositories": [
+        "ivRooom/Herta"
+      ],
+      "published": {
+        "qiita": "https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e"
+      }
+    }
+  ],
+  "notable_articles": [
+    {
+      "slug": "github-profile-daily-activity",
+      "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+      "published_at": "2026-08-26",
+      "platform": "qiita",
+      "url": "https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a",
+      "reactions": {
+        "likes": 0,
+        "stocks": 2,
+        "comments": 0
+      }
+    }
+  ],
+  "export_quality": {
+    "omitted_non_allowlisted_source_repository_references": 0
+  }
+}

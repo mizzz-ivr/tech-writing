@@ -1,6 +1,6 @@
 # Writing Analytics Visual Dashboard
 
-> Source snapshot: 2026-08-28 07:13 JST
+> Source snapshot: 2026-08-28 07:34 JST
 
 Repository metadata and metric snapshots remain the Source of Truth. This page and the SVG files are derived/generated views.
 
@@ -42,7 +42,7 @@ The reaction chart contains only observed numeric values. `unavailable` and `not
 | Article | Platform | Reactions |
 | --- | --- | --- |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page views 149 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page views 151 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page views 152 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page views 343 |
 
 ## Recent Publications
