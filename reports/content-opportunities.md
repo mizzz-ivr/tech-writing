@@ -94,7 +94,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 1 published article(s)
 
-### 2. [自作GitHubプロフィールWidgetをStandalone OSSとしてRelease配布できる形にしてみた](../articles/profile-signal-github-action/article.md)
+### 2. [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/profile-signal-github-action/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
