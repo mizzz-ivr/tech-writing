@@ -2,22 +2,24 @@
 
 ## この記事の位置づけ
 
-- 媒体: Zennを第一候補
-- 目標公開日: 2026-08-30
+- 媒体: Zenn
+- 公開日: 2026-08-27
+- 公開URL: https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary
 - GitHub Issue: #12
+- 公開PR: #25
 - Qiitaへの同一本文転載: しない
 - 狙い: How-toではなく、実装から得た設計判断・Security境界・Trade-offを扱う
 
 ## Source of Truth確認
 
-2026-08-27確認。
+2026-08-27公開直前に再確認。
 
 対象Repository: `ivRooom/Herta`
 
-確認時main:
+公開直前確認時main:
 
-- `925bf985ead0cd3b79c84467ca6dd0f916d4f95d`
-- latest merge: PR #343 `feat/ai-runtime-settings`
+- `1cb53194a288482a10ef350cd16e38911fd328ed`
+- latest merge: PR #347 `feat(ai): add Phase 1 artifact runtime and Discord attachment delivery`
 
 主に確認したもの:
 
@@ -69,7 +71,7 @@
 
 今回の記事は、開発運用やGitHub自動化ではなく、AI Runtime内部のSecurity / Cost / Configuration設計が主題。既存3本と主題・構成・コード例が重複しない。
 
-## 公開時に残すべき具体性
+## 公開時に残した具体性
 
 - Secretが「未登録」と「読めない」を分けた理由
 - request-time immutable snapshot
@@ -78,7 +80,7 @@
 - 成功系よりfail-closedをテストへ固定したこと
 - Providerが1つの段階では抽象化しすぎない判断
 
-## 公開時に削る / 一般化する情報
+## 公開時に削った / 一般化した情報
 
 - API Key / Secret値
 - productionの具体的な認証情報
@@ -88,25 +90,31 @@
 - Herta内部だけで意味が通じる固有名詞
 - 将来構想を実装済みと誤認させる表現
 
-## Zenn topics候補
-
-優先候補:
+## Zenn topics
 
 - TypeScript
 - 生成AI
 - OpenAI
-- 設計
-- セキュリティ
+- Security
+- Architecture
 
-5個に絞る。公開直前にZenn上のtopic表記を確認する。
+## 公開チェック
 
-## 公開前チェック
+- [x] Herta mainを再取得し、AI FoundationのProvider対応状況を再確認
+- [x] `docs/AI_FOUNDATION.md` と実装差分がないか再確認
+- [x] factory / runtime-service / testsの挙動を再確認
+- [x] Secretや本番情報が本文へ混入していない
+- [x] Claude/Geminiを実装済みと読める記述がない
+- [x] Zenn GitHub Deployで下書き生成を確認
+- [x] タイトルとtopicsを確定
+- [x] PR #25で `published: true` をmainへmerge
+- [x] 2026-08-27に公開確認
+- [x] `ideas/published.md` のZenn列へURLを記録
+- [x] Notionへ公開記録と今後の運用を反映
 
-- [ ] Herta mainを再取得し、AI FoundationのProvider対応状況を再確認
-- [ ] `docs/AI_FOUNDATION.md` と実装差分がないか再確認
-- [ ] factory / runtime-service / testsの挙動を再確認
-- [ ] Secretや本番情報が本文・スクリーンショットへ混入していない
-- [ ] Claude/Geminiを実装済みと読める記述がない
-- [ ] Zenn PreviewでMermaid / table / code blockを確認
-- [ ] タイトルとtopicsを確定
-- [ ] 公開後 `ideas/published.md` のZenn列へURLを記録
+## 今後の更新方針
+
+- 公開後の軽微修正もRepositoryをSource of TruthとしてPR経由で行う。
+- Web EditorとRepositoryを同時編集しない。
+- 実装状況が変わる内容を更新する場合は、必ずHerta Repositoryを再確認する。
+- 2つ目のProviderを実装・検証した段階で、Provider abstractionの答え合わせ記事を次候補とする。
