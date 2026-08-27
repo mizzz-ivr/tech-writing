@@ -7,6 +7,7 @@ on:
       - "ideas/published.md"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "requirements.txt"
@@ -18,6 +19,7 @@ on:
       - "ideas/published.md"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "requirements.txt"
@@ -45,6 +47,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Run analytics unit tests
         run: python -m unittest discover -s tests -v
+      - name: Validate curated metadata migration
+        run: python scripts/migrations/20260827_normalize_published_metadata.py --check
       - name: Validate article metadata and analytics rendering
         run: python scripts/writing_analytics.py --check
       - name: Exercise external metric adapters (best effort)
@@ -52,7 +56,7 @@ jobs:
         run: python scripts/writing_analytics.py --refresh-metrics --check
 
   refresh:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -67,19 +71,21 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Run analytics unit tests
         run: python -m unittest discover -s tests -v
+      - name: Normalize pre-analytics published metadata
+        run: python scripts/migrations/20260827_normalize_published_metadata.py
       - name: Refresh metrics and generated profile
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
         run: python scripts/writing_analytics.py --refresh-metrics
-      - name: Commit generated analytics when changed
+      - name: Commit analytics and metadata when changed
         run: |
-          if [ -z "$(git status --porcelain -- README.md reports/writing-profile.md data/metrics)" ]; then
-            echo "No analytics changes"
+          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md data/metrics)" ]; then
+            echo "No analytics or metadata changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md reports/writing-profile.md data/metrics
-          git commit -m "chore: refresh writing analytics"
+          git add articles README.md reports/writing-profile.md data/metrics
+          git commit -m "chore: normalize metadata and refresh writing analytics"
           git push

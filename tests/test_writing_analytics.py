@@ -34,6 +34,52 @@ class CadenceSummaryTests(unittest.TestCase):
         self.assertEqual(average, "5.0日")
 
 
+class ClassificationTests(unittest.TestCase):
+    def test_explicit_empty_list_is_not_unclassified(self):
+        article = analytics.Article(
+            slug="language-agnostic",
+            path=Path("articles/language-agnostic/article.md"),
+            meta={
+                "title": "language agnostic",
+                "status": "published",
+                "published_at": "2026-01-01",
+                "domains": ["ai"],
+                "languages": [],
+                "technologies": ["GitHub"],
+                "published": {"qiita": "https://qiita.com/example/items/00000000000000000000"},
+            },
+            registry=None,
+        )
+
+        issues = analytics.data_quality([article])
+        languages = analytics.count_field([article], "languages")
+
+        self.assertFalse(any("`languages` が未分類" in issue for issue in issues))
+        self.assertNotIn("Unclassified", languages)
+        self.assertEqual(sum(languages.values()), 0)
+
+    def test_missing_classification_remains_unclassified(self):
+        article = analytics.Article(
+            slug="missing-language",
+            path=Path("articles/missing-language/article.md"),
+            meta={
+                "title": "missing language",
+                "status": "published",
+                "published_at": "2026-01-01",
+                "domains": ["ai"],
+                "technologies": ["GitHub"],
+                "published": {"qiita": "https://qiita.com/example/items/00000000000000000000"},
+            },
+            registry=None,
+        )
+
+        issues = analytics.data_quality([article])
+        languages = analytics.count_field([article], "languages")
+
+        self.assertTrue(any("`languages` が未分類" in issue for issue in issues))
+        self.assertEqual(languages["Unclassified"], 1)
+
+
 class ExternalMetricHardeningTests(unittest.TestCase):
     def test_unexpected_zenn_schema_becomes_platform_error(self):
         article = analytics.Article(

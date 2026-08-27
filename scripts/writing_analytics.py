@@ -145,6 +145,16 @@ def list_values(meta: dict[str, Any], key: str) -> list[str]:
     return [str(value).strip()] if str(value).strip() else []
 
 
+def has_explicit_classification(meta: dict[str, Any], key: str) -> bool:
+    """Return True for populated values or an explicit empty list used as N/A."""
+    if key not in meta:
+        return False
+    value = meta.get(key)
+    if isinstance(value, list):
+        return True
+    return bool(str(value).strip()) if value is not None else False
+
+
 def api_json(url: str, token: str | None = None) -> Any:
     headers = {"Accept": "application/json", "User-Agent": USER_AGENT}
     if token:
@@ -275,7 +285,7 @@ def data_quality(articles: list[Article]) -> list[str]:
         if status == "published" and not any(article.platform_url(name) for name in ("qiita", "zenn")):
             issues.append(f"`{article.slug}`: `status: published` だが公開URLがない")
         for key in ("domains", "languages", "technologies"):
-            if article.effective_status == "published" and not list_values(article.meta, key):
+            if article.effective_status == "published" and not has_explicit_classification(article.meta, key):
                 issues.append(f"`{article.slug}`: `{key}` が未分類")
     return issues
 
@@ -285,10 +295,11 @@ def count_field(articles: list[Article], key: str) -> Counter[str]:
     for article in articles:
         if article.effective_status != "published":
             continue
-        values = list_values(article.meta, key)
-        if not values:
+        if not has_explicit_classification(article.meta, key):
             counter["Unclassified"] += 1
-        else:
+            continue
+        values = list_values(article.meta, key)
+        if values:
             counter.update(values)
     return counter
 

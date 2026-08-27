@@ -53,6 +53,24 @@ published:
 
 過去記事に不足項目があっても、スクリプトが推測してfront matterを書き換えることはしません。未分類は `Unclassified` とdata quality警告で可視化します。
 
+### 未分類とN/Aを分ける
+
+記事によっては、技術分野や技術スタックは分類できても特定のプログラミング言語を扱わない場合があります。
+
+この場合はfieldを省略せず、明示的に空配列を記録します。
+
+```yaml
+languages: []
+```
+
+Writing Analyticsでは次のように区別します。
+
+- fieldが無い / `null` / 空文字: **Unclassified**。data quality対象
+- `[]`: **明示的にN/A**。Unclassifiedへ加算しない
+- 1件以上の値: 通常の分類として集計
+
+これにより、言語非依存の記事へ無理にPythonやTypeScriptを付与して分析結果を歪めることを避けます。
+
 ## 生成物
 
 ### `reports/writing-profile.md`
@@ -135,14 +153,22 @@ PVは取得できる前提にしません。
 
 不整合を自動修正はしません。記事ごとの意図を壊さないよう、レポートに出して人が直します。
 
+### Writing Analytics導入前の記事
+
+PR #15より前に公開済みだった3記事は、記事本文と `ideas/published.md` を確認したうえで `scripts/migrations/20260827_normalize_published_metadata.py` に明示的な移行値を固定しています。
+
+このmigrationは推論エンジンではありません。対象slugと値を固定したidempotentな移行処理で、main refresh時に既存front matterを正規化した後は変更を発生させません。
+
 ## GitHub Actions
 
-- Pull Request: 集計スクリプトが実行できることを検証
-- `main` push: 集計レポートを更新
+- Pull Request: unit test / migration check / 集計スクリプトを検証
+- `main` push: legacy metadataをidempotentに正規化して集計レポートを更新
 - daily schedule: 外部メトリクスをsnapshotし、README / reportを更新
 - manual dispatch: 任意タイミングで再取得
 
 外部API障害はwarningとして扱い、front matter検証などRepository内部の問題と分離します。
+
+GitHub Actions bot自身のanalytics commitではrefresh jobを再実行しないため、自動commitのループを防ぎます。
 
 ## Portfolio / Career活用
 
