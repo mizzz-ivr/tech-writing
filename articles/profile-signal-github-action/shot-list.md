@@ -2,96 +2,136 @@
 
 Qiita #3用。
 
-## 採用予定5枚
+## 方針
 
-### 01. `01-profile-overview.jpeg`
+GitHubプロフィール全景は縦長すぎて記事内では読めないため、**スクリーンショットを掲載しない**。
 
-用途:
+本文から実プロフィールへ直接誘導する。
 
-- 冒頭の完成形プレビュー
-- Consumer / Live Demoとして実際にProfile Signalを使っていることを示す
-- 内容が現在のProfileと大きくズレていなければ既存画像を再利用可能
+```text
+https://github.com/mizzz-ivr
+```
 
-確認:
+記事で使う画像は `02`〜`05` の4枚に絞る。
 
-- Widget詳細はQiita #2と重複させない
-- 縦長の場合は縮小表示
-- 直後にGitHubプロフィール本体へのリンクを置く
+## 採用4枚
 
 ### 02. `02-standalone-repository.png`
 
-撮影対象:
+撮影場所:
 
-- `mizzz-ivr/profile-signal` Repository root
+```text
+https://github.com/mizzz-ivr/profile-signal
+```
+
+撮影範囲:
+
+- Repository名 `mizzz-ivr/profile-signal`
+- rootのファイルtree
+- `.github/`
 - `.profile-signal/`
 - `distribution/`
 - `docs/`
 - `release-notes/`
 - `scripts/`
 - `tests/`
-- Latest Release `Profile Signal v0.4.0`
+- 右側のAbout / Releasesは無理なく入る場合だけ含める
 
 目的:
 
 - OSS本体が個人Profile Repositoryから独立したことを示す
 - `mizzz-ivr/profile-signal` がSource of Truthであることを視覚的に伝える
 
+構図:
+
+- browser chromeは最小限
+- treeの文字が読める倍率を優先
+- README本文までは入れなくてよい
+
 ### 03. `03-release-package-ci-success.png`
 
-撮影対象:
+撮影場所:
 
-- standalone `mizzz-ivr/profile-signal` のv0.4.0 Release workflow
-- Release ZIP build / smoke test / publishがsuccessしている画面
+`mizzz-ivr/profile-signal` → **Actions** → `Profile Signal release` → `v0.4.0` を発行したsuccess run。
+
+撮影範囲:
+
+- Workflow名
+- Success状態
+- Release package validation / smoke testのjob
+- GitHub Release publishのjob
 
 本文側で説明するポイント:
 
 - Release archive生成
 - clean fixtureへ展開してruntime smoke test
-- workflow staging validation
+- installed workflow staging validation
 - GitHub Release publish
 
 目的:
 
-- ZIPを作るだけでなく、配布物単体で動作確認していることを示す
+- ZIPを作るだけでなく、配布物単体をCIで検証してからReleaseしていることを示す
+
+注意:
+
+- 詳細log本文は不要
+- Token / Authorization header /不要なAccount情報が見える画面は使わない
 
 ### 04. `04-release-v0.4.0.png`
 
-撮影対象:
-
-- `Profile Signal v0.4.0`
-- Latest
-- 日本語Release Notesの主要部分
-- Assets `profile-signal-v0.4.0.zip`
-
-目的:
-
-- standalone Repositoryから正式Releaseしていることを示す
-- v0.4.0でLatest Signals lightweight refreshが追加されたことを見せる
-
-Release URL:
+撮影場所:
 
 ```text
 https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0
 ```
 
-### 05. `05-installed-repository.png`
+撮影範囲:
 
-撮影対象:
+- `Profile Signal v0.4.0`
+- `Latest` badge（表示される場合）
+- Release Notesの冒頭数行
+- **Assets** の `profile-signal-v0.4.0.zip`
 
-Consumer `mizzz-ivr/mizzz-ivr` 側で、少なくとも以下が分かる構図。
+目的:
+
+- Standalone Repositoryから正式Releaseしていることを示す
+- v0.4.0の配布物がZIPとして存在することを見せる
+
+構図:
+
+- 可能なら1枚でReleaseタイトル〜Assetsまで収める
+- 文字が潰れる場合は本文を少し縮めても、Assets名が読めることを優先する
+- 上下2枚の連結画像にはしない
+
+### 05. `05-sample-profile.png`
+
+撮影場所:
 
 ```text
-.profile-signal/
-.github/profile-signal.yml
-.github/workflows/update-readme.yml
+https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 ```
 
-可能ならinstalled runtimeが利用者Repository内に存在することを中心にする。
+`README.md` の**GitHubレンダリング表示**を撮る。Raw / Code表示は使わない。
+
+撮影範囲:
+
+- `Profile Signal — Sample Profile`
+- `Sample output only` の注記
+- `LIVE SIGNAL`
+- `TODAY`
+- `CURRENT FOCUS`
+- `DEV PULSE` 上部まで
+
+目的:
+
+- 実Consumer Repositoryを見せずに、導入後の出力イメージを再現可能な形で見せる
+- サンプル値が架空・固定であることを同じ画面で明示する
+- OSS Repository内のサンプルなので、記事読者もそのまま開いて確認できる
 
 注意:
 
-- Consumerは配布templateそのままではなくDogfooding用custom workflowを使っているため、「配布ZIPを展開した標準tree」と誤解させない
-- 標準Release ZIPの構成は本文コードブロックで示す
+- 下の `NOW BUILDING / ACTIVITY STREAM / DEV RECAP` まで1枚へ詰め込まない
+- 全体はSample Profileページへのリンクで見てもらう
 
 ## 本文でコード表示するもの
 
@@ -122,6 +162,25 @@ PROFILE_SIGNAL_VERSION
 
 ## 不採用
 
+### Profile overview screenshot
+
+使わない。
+
+理由:
+
+- Profile全体が縦長で記事幅へ収めると読めない
+- Qiita #2ですでにWidget表示を扱っている
+- 第3弾では実プロフィールURLへの直接誘導の方が情報量を保てる
+
+### Consumer installed tree screenshot
+
+使わない。
+
+理由:
+
+- ConsumerはDogfooding用custom workflowで、標準Release ZIPのtreeと完全一致しない
+- `examples/sample-profile` の方が再現可能で誤解が少ない
+
 ### v0.2.0 Release画像
 
 旧記事用の以下は使わない。
@@ -133,7 +192,6 @@ PROFILE_SIGNAL_VERSION
 
 - 最新Releaseがv0.4.0
 - Release Source of Truthが `mizzz-ivr/profile-signal` へ移行済み
-- `mizzz-ivr/mizzz-ivr/releases` を最新配布元と誤認させる
 
 ### `test-profile-signal-v0.2.0` tree
 
@@ -168,9 +226,6 @@ theme: signal
 ## Qiita placeholder mapping
 
 ```text
-01-profile-overview.jpeg
-→ <!-- QIITA_IMAGE: 01-profile-overview.jpg -->
-
 02-standalone-repository.png
 → <!-- QIITA_IMAGE: 02-standalone-repository.jpg -->
 
@@ -180,8 +235,8 @@ theme: signal
 04-release-v0.4.0.png
 → <!-- QIITA_IMAGE: 04-release-v0.4.0.jpg -->
 
-05-installed-repository.png
-→ <!-- QIITA_IMAGE: 05-installed-repository.jpg -->
+05-sample-profile.png
+→ <!-- QIITA_IMAGE: 05-sample-profile.jpg -->
 ```
 
 QiitaへUploadした際に生成されたMarkdownを対応placeholderへ置換する。
@@ -193,6 +248,6 @@ QiitaへUploadした際に生成されたMarkdownを対応placeholderへ置換�
 - [ ] Token / Secretなし
 - [ ] Private Repositoryなし
 - [ ] Authorization headerなし
-- [ ] 公開GitHubプロフィール / 公開Repositoryの範囲
+- [ ] 公開GitHub Repositoryの範囲
 - [ ] Issue / PRなど記事読者に不要な内部管理情報を映さない
-- [ ] Consumer固有の個人情報・不要な管理情報を映さない
+- [ ] Sample Profileに実ユーザーの動的数値を混ぜない
