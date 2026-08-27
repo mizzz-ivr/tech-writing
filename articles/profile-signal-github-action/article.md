@@ -16,9 +16,7 @@ published:
 
 https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
 
-<!-- QIITA_IMAGE: 01-profile-overview.jpg -->
-
-実際のプロフィールは今もProfile Signalを使って更新しています。
+実際のプロフィールは今もProfile Signalを使って更新しています。全体は縦長になるため、この記事では縮小スクリーンショットを載せず、実際のプロフィールへ直接誘導します。
 
 https://github.com/mizzz-ivr
 
@@ -395,6 +393,20 @@ profile-signal-v0.4.0.zip
 
 Release NotesもRepository内の `release-notes/v0.4.0.md` を元に管理しています。
 
+## 導入後の見た目をSample Profileで確認できる
+
+実Consumer Repositoryには個人プロフィール固有のREADMEやDogfooding用のWorkflowも含まれるため、それを標準導入例として見せると配布ZIPの構成と混同しやすくなります。
+
+そこでStandalone Repository内に、固定の架空データだけを使ったSample Profileを用意しました。
+
+https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
+
+<!-- QIITA_IMAGE: 05-sample-profile.jpg -->
+
+`LIVE SIGNAL`、`TODAY`、`CURRENT FOCUS`、`DEV PULSE`、`NOW BUILDING`、`ACTIVITY STREAM`、`DEV RECAP` をGitHub上でREADMEとしてレンダリングできます。
+
+実ユーザーの動的な数値は使わず、サンプル値を固定しているため、導入前の確認やドキュメント用スクリーンショットにも使えます。
+
 ## 導入手順はかなり短い
 
 ### 1. Profile Repositoryを用意
@@ -441,8 +453,6 @@ Actions
 ```
 
 初回結果を確認します。
-
-<!-- QIITA_IMAGE: 05-installed-repository.jpg -->
 
 その後はFull refreshとLatest Signals refreshがscheduleで動きます。
 
@@ -531,6 +541,7 @@ Workflow templateに変更があるReleaseでは、Release Notesを確認して 
 - YAML Preset Registry
 - 8種類の公式Preset
 - Full refresh / Latest Signals分離
+- deterministic Sample Profile
 
 まで整いました。
 
