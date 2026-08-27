@@ -67,7 +67,7 @@ jobs:
         run: python scripts/writing_analytics.py --refresh-metrics
       - name: Commit generated analytics when changed
         run: |
-          if git diff --quiet -- README.md reports/writing-profile.md data/metrics; then
+          if [ -z "$(git status --porcelain -- README.md reports/writing-profile.md data/metrics)" ]; then
             echo "No analytics changes"
             exit 0
           fi
