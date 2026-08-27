@@ -1,0 +1,75 @@
+name: Writing Analytics
+
+on:
+  pull_request:
+    paths:
+      - "articles/**"
+      - "ideas/published.md"
+      - "templates/article.md"
+      - "scripts/writing_analytics.py"
+      - "docs/WRITING_ANALYTICS.md"
+      - "requirements.txt"
+      - ".github/workflows/writing-analytics.yml"
+  push:
+    branches: [main]
+    paths:
+      - "articles/**"
+      - "ideas/published.md"
+      - "templates/article.md"
+      - "scripts/writing_analytics.py"
+      - "docs/WRITING_ANALYTICS.md"
+      - "requirements.txt"
+      - ".github/workflows/writing-analytics.yml"
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: writing-analytics-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Validate article metadata and analytics rendering
+        run: python scripts/writing_analytics.py --check
+
+  refresh:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Refresh metrics and generated profile
+        env:
+          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
+        run: python scripts/writing_analytics.py --refresh-metrics
+      - name: Commit generated analytics when changed
+        run: |
+          if git diff --quiet -- README.md reports/writing-profile.md data/metrics; then
+            echo "No analytics changes"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md reports/writing-profile.md data/metrics
+          git commit -m "chore: refresh writing analytics"
+          git push
