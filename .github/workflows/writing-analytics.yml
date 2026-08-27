@@ -43,6 +43,9 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Validate article metadata and analytics rendering
         run: python scripts/writing_analytics.py --check
+      - name: Exercise external metric adapters (best effort)
+        continue-on-error: true
+        run: python scripts/writing_analytics.py --refresh-metrics --check
 
   refresh:
     if: github.event_name != 'pull_request'
