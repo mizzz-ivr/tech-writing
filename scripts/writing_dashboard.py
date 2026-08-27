@@ -24,7 +24,11 @@ PIPELINE_STATUS_ORDER = ("draft", "review", "published", "archived")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--check", action="store_true", help="Render dashboard and charts in memory only")
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Validate that committed dashboard and chart files match the deterministic rendering",
+    )
     return parser.parse_args()
 
 
@@ -81,7 +85,9 @@ def svg_bar_chart(title: str, entries: Iterable[tuple[str, int]], *, max_items: 
     ]
 
     if not rows:
-        parts.append('<text x="28" y="92" fill="#8b949e" font-family="system-ui,sans-serif" font-size="16">No observed data</text>')
+        parts.append(
+            '<text x="28" y="92" fill="#8b949e" font-family="system-ui,sans-serif" font-size="16">No observed data</text>'
+        )
     else:
         for index, (label, value) in enumerate(rows):
             y = top + index * row_height
@@ -100,7 +106,7 @@ def svg_bar_chart(title: str, entries: Iterable[tuple[str, int]], *, max_items: 
                 f'<text x="{left + chart_width + 14}" y="{y + 22}" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">{value}</text>'
             )
 
-    parts.append('</svg>')
+    parts.append("</svg>")
     return "\n".join(parts) + "\n"
 
 
@@ -127,18 +133,36 @@ def latest_snapshot_count() -> int:
     return len(list(analytics.METRICS_DIR.glob("*.json")))
 
 
+def snapshot_source_time(snapshot: dict | None) -> str:
+    """Return a deterministic display time from the persisted metric snapshot."""
+    if not snapshot:
+        return "unavailable"
+    raw = snapshot.get("collected_at")
+    if not raw:
+        return "unavailable"
+
+    value = str(raw)
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return value
+    if parsed.tzinfo is None:
+        return value
+    return parsed.astimezone(analytics.JST).strftime("%Y-%m-%d %H:%M JST")
+
+
 def build_dashboard(articles: list[analytics.Article], snapshot: dict | None) -> str:
     published = analytics.published_articles(articles)
     last_date, avg_gap = analytics.cadence_summary(published)
     quality = analytics.data_quality(articles)
     rows = analytics.reaction_rows(snapshot)
     snapshots = latest_snapshot_count()
-    generated_at = datetime.now(analytics.JST).strftime("%Y-%m-%d %H:%M JST")
+    source_snapshot = snapshot_source_time(snapshot)
 
     lines = [
         "# Writing Analytics Visual Dashboard",
         "",
-        f"> Generated: {generated_at}",
+        f"> Source snapshot: {source_snapshot}",
         "",
         "Repository metadata and metric snapshots remain the Source of Truth. This page and the SVG files are derived/generated views.",
         "",
@@ -201,15 +225,19 @@ def build_dashboard(articles: list[analytics.Article], snapshot: dict | None) ->
 
     lines.extend(["", "## Trend Readiness", ""])
     if snapshots < 2:
-        lines.extend([
-            f"- Historical trend chart is intentionally not generated yet: **{snapshots} snapshot(s)** available.",
-            "- 7 / 30 / 90 day trend starts only after real snapshots accumulate; no interpolation or synthetic history is used.",
-        ])
+        lines.extend(
+            [
+                f"- Historical trend chart is intentionally not generated yet: **{snapshots} snapshot(s)** available.",
+                "- 7 / 30 / 90 day trend starts only after real snapshots accumulate; no interpolation or synthetic history is used.",
+            ]
+        )
     else:
-        lines.extend([
-            f"- **{snapshots} snapshots** are available.",
-            "- Time-series trend visualization can be generated from actual stored snapshots.",
-        ])
+        lines.extend(
+            [
+                f"- **{snapshots} snapshots** are available.",
+                "- Time-series trend visualization can be generated from actual stored snapshots.",
+            ]
+        )
 
     lines.extend(["", "## Data Quality", ""])
     if quality:
@@ -217,17 +245,19 @@ def build_dashboard(articles: list[analytics.Article], snapshot: dict | None) ->
     else:
         lines.append("- **No issues detected**")
 
-    lines.extend([
-        "",
-        "## Source of Truth",
-        "",
-        "- Article metadata: `articles/*/article.md`",
-        "- Publication registry: `ideas/published.md`",
-        "- Raw external metrics: `data/metrics/YYYY-MM-DD.json`",
-        "- Detailed text report: [`writing-profile.md`](./writing-profile.md)",
-        "- Visual assets: `reports/assets/*.svg`",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Source of Truth",
+            "",
+            "- Article metadata: `articles/*/article.md`",
+            "- Publication registry: `ideas/published.md`",
+            "- Raw external metrics: `data/metrics/YYYY-MM-DD.json`",
+            "- Detailed text report: [`writing-profile.md`](./writing-profile.md)",
+            "- Visual assets: `reports/assets/*.svg`",
+            "",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -235,6 +265,26 @@ def render() -> tuple[str, dict[str, str]]:
     articles = analytics.load_articles()
     snapshot = analytics.load_latest_snapshot()
     return build_dashboard(articles, snapshot), chart_payloads(articles, snapshot)
+
+
+def generated_file_mismatches(dashboard: str, charts: dict[str, str]) -> list[Path]:
+    """Return generated files that are missing or differ from the deterministic rendering."""
+    mismatches: list[Path] = []
+    if not DASHBOARD_PATH.exists() or DASHBOARD_PATH.read_text(encoding="utf-8") != dashboard:
+        mismatches.append(DASHBOARD_PATH)
+
+    for filename, expected in charts.items():
+        path = ASSET_DIR / filename
+        if not path.exists() or path.read_text(encoding="utf-8") != expected:
+            mismatches.append(path)
+    return mismatches
+
+
+def display_path(path: Path) -> str:
+    try:
+        return path.relative_to(analytics.ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
 
 
 def main() -> int:
@@ -246,8 +296,13 @@ def main() -> int:
         return 1
 
     if args.check:
-        print(dashboard)
-        print(f"check completed: {len(charts)} charts rendered", file=sys.stderr)
+        mismatches = generated_file_mismatches(dashboard, charts)
+        if mismatches:
+            for path in mismatches:
+                print(f"ERROR: stale generated file: {display_path(path)}", file=sys.stderr)
+            print("Run `python scripts/writing_dashboard.py` and commit the generated changes.", file=sys.stderr)
+            return 1
+        print(f"check completed: {len(charts)} generated chart files are current", file=sys.stderr)
         return 0
 
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
