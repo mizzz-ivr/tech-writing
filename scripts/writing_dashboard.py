@@ -19,6 +19,7 @@ import writing_analytics as analytics
 
 DASHBOARD_PATH = analytics.ROOT / "reports" / "visual-dashboard.md"
 ASSET_DIR = analytics.ROOT / "reports" / "assets"
+PIPELINE_STATUS_ORDER = ("draft", "review", "published", "archived")
 
 
 def parse_args() -> argparse.Namespace:
@@ -32,6 +33,14 @@ def status_counts(articles: list[analytics.Article]) -> Counter[str]:
     for article in articles:
         counts[article.effective_status] += 1
     return counts
+
+
+def pipeline_rows(counts: Counter[str]) -> list[tuple[str, int]]:
+    """Render every tracked status while keeping common states in a stable order."""
+    rows = [(status, counts.get(status, 0)) for status in PIPELINE_STATUS_ORDER]
+    known = set(PIPELINE_STATUS_ORDER)
+    rows.extend((status, counts[status]) for status in sorted(counts) if status not in known)
+    return rows
 
 
 def observed_reaction_counts(snapshot: dict | None) -> dict[str, int]:
@@ -104,10 +113,7 @@ def chart_payloads(articles: list[analytics.Article], snapshot: dict | None) -> 
     reactions = observed_reaction_counts(snapshot)
 
     return {
-        "pipeline.svg": svg_bar_chart(
-            "Editorial pipeline",
-            [(name, pipeline.get(name, 0)) for name in ("draft", "review", "published")],
-        ),
+        "pipeline.svg": svg_bar_chart("Editorial pipeline", pipeline_rows(pipeline)),
         "domains.svg": svg_bar_chart("Published domains", domains.most_common(8)),
         "technologies.svg": svg_bar_chart("Technology coverage", technologies.most_common(8)),
         "portfolio-signals.svg": svg_bar_chart("Portfolio signals", signals.most_common(8)),
