@@ -145,10 +145,12 @@ noteはQiita / Zennの代替ではなく、**エンジニアとして何を考�
 
 note記事の生成・編集・履歴管理はRepositoryをSource of Truthとし、公開自体はnote Web Editorで行う。
 
+新規note原稿は `articles/YYMMDD-<slug>/article.md` で作成する。`YYMMDD` はJSTの執筆開始日で、フォルダ名全体を安定したArticle IDとして扱う。既存の `articles/<slug>/article.md` は互換性のためrenameしない。詳細は [Article ID / File Naming](./ARTICLE_NAMING.md) を参照する。
+
 生成・編集後の記事は次のコマンドでMarkdown本文をクリップボードへコピーできる。
 
 ```bash
-npm run note:copy -- articles/<slug>/article.md
+npm run note:copy -- articles/YYMMDD-<slug>/article.md
 ```
 
 Repository管理用のYAML front matterはnote本文ではないため、コピー時に自動で除外する。
@@ -162,7 +164,7 @@ npm run note:open
 通常の公開準備では、コピーと投稿画面起動をまとめて行う。
 
 ```bash
-npm run note:publish -- articles/<slug>/article.md
+npm run note:publish -- articles/YYMMDD-<slug>/article.md
 ```
 
 `note:publish` は次の順番で動く。
