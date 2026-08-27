@@ -1,6 +1,6 @@
 ---
 title: "自作GitHubプロフィールWidgetをReleaseで配布できる形にしてみた"
-status: draft
+status: review
 topics: [GitHubActions, GitHub, Python, OSS, 個人開発]
 source_repositories: [mizzz-ivr/mizzz-ivr]
 published:
@@ -144,8 +144,14 @@ scripts/
 .profile-signal/
 ├─ action.yml
 ├─ LICENSE
+├─ presets/
+│  ├─ minimal.yml
+│  ├─ standard.yml
+│  ├─ full.yml
+│  └─ terminal.yml
 ├─ src/
-│  └─ orchestrator.py
+│  ├─ orchestrator.py
+│  └─ preset_runtime.py
 └─ scripts/
    ├─ update-profile-activity.py
    ├─ profile_signal.py
@@ -156,7 +162,7 @@ scripts/
 
 GitHubプロフィールで普段触る必要がないruntimeなので、hidden directoryにしています。
 
-Composite Actionの`action.yml`からは、同じディレクトリ内のOrchestratorを実行します。
+Composite Actionの`action.yml`からは、同じディレクトリ内のPreset Registry entrypointを実行します。
 
 ```yaml
 runs:
@@ -169,10 +175,12 @@ runs:
 
     - name: Generate Profile Signal
       shell: bash
-      run: python "${{ github.action_path }}/src/orchestrator.py"
+      run: python "${{ github.action_path }}/src/preset_runtime.py"
 ```
 
-Orchestrator側も `.profile-signal/scripts/` を見つけられるため、親RepositoryのPythonファイルへ依存しない構成です。
+`preset_runtime.py` がPreset YAMLを検証してからOrchestratorへ渡し、Orchestrator側は `.profile-signal/scripts/` のruntimeを実行します。
+
+親RepositoryのPythonファイルへ依存しない構成です。
 
 ## 自分のプロフィールも配布版runtimeを使うようにした
 
@@ -289,6 +297,65 @@ terminal
 
 を選べます。
 
+## Preset定義もYAMLへ分離した
+
+最初は `minimal / standard / full / terminal` の組み合わせをPythonの辞書に直接書いていました。
+
+でも今後プロフィール用テンプレートを増やすたびに、OrchestratorへPreset名の分岐を増やしたくありません。
+
+そこでPresetを `.profile-signal/presets/*.yml` へ分離しました。
+
+例えば `standard` は次のように定義します。
+
+```yaml
+version: 1
+id: standard
+description: Balanced default profile signal.
+theme: signal
+widgets:
+  - live_signal
+  - today
+  - current_focus
+  - dev_pulse
+```
+
+新しい公式Presetなら、基本的にはYAMLを追加するだけです。
+
+```text
+.profile-signal/presets/compact.yml
+```
+
+のように追加し、
+
+```yaml
+version: 1
+id: compact
+description: Compact profile template.
+theme: minimal
+widgets:
+  - today
+  - current_focus
+```
+
+と定義できます。
+
+Registry loaderでは、
+
+- schema version
+- ファイル名とPreset IDの一致
+- unknown Widget
+- Widget重複
+- 対応Theme
+- 既存4Presetの欠落
+
+を検証します。
+
+CIでは既存 `minimal / standard / full / terminal` のWidget構成も固定しています。
+
+これで今後 `compact / developer / portfolio / activity / oss` のような用途別Presetを増やしても、CollectorやAnalyticsへPreset固有の分岐を持ち込まずに済みます。
+
+利用者独自Presetについては、現状 `.profile-signal/` がRelease更新時に差し替わる領域なので、まずは `widgets` overrideを推奨しています。
+
 ## READMEはRelease ZIPに含めない
 
 ここはかなり重要でした。
@@ -400,7 +467,7 @@ README.md を1行だけ作る
    ↓
 configのusernameをtest用に設定
    ↓
-.profile-signal/src/orchestrator.py を実行
+.profile-signal/src/preset_runtime.py を実行
    ↓
 README / state / SVGを検証
 ```
@@ -441,11 +508,23 @@ Workflow側で、
 
 <!-- QIITA_IMAGE: 03-release-v0.1.0.jpg -->
 
-利用者はReleaseページからZIPをDownloadするだけです。
+`v0.1.0` は実際に公開済みです。
+
+https://github.com/mizzz-ivr/mizzz-ivr/releases/tag/v0.1.0
+
+Release assetには、
+
+```text
+profile-signal-v0.1.0.zip
+```
+
+を置いています。
+
+Release本文も日本語にし、導入方法・Privacy・LicenseがReleaseページだけでも分かるようにしました。
+
+Release Notes本文は `release-notes/v0.1.0.md` をSource of Truthとして、Workflowから公開済みReleaseへ同期します。
 
 ## 導入手順はかなり短くできた
-
-最終的な導入手順は次の形を目標にしています。
 
 ### 1. Profile Repositoryを用意
 
@@ -493,6 +572,75 @@ Actions
 <!-- QIITA_IMAGE: 04-installed-tree.jpg -->
 
 ここまでで、その後はscheduleで自動更新されます。
+
+## 導入手順はGitHub Wikiにもまとめた
+
+Releaseページだけに長い説明を詰め込まず、継続的なドキュメントはGitHub Wikiへ分けました。
+
+https://github.com/mizzz-ivr/mizzz-ivr/wiki
+
+Wikiには、
+
+- Home
+- Installation
+- Configuration
+- Presets
+- License
+
+を用意しています。
+
+ただしWikiをGitHub UIだけで編集すると、Repository側のドキュメントと内容がズレやすくなります。
+
+そこで編集元は、
+
+```text
+docs/wiki/*.md
+```
+
+にしました。
+
+Pull Requestでは必須ページと内部リンクを検証し、mainへMergeすると `Sync Profile Signal wiki` Workflowが `.wiki.git` へ自動pushします。
+
+実際に初期Wikiを作成したあと、
+
+```text
+mizzz-ivr/mizzz-ivr.wiki.git
+HEAD -> master
+Profile Signal wiki synchronized
+```
+
+まで動作確認しました。
+
+## MIT Licenseの対象も分けた
+
+Release ZIP内のProfile Signal runtimeはMIT Licenseにしています。
+
+一方で、配布元は自分自身のGitHub Profile Repositoryです。
+
+Repository root全体をMITにすると、
+
+- 個人Profile README本文
+- Hero / Avatar画像
+- Screenshot
+- 個人用の文章
+- 第三者Logoや商標
+
+まで同じLicense対象に見えやすくなります。
+
+そのためMITの対象は、
+
+```text
+.profile-signal/**
+Release packageの再利用可能コード
+generic config / workflow template
+配布ドキュメント
+```
+
+へ明確に寄せています。
+
+個人プロフィール固有コンテンツは別扱いです。
+
+「OSS化するコード」と「自分のプロフィールそのもの」を同じRepositoryに置いているからこそ、License境界も明記する必要がありました。
 
 ## Forkは補助的な導線にする
 
@@ -553,6 +701,9 @@ Workflow templateに変更があるReleaseだけ、Release Notesを見て手動�
 - Update時に何を残すか
 - Private dataをどこで遮断するか
 - 配布ZIPだけで本当に起動できるか
+- 配布コードと個人プロフィールのLicense境界
+- WikiとRepository内ドキュメントをどう同期するか
+- Presetをどう増やせるようにするか
 
 といった境界でした。
 
@@ -564,4 +715,6 @@ Workflow templateに変更があるReleaseだけ、Release Notesを見て手動�
 
 今のところ、**GitHubプロフィールを自動化するruntimeは、自分のProfile Repositoryに見える形で置いておく方が自分の狙いには合っている**と感じています。
 
-次は実際のReleaseをしばらくDogfoodingして、PresetやThemeをもう少し整えていく予定です。
+`v0.1.0` のRelease公開、Wiki、MIT License、YAML Preset Registryまで整いました。
+
+次は実際のDogfoodingを続けながら、用途別PresetとThemeを増やしていく予定です。
