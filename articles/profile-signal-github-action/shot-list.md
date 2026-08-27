@@ -25,31 +25,33 @@ Qiita #3用。
 
 見せたいもの:
 
-- `Profile Signal release` workflow
+- `Profile Signal release` workflow run #11
 - `Build release archive` success
 - `Smoke test extracted install` success
 - `Validate installed workflow staging without assets` success
+- `Publish GitHub Release` success
 - Secret / Tokenが映らない範囲
 
 目的:
 
-- Release ZIPを作っただけではなく、clean fixtureへ展開して実行できたことを示す
+- Release ZIPを作っただけではなく、clean fixtureへ展開して実行し、実Releaseまで自動発行できたことを示す
 
-### 03. GitHub Release `v0.1.0`
+### 03. GitHub Release `v0.2.0`
 
 見せたいもの:
 
 ```text
-Profile Signal v0.1.0
-profile-signal-v0.1.0.zip
+Profile Signal v0.2.0
+profile-signal-v0.2.0.zip
 ```
 
-加えて日本語Release Notesが見える範囲。
+加えて日本語Release Notesと、新Presetが見える範囲。
 
 目的:
 
 - 実際の配布導線を示す
 - Releaseページが日本語で案内されていることを示す
+- `compact / developer / activity / oss` のPreset追加まで含む現在の配布版を見せる
 
 ### 04. Release ZIP導入後のRepository tree
 
@@ -62,7 +64,9 @@ profile-signal-v0.1.0.zip
 README.md
 ```
 
-可能ならWorkflowの次の部分も同じ画面またはコードブロックで示す。
+可能なら `.profile-signal/presets/` も展開し、8Presetが見える状態にする。
+
+Workflowの次の部分はコードブロックでもよい。
 
 ```yaml
 uses: ./.profile-signal
@@ -96,19 +100,23 @@ uses: ./.profile-signal
 ├─ minimal.yml
 ├─ standard.yml
 ├─ full.yml
-└─ terminal.yml
+├─ terminal.yml
+├─ compact.yml
+├─ developer.yml
+├─ activity.yml
+└─ oss.yml
 ```
 
 Screenshotよりコードブロックで十分なら省略。
 
 目的:
 
-- 今後Profile templateを増やす際、runtimeへPreset名ごとの分岐を増やさない設計を示す
+- Profile templateを追加するとき、runtimeへPreset名ごとの分岐を増やさずYAML追加中心で拡張できることを示す
 
 ### 07. Config / Preset
 
 ```yaml
-preset: standard
+preset: developer
 theme: signal
 ```
 
