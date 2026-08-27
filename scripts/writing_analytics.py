@@ -31,6 +31,8 @@ README_START = "<!-- WRITING_ANALYTICS:START -->"
 README_END = "<!-- WRITING_ANALYTICS:END -->"
 JST = ZoneInfo("Asia/Tokyo")
 USER_AGENT = "mizzz-ivr-tech-writing-analytics/1.0"
+PUBLICATION_PLATFORMS = ("qiita", "zenn", "note")
+METRIC_PLATFORMS = ("qiita", "zenn")
 REACTION_FIELDS: dict[str, tuple[tuple[str, str], ...]] = {
     "qiita": (("likes", "likes"), ("stocks", "stocks"), ("comments", "comments")),
     "zenn": (("likes", "likes"), ("bookmarks", "bookmarks"), ("comments", "comments")),
@@ -43,6 +45,7 @@ class RegistryEntry:
     title: str
     qiita: str | None
     zenn: str | None
+    note: str | None
 
 
 @dataclass
@@ -125,6 +128,7 @@ def read_published_registry() -> dict[str, RegistryEntry]:
             title=cells[1],
             qiita=clean_cell(cells[2]),
             zenn=clean_cell(cells[3]),
+            note=clean_cell(cells[4]) if len(cells) >= 6 else None,
         )
         registry[entry.title] = entry
     return registry
@@ -157,6 +161,14 @@ def has_explicit_classification(meta: dict[str, Any], key: str) -> bool:
     if isinstance(value, list):
         return True
     return bool(str(value).strip()) if value is not None else False
+
+
+def preferred_publication_url(article: Article) -> str | None:
+    """Return a stable representative URL while supporting note-only publications."""
+    for platform in PUBLICATION_PLATFORMS:
+        if url := article.platform_url(platform):
+            return url
+    return None
 
 
 def api_json(url: str, token: str | None = None) -> Any:
@@ -225,7 +237,7 @@ def refresh_metrics(articles: list[Article]) -> dict[str, Any]:
             "published_at": article.effective_published_at,
             "platforms": {},
         }
-        for platform in ("qiita", "zenn"):
+        for platform in METRIC_PLATFORMS:
             url = article.platform_url(platform)
             if not url:
                 continue
@@ -277,7 +289,7 @@ def data_quality(articles: list[Article]) -> list[str]:
         if article.registry and status != "published":
             issues.append(f"`{article.slug}`: published.mdでは公開済みだがfront matterは `status: {status}`")
         if article.registry:
-            for platform in ("qiita", "zenn"):
+            for platform in PUBLICATION_PLATFORMS:
                 registry_url = getattr(article.registry, platform)
                 meta_url = published.get(platform) if isinstance(published, dict) else None
                 if registry_url and not meta_url:
@@ -286,7 +298,7 @@ def data_quality(articles: list[Article]) -> list[str]:
                     issues.append(f"`{article.slug}`: {platform} URLがpublished.mdとfront matterで不一致")
         if article.effective_status == "published" and not article.effective_published_at:
             issues.append(f"`{article.slug}`: 公開済みだが `published_at` を特定できない")
-        if status == "published" and not any(article.platform_url(name) for name in ("qiita", "zenn")):
+        if status == "published" and not any(article.platform_url(name) for name in PUBLICATION_PLATFORMS):
             issues.append(f"`{article.slug}`: `status: published` だが公開URLがない")
         for key in ("domains", "languages", "technologies"):
             if article.effective_status == "published" and not has_explicit_classification(article.meta, key):
@@ -427,8 +439,9 @@ def build_report(articles: list[Article], snapshot: dict[str, Any] | None) -> st
         lines.append("- No published articles")
     else:
         for article in published[:5]:
-            url = article.platform_url("qiita") or article.platform_url("zenn")
-            lines.append(f"- {article.effective_published_at or '-'} — {md_link(article.title, url)}")
+            lines.append(
+                f"- {article.effective_published_at or '-'} — {md_link(article.title, preferred_publication_url(article))}"
+            )
 
     lines.extend(["", "## Reactions", ""])
     rows = reaction_rows(snapshot)
@@ -483,8 +496,9 @@ def build_readme_section(articles: list[Article], snapshot: dict[str, Any] | Non
     languages = count_field(published, "languages")
     recent_lines = []
     for article in published[:3]:
-        url = article.platform_url("qiita") or article.platform_url("zenn")
-        recent_lines.append(f"- {article.effective_published_at or '-'} — {md_link(article.title, url)}")
+        recent_lines.append(
+            f"- {article.effective_published_at or '-'} — {md_link(article.title, preferred_publication_url(article))}"
+        )
     if not recent_lines:
         recent_lines = ["- No published articles"]
 
