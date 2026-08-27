@@ -25,9 +25,8 @@ Merge済み:
 - PR #28 YAML Preset Registry
 - PR #29 v0.2 Preset Pack
 
-## Release
+## Current release
 
-- `v0.1.0` 公開済み
 - `v0.2.0` 公開済み
 - `profile-signal-v0.2.0.zip` 公開済み
 - Release本文は日本語
@@ -38,13 +37,7 @@ Merge済み:
 
 ## Distribution decision
 
-不採用:
-
-```yaml
-uses: mizzz-ivr/profile-signal@v1
-```
-
-採用:
+推奨:
 
 ```text
 GitHub Release ZIP
@@ -58,7 +51,6 @@ GitHub Release ZIP
 uses: ./.profile-signal
 ```
 
-Release ZIPを推奨導入経路とする。
 Forkは完成形を参考にしたい場合の補助導線。
 
 ## Preset
@@ -77,26 +69,9 @@ v0.2追加:
 - activity
 - oss
 
-PR #29でYAML追加中心の拡張をDogfooding済み。
-
-## License
-
-Profile Signal runtime / Release packageはMIT License。
-個人Profile README本文・画像・Screenshotなど配布元Repository固有コンテンツはMIT対象外。
-
-## Wiki
-
-- Home
-- Installation
-- Configuration
-- Presets
-- License
-
-`docs/wiki/*.md` をSource of Truthとしてmain Merge後にGitHub Wikiへ自動同期する。
-
 ## Screenshot selection
 
-採用:
+採用済み:
 
 1. `01-profile-overview.jpeg`
 2. `02-release-package-ci-success.png`
@@ -108,7 +83,7 @@ Profile Signal runtime / Release packageはMIT License。
 
 - `test-profile-signal-v0.2.0` 作業用tree
 
-Releaseページは上下2枚に分け、本文を挟む。連結画像にはしない。
+Releaseページは上下2枚に分け、本文を挟む。
 Release全文はGitHub URLへ誘導する。
 
 ## Before publish
