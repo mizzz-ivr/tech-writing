@@ -1,10 +1,31 @@
 ---
-title: "GitHubプロフィールをライブな開発ダッシュボードにしてみた"
-status: review
-topics: [GitHub, GitHubActions, GitHubAPI, Python, 個人開発]
-source_repositories: [mizzz-ivr/mizzz-ivr]
+title: GitHubプロフィールをライブな開発ダッシュボードにしてみた
+status: published
+published_at: '2026-08-27'
+article_type: case-study
+level: intermediate
+topics:
+- GitHub
+- GitHubActions
+- GitHubAPI
+- Python
+- 個人開発
+domains:
+- devops
+- developer-productivity
+languages:
+- Python
+technologies:
+- GitHub Actions
+- GitHub API
+- GitHub Events API
+portfolio_signals:
+- automation
+- architecture
+source_repositories:
+- mizzz-ivr/mizzz-ivr
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
   zenn: null
 ---
 

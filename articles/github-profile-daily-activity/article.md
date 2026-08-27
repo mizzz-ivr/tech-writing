@@ -1,10 +1,31 @@
 ---
-title: "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた"
-status: review
-topics: [GitHub, GitHubActions, GitHubAPI, Python, 個人開発]
-source_repositories: [mizzz-ivr/mizzz-ivr]
+title: GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた
+status: published
+published_at: '2026-08-26'
+article_type: case-study
+level: intermediate
+topics:
+- GitHub
+- GitHubActions
+- GitHubAPI
+- Python
+- 個人開発
+domains:
+- devops
+- developer-productivity
+languages:
+- Python
+technologies:
+- GitHub Actions
+- GitHub API
+- GitHub Search API
+portfolio_signals:
+- automation
+- ci-cd
+source_repositories:
+- mizzz-ivr/mizzz-ivr
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a
   zenn: null
 ---
 

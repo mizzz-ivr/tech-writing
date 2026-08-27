@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-08-27 13:28 JST
+> Generated: 2026-08-27 13:57 JST
 
 ## Overview
 
@@ -12,10 +12,10 @@
 ## Technology Mix
 
 - Topics: GitHub (2), GitHubActions (2), GitHubAPI (2), Python (2), 個人開発 (2), ai-development (1), individual-development (1), github (1)
-- Domains: Unclassified (3)
-- Languages: Unclassified (3)
-- Technologies: Unclassified (3)
-- Portfolio signals: Unclassified (3)
+- Domains: developer-productivity (3), devops (2), ai (1)
+- Languages: Python (2)
+- Technologies: GitHub Actions (3), GitHub API (2), GitHub Events API (1), GitHub Search API (1), GitHub (1), GitHub Issues (1), GitHub Pull Requests (1)
+- Portfolio signals: automation (2), architecture (1), ci-cd (1), development-process (1), ai-assisted-development (1)
 
 ## Recent Articles
 
@@ -31,19 +31,7 @@
 
 ## Data Quality
 
-- `github-profile-daily-activity`: published.mdでは公開済みだがfront matterは `status: review`
-- `github-profile-daily-activity`: published.mdにqiita URLがあるがfront matterは空
-- `github-profile-daily-activity`: `domains` が未分類
-- `github-profile-daily-activity`: `languages` が未分類
-- `github-profile-daily-activity`: `technologies` が未分類
-- `github-profile-live-dashboard`: published.mdでは公開済みだがfront matterは `status: review`
-- `github-profile-live-dashboard`: published.mdにqiita URLがあるがfront matterは空
-- `github-profile-live-dashboard`: `domains` が未分類
-- `github-profile-live-dashboard`: `languages` が未分類
-- `github-profile-live-dashboard`: `technologies` が未分類
-- `repository-is-source-of-truth`: `domains` が未分類
-- `repository-is-source-of-truth`: `languages` が未分類
-- `repository-is-source-of-truth`: `technologies` が未分類
+- No issues detected
 
 ## Review Hints
 

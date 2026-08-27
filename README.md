@@ -22,8 +22,8 @@
 **3 published** · Last post **2026-08-27** · Avg interval **1.5日**
 
 - Topics: GitHub (2), GitHubActions (2), GitHubAPI (2), Python (2), 個人開発 (2)
-- Domains: Unclassified (3)
-- Languages: Unclassified (3)
+- Domains: developer-productivity (3), devops (2), ai (1)
+- Languages: Python (2)
 
 #### Recent
 

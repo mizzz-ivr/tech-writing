@@ -1,10 +1,27 @@
 ---
-title: "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話"
+title: AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話
 status: published
+published_at: '2026-08-24'
+article_type: case-study
+level: intermediate
 topics:
-  - ai-development
-  - individual-development
-  - github
+- ai-development
+- individual-development
+- github
+domains:
+- ai
+- developer-productivity
+languages: []
+technologies:
+- GitHub
+- GitHub Issues
+- GitHub Pull Requests
+- GitHub Actions
+portfolio_signals:
+- development-process
+- ai-assisted-development
+source_repositories:
+- ivRooom/Herta
 published:
   qiita: https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e
   zenn: null
