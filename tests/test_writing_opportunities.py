@@ -1,5 +1,6 @@
 import importlib.util
 import sys
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
@@ -22,6 +23,55 @@ def article(slug: str, status: str, **meta):
         meta=payload,
         registry=None,
     )
+
+
+class ArticleLoadingTests(unittest.TestCase):
+    def test_published_native_zenn_article_is_included(self):
+        title = "Native Zenn article"
+        registry = analytics.RegistryEntry(
+            published_at="2026-08-27",
+            title=title,
+            qiita=None,
+            zenn="https://zenn.dev/example/articles/native-zenn",
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            articles_dir = Path(tmp)
+            (articles_dir / "native-zenn.md").write_text(
+                "---\n"
+                f"title: {title}\n"
+                "topics: [typescript, security]\n"
+                "published: true\n"
+                "---\n"
+                "body\n",
+                encoding="utf-8",
+            )
+            with (
+                patch.object(analytics, "ARTICLES_DIR", articles_dir),
+                patch.object(analytics, "load_articles", return_value=[]),
+                patch.object(analytics, "read_published_registry", return_value={title: registry}),
+            ):
+                loaded = opportunities.load_opportunity_articles()
+
+        self.assertEqual(len(loaded), 1)
+        self.assertEqual(loaded[0].effective_status, "published")
+        self.assertEqual(analytics.list_values(loaded[0].meta, "topics"), ["typescript", "security"])
+
+    def test_unregistered_native_zenn_draft_is_not_assigned_a_status(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            articles_dir = Path(tmp)
+            (articles_dir / "draft.md").write_text(
+                "---\ntitle: Draft native\ntopics: [typescript]\npublished: false\n---\nbody\n",
+                encoding="utf-8",
+            )
+            with (
+                patch.object(analytics, "ARTICLES_DIR", articles_dir),
+                patch.object(analytics, "load_articles", return_value=[]),
+                patch.object(analytics, "read_published_registry", return_value={}),
+            ):
+                loaded = opportunities.load_opportunity_articles()
+
+        self.assertEqual(loaded, [])
 
 
 class BacklogParsingTests(unittest.TestCase):
@@ -147,6 +197,53 @@ class RecommendationPriorityTests(unittest.TestCase):
 
         self.assertEqual(candidates[0].article.slug, "career-gap")
         self.assertEqual(candidates[1].article.slug, "ready")
+
+    def test_older_coverage_gap_wins_when_higher_priority_axes_tie(self):
+        published_old = article(
+            "published-old",
+            "published",
+            published_at="2026-01-01",
+            domains=[],
+            languages=[],
+            technologies=["OldTech"],
+            portfolio_signals=["automation"],
+        )
+        published_recent = article(
+            "published-recent",
+            "published",
+            published_at="2026-07-20",
+            domains=[],
+            languages=[],
+            technologies=["RecentTech"],
+            portfolio_signals=["automation"],
+        )
+        older_gap = article(
+            "older-gap",
+            "draft",
+            domains=[],
+            languages=[],
+            technologies=["OldTech"],
+            portfolio_signals=["automation"],
+            source_repositories=["example/repo"],
+        )
+        recent_gap = article(
+            "recent-gap",
+            "draft",
+            domains=[],
+            languages=[],
+            technologies=["RecentTech"],
+            portfolio_signals=["automation"],
+            source_repositories=["example/repo"],
+        )
+
+        candidates = opportunities.build_candidates(
+            [published_old, published_recent, older_gap, recent_gap],
+            snapshot=None,
+            as_of=date(2026, 8, 27),
+        )
+
+        self.assertEqual(candidates[0].article.slug, "older-gap")
+        self.assertGreater(candidates[0].oldest_gap_age, candidates[1].oldest_gap_age)
 
     def test_missing_metadata_is_reported_instead_of_guessed(self):
         pending = article("pending", "review", topics=["GitHub"])
