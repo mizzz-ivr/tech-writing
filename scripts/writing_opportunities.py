@@ -25,6 +25,7 @@ COVERAGE_KEYS = ("topics", "domains", "languages", "technologies", "portfolio_si
 GAP_KEYS = ("domains", "languages", "technologies")
 WINDOWS = (30, 90, 365)
 OVERLAP_THRESHOLD = 0.88
+UNPUBLISHED_GAP_AGE = WINDOWS[-1] + 1
 
 
 @dataclass(frozen=True)
@@ -39,6 +40,7 @@ class Candidate:
     article: analytics.Article
     portfolio_gaps: tuple[str, ...]
     coverage_gaps: tuple[str, ...]
+    oldest_gap_age: int
     sources: tuple[str, ...]
     reaction_context: int
     missing_metadata: tuple[str, ...]
@@ -52,6 +54,40 @@ def parse_args() -> argparse.Namespace:
         help="Validate source metadata and render the report in memory without writing",
     )
     return parser.parse_args()
+
+
+def load_opportunity_articles() -> list[analytics.Article]:
+    """Load analytics articles plus published Zenn-native article files.
+
+    The main analytics loader intentionally scans ``articles/*/article.md``.
+    Phase 2C also needs published native Zenn files such as ``articles/<slug>.md``
+    so Portfolio coverage does not silently omit a published article. Native files
+    are included only when their title exists in ``ideas/published.md``; draft
+    state is not inferred from Zenn's separate front matter schema.
+    """
+
+    articles = analytics.load_articles()
+    registry = analytics.read_published_registry()
+    known_paths = {article.path.resolve() for article in articles}
+
+    for path in sorted(analytics.ARTICLES_DIR.glob("*.md")):
+        if path.resolve() in known_paths:
+            continue
+        meta = analytics.read_frontmatter(path)
+        title = str(meta.get("title") or path.stem)
+        published_entry = registry.get(title)
+        if published_entry is None:
+            continue
+        articles.append(
+            analytics.Article(
+                slug=path.stem,
+                path=path,
+                meta=meta,
+                registry=published_entry,
+            )
+        )
+
+    return sorted(articles, key=lambda article: article.path.as_posix())
 
 
 def parse_iso_date(value: Any) -> date | None:
@@ -95,6 +131,10 @@ def published_value_dates(
         for value in analytics.list_values(article.meta, key):
             result.setdefault(value, []).append(published_at)
     return result
+
+
+def published_values(articles: list[analytics.Article], key: str) -> set[str]:
+    return set(published_value_dates(articles, key))
 
 
 def coverage_rows(
@@ -177,10 +217,6 @@ def best_title_overlap(
     return best if best and best[2] >= OVERLAP_THRESHOLD else None
 
 
-def published_values(articles: list[analytics.Article], key: str) -> set[str]:
-    return set(published_value_dates(articles, key))
-
-
 def related_reaction_context(
     candidate: analytics.Article,
     articles: list[analytics.Article],
@@ -210,7 +246,7 @@ def build_candidates(
 ) -> list[Candidate]:
     published_signals = published_values(articles, "portfolio_signals")
     coverage = {key: published_value_dates(articles, key) for key in GAP_KEYS}
-    candidates = []
+    candidates: list[Candidate] = []
 
     for article in articles:
         if article.effective_status not in {"draft", "review"}:
@@ -221,7 +257,8 @@ def build_candidates(
             for value in analytics.list_values(article.meta, "portfolio_signals")
             if value not in published_signals
         )
-        coverage_gaps = []
+        coverage_gaps: list[str] = []
+        oldest_gap_age = 0
         for key in GAP_KEYS:
             if not analytics.has_explicit_classification(article.meta, key):
                 continue
@@ -229,10 +266,12 @@ def build_candidates(
                 dates = coverage[key].get(value, [])
                 if not dates:
                     coverage_gaps.append(f"{key}:{value} (not yet published)")
+                    oldest_gap_age = max(oldest_gap_age, UNPUBLISHED_GAP_AGE)
                     continue
                 age = max(0, (as_of - max(dates)).days)
                 if age > WINDOWS[0]:
                     coverage_gaps.append(f"{key}:{value} ({age}d since last post)")
+                    oldest_gap_age = max(oldest_gap_age, age)
 
         sources = tuple(analytics.list_values(article.meta, "source_repositories"))
         missing = tuple(
@@ -245,6 +284,7 @@ def build_candidates(
                 article=article,
                 portfolio_gaps=portfolio_gaps,
                 coverage_gaps=tuple(coverage_gaps),
+                oldest_gap_age=oldest_gap_age,
                 sources=sources,
                 reaction_context=related_reaction_context(article, articles, snapshot),
                 missing_metadata=missing,
@@ -257,6 +297,7 @@ def build_candidates(
             len(candidate.portfolio_gaps),
             bool(candidate.sources),
             len(candidate.coverage_gaps),
+            candidate.oldest_gap_age,
             candidate.reaction_context,
             readiness,
             candidate.article.title.casefold(),
@@ -298,13 +339,12 @@ def build_report(
 ) -> str:
     published = analytics.published_articles(articles)
     candidates = build_candidates(articles, snapshot, as_of)
-
     title_pool = [("published", title) for title in analytics.read_published_registry()]
     title_pool.extend((article.effective_status, article.title) for article in articles)
 
-    overlaps = []
-    evidence_backlog = []
-    unscored_backlog = []
+    overlaps: list[tuple[BacklogItem, tuple[str, str, float]]] = []
+    evidence_backlog: list[BacklogItem] = []
+    unscored_backlog: list[BacklogItem] = []
     for item in backlog:
         overlap = best_title_overlap(item, title_pool)
         if overlap:
@@ -327,7 +367,7 @@ def build_report(
         "",
         "1. Portfolio / career coverage gap",
         "2. `source_repositories` 等で実装・検証根拠が明示されているか",
-        "3. 未公開classification / 最終投稿日からのcoverage gap",
+        "3. 未公開classification / 最終投稿日からのcoverage gap・recency",
         "4. 関連する公開記事のpositive reaction",
         "5. 同条件なら `review` を `draft` よりreadyとして扱う",
         "",
@@ -336,19 +376,21 @@ def build_report(
         "## Current Portfolio Coverage",
         "",
         f"- Tracked articles: **{len(articles)}**",
-        f"- Published in analytics metadata: **{len(published)}**",
+        f"- Published articles: **{len(published)}**",
         f"- Draft / review candidates: **{len(candidates)}**",
         f"- Unchecked backlog items: **{len(backlog)}**",
         "",
     ]
 
     for key in COVERAGE_KEYS:
-        lines += [
-            f"### {key}",
-            "",
-            "| Value | Published | Last published | Age | 30d | 90d | 365d |",
-            "| --- | ---: | --- | ---: | :---: | :---: | :---: |",
-        ]
+        lines.extend(
+            [
+                f"### {key}",
+                "",
+                "| Value | Published | Last published | Age | 30d | 90d | 365d |",
+                "| --- | ---: | --- | ---: | :---: | :---: | :---: |",
+            ]
+        )
         rows = coverage_rows(articles, key, as_of)
         if not rows:
             lines.append("| - | 0 | - | - | - | - | - |")
@@ -360,12 +402,14 @@ def build_report(
             )
         lines.append("")
 
-    lines += [
-        "## Pipeline-only Coverage Gaps",
-        "",
-        "draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。",
-        "",
-    ]
+    lines.extend(
+        [
+            "## Pipeline-only Coverage Gaps",
+            "",
+            "draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。",
+            "",
+        ]
+    )
     found_gap = False
     for key in COVERAGE_KEYS:
         values = pipeline_only_values(articles, key)
@@ -376,34 +420,36 @@ def build_report(
         lines.append("- No pipeline-only classifications")
     lines.append("")
 
-    lines += ["## Next Article Candidates", ""]
+    lines.extend(["## Next Article Candidates", ""])
     if not candidates:
         lines.append("- No draft/review article candidates")
     for index, candidate in enumerate(candidates, start=1):
-        lines += [
-            f"### {index}. {article_link(candidate.article)}",
-            "",
-            f"- Status: `{candidate.article.effective_status}`",
-            "- Portfolio gap: "
-            + (
-                ", ".join(f"`{value}`" for value in candidate.portfolio_gaps)
-                if candidate.portfolio_gaps
-                else "no new published portfolio signal detected"
-            ),
-            "- Implementation evidence: "
-            + (
-                ", ".join(f"`{value}`" for value in candidate.sources)
-                if candidate.sources
-                else "not recorded"
-            ),
-            "- Coverage gap / recency: "
-            + (
-                "; ".join(candidate.coverage_gaps)
-                if candidate.coverage_gaps
-                else "no >30d or unpublished domain/language/technology gap detected"
-            ),
-            f"- Related positive-reaction context: {candidate.reaction_context} published article(s)",
-        ]
+        lines.extend(
+            [
+                f"### {index}. {article_link(candidate.article)}",
+                "",
+                f"- Status: `{candidate.article.effective_status}`",
+                "- Portfolio gap: "
+                + (
+                    ", ".join(f"`{value}`" for value in candidate.portfolio_gaps)
+                    if candidate.portfolio_gaps
+                    else "no new published portfolio signal detected"
+                ),
+                "- Implementation evidence: "
+                + (
+                    ", ".join(f"`{value}`" for value in candidate.sources)
+                    if candidate.sources
+                    else "not recorded"
+                ),
+                "- Coverage gap / recency: "
+                + (
+                    "; ".join(candidate.coverage_gaps)
+                    if candidate.coverage_gaps
+                    else "no >30d or unpublished domain/language/technology gap detected"
+                ),
+                f"- Related positive-reaction context: {candidate.reaction_context} published article(s)",
+            ]
+        )
         if candidate.missing_metadata:
             lines.append(
                 "- Metadata needed before stronger scoring: "
@@ -411,23 +457,24 @@ def build_report(
             )
         lines.append("")
 
-    lines += [
-        "## Backlog Hygiene / Overlap",
-        "",
-        "backlog自由文にはclassificationを自動付与せず、タイトル類似度が高い既存記事だけを重複候補として可視化します。",
-        "",
-    ]
+    lines.extend(
+        [
+            "## Backlog Hygiene / Overlap",
+            "",
+            "backlog自由文にはclassificationを自動付与せず、タイトル類似度が高い既存記事だけを重複候補として可視化します。",
+            "",
+        ]
+    )
     if overlaps:
-        for item, (status, title, ratio) in sorted(
-            overlaps, key=lambda row: row[1][2], reverse=True
-        ):
+        for item, (status, title, ratio) in sorted(overlaps, key=lambda row: row[1][2], reverse=True):
             lines.append(
                 f"- `{item.title}` → **{status}** `{title}` "
                 f"(title similarity {ratio:.2f}, section: {item.section})"
             )
     else:
         lines.append("- No likely backlog overlaps detected")
-    lines += ["", "### Evidence-backed backlog items not already tracked", ""]
+
+    lines.extend(["", "### Evidence-backed backlog items not already tracked", ""])
     if evidence_backlog:
         for item in evidence_backlog:
             lines.append(
@@ -436,36 +483,41 @@ def build_report(
     else:
         lines.append("- None")
 
-    lines += [
-        "",
-        "### Backlog items intentionally left unscored",
-        "",
-        f"- Count: **{len(unscored_backlog)}**",
-        "- 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。",
-    ]
+    lines.extend(
+        [
+            "",
+            "### Backlog items intentionally left unscored",
+            "",
+            f"- Count: **{len(unscored_backlog)}**",
+            "- 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。",
+        ]
+    )
     for item in unscored_backlog[:10]:
         lines.append(f"  - `{item.title}` ({item.section})")
     if len(unscored_backlog) > 10:
         lines.append(f"  - … and {len(unscored_backlog) - 10} more")
 
-    lines += [
-        "",
-        "## Interpretation",
-        "",
-        "- `30d / 90d / 365d` は公開済みclassificationの最終投稿日を基準にする。",
-        "- `not yet published` はtracked draft/review metadataにはあるが、公開済みcoverageにはまだ存在しない値。",
-        "- `source_repositories` が無い候補は、実装根拠が無いと断定せず **not recorded** とする。",
-        "- backlog自由文は分類推測しない。推薦精度を上げる場合はfront matterまたはbacklogへ根拠を明示する。",
-        "- metricsが無い / positive reactionが無い場合も推薦自体は成立する。",
-        "",
-    ]
+    lines.extend(
+        [
+            "",
+            "## Interpretation",
+            "",
+            "- `30d / 90d / 365d` は公開済みclassificationの最終投稿日を基準にする。",
+            "- Zenn-native `articles/*.md` は `ideas/published.md` に公開記録がある記事だけcoverageへ含める。draft状態は推測しない。",
+            "- `not yet published` はtracked draft/review metadataにはあるが、公開済みcoverageにはまだ存在しない値。",
+            "- `source_repositories` が無い候補は、実装根拠が無いと断定せず **not recorded** とする。",
+            "- backlog自由文は分類推測しない。推薦精度を上げる場合はfront matterまたはbacklogへ根拠を明示する。",
+            "- metricsが無い / positive reactionが無い場合も推薦自体は成立する。",
+            "",
+        ]
+    )
     return "\n".join(lines)
 
 
 def main() -> int:
     args = parse_args()
     try:
-        articles = analytics.load_articles()
+        articles = load_opportunity_articles()
         backlog = load_backlog()
         snapshot = analytics.load_latest_snapshot()
         report = build_report(articles, backlog, snapshot, resolve_as_of(articles))
