@@ -5,6 +5,7 @@ on:
     paths:
       - "articles/**"
       - "ideas/published.md"
+      - "data/metrics/**"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_dashboard.py"
@@ -20,6 +21,7 @@ on:
     paths:
       - "articles/**"
       - "ideas/published.md"
+      - "data/metrics/**"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_dashboard.py"
