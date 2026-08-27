@@ -1,18 +1,31 @@
 # tech-writing
 
-個人開発で得た知見を、Qiita・Zenn・SNSなどで継続的に発信するための執筆リポジトリです。
+個人開発で得た知見や、エンジニアとしての経験・考えを、Qiita・Zenn・note・SNSなどで継続的に発信するための執筆リポジトリです。
 
 ## このリポジトリの役割
 
-- 技術記事の元原稿を管理する
+- 技術記事とnote記事の元原稿・企画を管理する
 - 記事から展開するSNS投稿を管理する
 - 次に書きたいテーマや公開済み記事を整理する
 - 執筆時のテンプレートと文章方針を共通化する
 - 投稿履歴・技術分野・言語/技術スタック・公開頻度を分析する
 - Qiita / Zennの取得可能な外部指標を時系列で保存する
 - 転職・フリーランス・営業でも使えるTechnical Portfolioとして育てる
+- 技術だけでなく、経験・判断・価値観を残すThinking Portfolioとしても育てる
 
 実装内容そのものの事実確認は、各開発リポジトリを優先します。このリポジトリは「何を、どう発信したか」のSource of Truthとして扱います。
+
+## 媒体戦略
+
+同じ経験を複数媒体で扱うことはありますが、同一本文は重複投稿しません。媒体ごとに記事が答える問いを分けます。
+
+| 媒体 | 主な役割 | 基本の問い |
+| --- | --- | --- |
+| Qiita | 実装・検証・問題解決 | How: どう実装・解決したか |
+| Zenn | 設計・技術深掘り | Design / Why technically: なぜその設計にしたか |
+| note | 経験・思想・キャリア・社会 | Why personally / What I think: なぜそう考えるか |
+
+noteは月1本程度を目安にし、エンジニアとしての考え方、個人開発の裏側、キャリア・仕事・学習、技術×経済・社会を主な柱にします。詳細は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
 
 ## Writing Analytics
 
@@ -62,11 +75,13 @@ tech-writing/
 ├─ reports/
 │  └─ writing-profile.md
 ├─ docs/
+│  ├─ NOTE_EDITORIAL.md
 │  └─ WRITING_ANALYTICS.md
 ├─ scripts/
 │  └─ writing_analytics.py
 ├─ templates/
 │  ├─ article.md
+│  ├─ note.md
 │  └─ social-post.md
 └─ .github/
    ├─ PULL_REQUEST_TEMPLATE.md
@@ -79,11 +94,12 @@ tech-writing/
 1. `ideas/backlog.md` にテーマを残す
 2. `articles/<slug>/notes.md` に実体験・根拠・使いたい具体例を集める
 3. `article.md` を媒体共通の元原稿として書く
-4. Qiita / Zenn向けの最終調整は公開時に行う
-5. `social/<slug>/` にSNS投稿案を作る
-6. 公開後にfront matterの `status` / `published_at` / 公開URLを更新する
-7. `ideas/published.md` にURLと公開日を記録する
-8. Writing AnalyticsがREADME / report / metrics snapshotを更新する
+4. Qiita / Zenn / noteそれぞれの目的に合わせて公開時に最終調整する
+5. noteでは必要に応じて `templates/note.md` の構成を使い、技術解説より経験・判断・価値観を主役にする
+6. `social/<slug>/` にSNS投稿案を作る
+7. 公開後にfront matterの `status` / `published_at` / 公開URLを更新する
+8. `ideas/published.md` にURLと公開日を記録する
+9. Writing AnalyticsがREADME / report / metrics snapshotを更新する
 
 ## 執筆方針
 
@@ -91,7 +107,9 @@ tech-writing/
 
 一般論を並べるより、実際に開発中に起きたこと、迷ったこと、失敗したこと、そこから設計や運用を変えた理由を中心に書きます。技術的な主張は可能な限り対象リポジトリのコード・Issue・PR・Docs・CIを確認してから記載します。
 
-詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md) を参照してください。
+noteでは技術的な正確性を維持しつつ、実装手順の網羅よりも「なぜその考えに至ったか」「経験して何が変わったか」を優先します。経済・社会・制度・時事情報を扱う場合は、事実と意見を分け、公開時点の情報を確認します。
+
+詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md) と [docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md) を参照してください。
 
 ## Writing Analyticsの実行
 
@@ -108,6 +126,8 @@ python scripts/writing_analytics.py --refresh-metrics
 ```
 
 Qiitaの認証が必要な指標を取得する場合は `QIITA_TOKEN` を環境変数またはGitHub ActionsのRepository Secretとして設定します。Token値はRepositoryへ保存しません。
+
+現時点の外部reaction取得対象はQiita / Zennです。noteの外部指標は、安定した取得方法を確認できるまで推測や不安定なスクレイピングを前提にしません。
 
 ## 最初の記事
 
