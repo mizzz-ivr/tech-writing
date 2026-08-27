@@ -32,7 +32,7 @@ data/analytics/writing-analytics.json
 
 ```text
 schema_version
-a s_of
+as_of
 overview
 pipeline
 trend_readiness
