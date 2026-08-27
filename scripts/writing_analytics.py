@@ -45,7 +45,7 @@ class RegistryEntry:
     title: str
     qiita: str | None
     zenn: str | None
-    note: str | None
+    note: str | None = None
 
 
 @dataclass
