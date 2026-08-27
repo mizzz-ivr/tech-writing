@@ -9,7 +9,7 @@ Repository metadata and metric snapshots remain the Source of Truth. This page a
 | KPI | Value |
 | --- | ---: |
 | Published | **3** |
-| Tracked | **5** |
+| Tracked | **6** |
 | Last published | **2026-08-27** |
 | Average interval | **1.5日** |
 | Data quality findings | **0** |
@@ -21,7 +21,8 @@ Repository metadata and metric snapshots remain the Source of Truth. This page a
 
 - published: 3
 - review: 2
-- draft: 0
+- draft: 1
+- archived: 0
 
 ## Portfolio Coverage
 

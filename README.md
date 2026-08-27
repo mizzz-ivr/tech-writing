@@ -35,10 +35,12 @@ noteは月1本程度を目安にし、エンジニアとしての考え方、個
 
 note記事の生成・編集・履歴管理はRepositoryで行い、公開自体はnote Web Editorで行います。
 
+新規の共通原稿・note原稿は `articles/YYMMDD-<slug>/article.md` を使います。`YYMMDD` はJSTの執筆開始日で、フォルダ名全体を安定したArticle IDとして扱います。詳細は [Article ID / File Naming](./docs/ARTICLE_NAMING.md) を参照してください。
+
 生成・編集後の記事をMarkdown本文としてコピーする場合:
 
 ```bash
-npm run note:copy -- articles/<slug>/article.md
+npm run note:copy -- articles/YYMMDD-<slug>/article.md
 ```
 
 noteの新規投稿画面を開く場合:
@@ -50,10 +52,10 @@ npm run note:open
 通常はコピーと投稿画面起動をまとめて実行します。
 
 ```bash
-npm run note:publish -- articles/<slug>/article.md
+npm run note:publish -- articles/YYMMDD-<slug>/article.md
 ```
 
-`articles/<slug>/article.md` にWriting Analytics等のRepository管理用YAML front matterがある場合、そのmetadataは自動で除外し、Markdown本文だけをクリップボードへコピーします。その後 `https://note.com/new` を既定ブラウザで開きます。
+`articles/YYMMDD-<slug>/article.md` にWriting Analytics等のRepository管理用YAML front matterがある場合、そのmetadataは自動で除外し、Markdown本文だけをクリップボードへコピーします。その後 `https://note.com/new` を既定ブラウザで開きます。
 
 noteのID / Password / Cookie / API Tokenは扱わず、自動投稿やブラウザ自動操作もしません。貼り付け後の見出し・画像・ハッシュタグ・公開設定はnote Editorで最終確認します。
 
@@ -140,7 +142,7 @@ tech-writing/
 │  └─ <qiita-article-slug>.md
 ├─ articles/
 │  ├─ <zenn-article-slug>.md      # Zenn GitHub Deploy対象
-│  └─ <article-slug>/             # 媒体共通原稿・notes・analytics metadata
+│  └─ YYMMDD-<slug>/              # 新規の媒体共通/note原稿。安定したArticle ID
 │     ├─ article.md
 │     ├─ notes.md
 │     └─ assets/
@@ -163,6 +165,7 @@ tech-writing/
 ├─ reports/
 │  └─ writing-profile.md
 ├─ docs/
+│  ├─ ARTICLE_NAMING.md
 │  ├─ NOTE_EDITORIAL.md
 │  ├─ NOTE_PUBLISH_HELPER.md
 │  ├─ QIITA_GITHUB_PUBLISH.md
@@ -187,11 +190,13 @@ tech-writing/
       └─ writing-analytics.yml
 ```
 
+既存の `articles/<slug>/article.md` は互換性維持のため一括renameしません。新規の共通原稿・note原稿から `YYMMDD-<slug>` を適用します。
+
 ## 基本フロー
 
 1. `ideas/backlog.md` にテーマを残す。
 2. 実体験・根拠・具体例をnotesへ集める。
-3. `articles/<slug>/article.md` に媒体共通の元原稿・企画・Writing Analytics用metadataを整理する。
+3. 新規の媒体共通/note原稿は `articles/YYMMDD-<slug>/article.md` に元原稿・企画・Writing Analytics用metadataを整理する。
 4. note記事はRepositoryで生成・編集・レビューし、`note:publish` でMarkdown本文をコピーしてnote Web Editorへ反映する。
 5. Qiita記事は `public/<slug>.md` をcanonicalな公開ソースとしてPRでレビューし、mainへのmerge後にGitHub Actionsから投稿・更新する。
 6. Zenn記事は `articles/<slug>.md`、Zenn本は `books/<book-slug>/` をcanonicalな公開ソースとして扱う。
@@ -201,7 +206,7 @@ tech-writing/
 10. 公開後に公開URL・公開日を `ideas/published.md` 等へ記録する。
 11. Writing AnalyticsがREADME / report / metrics snapshotを更新する。
 
-`articles/<slug>/article.md` とQiitaの `public/*.md` は自動同期しません。Qiita公開時は `public/*.md`、Zenn公開時は `articles/<slug>.md` / `books/` を各媒体の公開Source of Truthとして扱います。noteはRepositoryのMarkdownを元原稿として、Web Editorで最終確認して公開します。
+新規の共通原稿・note原稿は `articles/YYMMDD-<slug>/article.md` を使い、既存の `articles/<slug>/article.md` は互換性のため維持します。Qiitaの `public/*.md`、Zennの `articles/<slug>.md` / `books/` は各媒体の公開Source of Truthとして別管理します。noteはRepositoryのMarkdownを元原稿として、Web Editorで最終確認して公開します。
 
 ## 執筆方針
 
@@ -211,7 +216,7 @@ tech-writing/
 
 noteでは技術的な正確性を維持しつつ、実装手順の網羅よりも「なぜその考えに至ったか」「経験して何が変わったか」を優先します。経済・社会・制度・時事情報を扱う場合は、事実と意見を分け、公開時点の情報を確認します。
 
-詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/NOTE_PUBLISH_HELPER.md](./docs/NOTE_PUBLISH_HELPER.md)、[docs/QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
+詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/ARTICLE_NAMING.md](./docs/ARTICLE_NAMING.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/NOTE_PUBLISH_HELPER.md](./docs/NOTE_PUBLISH_HELPER.md)、[docs/QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
 
 ## Writing Analyticsの実行
 
