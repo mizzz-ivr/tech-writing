@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -11,6 +12,10 @@ import yaml
 
 
 REQUIRED_KEYS = ("title", "tags", "private")
+FRONT_MATTER_PATTERN = re.compile(
+    r"\A---\n(?P<front_matter>.*?)\n---(?:\n|\Z)(?P<body>.*)\Z",
+    re.DOTALL,
+)
 
 
 def parse_article(path: Path) -> tuple[dict[str, Any] | None, str, list[str]]:
@@ -20,10 +25,12 @@ def parse_article(path: Path) -> tuple[dict[str, Any] | None, str, list[str]]:
     if not text.startswith("---\n"):
         return None, "", ["front matter must start with '---'"]
 
-    try:
-        front_matter, body = text[4:].split("\n---", 1)
-    except ValueError:
-        return None, "", ["front matter closing '---' is missing"]
+    match = FRONT_MATTER_PATTERN.match(text)
+    if match is None:
+        return None, "", ["front matter closing delimiter must be a standalone '---' line"]
+
+    front_matter = match.group("front_matter")
+    body = match.group("body")
 
     try:
         data = yaml.safe_load(front_matter)
@@ -31,9 +38,9 @@ def parse_article(path: Path) -> tuple[dict[str, Any] | None, str, list[str]]:
         return None, "", [f"front matter is invalid YAML: {exc}"]
 
     if not isinstance(data, dict):
-        return None, body.lstrip("\n"), ["front matter must be a mapping"]
+        return None, body, ["front matter must be a mapping"]
 
-    return data, body.lstrip("\n"), errors
+    return data, body, errors
 
 
 def validate_article(path: Path) -> list[str]:
