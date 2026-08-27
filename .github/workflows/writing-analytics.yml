@@ -5,11 +5,15 @@ on:
     paths:
       - "articles/**"
       - "ideas/published.md"
+      - "data/metrics/**"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/writing_dashboard.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
+      - "reports/visual-dashboard.md"
+      - "reports/assets/**"
       - "requirements.txt"
       - ".github/workflows/writing-analytics.yml"
   push:
@@ -17,11 +21,15 @@ on:
     paths:
       - "articles/**"
       - "ideas/published.md"
+      - "data/metrics/**"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/writing_dashboard.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
+      - "reports/visual-dashboard.md"
+      - "reports/assets/**"
       - "requirements.txt"
       - ".github/workflows/writing-analytics.yml"
   schedule:
@@ -51,6 +59,8 @@ jobs:
         run: python scripts/migrations/20260827_normalize_published_metadata.py --check
       - name: Validate article metadata and analytics rendering
         run: python scripts/writing_analytics.py --check
+      - name: Validate visual dashboard rendering
+        run: python scripts/writing_dashboard.py --check
       - name: Exercise external metric adapters (best effort)
         continue-on-error: true
         run: python scripts/writing_analytics.py --refresh-metrics --check
@@ -77,15 +87,17 @@ jobs:
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
         run: python scripts/writing_analytics.py --refresh-metrics
+      - name: Refresh visual dashboard
+        run: python scripts/writing_dashboard.py
       - name: Commit analytics and metadata when changed
         run: |
-          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md data/metrics)" ]; then
+          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/assets data/metrics)" ]; then
             echo "No analytics or metadata changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles README.md reports/writing-profile.md data/metrics
+          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/assets data/metrics
           git commit -m "chore: normalize metadata and refresh writing analytics"
           git push

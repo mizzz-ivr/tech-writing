@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="322" viewBox="0 0 920 322" role="img" aria-labelledby="title desc">
+<title id="title">Portfolio signals</title>
+<desc id="desc">Horizontal bar chart for Portfolio signals</desc>
+<rect width="100%" height="100%" rx="14" fill="#0d1117"/>
+<text x="28" y="38" fill="#f0f6fc" font-family="system-ui,sans-serif" font-size="22" font-weight="700">Portfolio signals</text>
+<text x="234" y="97" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">automation</text>
+<rect x="250" y="83" width="590" height="20" rx="5" fill="#21262d"/>
+<rect x="250" y="83" width="590" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="98" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">2</text>
+<text x="234" y="139" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">architecture</text>
+<rect x="250" y="125" width="590" height="20" rx="5" fill="#21262d"/>
+<rect x="250" y="125" width="295" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="140" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
+<text x="234" y="181" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">ci-cd</text>
+<rect x="250" y="167" width="590" height="20" rx="5" fill="#21262d"/>
+<rect x="250" y="167" width="295" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="182" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
+<text x="234" y="223" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">development-process</text>
+<rect x="250" y="209" width="590" height="20" rx="5" fill="#21262d"/>
+<rect x="250" y="209" width="295" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="224" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
+<text x="234" y="265" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">ai-assisted-development</text>
+<rect x="250" y="251" width="590" height="20" rx="5" fill="#21262d"/>
+<rect x="250" y="251" width="295" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="266" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
+</svg>
