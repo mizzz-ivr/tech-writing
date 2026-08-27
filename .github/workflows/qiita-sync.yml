@@ -75,11 +75,37 @@ jobs:
           BRANCH: ${{ steps.branch.outputs.name }}
         shell: bash
         run: |
-          gh pr create \
+          set +e
+          output=$(gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "chore(qiita): sync existing articles from Qiita" \
-            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。"
+            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。" \
+            2>&1)
+          status=$?
+          set -e
+
+          if [[ $status -eq 0 ]]; then
+            echo "$output"
+            exit 0
+          fi
+
+          if grep -Fq "GitHub Actions is not permitted to create or approve pull requests" <<<"$output"; then
+            pr_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/new/${BRANCH}"
+            echo "::warning title=Manual PR required::Sync branch was pushed, but GitHub Actions is not permitted to create pull requests. Open ${pr_url}"
+            {
+              echo "### Qiita sync branch created"
+              echo
+              echo "GitHub Actions is not permitted to create pull requests in this repository."
+              echo
+              echo "- Branch: \`${BRANCH}\`"
+              echo "- [Open a pull request](${pr_url})"
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          echo "$output" >&2
+          exit "$status"
 
       - name: No changes
         if: steps.changes.outputs.changed != 'true'
