@@ -6,14 +6,26 @@
 
 noteへの公開自体はWeb Editorで行い、noteの認証情報や非公開APIには依存しない。
 
+## Article ID / ファイル名
+
+新規の共通原稿・note原稿は次の形式で作る。
+
+```text
+articles/YYMMDD-<slug>/article.md
+```
+
+`YYMMDD` はJSTの執筆開始日。フォルダ名全体を安定したArticle IDとして扱い、タイトル変更後も原則renameしない。既存の `articles/<slug>/article.md` は互換性のためそのまま維持する。
+
+詳細は [Article ID / File Naming](./ARTICLE_NAMING.md) を参照する。
+
 ## 基本フロー
 
 ```text
-articles/<slug>/article.md を生成・編集
+articles/YYMMDD-<slug>/article.md を生成・編集
   ↓
 Git / PRでレビュー・履歴管理
   ↓
-npm run note:publish -- articles/<slug>/article.md
+npm run note:publish -- articles/YYMMDD-<slug>/article.md
   ↓
 Repository用YAML front matterを除外
   ↓
@@ -29,10 +41,10 @@ note Editorへ貼り付け・最終調整・公開
 ### Markdown本文だけコピー
 
 ```bash
-npm run note:copy -- articles/<slug>/article.md
+npm run note:copy -- articles/YYMMDD-<slug>/article.md
 ```
 
-`articles/<slug>/article.md` の先頭にRepository管理用YAML front matterがある場合、そのfront matterだけを除外して本文をコピーする。
+`articles/YYMMDD-<slug>/article.md` の先頭にRepository管理用YAML front matterがある場合、そのfront matterだけを除外して本文をコピーする。
 
 見出し、箇条書き、リンク、引用、code blockなどのMarkdown本文は文字列として維持する。
 
@@ -53,7 +65,7 @@ https://note.com/new
 通常はこちらを使う。
 
 ```bash
-npm run note:publish -- articles/<slug>/article.md
+npm run note:publish -- articles/YYMMDD-<slug>/article.md
 ```
 
 処理順:
