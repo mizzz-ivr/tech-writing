@@ -4,7 +4,7 @@
 
 ## 次に着手
 
-- [ ] Zenn: 生成AIを「APIを呼ぶだけ」で終わらせない — Secret・Quota・Kill Switchを分離したAI Runtime設計
+- [ ] 生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計
   - 媒体: Zenn
   - 目標: 2026-08-30までに初回投稿
   - 本文: review
