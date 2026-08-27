@@ -1,42 +1,35 @@
 # Zenn GitHub Deploy
 
-`mizzz-ivr/tech-writing` をZennのGitHub連携リポジトリとして使うための運用手順です。
+`mizzz-ivr/tech-writing` をZenn連携Repositoryとして使うためのRunbookです。
 
-## 方針
+## 対応範囲
 
-- Zennの同期ブランチは `main`
-- Zenn公開対象はRepository rootの `articles/<slug>.md`
-- 下書きは `published: false`
-- 公開は `published: true` へ変更したPRを `main` へmergeすることで行う
-- `articles/<slug>/` はnotesや媒体共通の補助資料を置く場所として残せるが、Zennの公開本文は置かない
-- Secret / Token / API Keyは記事・Front Matter・GitHub Issue / PRへ記載しない
+2026-08-27時点のZenn公式仕様では、GitHub Repository同期に対応するのは **記事（article）と本（book）** です。
+
+**スクラップ（scrap）はGitHub同期非対応**です。そのためこのRepositoryでは、スクラップも原稿・履歴をGit管理できますが、Zennへの作成・更新はWeb UIで行います。
+
+| 種別 | Repository管理 | GitHub Deploy | Zenn CLI Preview |
+| --- | --- | --- | --- |
+| 記事 | `articles/<slug>.md` | 対応 | 対応 |
+| 本 | `books/<book-slug>/...` | 対応 | 対応 |
+| スクラップ | `scraps/<slug>.md` | 非対応 | 非対応 |
 
 ## 初回セットアップ
 
 1. Zennへログインし、`https://zenn.dev/dashboard/deploys` を開く。
 2. 「リポジトリを連携」を選ぶ。
-3. GitHub AppのRepository accessは `Only select repositories` を選択する。
-4. `mizzz-ivr/tech-writing` だけを選択して `Install & Authorize` する。
-5. Zennのリポジトリ設定で同期対象ブランチを `main` にする。
-6. 連携後に、このRepositoryのZenn対応PRを `main` へmergeする。
-7. Zenn Dashboardのデプロイ履歴で成功を確認する。
+3. GitHub AppのRepository accessは `Only select repositories` を選ぶ。
+4. `mizzz-ivr/tech-writing` だけを許可してInstall / Authorizeする。
+5. Zenn側の同期対象Repositoryを `mizzz-ivr/tech-writing` にする。
+6. 同期対象branchを `main` にする。
+7. このsetup PRを `main` へmergeする。
+8. Zenn DashboardのDeploy履歴で同期成功を確認する。
 
-Zenn公式仕様では、登録ブランチに変更がpushされると同期が開始されます。連携前に存在していたファイルだけでは初回同期が走らない場合があるため、**Repository連携を先に完了し、その後にsetup PRをmergeする**順番を推奨します。
+Zennは登録branchへのpushをトリガーに同期します。初回は **Zenn連携を先に完了し、その後setup PRをmergeする** 順番にします。
 
-## 記事ファイル
+## 記事
 
-Zenn記事は次の形式で配置します。
-
-```text
-articles/
-├─ ai-runtime-safety-boundary.md   # Zenn同期対象
-├─ ai-runtime-safety-boundary/
-│  └─ notes.md                     # 執筆メモ。Zenn同期対象外
-└─ other-article/
-   └─ article.md                   # Qiita等の媒体共通原稿。Zenn同期対象外
-```
-
-Front MatterはZenn形式にします。
+Zenn記事はRepository root直下の `articles/<slug>.md` に置きます。
 
 ```yaml
 ---
@@ -48,54 +41,145 @@ published: false
 ---
 ```
 
-`slug` はファイル名です。公開後に変更すると別記事になるため、公開前に確定します。
+- `published: false`: 下書き
+- `published: true`: 公開
+- `published_at`: 必要な場合のみ公開予約日時をJSTで指定
+- ファイル名がslugになるため、公開後は原則変更しない
 
-## ローカルPreview
+新規記事:
 
-初回のみ依存関係をインストールします。
+```bash
+npm run zenn:new:article -- --slug <12-50文字のslug>
+```
+
+## 本
+
+本はZenn公式形式で管理します。
+
+```text
+books/
+└─ <book-slug>/
+   ├─ config.yaml
+   ├─ cover.png          # 任意
+   ├─ introduction.md
+   └─ chapter-01.md
+```
+
+`config.yaml` の基本形:
+
+```yaml
+title: "本のタイトル"
+summary: "本の紹介文"
+topics: ["typescript", "architecture"]
+published: false
+price: 0
+chapters:
+  - introduction
+  - chapter-01
+```
+
+各chapter:
+
+```yaml
+---
+title: "チャプタータイトル"
+---
+```
+
+新規本:
+
+```bash
+npm run zenn:new:book -- --slug <12-50文字のslug>
+```
+
+公開前は `config.yaml` の `published: false` を維持し、公開PRで `true` にします。
+
+## スクラップ
+
+スクラップはZennのGitHub同期対象ではありません。
+
+Repository側では `scraps/<slug>.md` を原稿・履歴・バックアップとして使います。`templates/zenn-scrap.md` をコピーして作成します。
+
+```text
+scraps/
+└─ <slug>.md
+```
+
+運用:
+
+1. Repositoryで原稿・URL・追記履歴を管理する。
+2. Zenn Web UIでスクラップを作成する。
+3. Zennへ追記した内容を必要に応じてRepository側にも反映する。
+4. ZennからexportしたscrapをバックアップとしてRepositoryへ保存してもよい。
+
+**GitHubへpushしてもスクラップはZennへ自動投稿・更新されません。**
+
+## Preview
+
+初回:
 
 ```bash
 npm install
 ```
 
-Preview:
+記事・本をPreview:
 
 ```bash
 npm run zenn:preview
 ```
 
-新規記事をCLIで作る場合:
-
-```bash
-npm run zenn:new -- --slug <12-50文字のslug>
-```
-
-生成された `articles/<slug>.md` は、公開準備が完了するまで `published: false` を維持します。
+スクラップはZenn CLIのGitHub同期対象外なので、Web UIで確認します。
 
 ## 公開フロー
 
-1. `main` から記事用branchを作る。
-2. `articles/<slug>.md` を編集する。
-3. `published: false` のままPRを作り、内容とZenn Previewを確認する。
-4. 公開直前にSource Repositoryの最新状態を再確認する。
-5. `published: true` に変更する。
-6. PRを `main` へmergeする。
-7. Zenn Dashboardのデプロイ履歴を確認する。
-8. 公開URLをfront matterとは別のRepository管理情報（`ideas/published.md` など）へ記録する。
+### 記事
 
-Zenn側の公開URLは `https://zenn.dev/<username>/articles/<slug>` です。
+1. `main` から記事branchを作る。
+2. `articles/<slug>.md` を `published: false` で作成・編集する。
+3. `npm run zenn:preview` で確認する。
+4. Source Repositoryの最新状態を再確認する。
+5. 公開するPRで `published: true` にする。
+6. `main` へmergeする。
+7. Zenn DashboardのDeploy履歴を確認する。
+8. 公開URLを `ideas/published.md` 等へ記録する。
+
+### 本
+
+記事と同様にPRで管理し、公開時だけ `books/<book-slug>/config.yaml` の `published` を `true` にします。
+
+### スクラップ
+
+Repositoryで下書き・履歴を管理したうえで、Zenn Web UIから作成・更新します。公開URLはRepository側にも記録します。
+
+## Repository構成
+
+```text
+tech-writing/
+├─ articles/
+│  ├─ <zenn-article-slug>.md       # Zenn記事: deploy対象
+│  └─ <common-article-slug>/       # Qiita等の元原稿・notes
+├─ books/                          # Zenn本: deploy対象
+│  └─ <book-slug>/
+│     ├─ config.yaml
+│     └─ <chapter-slug>.md
+├─ scraps/                         # Git管理のみ。Zenn deploy対象外
+├─ templates/
+│  └─ zenn-scrap.md
+└─ docs/
+   └─ ZENN_GITHUB_DEPLOY.md
+```
 
 ## 注意点
 
-- Zennが同期するのは `articles` 直下のMarkdownです。`articles/<slug>/article.md` はZenn記事として扱いません。
-- Zennアカウントに連携できるRepository数には上限があります。GitHub Appでは必要なRepositoryだけを許可します。
-- commit messageに `[ci skip]` または `[skip ci]` が入っているとZenn deployがskipされるため、公開・更新commitでは使いません。
-- Zenn上で一度作成したslugは変更しません。
-- 記事削除はRepositoryからファイルを消すだけでは完了しないため、Zenn Dashboard側の投稿管理も確認します。
+- Secret / Token / API Key / private URLを記事・本・スクラップ・Issue / PRへ記載しない。
+- commit messageに `[ci skip]` または `[skip ci]` があるとZenn Deployがskipされるため、公開commitでは使わない。
+- 記事や本のslug変更は別コンテンツ扱いになるため、公開後は変更しない。
+- Repositoryからファイルを削除しただけではZenn上のコンテンツ削除は完了しない。Dashboard側でも削除する。
+- GitHub Appには必要なRepositoryだけを許可する。
 
 ## 公式ドキュメント
 
 - GitHub連携: https://zenn.dev/zenn/articles/connect-to-github
-- Zenn CLI導入: https://zenn.dev/zenn/articles/install-zenn-cli
+- 途中からGitHub連携: https://zenn.dev/zenn/articles/setup-zenn-github-with-export
 - Zenn CLI: https://zenn.dev/zenn/articles/zenn-cli-guide
-- slug: https://zenn.dev/zenn/articles/what-is-slug
+- Scraps: https://zenn.dev/zenn/articles/about-zenn-scraps
