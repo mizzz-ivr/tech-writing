@@ -1,6 +1,6 @@
 # Writing Analytics Visual Dashboard
 
-> Initial generated snapshot: 2026-08-27 JST
+> Source snapshot: 2026-08-27 21:43 JST
 
 Repository metadata and metric snapshots remain the Source of Truth. This page and the SVG files are derived/generated views.
 
@@ -19,30 +19,19 @@ Repository metadata and metric snapshots remain the Source of Truth. This page a
 
 ![Editorial pipeline](./assets/pipeline.svg)
 
-- published: 3
-- review: 2
-- draft: 1
-- archived: 0
-
 ## Portfolio Coverage
 
 ### Domains
 
 ![Published domains](./assets/domains.svg)
 
-現状は `developer-productivity` と `devops` に寄っている。`ai` は1記事で、security / testing / observability / frontend / backend / infra等は公開済みcoverageとしてまだ弱い。
-
 ### Technologies
 
 ![Technology coverage](./assets/technologies.svg)
 
-GitHub Actions / GitHub API周辺の記事が中心。現在の公開実績をそのまま示しており、不足領域を推測で補完していない。
-
 ### Portfolio Signals
 
 ![Portfolio signals](./assets/portfolio-signals.svg)
-
-`automation` が最も強く、architecture / ci-cd / development-process / ai-assisted-developmentが各1件。今後の記事選定ではSecurity・Testing・Observability・OSS等のcoverage gapも別軸で見る。
 
 ## Reactions
 
@@ -64,7 +53,7 @@ The reaction chart contains only observed numeric values. `unavailable` and `not
 
 ## Trend Readiness
 
-- Historical trend chart is intentionally not generated yet: **1 snapshot** available.
+- Historical trend chart is intentionally not generated yet: **1 snapshot(s)** available.
 - 7 / 30 / 90 day trend starts only after real snapshots accumulate; no interpolation or synthetic history is used.
 
 ## Data Quality
