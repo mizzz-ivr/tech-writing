@@ -45,7 +45,7 @@ npm run qiita:new:article -- <article-slug>
 npm run qiita:pull
 ```
 
-ローカルCLIは公開の必須条件ではありません。公開処理はGitHub Actionsが担当します。
+ローカルCLIは公開の必須条件ではありません。公開処理はGitHub Actionsが担当します。PRでは `Validate Qiita articles` workflowがSecretを使わずにQiita front matterと本文の基本条件を検証します。
 
 Tokenには `read_qiita` / `write_qiita` を付与し、GitHub ActionsのRepository Secret `QIITA_TOKEN` として保存します。Token値はRepositoryへ保存しません。
 
@@ -139,6 +139,7 @@ tech-writing/
 │  ├─ WRITING_ANALYTICS.md
 │  └─ ZENN_GITHUB_DEPLOY.md
 ├─ scripts/
+│  ├─ validate_qiita_articles.py
 │  └─ writing_analytics.py
 ├─ templates/
 │  ├─ article.md
@@ -150,6 +151,7 @@ tech-writing/
    └─ workflows/
       ├─ qiita-publish.yml
       ├─ qiita-sync.yml
+      ├─ qiita-validate.yml
       └─ writing-analytics.yml
 ```
 
