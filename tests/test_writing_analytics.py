@@ -172,6 +172,32 @@ class ReactionAnalyticsTests(unittest.TestCase):
         self.assertIn("page views unavailable", summary)
         self.assertNotIn("metrics error", summary)
 
+    def test_report_uses_reactions_and_notable_instead_of_popular_ranking(self):
+        snapshot = {
+            "articles": [
+                {
+                    "title": "Stocked article",
+                    "platforms": {
+                        "qiita": {
+                            "url": "https://example.test/article",
+                            "likes": 0,
+                            "stocks": 2,
+                            "comments": 0,
+                            "page_views": None,
+                        }
+                    },
+                }
+            ]
+        }
+
+        report = analytics.build_report([], snapshot)
+
+        self.assertIn("## Reactions", report)
+        self.assertIn("### Notable", report)
+        self.assertIn("stocks 2", report)
+        self.assertIn("page views unavailable", report)
+        self.assertNotIn("## Popular Articles", report)
+
 
 if __name__ == "__main__":
     unittest.main()
