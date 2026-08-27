@@ -1,111 +1,59 @@
 # tech-writing
 
-個人開発で得た知見や、エンジニアとしての経験・考えを、Qiita・Zenn・note・SNSなどで継続的に発信するための執筆リポジトリです。
+個人開発やエンジニア業務で得た知見を、**Qiita / Zenn / note** 向けの記事として管理・公開するための執筆リポジトリです。
 
-## このリポジトリの役割
+このRepositoryは「何を、どう発信したか」のSource of Truthです。記事の技術的な事実確認は、元になった各開発Repositoryを優先します。
 
-- 技術記事とnote記事の元原稿・企画を管理する
-- Qiitaの記事をQiita CLI + GitHub Actionsで投稿・更新する
-- Zennの記事・本をGitHub連携で投稿・更新する
-- Zennスクラップの原稿・履歴・バックアップを管理する
-- note記事のMarkdownコピーと新規投稿画面への導線を提供する
-- 記事から展開するSNS投稿を管理する
-- 次に書きたいテーマや公開済み記事を整理する
-- 執筆時のテンプレートと文章方針を共通化する
-- 投稿履歴・技術分野・言語/技術スタック・公開頻度を分析する
-- Qiita / Zennの取得可能な外部指標を時系列で保存する
-- 転職・フリーランス・営業でも使えるTechnical Portfolioとして育てる
-- 技術だけでなく、経験・判断・価値観を残すThinking Portfolioとしても育てる
+## まず見る
 
-実装内容そのものの事実確認は、各開発リポジトリを優先します。このリポジトリは「何を、どう発信したか」のSource of Truthとして扱います。
+| 媒体 | 主な役割 | Canonical source | 公開方法 | 詳細 |
+| --- | --- | --- | --- | --- |
+| Qiita | 実装・検証・問題解決 | `public/*.md` | `main` merge後にGitHub Actionsからpublish | [Runbook](./docs/QIITA_GITHUB_PUBLISH.md) |
+| Zenn | 設計・技術深掘り | `articles/<slug>.md` / `books/` | Zenn GitHub Deploy | [Runbook](./docs/ZENN_GITHUB_DEPLOY.md) |
+| note | 経験・考え・キャリア | `articles/YYMMDD-<slug>/article.md` | `note:publish` → Web Editorで最終公開 | [Runbook](./docs/NOTE_PUBLISH_HELPER.md) |
 
-## 媒体戦略
+同じ経験を複数媒体で扱うことはありますが、同一本文をそのまま重複投稿しません。媒体ごとの役割は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
 
-同じ経験を複数媒体で扱うことはありますが、同一本文は重複投稿しません。媒体ごとに記事が答える問いを分けます。
+## 普段の流れ
 
-| 媒体 | 主な役割 | 基本の問い |
-| --- | --- | --- |
-| Qiita | 実装・検証・問題解決 | How: どう実装・解決したか |
-| Zenn | 設計・技術深掘り | Design / Why technically: なぜその設計にしたか |
-| note | 経験・思想・キャリア・社会 | Why personally / What I think: なぜそう考えるか |
+1. `ideas/backlog.md` にテーマを残す。
+2. 実体験・Issue・PR・コード・CIなど、記事の根拠を集める。
+3. 媒体に合わせて原稿を作り、branch / PRでレビューする。
+4. Qiita / Zenn / noteそれぞれの公開フローで公開する。
+5. 公開URLと公開日を `ideas/published.md` に記録する。
+6. Writing Analyticsが公開履歴・技術coverage・外部reactionを更新する。
 
-noteは月1本程度を目安にし、エンジニアとしての考え方、個人開発の裏側、キャリア・仕事・学習、技術×経済・社会を主な柱にします。詳細は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
+記事ID・ファイル名のルールは [Article ID / File Naming](./docs/ARTICLE_NAMING.md) を参照してください。
 
-## note Publish Helper
-
-note記事の生成・編集・履歴管理はRepositoryで行い、公開自体はnote Web Editorで行います。
-
-新規の共通原稿・note原稿は `articles/YYMMDD-<slug>/article.md` を使います。`YYMMDD` はJSTの執筆開始日で、フォルダ名全体を安定したArticle IDとして扱います。詳細は [Article ID / File Naming](./docs/ARTICLE_NAMING.md) を参照してください。
-
-生成・編集後の記事をMarkdown本文としてコピーする場合:
+## よく使うコマンド
 
 ```bash
-npm run note:copy -- articles/YYMMDD-<slug>/article.md
-```
-
-noteの新規投稿画面を開く場合:
-
-```bash
-npm run note:open
-```
-
-通常はコピーと投稿画面起動をまとめて実行します。
-
-```bash
+# note: Markdown本文をコピーして新規投稿画面を開く
 npm run note:publish -- articles/YYMMDD-<slug>/article.md
-```
 
-`articles/YYMMDD-<slug>/article.md` にWriting Analytics等のRepository管理用YAML front matterがある場合、そのmetadataは自動で除外し、Markdown本文だけをクリップボードへコピーします。その後 `https://note.com/new` を既定ブラウザで開きます。
-
-noteのID / Password / Cookie / API Tokenは扱わず、自動投稿やブラウザ自動操作もしません。貼り付け後の見出し・画像・ハッシュタグ・公開設定はnote Editorで最終確認します。
-
-詳細は [note Publish Helper Runbook](./docs/NOTE_PUBLISH_HELPER.md) を参照してください。
-
-## Qiita GitHub Publish
-
-Qiitaは公式Qiita CLIとGitHub Actionsで管理します。Qiitaへ実際に反映されるcanonicalな公開ソースは `public/*.md` です。
-
-PRは下書き・レビュー境界として扱い、PR作成・更新ではQiitaへpublishしません。`public/**/*.md` が `main` にmergeされたときだけ `.github/workflows/qiita-publish.yml` が起動し、Repository Secret `QIITA_TOKEN` を使ってQiitaへ投稿・更新します。
-
-既存Qiita記事は本文を手作業で複製せず、`Sync Qiita articles` workflowから `qiita pull` してPRとして取り込みます。これにより既存のQiita item IDを維持した状態でRepository管理へ移行します。
-
-```bash
-npm install
+# Qiita / Zenn preview
 npm run qiita:preview
-npm run qiita:new:article -- <article-slug>
-npm run qiita:pull
-```
-
-ローカルCLIは公開の必須条件ではありません。公開処理はGitHub Actionsが担当します。PRでは `Validate Qiita articles` workflowがSecretを使わずにQiita front matterと本文の基本条件を検証します。
-
-Tokenには `read_qiita` / `write_qiita` を付与し、GitHub ActionsのRepository Secret `QIITA_TOKEN` として保存します。Token値はRepositoryへ保存しません。
-
-初回取り込み・公開・更新・削除・rollbackの詳細は [Qiita GitHub Publish Runbook](./docs/QIITA_GITHUB_PUBLISH.md) を参照してください。
-
-## Zenn GitHub Deploy
-
-ZennアカウントにこのRepositoryを連携し、同期branchを `main` にします。
-
-| 種別 | 管理場所 | GitHubからZennへ同期 |
-| --- | --- | --- |
-| 記事 | `articles/<slug>.md` | 対応 |
-| 本 | `books/<book-slug>/` | 対応 |
-| スクラップ | `scraps/<slug>.md` | 非対応（Repository管理 + Zenn Web UI） |
-
-2026-08-27時点のZenn公式仕様ではGitHub同期対象は記事と本のみで、スクラップは非対応です。スクラップについて自動投稿できるものとして扱いません。
-
-記事・本は公開準備中 `published: false` を維持し、公開PRで `true` にして `main` へmergeします。
-
-```bash
-npm install
 npm run zenn:preview
-npm run zenn:new:article -- --slug <article-slug>
-npm run zenn:new:book -- --slug <book-slug>
+
+# Writing Analyticsの検証
+python scripts/writing_analytics.py --check
 ```
 
-初回接続・公開・削除・スクラップ運用の詳細は [Zenn GitHub Deploy Runbook](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
+Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップなどの詳細コマンドは各Runbookへ集約しています。
 
-## Writing Analytics
+## Writing Analytics / Portfolio
+
+公開履歴・技術分野・Portfolio coverage・外部reactionをRepository内のデータから生成します。
+
+- [Writing Profile](./reports/writing-profile.md) — 公開頻度・技術傾向・reaction
+- [Content Opportunities](./reports/content-opportunities.md) — 次の記事候補・coverage gap
+- [Visual Dashboard](./reports/visual-dashboard.md) — 可視化
+- [Public Writing Portfolio JSON](./data/exports/writing-portfolio.json) — 外部Portfolio向けstable schema
+
+**Portfolio全体の公開記事数やcoverageは `writing-portfolio.json` を参照してください。** Zenn-native記事を含む統合データはこちらを正とします。
+
+<details>
+<summary>README用の詳細Writing Analyticsを表示</summary>
 
 <!-- WRITING_ANALYTICS:START -->
 ### Writing Profile
@@ -129,113 +77,37 @@ npm run zenn:new:book -- --slug <book-slug>
 詳細なreaction値と未取得状態: [Writing Profile / Analytics](./reports/writing-profile.md) · [運用設計](./docs/WRITING_ANALYTICS.md)
 <!-- WRITING_ANALYTICS:END -->
 
-## 構成
+</details>
 
-```text
-tech-writing/
-├─ README.md
-├─ STYLE_GUIDE.md
-├─ package.json
-├─ qiita.config.json
-├─ requirements.txt
-├─ public/                         # Qiita CLI publish対象
-│  └─ <qiita-article-slug>.md
-├─ articles/
-│  ├─ <zenn-article-slug>.md      # Zenn GitHub Deploy対象
-│  └─ YYMMDD-<slug>/              # 新規の媒体共通/note原稿。安定したArticle ID
-│     ├─ article.md
-│     ├─ notes.md
-│     └─ assets/
-├─ books/                         # Zenn GitHub Deploy対象
-│  └─ <book-slug>/
-│     ├─ config.yaml
-│     ├─ cover.png
-│     └─ <chapter-slug>.md
-├─ scraps/                        # Git管理のみ。Zenn同期非対応
-│  └─ <scrap-slug>.md
-├─ social/
-│  └─ <article-slug>/
-│     └─ x.md
-├─ ideas/
-│  ├─ backlog.md
-│  └─ published.md
-├─ data/
-│  └─ metrics/
-│     └─ YYYY-MM-DD.json
-├─ reports/
-│  └─ writing-profile.md
-├─ docs/
-│  ├─ ARTICLE_NAMING.md
-│  ├─ NOTE_EDITORIAL.md
-│  ├─ NOTE_PUBLISH_HELPER.md
-│  ├─ QIITA_GITHUB_PUBLISH.md
-│  ├─ WRITING_ANALYTICS.md
-│  └─ ZENN_GITHUB_DEPLOY.md
-├─ scripts/
-│  ├─ note_publish.mjs
-│  ├─ validate_qiita_articles.py
-│  └─ writing_analytics.py
-├─ templates/
-│  ├─ article.md
-│  ├─ note.md
-│  ├─ social-post.md
-│  └─ zenn-scrap.md
-└─ .github/
-   ├─ PULL_REQUEST_TEMPLATE.md
-   └─ workflows/
-      ├─ note-publish-helper.yml
-      ├─ qiita-publish.yml
-      ├─ qiita-sync.yml
-      ├─ qiita-validate.yml
-      └─ writing-analytics.yml
-```
+## 主なディレクトリ
 
-既存の `articles/<slug>/article.md` は互換性維持のため一括renameしません。新規の共通原稿・note原稿から `YYMMDD-<slug>` を適用します。
+| Path | 用途 |
+| --- | --- |
+| `public/` | Qiita publish対象 |
+| `articles/` | Zenn記事 / 共通原稿 / note原稿 |
+| `books/` | Zenn本 |
+| `scraps/` | ZennスクラップのGit管理 |
+| `ideas/` | backlog / 公開記録 |
+| `social/` | SNS投稿案 |
+| `reports/` | Writing Analytics生成レポート |
+| `data/` | metrics snapshot / public export |
+| `docs/` | 詳細Runbook・設計 |
 
-## 基本フロー
+## Docs
 
-1. `ideas/backlog.md` にテーマを残す。
-2. 実体験・根拠・具体例をnotesへ集める。
-3. 新規の媒体共通/note原稿は `articles/YYMMDD-<slug>/article.md` に元原稿・企画・Writing Analytics用metadataを整理する。
-4. note記事はRepositoryで生成・編集・レビューし、`note:publish` でMarkdown本文をコピーしてnote Web Editorへ反映する。
-5. Qiita記事は `public/<slug>.md` をcanonicalな公開ソースとしてPRでレビューし、mainへのmerge後にGitHub Actionsから投稿・更新する。
-6. Zenn記事は `articles/<slug>.md`、Zenn本は `books/<book-slug>/` をcanonicalな公開ソースとして扱う。
-7. Zenn記事・本は `published: false` でPR・Previewし、公開時に `true` へ変更して `main` へmergeする。
-8. Zennスクラップは `scraps/` で原稿・履歴をGit管理し、Zenn Web UIへ手動反映する。
-9. `social/<slug>/` にSNS投稿案を作る。
-10. 公開後に公開URL・公開日を `ideas/published.md` 等へ記録する。
-11. Writing AnalyticsがREADME / report / metrics snapshotを更新する。
-
-新規の共通原稿・note原稿は `articles/YYMMDD-<slug>/article.md` を使い、既存の `articles/<slug>/article.md` は互換性のため維持します。Qiitaの `public/*.md`、Zennの `articles/<slug>.md` / `books/` は各媒体の公開Source of Truthとして別管理します。noteはRepositoryのMarkdownを元原稿として、Web Editorで最終確認して公開します。
+| Document | 内容 |
+| --- | --- |
+| [STYLE_GUIDE.md](./STYLE_GUIDE.md) | 執筆方針 |
+| [ARTICLE_NAMING.md](./docs/ARTICLE_NAMING.md) | Article ID / ファイル命名 |
+| [QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md) | Qiita同期・投稿・rollback |
+| [ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) | Zenn GitHub Deploy |
+| [NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md) | note媒体戦略 |
+| [NOTE_PUBLISH_HELPER.md](./docs/NOTE_PUBLISH_HELPER.md) | note公開helper |
+| [WRITING_ANALYTICS.md](./docs/WRITING_ANALYTICS.md) | Writing Analytics設計 |
+| [PORTFOLIO_EXPORT.md](./docs/PORTFOLIO_EXPORT.md) | public Portfolio JSON |
 
 ## 執筆方針
 
-読みやすさは大事にしますが、文章を必要以上に整えすぎません。
+一般論を増やすより、**実際に起きたこと・迷ったこと・失敗したこと・設計や運用を変えた理由**を中心に書きます。技術的な主張は可能な限り元Repositoryのコード・Issue・PR・Docs・CIで確認します。
 
-一般論を並べるより、実際に開発中に起きたこと、迷ったこと、失敗したこと、そこから設計や運用を変えた理由を中心に書きます。技術的な主張は可能な限り対象リポジトリのコード・Issue・PR・Docs・CIを確認してから記載します。
-
-noteでは技術的な正確性を維持しつつ、実装手順の網羅よりも「なぜその考えに至ったか」「経験して何が変わったか」を優先します。経済・社会・制度・時事情報を扱う場合は、事実と意見を分け、公開時点の情報を確認します。
-
-詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/ARTICLE_NAMING.md](./docs/ARTICLE_NAMING.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/NOTE_PUBLISH_HELPER.md](./docs/NOTE_PUBLISH_HELPER.md)、[docs/QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
-
-## Writing Analyticsの実行
-
-```bash
-pip install -r requirements.txt
-python scripts/writing_analytics.py --check
-python scripts/writing_analytics.py
-```
-
-外部メトリクスも更新する場合:
-
-```bash
-python scripts/writing_analytics.py --refresh-metrics
-```
-
-Qiitaの認証が必要な指標を取得する場合は `QIITA_TOKEN` を環境変数またはGitHub ActionsのRepository Secretとして設定します。Token値はRepositoryへ保存しません。
-
-現時点の外部reaction取得対象はQiita / Zennです。noteの外部指標は、安定した取得方法を確認できるまで推測や不安定なスクレイピングを前提にしません。
-
-## 最初の記事
-
-- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](./articles/repository-is-source-of-truth/article.md)
+Secret / Token / Password / Cookieなどの認証情報はRepository・Issue・PR・記事へ記載しません。
