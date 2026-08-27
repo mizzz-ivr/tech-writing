@@ -4,9 +4,14 @@
   "scripts": {
     "zenn:preview": "zenn preview",
     "zenn:new:article": "zenn new:article",
-    "zenn:new:book": "zenn new:book"
+    "zenn:new:book": "zenn new:book",
+    "qiita:preview": "qiita preview",
+    "qiita:new:article": "qiita new",
+    "qiita:pull": "qiita pull",
+    "qiita:publish": "qiita publish --all"
   },
   "devDependencies": {
+    "@qiita/qiita-cli": "1.10.0",
     "zenn-cli": "0.5.2"
   }
 }
