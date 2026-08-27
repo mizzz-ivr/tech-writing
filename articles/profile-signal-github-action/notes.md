@@ -1,165 +1,98 @@
-# Notes — Profile Signal Standalone OSS / Release / Wiki
+# Notes — Profile Signal Standalone OSS / Release
 
 ## Article focus
 
-単にComposite Actionの書き方を説明する記事にはしない。
+Qiita #3では、実装詳細を網羅しない。
 
-自分用のGitHub Profile generatorを、**Standalone OSS Repository + Release ZIP + local runtime**として配布できる形へ変えた実体験を中心にする。
+伝える内容は次の3点に絞る。
 
-外部Repositoryから `uses: owner/repo@v1` で直接呼ぶモデルは採用しない。
+1. 自分用Profile generatorをStandalone OSSへ分離した
+2. 外部ActionではなくRelease ZIP + local runtimeを選んだ
+3. v0.4.0でFull refreshとLatest Signals refreshを分離した
+
+詳細なPreset validator、Wiki同期、License境界、CI job構成は本文では深掘りしない。
 
 ## Source of Truth — 2026-08-28 JST
 
-### OSS本体
-
-- Repository: `mizzz-ivr/profile-signal`
-- current release: `v0.4.0`
-- asset: `profile-signal-v0.4.0.zip`
-- GitHub Wiki: standalone Repository側で公開・自動同期
-- root MIT License
-- 8公式Preset
+- OSS: `mizzz-ivr/profile-signal`
+- Consumer / Live Demo: `mizzz-ivr/mizzz-ivr`
+- Current Release: `v0.4.0`
+- Asset: `profile-signal-v0.4.0.zip`
 - public-only / 標準PAT・API Key不要
+- 8 Preset
 
-### Consumer / Live Demo
-
-- Repository: `mizzz-ivr/mizzz-ivr`
-- Profile Signal本体のSource of Truthではない
-- installed `.profile-signal` runtimeをDogfooding
-- 個人README / 画像 / ScreenshotはStandalone OSSのMIT対象として扱わない
-- Profile全景はQiita記事内へ画像掲載せず、`https://github.com/mizzz-ivr` へ直接誘導する
-
-## Sample Profile
-
-`mizzz-ivr/profile-signal` に deterministic sample page を追加する。
-
-```text
-examples/sample-profile/README.md
-examples/sample-profile/assets/dev-pulse.svg
-```
-
-方針:
-
-- GitHub上でREADMEをレンダリングして実Profileに近い見た目を確認できる
-- 値はすべて架空の固定データ
-- Private Repository / 実ユーザーのActivity値を使わない
-- Screenshotやドキュメントを再現可能にする
-- 実Consumerのcustom workflow/treeを標準導入例として見せない
-
-Tracking implementation: `mizzz-ivr/profile-signal` PR #7。
-
-## Release history relevant to article
-
-### v0.2.0
-
-- YAML Preset Registry
-- 8 Presetへ拡張
-
-### v0.3.0
-
-- `mizzz-ivr/profile-signal` へStandalone OSS移行
-- runtime / tests / Release / Wiki Sourceを分離
-- `mizzz-ivr/mizzz-ivr` はConsumer / Live Demoへ縮小
-
-### v0.4.0
-
-- Latest Signals lightweight runtime追加
-- distributionへ `profile-signal-stream.yml` を追加
-- default cadence:
-  - Full refresh: 3時間
-  - Latest Signals: 30分
-- lightweight対象:
-  - LIVE SIGNAL
-  - CURRENT FOCUS
-  - ACTIVITY STREAM
-- CI / History / Health等の重いstateを保持
-- live-facing stateに実質変更がなければcommitしない
-
-## Distribution decision
-
-推奨:
+## Distribution
 
 ```text
 mizzz-ivr/profile-signal
         ↓
 GitHub Release ZIP
         ↓
-利用者の GitHub Profile Repository
+<username>/<username>
         ↓
 .profile-signal/
 .github/profile-signal.yml
 .github/workflows/profile-signal.yml
 .github/workflows/profile-signal-stream.yml
-        ↓
-uses: ./.profile-signal
 ```
 
-Release builderがpackageする主なファイル:
+Workflowは `uses: ./.profile-signal` でlocal runtimeを実行する。
 
-- `.profile-signal/**`
-- `.github/profile-signal.yml`
-- `.github/workflows/profile-signal.yml`
-- `.github/workflows/profile-signal-stream.yml`
-- `PROFILE_SIGNAL_INSTALL.md`
-- `PROFILE_SIGNAL_VERSION`
+## Release history used in article
 
-## Preset
+### v0.3.0
 
-- minimal
-- standard
-- full
-- terminal
-- compact
-- developer
-- activity
-- oss
+- Standalone OSS Repositoryへ移行
+- Consumer / Live DemoとOSS本体を分離
 
-## Scheduler note
+### v0.4.0
 
-Consumer `mizzz-ivr/mizzz-ivr` ではlive-facing signalをより短い間隔でDogfoodingする設定を試しているが、記事では**v0.4.0配布物のdefault 30分**を仕様として書く。
+- Full refresh: 3時間
+- Latest Signals refresh: 30分
+- Latest Signals対象: LIVE SIGNAL / CURRENT FOCUS / ACTIVITY STREAM
+- 重いAnalytics stateを維持
+- 表示変更がなければcommitしない
 
-2026-08-26〜27 UTCにGitHub Actions trigger/dispatch障害が公式に発生。Consumer側の5分schedule acceptanceは未完了でIssue #52管理中。
+## Sample Profile
 
-記事ではGitHub Actions scheduleをリアルタイム保証として表現しない。
+```text
+https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
+```
 
-## Screenshot selection — 4枚
+- 固定の架空データ
+- 実Consumer固有情報を使わない
+- GitHub上で出力イメージを確認可能
 
-Profile overviewは使わない。実プロフィールへ直接誘導する。
+## Screenshot selection — 3枚
 
-新規撮影:
+採用:
 
-2. `02-standalone-repository.png`
-   - `mizzz-ivr/profile-signal` root tree
-3. `03-release-package-ci-success.png`
-   - standalone Repositoryのv0.4.0 Release workflow success
-4. `04-release-v0.4.0.png`
-   - v0.4.0 Release + ZIP asset
-5. `05-sample-profile.png`
-   - `examples/sample-profile/README.md` のGitHubレンダリング表示
+- `02-standalone-repository.png`
+- `04-release-v0.4.0.png`
+- `05-sample-profile.png`
 
-Consumer installed treeと古いv0.2.0 Release画像は記事から外す。
+不採用:
+
+- Profile overview
+- Release CI
+- Consumer installed tree
+- 古いv0.2.0画像
 
 ## Before publish
 
 - [x] Qiita #2公開
-- [x] 第3弾からQiita #2へリンク
-- [x] Release ZIP配布モデルへ記事を変更
-- [x] Standalone OSS Repository移行完了
-- [x] v0.4.0 Release公開
-- [x] v0.4.0 ZIP asset確認
-- [x] GitHub Wiki standalone移行・同期確認
-- [x] root MIT License確認
-- [x] YAML Preset Registry / 8公式Preset確認
-- [x] article本文をv0.4.0へ追従
-- [x] Profile overview Screenshotを不採用に変更
-- [x] Sample Profile追加PR #7作成
-- [ ] Sample Profile PR #7 CI / Merge
-- [ ] 02〜05 Screenshotを撮影 / 選定
-- [ ] Qiitaへ画像Upload
-- [ ] Qiita image Markdownをplaceholderへ反映
-- [ ] Qiita Preview / mobile preview
-- [ ] 公開直前に`mizzz-ivr/profile-signal` main / Releaseを再確認
-- [ ] 公開
-- [ ] `ideas/published.md` とfront matterへ公開URL反映
+- [x] Standalone OSS移行
+- [x] v0.4.0 Release
+- [x] Sample Profile追加
+- [x] 記事本文をv0.4.0へ更新
+- [x] 記事を簡潔化
+- [x] Screenshotを3枚へ削減
+- [x] 02 / 04 / 05 Screenshot撮影
+- [ ] Qiita canonical `public/*.md` を作成
+- [ ] Qiita Preview
+- [ ] 公開直前にRepository / Releaseを再確認
+- [ ] Qiitaへ反映
+- [ ] `ideas/published.md` とmetadataへ公開URL反映
 
 ## Tags
 
