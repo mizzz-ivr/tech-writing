@@ -128,7 +128,6 @@ Preset一覧はScreenshotではなく本文コードブロックで示す。
 ### GitHub Wiki
 
 スクリーンショットは必須にしない。
-
 記事中ではWiki URLへ誘導する。
 
 ### Config
@@ -139,10 +138,6 @@ theme: signal
 ```
 
 コードブロックで十分。
-
-### Marker auto insert before / after
-
-第3弾では必須にしない。
 
 ## Qiita placeholder mapping
 
@@ -172,6 +167,5 @@ QiitaへUploadした際に生成されたMarkdownを対応placeholderへ置換�
 - [x] Token / Secretなし
 - [x] Private Repositoryなし
 - [x] `GITHUB_TOKEN`値やAuthorization headerなし
-- [x] Release assetに個人READMEや秘密情報が含まれている表示なし
 - [x] 公開GitHubプロフィール / 公開Repositoryの範囲
 - [x] 不要なtest tree画像は除外
