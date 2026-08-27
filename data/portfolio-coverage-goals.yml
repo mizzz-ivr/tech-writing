@@ -1,0 +1,50 @@
+schema_version: 1
+goals:
+  - id: architecture
+    label: Architecture
+    selectors:
+      portfolio_signals: [architecture]
+      topics: [architecture, 設計]
+  - id: security
+    label: Security
+    selectors:
+      domains: [security]
+      portfolio_signals: [security]
+      topics: [security, セキュリティ]
+  - id: testing
+    label: Testing
+    selectors:
+      portfolio_signals: [testing]
+      topics: [testing, test]
+  - id: observability
+    label: Observability
+    selectors:
+      portfolio_signals: [observability]
+      topics: [observability]
+  - id: oss
+    label: OSS
+    selectors:
+      portfolio_signals: [oss]
+      topics: [OSS, open-source]
+  - id: frontend
+    label: Frontend
+    selectors:
+      domains: [frontend]
+  - id: backend
+    label: Backend
+    selectors:
+      domains: [backend]
+  - id: infra
+    label: Infrastructure
+    selectors:
+      domains: [infra, infrastructure]
+      portfolio_signals: [infrastructure]
+  - id: ci-cd
+    label: CI/CD
+    selectors:
+      portfolio_signals: [ci-cd]
+      topics: [ci, ci-cd, GitHubActions, github-actions]
+  - id: automation
+    label: Automation
+    selectors:
+      portfolio_signals: [automation]
