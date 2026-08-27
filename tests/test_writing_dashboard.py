@@ -1,5 +1,6 @@
 import importlib.util
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -97,6 +98,12 @@ class WritingDashboardTests(unittest.TestCase):
         self.assertIn(">0</text>", svg)
         self.assertIn(">2</text>", svg)
 
+    def test_snapshot_source_time_is_deterministic(self):
+        snapshot = {"collected_at": "2026-08-27T12:43:26+00:00"}
+
+        self.assertEqual(dashboard.snapshot_source_time(snapshot), "2026-08-27 21:43 JST")
+        self.assertEqual(dashboard.snapshot_source_time(None), "unavailable")
+
     def test_dashboard_refuses_to_invent_history_when_only_one_snapshot_exists(self):
         articles = [self.article("published-one", "published", "2026-08-27")]
 
@@ -106,6 +113,7 @@ class WritingDashboardTests(unittest.TestCase):
         self.assertIn("1 snapshot(s)", content)
         self.assertIn("intentionally not generated", content)
         self.assertIn("no interpolation or synthetic history", content)
+        self.assertIn("Source snapshot: unavailable", content)
 
     def test_chart_payloads_include_expected_visuals(self):
         articles = [self.article("published-one", "published", "2026-08-27")]
@@ -124,6 +132,42 @@ class WritingDashboardTests(unittest.TestCase):
         )
         self.assertIn("Published domains", charts["domains.svg"])
         self.assertIn("archived", charts["pipeline.svg"])
+
+    def test_generated_file_mismatches_detect_stale_dashboard_and_chart(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            dashboard_path = root / "visual-dashboard.md"
+            asset_dir = root / "assets"
+            asset_dir.mkdir()
+            dashboard_path.write_text("expected dashboard", encoding="utf-8")
+            (asset_dir / "pipeline.svg").write_text("stale chart", encoding="utf-8")
+
+            with patch.object(dashboard, "DASHBOARD_PATH", dashboard_path), patch.object(
+                dashboard, "ASSET_DIR", asset_dir
+            ):
+                mismatches = dashboard.generated_file_mismatches(
+                    "expected dashboard", {"pipeline.svg": "expected chart"}
+                )
+
+            self.assertEqual(mismatches, [asset_dir / "pipeline.svg"])
+
+    def test_generated_file_mismatches_accept_current_files(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            dashboard_path = root / "visual-dashboard.md"
+            asset_dir = root / "assets"
+            asset_dir.mkdir()
+            dashboard_path.write_text("expected dashboard", encoding="utf-8")
+            (asset_dir / "pipeline.svg").write_text("expected chart", encoding="utf-8")
+
+            with patch.object(dashboard, "DASHBOARD_PATH", dashboard_path), patch.object(
+                dashboard, "ASSET_DIR", asset_dir
+            ):
+                mismatches = dashboard.generated_file_mismatches(
+                    "expected dashboard", {"pipeline.svg": "expected chart"}
+                )
+
+            self.assertEqual(mismatches, [])
 
 
 if __name__ == "__main__":
