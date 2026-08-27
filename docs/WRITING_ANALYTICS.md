@@ -34,6 +34,7 @@ source_repositories: [mizzz-ivr/mizzz-ivr]
 published:
   qiita: https://qiita.com/...
   zenn: null
+  note: null
 ---
 ```
 
@@ -49,7 +50,7 @@ published:
 - `technologies`: Next.js / Docker / GitHub Actions / PostgreSQLなど
 - `portfolio_signals`: architecture / automation / testing / observability / ossなど、仕事・営業・ポートフォリオで示したい能力軸
 - `source_repositories`: 記事の根拠になったRepository
-- `published`: 媒体別URL
+- `published`: 媒体別URL。`qiita` / `zenn` / `note` を正式な公開platformとして扱う
 
 過去記事に不足項目があっても、スクリプトが推測してfront matterを書き換えることはしません。未分類は `Unclassified` とdata quality警告で可視化します。
 
@@ -70,6 +71,15 @@ Writing Analyticsでは次のように区別します。
 - 1件以上の値: 通常の分類として集計
 
 これにより、言語非依存の記事へ無理にPythonやTypeScriptを付与して分析結果を歪めることを避けます。
+
+## Publication Registry
+
+`ideas/published.md` は `公開日 / タイトル / Qiita / Zenn / note / その他` を記録します。
+
+- Qiita / Zenn / noteの公開URLはfront matterとRegistryの両方で照合する
+- note-only記事も正式なpublished articleとして扱う
+- 既存の旧5列形式は後方互換のため読み取り可能とし、旧「その他」列をnote URLとして誤解釈しない
+- Recent Articles / READMEは代表URLを `Qiita → Zenn → note` の順で選び、note-only記事ではnote URLを使う
 
 ## 生成物
 
@@ -101,6 +111,13 @@ READMEの自動生成部分はmarker内だけを更新し、手書き部分を�
 
 ## External Metrics
 
+公開platformとmetrics取得platformは分離します。
+
+- 公開platform: Qiita / Zenn / note
+- metrics取得platform: Qiita / Zennのみ
+
+noteは公開URLと投稿履歴だけを正式対応し、安定した公式取得方法を確認できるまでPV / スキ / コメント等を自動収集しません。不安定なHTML scrapingや推測値は導入しません。
+
 ### Qiita
 
 Qiita API v2を利用します。
@@ -129,6 +146,22 @@ Zennの記事一覧JSON endpointは公式ドキュメントで安定性が保証
 - endpoint変更時にadapterだけ差し替えられる構成にする
 
 PVは取得できる前提にしません。
+
+### note
+
+Writing Analyticsでは次だけを扱います。
+
+- `published.note` の公開URL
+- `ideas/published.md` のnote URL
+- 公開日 / Recent Articles / README / Portfolio exportへの反映
+- Registryとfront matterのData Quality照合
+
+Non-goals:
+
+- noteのPV / スキ / コメント等の自動収集
+- note HTMLのscraping
+- note認証情報の保持
+- noteへの自動投稿
 
 ### Reaction / Notableのderived view
 
@@ -172,8 +205,8 @@ Trend計算では、必要な日付のsnapshotが存在する場合だけ差分�
 最低限、次を検出します。
 
 - `ideas/published.md` にあるがfront matterが `published` ではない
-- `ideas/published.md` にURLがあるがfront matterのURLが空
-- `status: published` なのに公開URLがない
+- `ideas/published.md` のQiita / Zenn / note URLがfront matterに無い、または不一致
+- `status: published` なのにQiita / Zenn / noteの公開URLがない
 - `status: published` なのに `published_at` がない
 - `domains` / `languages` / `technologies` が未分類
 
@@ -198,7 +231,7 @@ GitHub Actions bot自身のanalytics commitではrefresh jobを再実行しな�
 
 ## Portfolio / Career活用
 
-将来的にはこのデータを `ivmz-home` から利用できるJSON/Markdownとしてexportします。
+`data/exports/writing-portfolio.json` をstable public schemaとして利用します。公開URLはQiita / Zenn / noteを出力できますが、reaction metricsは取得済みのQiita / Zennだけを扱います。
 
 表示候補:
 
