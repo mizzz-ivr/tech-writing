@@ -4,16 +4,13 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
-from typing import Any
 
 import yaml
 
 import writing_analytics as analytics
 import writing_catalog as catalog
-
-PORTFOLIO_EXPORT_PATH = analytics.ROOT / "data" / "exports" / "writing-portfolio.json"
+import writing_opportunities as opportunities
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,32 +28,27 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def expected_portfolio_published_count() -> int | None:
-    if not PORTFOLIO_EXPORT_PATH.exists():
-        return None
-    try:
-        payload: Any = json.loads(PORTFOLIO_EXPORT_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    if not isinstance(payload, dict):
-        return None
-    summary = payload.get("summary")
-    if not isinstance(summary, dict):
-        return None
-    value = summary.get("published_articles")
-    return value if isinstance(value, int) and not isinstance(value, bool) else None
-
-
 def validate_universe(articles: list[analytics.Article]) -> None:
-    expected = expected_portfolio_published_count()
-    if expected is None:
-        return
-    actual = len(analytics.published_articles(articles))
-    if actual != expected:
-        raise ValueError(
-            "analytics published universe does not match public Portfolio Export: "
-            f"analytics={actual}, portfolio={expected}"
+    """Keep analytics and Portfolio loaders aligned without depending on stale generated JSON."""
+
+    analytics_slugs = {
+        article.slug for article in analytics.published_articles(articles)
+    }
+    portfolio_slugs = {
+        article.slug
+        for article in analytics.published_articles(
+            opportunities.load_opportunity_articles()
         )
+    }
+    if analytics_slugs == portfolio_slugs:
+        return
+
+    missing = sorted(portfolio_slugs - analytics_slugs)
+    extra = sorted(analytics_slugs - portfolio_slugs)
+    raise ValueError(
+        "analytics published universe does not match Portfolio loader: "
+        f"missing={missing}, extra={extra}"
+    )
 
 
 def main() -> int:
