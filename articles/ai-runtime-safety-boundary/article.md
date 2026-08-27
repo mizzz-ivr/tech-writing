@@ -1,5 +1,5 @@
 ---
-title: "生成AIを「APIを呼ぶだけ」で終わらせない — Secret・Quota・Kill Switchを分離したAI Runtime設計"
+title: "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計"
 status: review
 topics: ["TypeScript", "生成AI", "OpenAI", "設計", "セキュリティ"]
 source_repositories: ["ivRooom/Herta"]
@@ -8,97 +8,91 @@ published:
   zenn: null
 ---
 
-# 生成AIを「APIを呼ぶだけ」で終わらせない — Secret・Quota・Kill Switchを分離したAI Runtime設計
+# 生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計
 
-Discord Botに生成AIを入れ始めたとき、最初に必要だったのはそこまで複雑なものではありませんでした。
+個人開発のDiscord Botに生成AIを入れ始めたとき、最初は単純でした。
 
-API Keyを環境変数から読み、ProviderのAPIを呼び、返ってきた文章をDiscordへ返す。小さく始めるなら、それで十分です。
+1. API Keyを読む
+2. Provider APIを呼ぶ
+3. 返ってきた文章をDiscordへ返す
 
-ただ、実際に運用する前提で作り始めると、APIを呼ぶ部分より周囲の方が気になってきました。
+小さく試すだけなら、これで十分です。
 
-- API Keyはどこで管理するのか
-- modelやreasoning設定を変えるたびに再deployするのか
-- 設定DBが壊れたとき、古いenvへ勝手にfallbackしてよいのか
-- 1ユーザーが連打したらどうするのか
-- Guild単位の予算上限をどう持つのか
-- Provider障害や想定外の課金が起きたとき、AI機能だけ即座に止められるか
-- Providerの生のエラー本文をそのまま利用者やlogへ流してよいのか
+ただ、実際に運用する前提になると、API呼び出しそのものより周囲の設計が気になってきました。
 
-このあたりを一つずつ足していくと、「OpenAI APIを呼ぶ処理」ではなく、アプリケーションと外部AI Providerの間に独立したRuntime境界が必要になりました。
+- API Keyとmodel設定を同じ場所に保存してよいのか
+- Secret Storeが壊れたとき、古い環境変数へfallbackしてよいのか
+- Rate Limitだけで利用料金を守れるのか
+- Provider障害時にAIだけすぐ止められるか
+- Providerのエラー本文をそのまま外へ出してよいのか
 
-今回は、個人開発しているBotで実際に作ったAI Foundationを元に、Secret、Runtime Config、Quota、Kill Switch、Error handlingをどこで分けたかを書きます。
+そこで、アプリケーションと外部AI Providerの間に小さな **AI Runtime** を置く形にしました。
 
-なお、現時点で実装済みのProviderはOpenAIだけです。ClaudeやGeminiまで対応済みという話ではありません。むしろ、Providerが1つの段階でどこまで共通境界を作り、どこから先はProvider固有として残したか、という設計の話です。
+この記事では、実装して特に重要だった4つの境界だけに絞ります。
 
-## Provider SDKを直接アプリケーションへ広げない
+> 現時点で実装済みのProviderはOpenAIのみです。ClaudeやGeminiへの対応方法ではなく、Providerが1つの段階でも先に分離しておくと扱いやすかった部分をまとめています。
 
-最初に決めたのは、Discordのcommandや各PluginからProvider SDKを直接呼ばないことでした。
-
-大まかな依存関係は次のようにしています。
+## 全体像
 
 ```mermaid
 graph LR
-  A["Discord / Feature"] --> B["AI Runtime Service"]
-  B --> C["Authorization / Guard"]
-  C --> D["Runtime Config Snapshot"]
-  C --> E["Rate / Quota / Cost / Concurrency"]
-  B --> F["Provider implementation"]
-  F --> G["External AI API"]
-  H["Runtime Secret Store"] --> F
-  I["Kill Switch"] --> B
+  A["Discord / Feature"] --> B["AI Runtime"]
+  B --> C["Policy / Guard"]
+  B --> D["Provider"]
+  E["Runtime Config"] --> B
+  F["Secret Store"] --> D
+  G["Kill Switch"] --> B
+  D --> H["External AI API"]
 ```
 
-Feature側が知るのは「生成を依頼すると、成功結果か分類済みの失敗が返る」という境界までです。
+Feature側からProvider SDKを直接呼ばず、必ずRuntimeを通します。
 
-Providerのrequest body、timeout処理、response parsing、usageの読み方などはProvider実装側へ閉じ込めます。
+Runtimeが担当するのは主に次の部分です。
 
-この構成にした一番の理由は、将来Providerを増やしたいから、だけではありません。Rate LimitやQuota、Privacy、Kill Switchといった**Providerに関係なく守りたいルールを、一か所で通すため**です。
+- Credentialの解決
+- modelなどのRuntime Config
+- Rate Limit / Quota / Cost / Concurrency
+- Kill Switch
+- Errorの分類
 
-## SecretとRuntime Configを同じものとして扱わない
+Provider固有のrequest bodyやresponse parsingはProvider実装側へ閉じ込めます。
 
-途中でかなり重要だと感じたのが、API Keyとmodel設定を同じ「設定」として保存しないことでした。
+## 1. Secretと通常設定を分ける
 
-自分の構成では、次のように分けています。
+API Keyとmodel名は、どちらも「設定」に見えます。
+
+ただ、必要な扱いはかなり違いました。
 
 | 種類 | 例 | 管理 |
 | --- | --- | --- |
-| Secret | API Key | encrypted Runtime Secret Store |
-| Runtime Config | provider / model profile / reasoning | typed non-secret store |
-| Security Gate | AI enabled / kill switch / quota上限 | server-side config |
+| Secret | API Key | encrypted Secret Store |
+| Runtime Config | model / reasoning | typed non-secret store |
+| Security Gate | enable / kill switch | server-side config |
 
-modelやreasoningは管理画面から変えたい。一方でAPI Keyは通常の設定APIやPlugin configへ混ぜたくない。
+modelやreasoningは管理画面から変更したい一方、API Keyは通常の設定APIやPlugin configへ混ぜたくありません。
 
-この2つを分離すると、管理画面の権限や監査対象も整理しやすくなりました。
+このため、**Secret・変更可能な設定・Security Gateを別物として扱う**ようにしました。
 
-また、Runtime Config側は任意の文字列をそのまま受け取らず、server側のallowlistをSource of Truthにしています。保存済みの値が不正だった場合も「近そうなmodelへ勝手に丸める」のではなく、unsupported combinationとして扱います。
+Runtime Configも任意文字列をそのまま受け取らず、server側のallowlistを通します。保存済みの値が不正でも、近いmodelへ勝手に丸めない方針です。
 
-便利さより、何を実行したのか後から説明できることを優先しました。
+### Secret Store障害時はfail closed
 
-## Secret Store障害時は、envへ逃がさない
+移行期間中は、Secret StoreにKeyが未登録なら従来の環境変数を見るfallbackを残しています。
 
-Secret移行時に迷ったのがfallbackです。
+ただし、次の2ケースは分けました。
 
-移行期間だけを考えるなら、Runtime Secret StoreにAPI Keyがなければ従来の環境変数を見る、というのは便利です。
+1. Secret Storeを正常に読めたが、Keyが未登録
+2. DB障害やdecrypt失敗で、Secret Storeを正常に読めない
 
-ただし次の2つは分ける必要があります。
-
-1. Secret Storeを正常に読めたが、まだSecretが登録されていない
-2. DB障害やmaster key不整合などで、Secret Storeを正常に読めなかった
-
-自分の実装では、1のときだけlegacy envへfallbackし、2はfail closedにしています。
-
-簡略化するとこういう形です。
+1ではenv fallbackを許可し、2では許可しません。
 
 ```ts
 async function resolveCredential(): Promise<string | null> {
   try {
     const stored = await readSecret();
-
-    if (stored) {
-      return stored;
-    }
+    if (stored) return stored;
   } catch {
-    // 「Secretが無い」のではなく「安全に確認できない」
+    // Secretが「無い」のではなく、安全に確認できない
     return null;
   }
 
@@ -106,151 +100,119 @@ async function resolveCredential(): Promise<string | null> {
 }
 ```
 
-ここで障害時にもenv fallbackすると、「管理画面上ではSecretを無効化したつもりなのに、古い環境変数でProvider callが継続する」という状態を作れます。
+障害時にもenvへ逃がすと、管理上はSecretを止めたつもりでも、古いCredentialで外部callが続く可能性があります。
 
-テストでも、Secret Storeのdecrypt失敗やDB read失敗時にはenvへfallbackしないケースを固定しています。
+Credential周りでは、可用性より「意図しない継続をしない」方を優先しました。
 
-この設計は可用性を少し犠牲にしますが、CredentialのようなSecurity境界ではこちらを選びました。
+## 2. Rate Limitと予算管理を分ける
 
-## Runtime Configはrequest開始時にsnapshot化する
+Rate Limitは必要ですが、それだけでは利用料金を守れません。
 
-model設定を管理画面から変更できるようにすると、今度は「実行途中で設定が変わったらどうするか」が出てきます。
+例えば10回のrequestでも、軽いmodelと高価なmodelではCostが違います。
 
-自分の実装では、request開始時にprovider / model / reasoning / pricing情報を解決し、そのrequest内ではimmutableなsnapshotとして扱います。
-
-複数instanceで毎回DBを引くのも避けたかったため、resolverには短いTTLを持たせています。ただし、一つのrequestの途中で設定を再取得することはしません。
-
-これは細かい話に見えますが、Cost Guardまで入れると重要でした。
-
-たとえばrequest開始時はModel Aの価格でpreflightしたのに、Provider call直前だけModel Bへ切り替わると、予約したCostと実際のCostの前提がずれます。
-
-「設定変更を即時反映する」より、「1 requestの中では前提を固定する」を優先しています。
-
-## Rate Limitだけでは予算を守れなかった
-
-生成AIを組み込むとき、最初はRate Limitだけでも十分そうに見えました。
-
-しかし、Rate Limitは「何回呼べるか」は制限できますが、「いくら使えるか」は直接制限できません。
-
-そこでRuntime側では、少なくとも次を別々のGuardとして扱っています。
+そのためRuntimeでは、次を別々に扱っています。
 
 - per-user Rate Limit
-- per-scope Rate Limit
-- scope単位のCost Budget
-- 1 requestあたりのpreflight Cost Cap
+- scope単位のRate Limit
+- Cost Budget
+- 1 requestあたりのCost Cap
 - global concurrency
 
-CostはProvider call前に保守的に予約し、完了後にProviderが返したauthoritative usageでsettleする形にしています。
+考え方はシンプルで、
 
-ここで重視したのは、平均的な入力を前提に安く見積もらないことです。入力上限まで来てもGuardの想定内に収まるよう、preflightでは安全側に寄せます。
+**回数・金額・同時実行数は別の制約**
 
-Rate Limit、Quota、Concurrencyを一つの巨大な条件分岐にせず、それぞれ別の責務として置いたことで、後から「回数は許可するが予算で止める」「予算は残っているが同時実行数で待たせる」といった状態を追いやすくなりました。
+として見ることです。
 
-## Kill Switchは管理画面の便利設定にしなかった
+CostはProvider call前に安全側で予約し、完了後にProviderが返したusageで精算します。
 
-AI Runtimeには、機能の有効・無効とは別にKill Switchを置いています。
+これなら「回数制限には余裕があるが、今日のBudgetを超えたので停止する」といった判断をRuntime側でできます。
 
-Provider障害、予算異常、abuse疑いなど、原因調査より先に外部callを止めたい場面を想定したものです。
+## 3. Kill SwitchでAIだけ止められるようにする
 
-ここは通常のRuntime Configと同じ扱いにはしていません。
+外部AIはアプリ本体とは別の障害要因を持ちます。
 
-管理画面でmodelを変えられることと、緊急停止用のSecurity Gateを書き換えられることは別問題だからです。
+- Provider障害
+- 想定外の課金
+- abuse
+- Credential問題
 
-また、AI機能がdisabledでもBot本体は起動できるようにしています。AIのCredentialがない、Providerが使えない、Kill SwitchがON、といった理由で非AI機能まで巻き込んで停止しないためです。
+このため、通常の有効・無効設定とは別にKill Switchを置きました。
 
-この「AIはoptional subsystem」という扱いは、実装してみてかなり重要でした。
+重要なのは、**AIを停止してもBot本体は起動できる**ことです。
 
-## Providerのエラー本文をそのまま外へ出さない
+AI機能をoptional subsystemとして扱えば、Providerが使えないだけでReminderやPollなど別機能まで停止するのを避けられます。
 
-外部APIの失敗は種類が多く、Providerごとにresponse bodyも違います。
+自分の構成では、AI disabled時にはCredentialの読み込み自体を行わないケースもテストで固定しています。
 
-一方、Feature側がProvider固有のHTTP statusやerror JSONを知り始めると、境界を作った意味が薄くなります。
+## 4. Providerの生エラーをアプリ側へ広げない
 
-そこで外へ出す失敗は、Runtime側でcategoryへ寄せています。
+ProviderごとにHTTP statusやerror JSONは異なります。
 
-例としては次のようなものです。
+Feature側がそれらを直接扱い始めると、Provider依存がアプリ全体へ広がります。
+
+そこでRuntimeから外へ出す失敗は、例えば次のようなcategoryへ寄せています。
 
 - `disabled`
-- `unauthorized`
 - `rate_limited`
 - `quota_exceeded`
-- `invalid_input`
 - `timeout`
 - `provider_unavailable`
 - `provider_rejected`
 - `malformed_response`
-- `output_too_large`
 - `internal_error`
 
-Providerの生のerror bodyを、そのまま利用者向けresponseやstructured logへ流しません。
+Providerの生のerror bodyは、そのまま利用者向けresponseやstructured logへ流しません。
 
-これはProvider差分を吸収するためだけでなく、予期しない内部情報やrequest断片をlogへ残さないためでもあります。
+Observabilityも同じ考え方です。raw prompt / raw responseを通常telemetryへ保存せず、基本はmetadataを残します。
 
-## Observabilityは欲しい。でもprompt本文は要らない
-
-AI機能は、何も記録しないと障害調査やCost分析がかなり難しくなります。
-
-一方で、raw prompt / raw responseを全部保存する設計にもしたくありませんでした。
-
-そこで通常のtelemetryでは、本文ではなくmetadataを中心に残す方針にしています。
-
-- request ID
-- feature
 - provider / model
 - latency
-- input / output token usage
+- token usage
 - estimated cost
 - result / error category
 
-これなら「どのmodelで失敗率が上がったか」「Costが急に増えていないか」は見られます。
+これだけでも、Cost増加や失敗率の変化はかなり追えます。
 
-prompt本文が本当に必要なdebug機能を将来作るとしても、通常telemetryとは別の明示的な仕組みにした方が扱いやすいと考えています。
+## Providerが1つなら、抽象化しすぎない
 
-## Providerが1つなのに、抽象化しすぎない
-
-ここまで書くと、最初からOpenAI / Claude / Gemini共通の巨大なProvider Interfaceを作りたくなります。
+ここまで分離すると、OpenAI / Claude / Gemini共通の巨大なInterfaceを先に作りたくなります。
 
 自分はそこまではやっていません。
 
-現時点で実装済みなのはOpenAIだけなので、まだ分からない差分を想像して共通型へ押し込むと、抽象化の方が先行します。
+今共通化しているのは、すでに共通だと分かっているRuntime側の境界です。
 
-今の段階で共通化しているのは、アプリケーション側が必要とするRuntimeの境界です。
+- Policyを通す
+- Credentialを安全に解決する
+- Cost / Rate / Concurrencyを守る
+- 分類済みの結果を返す
 
-- bounded inputを受ける
-- server-side policyを通す
-- request単位のruntime snapshotを使う
-- 成功結果か分類済みerrorを返す
-- telemetry metadataを送る
+一方で、Provider固有のrequest schema、reasoning指定、streaming、tool callingなどは無理に共通化していません。
 
-逆に、Provider固有のrequest schema、reasoning指定、stream event、tool calling、usageの詳細まで無理に共通化していません。
+2つ目のProviderを実装したときに、本当に共通している部分を見てAdapterを固める方が安全だと考えています。
 
-ClaudeやGeminiを追加するときは、2つ目・3つ目の実装で本当に共通している部分を見てからAdapter境界を固める予定です。
+## 実装するときのチェックリスト
 
-「将来差し替えたいから全部interface化する」ではなく、**今すでに守る必要があるPolicy境界を先に共通化する**、という順番にしています。
+AI機能を運用へ持っていくときは、Provider SDKを選ぶ前後で次を確認すると整理しやすいです。
 
-## テストで固定したかったのは「成功すること」より失敗時の挙動
+- [ ] Secretと通常設定を分離している
+- [ ] Secret Storeの「未登録」と「障害」を区別している
+- [ ] Rate Limitとは別にCost上限がある
+- [ ] AIだけ停止できるKill Switchがある
+- [ ] Providerの生エラーを外へ出していない
+- [ ] raw prompt / responseを無条件に保存していない
+- [ ] Provider固有処理がFeature側へ漏れていない
 
-AI連携のテストというと、正常なProvider responseをmockして文章が返ることを確認しがちです。
+## まとめ
 
-それも必要ですが、今回優先したのは次のようなケースでした。
+生成AIをアプリへ組み込むとき、Provider APIを呼ぶ部分自体はそこまで難しくありませんでした。
 
-- Secret Storeの値をlegacy envより優先する
-- Secret未登録時だけenv fallbackする
-- decrypt / DB障害時はfail closedする
-- AI disabled時はCredentialを読まない
-- Credentialが成立した場合だけRuntime Serviceを構築する
-- 不正なRuntime Configを任意のmodelへsilent downgradeしない
+運用で効いてきたのは、その前後にある境界です。
 
-外部Providerとの境界は、正常時より「異常時に何をしないか」をテストへ残した方が、後の変更でSecurity Policyを壊しにくいと感じています。
+特に自分の環境では、
 
-## 今のところの結論
+**Secret / Config / Cost / Failureを分けてからProviderを呼ぶ**
 
-生成AI機能を追加していて、一番設計量が増えたのはPromptでもProvider APIの呼び方でもありませんでした。
+という形にしたことで、AI機能をアプリ本体から独立して扱いやすくなりました。
 
-Secret、設定変更、Rate / Quota / Cost、停止手段、Error、Privacyをどう境界化するかの方でした。
-
-個人開発なので、最初から大規模Platformのような仕組みを作る必要はありません。ただ、外部AI APIはCredentialと従量課金を持つため、普通の外部APIより「止められること」「使いすぎないこと」「失敗時に安全側へ倒れること」を早めに決めておく価値がありました。
-
-現在はOpenAIのみですが、次に別Providerを追加するときも、まず守りたいのは共通Provider Interfaceの美しさではなく、このRuntime境界です。
-
-Providerが増えた結果、本当に共通だったものと固有だったものが見えてきた段階で、抽象化も更新していくつもりです。
+Providerが1つしかない段階でもSecurityやCostの境界は先に共通化し、Provider差分の抽象化は実装が増えてから考える。この順番が、今のところ一番扱いやすいと感じています。
