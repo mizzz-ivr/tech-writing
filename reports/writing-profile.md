@@ -1,13 +1,13 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-08-27 14:44 JST
+> Generated: 2026-08-27 18:49 JST
 
 ## Overview
 
 - Published articles: **3**
 - Last published: **2026-08-27**
 - Average publish interval: **1.5日**
-- Tracked article drafts/reviews/published: **6**
+- Tracked article drafts/reviews/published: **5**
 
 ## Technology Mix
 
