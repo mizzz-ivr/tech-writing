@@ -94,6 +94,23 @@ Article body
             validate_article(path),
         )
 
+    def test_rejects_non_standalone_closing_delimiter(self):
+        path = self.write_article(
+            """---
+title: Invalid delimiter
+tags:
+  - GitHub
+private: false
+---oops
+Article body
+"""
+        )
+
+        self.assertIn(
+            "front matter closing delimiter must be a standalone '---' line",
+            validate_article(path),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
