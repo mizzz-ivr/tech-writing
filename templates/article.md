@@ -13,6 +13,7 @@ source_repositories: []
 published:
   qiita: null
   zenn: null
+  note: null
 ---
 
 # タイトル
@@ -54,6 +55,6 @@ published:
 - STYLE_GUIDE.md を確認
 - 対象Repositoryの最新状態を再確認
 - Secret / 個人情報 / 本番環境情報を確認
-- Qiita / ZennそれぞれのMarkdown差分を確認
+- Qiita / Zenn / noteそれぞれの公開先・Markdown差分を確認
 - 公開時に status / published_at / published URL を更新
 -->

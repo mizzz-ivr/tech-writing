@@ -241,7 +241,7 @@ def build_dashboard(articles: list[analytics.Article], snapshot: dict | None) ->
     lines.extend(["", "## Recent Publications", ""])
     if published:
         for article in published[:8]:
-            url = article.platform_url("qiita") or article.platform_url("zenn")
+            url = analytics.preferred_publication_url(article)
             lines.append(
                 f"- **{article.effective_published_at or '-'}** — `{article.slug}` — {analytics.md_link(article.title, url)}"
             )

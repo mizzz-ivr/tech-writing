@@ -60,7 +60,7 @@ def article_payload(article: analytics.Article, allowlist: set[str]) -> tuple[di
     sources, omitted = exported_sources(article, allowlist)
     platforms = {
         platform: url
-        for platform in ("qiita", "zenn")
+        for platform in analytics.PUBLICATION_PLATFORMS
         if (url := article.platform_url(platform))
     }
     payload = {

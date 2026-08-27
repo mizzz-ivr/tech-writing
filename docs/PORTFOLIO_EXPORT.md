@@ -41,7 +41,7 @@ export対象は公開済み記事だけです。draft / review / backlog本文�
 - slug / title / published_at
 - article_type / level
 - topics / domains / languages / technologies / portfolio_signals
-- Qiita / Zenn公開URL
+- Qiita / Zenn / note公開URL
 - 明示的にpublic allowlistへ登録されたsource repository
 - 30 / 90 / 365日coverage
 - latest snapshotでpositive reactionがあるNotable記事
@@ -60,10 +60,13 @@ allowlist外のsource repository参照は名前をexportせず、`export_quality
 
 ## Metrics boundary
 
-Notableではplatform固有のpublic reactionを保持します。
+`recent_articles[].published` ではQiita / Zenn / noteの公開URLを保持できます。一方、Notableは取得済みのplatform固有public reactionだけを保持します。
 
 - Qiita: likes / stocks / comments
 - Zenn: likes / bookmarks / comments
+- note: reaction metricsは収集しない
+
+noteは公開URLの記録だけを正式対応し、安定した公式取得方法が確認できるまでPV / スキ / コメント等をscrapingで補いません。
 
 複数指標を総合Popularity Scoreへ変換しません。
 
