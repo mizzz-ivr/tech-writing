@@ -1,0 +1,86 @@
+name: Sync Qiita articles
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: qiita-sync
+  cancel-in-progress: false
+
+jobs:
+  sync_articles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22.23.2"
+
+      - name: Install Qiita CLI
+        run: npm install --global @qiita/qiita-cli@1.10.0
+
+      - name: Pull articles from Qiita
+        run: qiita pull
+        env:
+          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install validator dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate pulled Qiita articles
+        run: python scripts/validate_qiita_articles.py
+
+      - name: Detect article changes
+        id: changes
+        shell: bash
+        run: |
+          if [[ -n "$(git status --porcelain -- public)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit sync branch
+        if: steps.changes.outputs.changed == 'true'
+        id: branch
+        shell: bash
+        run: |
+          branch="sync/qiita-articles-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          echo "name=$branch" >> "$GITHUB_OUTPUT"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public
+          git commit -m "chore(qiita): sync articles from Qiita"
+          git push origin "$branch"
+
+      - name: Open sync pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.branch.outputs.name }}
+        shell: bash
+        run: |
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore(qiita): sync existing articles from Qiita" \
+            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。"
+
+      - name: No changes
+        if: steps.changes.outputs.changed != 'true'
+        run: echo "Qiita articles are already in sync."

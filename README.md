@@ -5,6 +5,7 @@
 ## このリポジトリの役割
 
 - 技術記事とnote記事の元原稿・企画を管理する
+- Qiitaの記事をQiita CLI + GitHub Actionsで投稿・更新する
 - Zennの記事・本をGitHub連携で投稿・更新する
 - Zennスクラップの原稿・履歴・バックアップを管理する
 - 記事から展開するSNS投稿を管理する
@@ -28,6 +29,27 @@
 | note | 経験・思想・キャリア・社会 | Why personally / What I think: なぜそう考えるか |
 
 noteは月1本程度を目安にし、エンジニアとしての考え方、個人開発の裏側、キャリア・仕事・学習、技術×経済・社会を主な柱にします。詳細は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
+
+## Qiita GitHub Publish
+
+Qiitaは公式Qiita CLIとGitHub Actionsで管理します。Qiitaへ実際に反映されるcanonicalな公開ソースは `public/*.md` です。
+
+PRは下書き・レビュー境界として扱い、PR作成・更新ではQiitaへpublishしません。`public/**/*.md` が `main` にmergeされたときだけ `.github/workflows/qiita-publish.yml` が起動し、Repository Secret `QIITA_TOKEN` を使ってQiitaへ投稿・更新します。
+
+既存Qiita記事は本文を手作業で複製せず、`Sync Qiita articles` workflowから `qiita pull` してPRとして取り込みます。これにより既存のQiita item IDを維持した状態でRepository管理へ移行します。
+
+```bash
+npm install
+npm run qiita:preview
+npm run qiita:new:article -- <article-slug>
+npm run qiita:pull
+```
+
+ローカルCLIは公開の必須条件ではありません。公開処理はGitHub Actionsが担当します。PRでは `Validate Qiita articles` workflowがSecretを使わずにQiita front matterと本文の基本条件を検証します。
+
+Tokenには `read_qiita` / `write_qiita` を付与し、GitHub ActionsのRepository Secret `QIITA_TOKEN` として保存します。Token値はRepositoryへ保存しません。
+
+初回取り込み・公開・更新・削除・rollbackの詳細は [Qiita GitHub Publish Runbook](./docs/QIITA_GITHUB_PUBLISH.md) を参照してください。
 
 ## Zenn GitHub Deploy
 
@@ -83,10 +105,13 @@ tech-writing/
 ├─ README.md
 ├─ STYLE_GUIDE.md
 ├─ package.json
+├─ qiita.config.json
 ├─ requirements.txt
+├─ public/                         # Qiita CLI publish対象
+│  └─ <qiita-article-slug>.md
 ├─ articles/
 │  ├─ <zenn-article-slug>.md      # Zenn GitHub Deploy対象
-│  └─ <article-slug>/             # 媒体共通原稿・notes
+│  └─ <article-slug>/             # 媒体共通原稿・notes・analytics metadata
 │     ├─ article.md
 │     ├─ notes.md
 │     └─ assets/
@@ -110,9 +135,11 @@ tech-writing/
 │  └─ writing-profile.md
 ├─ docs/
 │  ├─ NOTE_EDITORIAL.md
+│  ├─ QIITA_GITHUB_PUBLISH.md
 │  ├─ WRITING_ANALYTICS.md
 │  └─ ZENN_GITHUB_DEPLOY.md
 ├─ scripts/
+│  ├─ validate_qiita_articles.py
 │  └─ writing_analytics.py
 ├─ templates/
 │  ├─ article.md
@@ -122,6 +149,9 @@ tech-writing/
 └─ .github/
    ├─ PULL_REQUEST_TEMPLATE.md
    └─ workflows/
+      ├─ qiita-publish.yml
+      ├─ qiita-sync.yml
+      ├─ qiita-validate.yml
       └─ writing-analytics.yml
 ```
 
@@ -129,13 +159,16 @@ tech-writing/
 
 1. `ideas/backlog.md` にテーマを残す。
 2. 実体験・根拠・具体例をnotesへ集める。
-3. Qiita / note等は `articles/<slug>/article.md` を元原稿として整える。
-4. Zenn記事は `articles/<slug>.md`、Zenn本は `books/<book-slug>/` をcanonicalな公開ソースとして扱う。
-5. Zenn記事・本は `published: false` でPR・Previewし、公開時に `true` へ変更して `main` へmergeする。
-6. Zennスクラップは `scraps/` で原稿・履歴をGit管理し、Zenn Web UIへ手動反映する。
-7. `social/<slug>/` にSNS投稿案を作る。
-8. 公開後に公開URL・公開日を `ideas/published.md` 等へ記録する。
-9. Writing AnalyticsがREADME / report / metrics snapshotを更新する。
+3. `articles/<slug>/article.md` に媒体共通の元原稿・企画・Writing Analytics用metadataを整理する。
+4. Qiita記事は `public/<slug>.md` をcanonicalな公開ソースとしてPRでレビューし、mainへのmerge後にGitHub Actionsから投稿・更新する。
+5. Zenn記事は `articles/<slug>.md`、Zenn本は `books/<book-slug>/` をcanonicalな公開ソースとして扱う。
+6. Zenn記事・本は `published: false` でPR・Previewし、公開時に `true` へ変更して `main` へmergeする。
+7. Zennスクラップは `scraps/` で原稿・履歴をGit管理し、Zenn Web UIへ手動反映する。
+8. `social/<slug>/` にSNS投稿案を作る。
+9. 公開後に公開URL・公開日を `ideas/published.md` 等へ記録する。
+10. Writing AnalyticsがREADME / report / metrics snapshotを更新する。
+
+`articles/<slug>/article.md` とQiitaの `public/*.md` は自動同期しません。Qiita公開時は `public/*.md`、Zenn公開時は `articles/<slug>.md` / `books/` を各媒体の公開Source of Truthとして扱います。
 
 ## 執筆方針
 
@@ -145,7 +178,7 @@ tech-writing/
 
 noteでは技術的な正確性を維持しつつ、実装手順の網羅よりも「なぜその考えに至ったか」「経験して何が変わったか」を優先します。経済・社会・制度・時事情報を扱う場合は、事実と意見を分け、公開時点の情報を確認します。
 
-詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
+詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
 
 ## Writing Analyticsの実行
 
