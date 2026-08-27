@@ -1,7 +1,14 @@
 ---
 title: ""
 status: draft
+published_at: null
+article_type: null
+level: null
 topics: []
+domains: []
+languages: []
+technologies: []
+portfolio_signals: []
 source_repositories: []
 published:
   qiita: null
@@ -35,9 +42,18 @@ published:
 記事全体を繰り返すのではなく、今の自分なりの結論を書く。
 
 <!--
+分析用metadata:
+- topics: 媒体タグに近いキーワード
+- domains: frontend / backend / infra / devops / security / ai / database など
+- languages: Python / TypeScript / Go など
+- technologies: Next.js / Docker / GitHub Actions / PostgreSQL など
+- portfolio_signals: architecture / automation / testing / observability / oss など
+- 不明な項目は推測で埋めず空配列のままにする
+
 公開前:
 - STYLE_GUIDE.md を確認
 - 対象Repositoryの最新状態を再確認
 - Secret / 個人情報 / 本番環境情報を確認
 - Qiita / ZennそれぞれのMarkdown差分を確認
+- 公開時に status / published_at / published URL を更新
 -->
