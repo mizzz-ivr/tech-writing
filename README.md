@@ -28,6 +28,10 @@
 ## よく使うコマンド
 
 ```bash
+# 初回セットアップ
+npm install
+pip install -r requirements.txt
+
 # note: Markdown本文をコピーして新規投稿画面を開く
 npm run note:publish -- articles/YYMMDD-<slug>/article.md
 
