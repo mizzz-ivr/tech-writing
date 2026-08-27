@@ -25,13 +25,18 @@ Merge済み:
 - PR #26 `docs/wiki/` → GitHub Wiki同期Workflow
 - PR #27 Wiki未初期化時のbootstrap handling
 - PR #28 YAML Preset Registry
+- PR #29 v0.2 Preset Pack
 
 ### Release
 
 - `v0.1.0` 公開済み
-- `profile-signal-v0.1.0.zip` 公開済み
-- Release本文は日本語へ同期済み
-- Release Notesは `release-notes/v0.1.0.md` をSource of Truthとして管理
+- `v0.2.0` 公開済み
+- `profile-signal-v0.2.0.zip` 公開済み
+- Release本文は日本語
+- Release Notesは `release-notes/v0.2.0.md` をSource of Truthとして管理
+- `Profile Signal release` workflow_dispatch run #11 success
+- Release package validation / clean fixture / minimal staging / Publish GitHub Release success
+- GitHub Release asset digest: `sha256:f816bcdd8adf8f838a6839075380ef4f982b3dd89aa598b30df5612536c35e9c`
 
 ### Package validation
 
@@ -127,7 +132,11 @@ Forkはshowcase全体を参考にしたい人向けの補助導線。個人プ�
 │  ├─ minimal.yml
 │  ├─ standard.yml
 │  ├─ full.yml
-│  └─ terminal.yml
+│  ├─ terminal.yml
+│  ├─ compact.yml
+│  ├─ developer.yml
+│  ├─ activity.yml
+│  └─ oss.yml
 ├─ src/
 │  ├─ orchestrator.py
 │  └─ preset_runtime.py
@@ -200,26 +209,19 @@ v0.1互換のbuilt-in contract:
 - full = all 7 widgets
 - terminal = all 7 widgets + terminal theme default
 
+v0.2追加Preset:
+
+- compact = today + current_focus / minimal theme
+- developer = live_signal + current_focus + dev_pulse + now_building + activity_stream
+- activity = today + dev_pulse + activity_stream + dev_recap
+- oss = current_focus + now_building + activity_stream + dev_recap
+
 ## YAML Preset Registry
 
 PR #28でPresetをruntimeコードから分離。
 
 ```text
 .profile-signal/presets/*.yml
-```
-
-例:
-
-```yaml
-version: 1
-id: standard
-description: Balanced default profile signal.
-theme: signal
-widgets:
-  - live_signal
-  - today
-  - current_focus
-  - dev_pulse
 ```
 
 新しい公式PresetはYAML追加中心で定義できる。
@@ -233,19 +235,9 @@ Registry validation:
 - unknown widget rejection
 - duplicate widget rejection
 - supported theme validation
-- built-in 4Preset欠落検知
+- built-in互換Preset欠落検知
 
-CIでは既存PresetのWidget contractを固定。
-
-将来候補:
-
-- compact
-- developer
-- portfolio
-- activity
-- oss
-
-名称とWidget構成は実利用を見ながら決める。
+PR #29で実際に4Presetを追加し、既存4Presetを変更せず拡張できることをDogfooding済み。
 
 利用者独自Presetは現状 `.profile-signal/` 更新時に消える可能性があるため、まず `widgets` overrideを推奨する。
 
@@ -316,7 +308,7 @@ PRで必須ページと内部リンクをvalidationし、main Merge後に自動�
 
 1. 完成形Profile overview（保存済み画像）
 2. package smoke test success
-3. GitHub Release `v0.1.0` + ZIP asset + 日本語説明
+3. GitHub Release `v0.2.0` + ZIP asset + 日本語説明
 4. Release ZIPを展開したRepository tree / `uses: ./.profile-signal`
 
 Optional:
@@ -337,11 +329,14 @@ Optional:
 - [x] Release ZIPをclean fixtureへ導入した結果を確認
 - [x] 記事をRelease/Forkモデルへ更新
 - [x] `v0.1.0` Release作成
-- [x] Release ZIP asset確認
 - [x] Releaseページ日本語化
 - [x] MIT License範囲整理
 - [x] GitHub Wiki公開 / 自動同期
 - [x] YAML Preset Registry実装 / PR #28 Merge
+- [x] v0.2 Preset Pack / PR #29 Merge
+- [x] `v0.2.0` Release作成
+- [x] `profile-signal-v0.2.0.zip` asset確認
+- [x] v0.2.0 Release package / smoke test / publish job success
 - [ ] Screenshot追加
 - [ ] Qiita Preview最終確認
 - [ ] 公開
