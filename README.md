@@ -33,7 +33,9 @@
 
 #### Popular
 
-- 外部メトリクスはまだ未取得
+- [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — 0 likes (qiita)
+- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — 0 likes (qiita)
+- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — 0 likes (qiita)
 
 詳細: [Writing Profile / Analytics](./reports/writing-profile.md) · [運用設計](./docs/WRITING_ANALYTICS.md)
 <!-- WRITING_ANALYTICS:END -->

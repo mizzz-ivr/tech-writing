@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "collected_at": "2026-08-27T04:28:46+00:00",
+  "articles": [
+    {
+      "slug": "github-profile-daily-activity",
+      "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+      "published_at": "2026-08-26",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a",
+          "likes": 0,
+          "stocks": 2,
+          "comments": 0,
+          "page_views": null
+        }
+      }
+    },
+    {
+      "slug": "github-profile-live-dashboard",
+      "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+      "published_at": "2026-08-27",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": null
+        }
+      }
+    },
+    {
+      "slug": "repository-is-source-of-truth",
+      "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+      "published_at": "2026-08-24",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": null
+        }
+      }
+    }
+  ],
+  "errors": []
+}
