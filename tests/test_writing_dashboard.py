@@ -45,13 +45,25 @@ class WritingDashboardTests(unittest.TestCase):
             self.article("draft-one", "draft"),
             self.article("review-one", "review"),
             self.article("published-one", "published", "2026-08-27"),
+            self.article("archived-one", "archived"),
         ]
 
         counts = dashboard.status_counts(articles)
+        rows = dict(dashboard.pipeline_rows(counts))
 
         self.assertEqual(counts["draft"], 1)
         self.assertEqual(counts["review"], 1)
         self.assertEqual(counts["published"], 1)
+        self.assertEqual(rows["archived"], 1)
+        self.assertEqual(sum(rows.values()), len(articles))
+
+    def test_pipeline_rows_preserve_unknown_future_statuses(self):
+        counts = dashboard.Counter({"published": 2, "scheduled": 1})
+
+        rows = dict(dashboard.pipeline_rows(counts))
+
+        self.assertEqual(rows["published"], 2)
+        self.assertEqual(rows["scheduled"], 1)
 
     def test_reaction_totals_keep_observed_zero_but_skip_null_and_missing(self):
         snapshot = {
@@ -111,6 +123,7 @@ class WritingDashboardTests(unittest.TestCase):
             },
         )
         self.assertIn("Published domains", charts["domains.svg"])
+        self.assertIn("archived", charts["pipeline.svg"])
 
 
 if __name__ == "__main__":
