@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-08-27 13:57 JST
+> Generated: 2026-08-27 14:16 JST
 
 ## Overview
 
@@ -23,11 +23,19 @@
 - 2026-08-26 — [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a)
 - 2026-08-24 — [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e)
 
-## Popular Articles
+## Reactions
 
-- [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — 0 likes (qiita)
-- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — 0 likes (qiita)
-- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — 0 likes (qiita)
+Latest snapshot. Metrics stay platform-specific; no combined popularity score is calculated.
+
+- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views unavailable
+- [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views unavailable
+- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views unavailable
+
+`0` means an observed zero. `unavailable` means the snapshot explicitly contains `null`; `not collected` means the field is absent. `page_views: null` is a normal state.
+
+### Notable
+
+- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0
 
 ## Data Quality
 
@@ -37,5 +45,5 @@
 
 - `Unclassified` が多い軸は、次回の記事更新時にfront matterを整備する
 - 30/90日単位でtopic / domain / languageの偏りを見る
-- metrics snapshotが蓄積したら、likesの絶対値だけでなく7日/30日の増分を見る
+- metrics snapshotが蓄積したら、likes / stocks / comments等を別指標のまま7日/30日の増分で見る
 - Portfolio用途では、記事数より `portfolio_signals` とsource repositoryの対応を重視する
