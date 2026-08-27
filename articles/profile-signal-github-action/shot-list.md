@@ -1,115 +1,171 @@
-# Shot List — Profile Signal Release / Fork distribution
+# Shot List — Profile Signal Release / Wiki / Preset distribution
 
 Qiita #3用。
 
-## Required
+## 採用5枚
 
-### 01. 完成形Profile overview
+### 01. `01-profile-overview.jpeg`
 
-保存済み:
+元画像:
 
 - `IMG_3769.jpeg`
 
 用途:
 
-- 冒頭で「最終的に何が動いているか」を見せる完成形プレビュー
-
-注意:
-
-- 縦長なので記事本文へ原寸では貼らない
-- 小さめのプレビューとして使う
+- 冒頭の完成形プレビュー
+- 縦長なので原寸ではなく縮小表示
 - 直後にGitHubプロフィール本体へのリンクを置く
-- 各Widgetの詳細画像は第2弾で既に見せているため、第3弾では重複させない
+- Widget詳細は第2弾で見せているため、第3弾では重複させない
 
-### 02. PR #24 Release package CI success
+### 02. `02-release-package-ci-success.png`
 
-見せたいもの:
+見えているもの:
 
-- `Profile Signal release` workflow
-- `Build release archive` success
-- `Smoke test extracted install` success
-- Secret / Tokenが映らない範囲
+- `Profile Signal release #11`
+- Status: Success
+- `validate-package` success
+- `release` success
+
+本文側では、同run内で確認済みの以下も説明する。
+
+- Build release archive
+- Smoke test extracted install
+- Validate installed workflow staging without assets
+- Publish GitHub Release
 
 目的:
 
-- Release ZIPを作っただけではなく、clean fixtureへ展開して実行できたことを示す
+- ZIP生成だけでなくclean fixture検証とRelease publishまで通っていることを示す
 
-### 03. GitHub Release `v0.1.0`
+### 03. `03-release-v0.2.0-top.png`
 
-見せたいもの:
+見えているもの:
+
+- `Profile Signal v0.2.0`
+- Latest
+- 日本語Release Notes上部
+
+目的:
+
+- v0.2.0を正式Releaseしていることを示す
+
+### 04. `04-release-v0.2.0-assets.png`
+
+見えているもの:
+
+- MIT License説明
+- GitHub Wikiへの導線
+- Assets
+- Profile Signal v0.2.0 ZIP asset
+
+目的:
+
+- 配布物・License・ドキュメントの導線を1枚で示す
+
+Releaseページは03と04を画像編集で連結しない。
 
 ```text
-Profile Signal v0.1.0
-profile-signal-v0.1.0.zip
+03 Release上部
+↓
+本文説明
+↓
+04 Release下部
 ```
+
+の順で置く。
+
+全文はRelease URLへ誘導する。
+
+### 05. `05-repository-root.png`
+
+見えているもの:
+
+- `.github/`
+- `.profile-signal/`
+- `distribution/`
+- `docs/`
+- `release-notes/`
+- `scripts/`
+- `tests/`
+- Latest Release `Profile Signal v0.2.0`
 
 目的:
 
-- 実際の配布導線を示す
+- runtimeを利用者Repository内へ置く配布モデルを示す
+- `.profile-signal/` と設定・WorkflowがRepository内で管理されることを説明する
 
-### 04. Release ZIP導入後のRepository tree
-
-見せたい構成:
+Preset一覧はScreenshotではなく本文コードブロックで示す。
 
 ```text
-.profile-signal/
-.github/profile-signal.yml
-.github/workflows/profile-signal.yml
-README.md
+.profile-signal/presets/
+├─ minimal.yml
+├─ standard.yml
+├─ full.yml
+├─ terminal.yml
+├─ compact.yml
+├─ developer.yml
+├─ activity.yml
+└─ oss.yml
 ```
 
-可能ならWorkflowの次の部分も同じ画面またはコードブロックで示す。
+## 不採用
 
-```yaml
-uses: ./.profile-signal
-```
+### `test-profile-signal-v0.2.0` tree
 
-目的:
+記事には使わない。
 
-- 外部Action呼び出しではなく、利用者自身のProfile Repository内で完結することを示す
+理由:
+
+- 作業用directoryに見える
+- `test file add` などのcommit messageが見える
+- 展開物がflattenして見える
+- `profile-signal (1).yml` など、正式な導入構造と誤解されやすい要素がある
+
+配布構造の説明には05のRepository rootとコードブロックを使う。
 
 ## Optional
 
-### 05. Config / Preset
+### GitHub Wiki
+
+スクリーンショットは必須にしない。
+記事中ではWiki URLへ誘導する。
+
+### Config
 
 ```yaml
-preset: standard
+preset: developer
 theme: signal
 ```
 
-Screenshotよりコードブロックで十分なら省略。
+コードブロックで十分。
 
-### 06. Marker auto insert before / after
+## Qiita placeholder mapping
 
-導入前の短いREADMEと、初回実行後のREADME diff。
+```text
+01-profile-overview.jpeg
+→ <!-- QIITA_IMAGE: 01-profile-overview.jpg -->
 
-### 07. Fork導線
+02-release-package-ci-success.png
+→ <!-- QIITA_IMAGE: 02-release-package-ci-success.jpg -->
 
-Forkは補助導線なので、スクリーンショットは必須ではない。
+03-release-v0.2.0-top.png
+→ <!-- QIITA_IMAGE: 03-release-v0.2.0-top.jpg -->
 
-記事では:
+04-release-v0.2.0-assets.png
+→ <!-- QIITA_IMAGE: 04-release-v0.2.0-assets.jpg -->
 
-- Release ZIP = 推奨
-- Fork = Showcase全体を参考にしたい人向け
-
-と文章で説明すれば十分。
-
-## 不要になったScreenshot
-
-外部Repositoryから:
-
-```yaml
-uses: mizzz-ivr/profile-signal@v1
+05-repository-root.png
+→ <!-- QIITA_IMAGE: 05-repository-root.jpg -->
 ```
 
-と呼ぶ画面は不要。
+QiitaへUploadした際に生成されたMarkdownを対応placeholderへ置換する。
 
-今回の配布モデルでは採用しない。
+## Safety check
 
-## Safety
+今回採用する5枚について確認済み:
 
-- [ ] Token / Secretなし
-- [ ] Private Repositoryなし
-- [ ] third-party notificationなし
-- [ ] `GITHUB_TOKEN`値やAuthorization headerなし
-- [ ] Release assetに個人READMEや秘密情報が含まれていない
+- [x] Token / Secretなし
+- [x] Private Repositoryなし
+- [x] `GITHUB_TOKEN`値やAuthorization headerなし
+- [x] 公開GitHubプロフィール / 公開Repositoryの範囲
+- [x] 不要なtest tree画像は除外
