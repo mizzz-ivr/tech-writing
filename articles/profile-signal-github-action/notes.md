@@ -1,4 +1,4 @@
-# Notes — Profile Signal Release / Fork配布
+# Notes — Profile Signal Release / Wiki / Preset配布
 
 ## Article focus
 
@@ -21,29 +21,54 @@ Merge済み:
 - PR #22 History / DEV RECAP
 - PR #23 config-driven local GitHub Action / Dogfooding
 - PR #24 Release ZIP installation package
+- PR #25 日本語Release Notes / License範囲 / Wiki source整備
+- PR #26 `docs/wiki/` → GitHub Wiki同期Workflow
+- PR #27 Wiki未初期化時のbootstrap handling
+- PR #28 YAML Preset Registry
 
-PR #23 Merge後:
+### Release
 
-- local Composite Action経由へWorkflow切替済み
-- main workflow_dispatch success確認済み
-- 24 tests success
+- `v0.1.0` 公開済み
+- `profile-signal-v0.1.0.zip` 公開済み
+- Release本文は日本語へ同期済み
+- Release Notesは `release-notes/v0.1.0.md` をSource of Truthとして管理
 
-PR #24:
+### Package validation
 
-- merged: 2026-08-27 JST
-- `.profile-signal/` self-contained runtime追加
-- Release ZIP builder追加
-- generic config / workflow / install guide追加
-- Package CI success
-- clean fixtureへRelease ZIP展開 → full runtime実行 success
-- `minimal`相当で`assets/`無しでもstaging可能なfixture success
+- Release ZIP build success
+- ZIP integrity check success
+- clean fixtureへ展開 → full runtime success
+- README Marker / state schema v4 / SVG / CI / History検証 success
+- `minimal`相当で`assets/`無しでもstaging success
 - Existing Profile regression / Public API preview success
-- Codex review 3件修正・resolve済み
 
-次:
+### GitHub Wiki
 
-- `Profile Signal release` workflow_dispatchで `v0.1.0` を発行する
-- Release ZIP assetを確認する
+Repository Wikiは有効化・初期化済み。
+
+Source of Truth:
+
+```text
+docs/wiki/
+├─ Home.md
+├─ Installation.md
+├─ Configuration.md
+├─ Presets.md
+├─ License.md
+└─ _Sidebar.md
+```
+
+`Sync Profile Signal wiki` workflowでmain Merge後に `.wiki.git` へ自動同期する。
+
+実Wikiへのpush:
+
+```text
+mizzz-ivr/mizzz-ivr.wiki.git
+HEAD -> master
+Profile Signal wiki synchronized
+```
+
+まで確認済み。
 
 ## Qiita series
 
@@ -92,13 +117,20 @@ Release ZIPを推奨導入経路とする。
 
 Forkはshowcase全体を参考にしたい人向けの補助導線。個人プロフィール固有の文章・画像まで入るため、初回導入の推奨にはしない。
 
-## PR #24 package
+## Release package
 
 ```text
 .profile-signal/
 ├─ action.yml
 ├─ LICENSE
-├─ src/orchestrator.py
+├─ presets/
+│  ├─ minimal.yml
+│  ├─ standard.yml
+│  ├─ full.yml
+│  └─ terminal.yml
+├─ src/
+│  ├─ orchestrator.py
+│  └─ preset_runtime.py
 └─ scripts/
    ├─ update-profile-activity.py
    ├─ profile_signal.py
@@ -139,12 +171,83 @@ uses: ./.profile-signal
 
 を使う。
 
+## License
+
+Profile Signal runtime / Release packageはMIT License。
+
+MIT対象:
+
+- `.profile-signal/**`
+- Release packageの再利用可能コード
+- generic config / workflow template
+- 配布ドキュメント
+
+MIT対象外:
+
+- 個人Profile README本文
+- Hero / Avatar / Screenshot
+- 個人プロフィール固有Asset
+- 第三者Logo / 商標 / 著作物
+
+Repository root全体をMITにはしない。
+
 ## Preset contract
+
+v0.1互換のbuilt-in contract:
 
 - minimal = live_signal + current_focus
 - standard = live_signal + today + current_focus + dev_pulse
 - full = all 7 widgets
 - terminal = all 7 widgets + terminal theme default
+
+## YAML Preset Registry
+
+PR #28でPresetをruntimeコードから分離。
+
+```text
+.profile-signal/presets/*.yml
+```
+
+例:
+
+```yaml
+version: 1
+id: standard
+description: Balanced default profile signal.
+theme: signal
+widgets:
+  - live_signal
+  - today
+  - current_focus
+  - dev_pulse
+```
+
+新しい公式PresetはYAML追加中心で定義できる。
+
+Registry validation:
+
+- YAML mapping
+- schema version
+- filename / id一致
+- non-empty widgets
+- unknown widget rejection
+- duplicate widget rejection
+- supported theme validation
+- built-in 4Preset欠落検知
+
+CIでは既存PresetのWidget contractを固定。
+
+将来候補:
+
+- compact
+- developer
+- portfolio
+- activity
+- oss
+
+名称とWidget構成は実利用を見ながら決める。
+
+利用者独自Presetは現状 `.profile-signal/` 更新時に消える可能性があるため、まず `widgets` overrideを推奨する。
 
 ## Themes
 
@@ -171,40 +274,6 @@ falseはエラー。
 Private dataを取得して後段でmaskする設計にはしない。
 Release ZIPのdefault運用ではAPI Secret不要。
 
-## Package validation
-
-PR #24で2種類のCIを通した。
-
-### Existing profile regression
-
-- existing unit tests
-- real Public GitHub API preview
-- README 7 Widget
-- Weekly / Monthly / DEV RECAP
-- SVG parse
-
-### Release fixture smoke test
-
-```text
-build ZIP
-  ↓
-clean temporary directoryへextract
-  ↓
-README.mdを1行だけ作成
-  ↓
-usernameをmizzz-ivrへ置換
-  ↓
-presetをCIだけfullへ変更
-  ↓
-.profile-signal/src/orchestrator.py 実行
-  ↓
-7 README marker / state v4 / CI / history / SVG検証
-```
-
-さらに`minimal` preset相当で`assets/`が存在しない場合でも、配布Workflowのstagingが失敗しないfixtureを追加した。
-
-これで「自分のRepositoryにたまたま依存して動いた」状態を避ける。
-
 ## Review fixes
 
 PR #24のCodex Reviewで見つかった内容:
@@ -221,24 +290,18 @@ PR #24のCodex Reviewで見つかった内容:
 
 3 threadともresolve済み。
 
-## Release publishing
+## Documentation
 
-`.github/workflows/profile-signal-release.yml` のworkflow_dispatchでversionを指定する。
+GitHub Wikiへ以下を公開する。
 
-例:
+- Home
+- Installation
+- Configuration
+- Presets
+- License
 
-```text
-v0.1.0
-```
-
-Workflowが:
-
-- deterministic ZIP生成
-- ZIP integrity check
-- GitHub Release作成
-- ZIP asset添付
-
-まで行う。
+Wikiは直接編集ではなく `docs/wiki/*.md` をSource of Truthにする。
+PRで必須ページと内部リンクをvalidationし、main Merge後に自動同期する。
 
 ## Screenshot strategy
 
@@ -252,9 +315,14 @@ Workflowが:
 ### Required screenshots
 
 1. 完成形Profile overview（保存済み画像）
-2. PR #24 / package smoke test success
-3. GitHub Release `v0.1.0` + ZIP asset
+2. package smoke test success
+3. GitHub Release `v0.1.0` + ZIP asset + 日本語説明
 4. Release ZIPを展開したRepository tree / `uses: ./.profile-signal`
+
+Optional:
+
+5. Wiki Home / Sidebar
+6. `.profile-signal/presets/` tree
 
 外部Action呼び出しScreenshotは不要。
 
@@ -268,10 +336,15 @@ Workflowが:
 - [x] PR #24 Merge
 - [x] Release ZIPをclean fixtureへ導入した結果を確認
 - [x] 記事をRelease/Forkモデルへ更新
-- [ ] `v0.1.0` Release作成
-- [ ] Release ZIP asset確認
-- [ ] mainで`.profile-signal` runtime経由のscheduled / workflow_dispatch更新を確認
+- [x] `v0.1.0` Release作成
+- [x] Release ZIP asset確認
+- [x] Releaseページ日本語化
+- [x] MIT License範囲整理
+- [x] GitHub Wiki公開 / 自動同期
+- [x] YAML Preset Registry実装 / PR #28 Merge
 - [ ] Screenshot追加
+- [ ] Qiita Preview最終確認
+- [ ] 公開
 
 ## Tags
 
