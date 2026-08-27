@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import sys
-from pathlib import Path
 from typing import Any
 
 import writing_analytics as analytics
@@ -39,10 +38,14 @@ def coverage_chart_entries(
 
 
 def reaction_chart_entries(model: dict[str, Any]) -> list[tuple[str, int]]:
+    """Chart reaction fields only; page views remain available in the Data Mart detail."""
+
     entries: list[tuple[str, int]] = []
     for platform, metrics in model["reactions"]["observed_numeric_totals"].items():
+        allowed = {key for key, _label in analytics.reaction_fields(platform)}
         for key, value in metrics.items():
-            entries.append((f"{platform} {key}", int(value)))
+            if key in allowed:
+                entries.append((f"{platform} {key}", int(value)))
     return sorted(entries, key=lambda item: item[0].casefold())
 
 
@@ -97,8 +100,9 @@ def build_dashboard(model: dict[str, Any]) -> str:
     next_candidate = candidates[0] if candidates else None
 
     if next_candidate:
+        candidate_title = str(next_candidate["title"]).replace("|", "\\|")
         next_article = (
-            f"[{next_candidate['title']}](../{next_candidate['path']}) "
+            f"[{candidate_title}](../{next_candidate['path']}) "
             f"(`{next_candidate['status']}`)"
         )
     else:
@@ -187,9 +191,9 @@ def build_dashboard(model: dict[str, Any]) -> str:
             "",
             "![Observed reactions](./assets/reactions.svg)",
             "",
-            "`0` / `unavailable` / field missingは別状態としてData Martに保持します。単一のPopularity Scoreには集約しません。",
+            "reaction chartはlikes / stocks / bookmarks / commentsのみを描画します。page viewsはData Martの観測値として保持します。`0` / `unavailable` / field missingは別状態で、単一のPopularity Scoreには集約しません。",
             "",
-            "| Article | Platform | Reactions |",
+            "| Article | Platform | Reactions / observed metrics |",
             "| --- | --- | --- |",
         ]
     )
