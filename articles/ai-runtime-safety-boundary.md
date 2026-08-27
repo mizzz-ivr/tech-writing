@@ -3,7 +3,7 @@ title: "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kil
 emoji: "🔐"
 type: "tech"
 topics: ["typescript", "生成ai", "openai", "security", "architecture"]
-published: false
+published: true
 ---
 
 個人開発のDiscord Botに生成AIを入れ始めたとき、最初は単純でした。
