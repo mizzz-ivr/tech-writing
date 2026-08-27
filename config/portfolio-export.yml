@@ -1,0 +1,6 @@
+schema_version: 1
+max_recent_articles: 10
+public_source_repositories:
+  - ivRooom/Herta
+  - mizzz-ivr/mizzz-ivr
+  - mizzz-ivr/profile-signal

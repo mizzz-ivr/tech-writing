@@ -7,14 +7,19 @@ on:
       - "ideas/backlog.md"
       - "ideas/published.md"
       - "data/metrics/**"
+      - "data/exports/**"
+      - "config/portfolio-export.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_opportunities.py"
+      - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
+      - "docs/PORTFOLIO_EXPORT.md"
+      - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
       - "reports/visual-dashboard.md"
       - "reports/content-opportunities.md"
       - "reports/assets/**"
@@ -27,14 +32,19 @@ on:
       - "ideas/backlog.md"
       - "ideas/published.md"
       - "data/metrics/**"
+      - "data/exports/**"
+      - "config/portfolio-export.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_opportunities.py"
+      - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
+      - "docs/PORTFOLIO_EXPORT.md"
+      - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
       - "reports/visual-dashboard.md"
       - "reports/content-opportunities.md"
       - "reports/assets/**"
@@ -69,6 +79,8 @@ jobs:
         run: python scripts/writing_analytics.py --check
       - name: Validate content opportunity rendering
         run: python scripts/writing_opportunities.py --check
+      - name: Validate public portfolio export
+        run: python scripts/writing_portfolio_export.py --check
       - name: Validate visual dashboard rendering
         run: python scripts/writing_dashboard.py --check
       - name: Exercise external metric adapters (best effort)
@@ -99,17 +111,19 @@ jobs:
         run: python scripts/writing_analytics.py --refresh-metrics
       - name: Refresh content opportunities
         run: python scripts/writing_opportunities.py
+      - name: Refresh public portfolio export
+        run: python scripts/writing_portfolio_export.py
       - name: Refresh visual dashboard
         run: python scripts/writing_dashboard.py
       - name: Commit analytics and metadata when changed
         run: |
-          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics)" ]; then
+          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/exports)" ]; then
             echo "No analytics or metadata changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics
+          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/exports
           git commit -m "chore: normalize metadata and refresh writing analytics"
           git push
