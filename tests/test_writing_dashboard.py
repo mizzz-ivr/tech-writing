@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -66,6 +67,15 @@ class WritingDashboardTests(unittest.TestCase):
         self.assertEqual(rows["published"], 2)
         self.assertEqual(rows["scheduled"], 1)
 
+    def test_pipeline_chart_does_not_drop_statuses_after_eight_rows(self):
+        articles = [self.article("published-one", "published", "2026-08-27")]
+        articles.extend(self.article(f"future-{index}", f"status-{index}") for index in range(7))
+
+        pipeline_svg = dashboard.chart_payloads(articles, None)["pipeline.svg"]
+
+        self.assertIn("status-0", pipeline_svg)
+        self.assertIn("status-6", pipeline_svg)
+
     def test_reaction_totals_keep_observed_zero_but_skip_null_and_missing(self):
         snapshot = {
             "articles": [
@@ -97,6 +107,28 @@ class WritingDashboardTests(unittest.TestCase):
         self.assertIn("x &lt; y", svg)
         self.assertIn(">0</text>", svg)
         self.assertIn(">2</text>", svg)
+
+    def test_latest_snapshot_count_ignores_malformed_and_incomplete_files(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            metrics_dir = Path(temp_dir)
+            (metrics_dir / "valid.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "collected_at": "2026-08-27T12:43:26+00:00",
+                        "articles": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (metrics_dir / "malformed.json").write_text("{not-json", encoding="utf-8")
+            (metrics_dir / "incomplete.json").write_text(
+                json.dumps({"collected_at": "2026-08-27T12:43:26+00:00"}),
+                encoding="utf-8",
+            )
+
+            with patch.object(analytics, "METRICS_DIR", metrics_dir):
+                self.assertEqual(dashboard.latest_snapshot_count(), 1)
 
     def test_snapshot_source_time_is_deterministic(self):
         snapshot = {"collected_at": "2026-08-27T12:43:26+00:00"}
