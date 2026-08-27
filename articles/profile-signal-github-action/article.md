@@ -1,14 +1,14 @@
 ---
-title: "自作GitHubプロフィールWidgetをReleaseで配布できる形にしてみた"
+title: "自作GitHubプロフィールWidgetをStandalone OSSとしてRelease配布できる形にしてみた"
 status: review
 topics: [GitHubActions, GitHub, Python, OSS, 個人開発]
-source_repositories: [mizzz-ivr/mizzz-ivr]
+source_repositories: [mizzz-ivr/profile-signal, mizzz-ivr/mizzz-ivr]
 published:
   qiita: null
   zenn: null
 ---
 
-# 自作GitHubプロフィールWidgetをReleaseで配布できる形にしてみた
+# 自作GitHubプロフィールWidgetをStandalone OSSとしてRelease配布できる形にしてみた
 
 前回の記事では、`TODAY` から始めたGitHubプロフィールを `LIVE SIGNAL`、`CURRENT FOCUS`、`DEV PULSE`、`NOW BUILDING`、`ACTIVITY STREAM`、`DEV RECAP` まで広げて、ライブな開発ダッシュボードにしました。
 
@@ -18,7 +18,7 @@ https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630
 
 <!-- QIITA_IMAGE: 01-profile-overview.jpg -->
 
-実際のプロフィールは今もGitHub Actionsで更新し続けています。
+実際のプロフィールは今もProfile Signalを使って更新しています。
 
 https://github.com/mizzz-ivr
 
@@ -26,25 +26,36 @@ https://github.com/mizzz-ivr
 
 完全に自分用でした。
 
-でもWidgetが増えて、設定ファイルでPresetやThemeを切り替えられるようになると、次に考えたのが、
+Widgetが増え、PresetやThemeを設定ファイルで切り替えられるようになったところで、次に考えたのが、
 
 **これを他の人も自分のGitHub Profile Repositoryへ入れられる形にできないか**
 
 ということでした。
 
-最初はReusableなGitHub Actionとして、
+最初は外部GitHub Actionとして、
 
 ```yaml
 uses: owner/repo@v1
 ```
 
-のように外部から呼ぶ形を考えていました。
+のように呼ぶ形も考えました。
 
-ただ、Profile Signalの性質を整理すると、外部Actionよりも**利用者自身のProfile Repositoryへruntimeを置く方が合っている**と判断しました。
+ただ、Profile SignalはREADMEを書き換えるだけではなく、履歴JSONやSVG、計算済みstateを利用者側へ継続的に残します。
 
-最終的には、GitHub ReleaseからZIPを取得し、自分のProfile Repositoryへ展開する配布方式にしています。
+そこで最終的には、
 
-この記事では、その設計判断と、実際に `v0.2.0` までReleaseできる形にした過程を書きます。
+- OSS本体は専用Repositoryへ分離する
+- GitHub Release ZIPとして配布する
+- 利用者自身のProfile Repositoryへruntimeを展開する
+- Workflowからは `uses: ./.profile-signal` でlocal runtimeを実行する
+
+という形にしました。
+
+現在のSource of Truthは次のRepositoryです。
+
+https://github.com/mizzz-ivr/profile-signal
+
+この記事では、自分専用のプロフィール生成処理を、`v0.4.0` までStandalone OSSとして配布できる形へ持っていった過程を書きます。
 
 ## 最初は外部Actionとして配ろうとしていた
 
@@ -58,9 +69,7 @@ config-driven化した直後は、最終形を次のように想定していま�
 
 一般的なGitHub Actionとしては自然です。
 
-利用者はAction本体を持たず、versionだけ指定すれば使えます。
-
-ただ、Profile SignalはCIで一度処理して終わる小さなActionではありません。
+ただ、Profile SignalはCIの中で一度処理して終わる小さなActionではありません。
 
 利用者のRepositoryへ継続的に、
 
@@ -83,9 +92,11 @@ README Markerや履歴JSONも利用者側へ残ります。
 
 ## Release ZIPを自分のRepositoryへ入れる方式にした
 
-現在の構成は次のようになっています。
+現在の導入構成は次のようになっています。
 
 ```text
+mizzz-ivr/profile-signal
+        ↓
 GitHub Release ZIP
         ↓
 利用者の GitHub Profile Repository
@@ -93,6 +104,7 @@ GitHub Release ZIP
 .profile-signal/
 .github/profile-signal.yml
 .github/workflows/profile-signal.yml
+.github/workflows/profile-signal-stream.yml
         ↓
 uses: ./.profile-signal
 ```
@@ -113,15 +125,15 @@ Workflowから呼ぶのは配布元Repositoryではありません。
 
 Profile READMEは公開物です。
 
-何をGitHub APIから取得して、何をREADMEへ書いているかは利用者自身が確認できる方が分かりやすいです。
+何をGitHub APIから取得し、何をREADMEへ書くのかは利用者自身が確認できる方が分かりやすいです。
 
-Release ZIP方式なら、実行されるPythonコードは自分のRepository内に残ります。
+Release ZIP方式なら、実際に動くPythonコードは自分のRepository内に残ります。
 
 ### 外部Repositoryへ毎回依存しない
 
-Profile Signalは数時間ごとに長期間動かします。
+Profile Signalは定期的に長期間動かします。
 
-一度取り込んだversionが自分のRepositoryに残る方が、今回の用途では扱いやすいと考えました。
+一度取り込んだversionが自分のRepositoryへ固定されるため、配布元のmain変更で挙動が急に変わりません。
 
 ### 更新前に差分を確認できる
 
@@ -129,15 +141,42 @@ Profile Signalは数時間ごとに長期間動かします。
 
 新versionのZIPを取得し、`.profile-signal/` の差分を確認してからcommitできます。
 
-プロフィールのように「動き続けるが、常に最新版へ即更新する必要はない」ものには、この更新方法が合っていました。
+プロフィールのように「長く動かすが、常に最新版へ即追従する必要はない」ものには、この更新方法が合っていました。
 
-## runtimeは `.profile-signal/` に隔離した
+## OSS本体をProfile Repositoryから分離した
 
-自分用の初期実装では、Profile Signal用コードとRepository側のscriptが混ざっていました。
+最初のReleaseは自分のGitHub Profile Repository `mizzz-ivr/mizzz-ivr` の中で作っていました。
 
-配布するなら利用者側の既存ファイルと衝突しない方がよいので、runtimeをhidden directoryへまとめています。
+ただ、配布物が育つにつれて、
 
-`v0.2.0` では次のような構成です。
+- runtime
+- tests
+- Release builder
+- Release Notes
+- Wiki source
+- Preset Registry
+
+まで個人プロフィールのRepositoryへ同居する状態になりました。
+
+そこで `v0.3.0` で開発・配布のSource of Truthを専用Repositoryへ移しました。
+
+```text
+mizzz-ivr/profile-signal
+→ OSS本体 / tests / CI / Release / Wiki / 配布Source
+
+mizzz-ivr/mizzz-ivr
+→ Consumer / Live Demo / Dogfooding
+```
+
+この分離によって、OSSコードと個人プロフィール固有コンテンツの境界もかなり分かりやすくなりました。
+
+<!-- QIITA_IMAGE: 02-standalone-repository.jpg -->
+
+## runtimeは `.profile-signal/` に隔離する
+
+Release ZIPへ入れるruntimeは `.profile-signal/` にまとめています。
+
+`v0.4.0` のRelease builderでは、最低限次のruntimeを必須ファイルとして検証しています。
 
 ```text
 .profile-signal/
@@ -154,7 +193,8 @@ Profile Signalは数時間ごとに長期間動かします。
 │  └─ oss.yml
 ├─ src/
 │  ├─ orchestrator.py
-│  └─ preset_runtime.py
+│  ├─ preset_runtime.py
+│  └─ stream_runtime.py
 └─ scripts/
    ├─ update-profile-activity.py
    ├─ profile_signal.py
@@ -163,40 +203,7 @@ Profile Signalは数時間ごとに長期間動かします。
    └─ profile_signal_history.py
 ```
 
-Composite ActionからPreset Registryのentrypointを呼びます。
-
-```yaml
-runs:
-  using: composite
-  steps:
-    - name: Set up Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: "3.12"
-
-    - name: Generate Profile Signal
-      shell: bash
-      run: python "${{ github.action_path }}/src/preset_runtime.py"
-```
-
-`preset_runtime.py` がPreset YAMLを検証し、Orchestratorが同じ `.profile-signal/` 配下のruntimeを実行します。
-
-親Repository側のPython fileへ依存しない構成です。
-
-## 自分のプロフィールも配布版runtimeで動かす
-
-配布用のコードだけを別管理すると、本番で使っているものとRelease packageが少しずつズレる可能性があります。
-
-そこで自分のProfile Repositoryも、配布版と同じruntimeを利用しています。
-
-```yaml
-- name: Update profile through installed Profile Signal runtime
-  uses: ./.profile-signal
-  with:
-    config: .github/profile-signal.yml
-```
-
-自分自身が最初の利用者としてDogfoodingし続ける形です。
+利用者Repository側のPython fileへ依存しない、自己完結したruntimeとして扱っています。
 
 ## runtimeと利用者設定を分ける
 
@@ -236,69 +243,22 @@ readme:
 
 Release更新時は基本的に `.profile-signal/` を差し替え、利用者が調整した `.github/profile-signal.yml` は維持します。
 
-## Presetはv0.2.0で8種類になった
+## Presetは8種類をYAML Registryで管理する
 
-初回Releaseでは次の4Presetから始めました。
+現在の公式Presetは8種類です。
 
 ```text
 minimal
 standard
 full
 terminal
-```
-
-`v0.2.0` では用途別に4つ追加しています。
-
-```text
 compact
-  TODAY + CURRENT FOCUS
-
 developer
-  現在の開発状況・Active Repository・Activity Stream中心
-
 activity
-  TODAY / DEV PULSE / ACTIVITY STREAM / DEV RECAP中心
-
 oss
-  Public Repositoryでの開発状況・履歴中心
 ```
 
-既存の `minimal / standard / full / terminal` の意味は変更していません。
-
-Presetを選んだ後でも、`widgets` で個別にON/OFFできます。
-
-```yaml
-preset: standard
-
-widgets:
-  activity_stream:
-    enabled: true
-  now_building:
-    enabled: true
-```
-
-Themeは現在、
-
-```text
-signal
-minimal
-terminal
-```
-
-を使えます。
-
-Presetは「どのWidgetを使うか」、Themeは「どう見せるか」と責務を分けています。
-
-## Preset定義もYAMLへ分離した
-
-Preset数を増やすたびにPythonへ、
-
-```python
-if preset == "compact":
-    ...
-```
-
-のような分岐を追加したくなかったため、Preset定義を `.profile-signal/presets/*.yml` へ分離しました。
+Preset数を増やすたびにPythonへ分岐を追加したくなかったので、Preset定義を `.profile-signal/presets/*.yml` へ分離しました。
 
 例えば `compact.yml` は次のような定義です。
 
@@ -323,48 +283,26 @@ Registry loaderでは、
 
 などを検証します。
 
-CIでは既存PresetのWidget contractも固定しています。
-
-今回 `compact / developer / activity / oss` を実際にYAML追加中心で実装できたので、Preset Registryを分離した狙いも確認できました。
-
-`portfolio` のようなPresetも候補にはありますが、現状のProfile Signalは動的な開発Activity Widgetが中心です。静的な代表作品まで生成しない段階で「portfolio」を名乗るのは責務が広すぎるため、今は追加していません。
+Presetは「どのWidgetを使うか」、Themeは「どう見せるか」と責務を分けています。
 
 ## READMEはRelease ZIPに含めない
 
 Release ZIPには利用者の既存READMEを上書きする `README.md` を含めていません。
 
-展開して追加される主なファイルは、
+builderがpackageする主なファイルは次のとおりです。
 
 ```text
 .profile-signal/
 .github/profile-signal.yml
 .github/workflows/profile-signal.yml
+.github/workflows/profile-signal-stream.yml
 PROFILE_SIGNAL_INSTALL.md
 PROFILE_SIGNAL_VERSION
 ```
 
-です。
+最初のWorkflow実行時に必要なREADME Markerを追加します。
 
-最初のWorkflow実行時に、必要なREADME Markerを自動追加します。
-
-Release版のdefault設定は、
-
-```yaml
-insert_before: ""
-```
-
-です。
-
-利用者READMEの見出し名を勝手に推測せず、指定がなければ末尾へ追加します。
-
-任意の見出し前へ置きたい場合は、
-
-```yaml
-readme:
-  insert_before: "## About me"
-```
-
-のように変更できます。
+利用者READMEの見出しを勝手に推測しないため、指定がなければ末尾へ挿入する設計です。
 
 ## Public-onlyを初期contractにした
 
@@ -375,27 +313,15 @@ privacy:
   public_only: true
 ```
 
-を必須にしています。
+を基本契約にしています。
 
 Private Repository情報を取得してからRendererで隠す設計ではありません。
 
 最初からPublic GitHub APIだけをCollection対象にします。
 
-標準構成ではAPI KeyやPATも不要です。
+標準構成ではPATやAPI Keyも不要です。
 
-プロフィールへ公開するツールなので、初期版では安全側へ寄せています。
-
-## Release ZIPは再現可能に生成する
-
-Release ZIPは手作業で作らず、Python builderで生成しています。
-
-```text
-scripts/build-profile-signal-release.py
-```
-
-対象を固定し、Releaseごとに必要なruntime・config・workflow・install guideをpackageします。
-
-同じSourceから同じversionをbuildしやすいよう、ZIP entryのtimestampも固定しています。
+プロフィールへ公開するツールなので、初期版は安全側へ寄せています。
 
 ## ZIPを作るだけではなく、展開して動かすCIを入れた
 
@@ -405,7 +331,7 @@ scripts/build-profile-signal-release.py
 
 という状態です。
 
-そこでRelease Workflowでは、archiveを作った後にclean fixtureへ展開して実際にruntimeを動かします。
+そこでRelease Workflowでは、archiveを作った後にclean fixtureへ展開し、実際にruntimeを動かして検証します。
 
 ```text
 build ZIP
@@ -421,66 +347,53 @@ Profile Signal runtime実行
 README / state / SVGを検証
 ```
 
-<!-- QIITA_IMAGE: 02-release-package-ci-success.jpg -->
+Release ZIP自体もbuilderで再現可能に生成し、ZIP entryのtimestampを固定しています。
 
-`v0.2.0` を発行した `Profile Signal release #11` でも、
+<!-- QIITA_IMAGE: 03-release-package-ci-success.jpg -->
 
-- Build release archive
-- Smoke test extracted install
-- Validate installed workflow staging without assets
-- Publish GitHub Release
+## v0.4.0ではLatest Signalsを軽量更新へ分けた
 
-まで成功しました。
+最初はProfile全体を同じWorkflowで更新していました。
 
-## GitHub ReleaseもWorkflowから発行する
+ただ、`ACTIVITY STREAM` や `CURRENT FOCUS` のような「今」に近い表示まで、重い履歴集計と同じ周期で待たせる必要はありません。
 
-配布Workflowは `workflow_dispatch` でversionを指定して実行します。
-
-例えば、
+そこで `v0.4.0` では更新責務を分けました。
 
 ```text
-v0.2.0
+profile-signal.yml
+→ 3時間ごとのFull refresh
+→ TODAY / DEV PULSE / CI / History / DEV RECAP など
+
+profile-signal-stream.yml
+→ 30分ごとのlightweight refresh
+→ LIVE SIGNAL / CURRENT FOCUS / ACTIVITY STREAM
 ```
 
-を指定すると、
+軽量runtimeはCIやHistoryなどの既存stateを再計算・破棄せず、live-facingな公開Event由来stateだけを更新します。
 
-1. Release ZIP生成
-2. package validation
-3. 日本語Release Notes準備
-4. GitHub Release作成
-5. ZIP asset添付
+表示内容に実質変更がなければcommitもしません。
 
-まで行います。
+GitHub Public EventsやGitHub Actionsのschedule自体には遅延があり得るため、ここはリアルタイム保証ではなく「取得できた最新の公開Signal」として扱っています。
 
-<!-- QIITA_IMAGE: 03-release-v0.2.0-top.jpg -->
+## 現在の最新版はv0.4.0
 
-現在の最新版は `v0.2.0` です。
+現在のReleaseは `v0.4.0` です。
 
-https://github.com/mizzz-ivr/mizzz-ivr/releases/tag/v0.2.0
-
-初回の `v0.1.0` から、Preset Registryと用途別Presetを追加したReleaseになっています。
-
-Release Notesも日本語で用意し、変更点・導入・互換性・License・Wikiへの導線がReleaseページだけでも分かるようにしています。
+https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0
 
 Release assetは、
 
 ```text
-profile-signal-v0.2.0.zip
+profile-signal-v0.4.0.zip
 ```
 
 です。
 
-<!-- QIITA_IMAGE: 04-release-v0.2.0-assets.jpg -->
+`v0.3.0` でStandalone Repositoryへ移行し、`v0.4.0` でLatest Signalsの軽量更新を追加しました。
 
-Release Notes本文は、
+<!-- QIITA_IMAGE: 04-release-v0.4.0.jpg -->
 
-```text
-release-notes/v0.2.0.md
-```
-
-をSource of Truthにしています。
-
-Releaseページ全文は長くなるため、記事では要点だけをスクリーンショットで見せ、詳細はReleaseページへ誘導します。
+Release NotesもRepository内の `release-notes/v0.4.0.md` を元に管理しています。
 
 ## 導入手順はかなり短い
 
@@ -494,12 +407,12 @@ GitHubプロフィールREADME用の、
 
 Repositoryを使います。
 
-### 2. v0.2.0のRelease ZIPを展開
+### 2. v0.4.0のRelease ZIPを展開
 
 Release Assetsから、
 
 ```text
-profile-signal-v0.2.0.zip
+profile-signal-v0.4.0.zip
 ```
 
 を取得してRepository rootへ展開します。
@@ -529,98 +442,46 @@ Actions
 
 初回結果を確認します。
 
-<!-- QIITA_IMAGE: 05-repository-root.jpg -->
+<!-- QIITA_IMAGE: 05-installed-repository.jpg -->
 
-Repository内では `.profile-signal/` と `.github/profile-signal.yml`、Workflowを確認できます。
+その後はFull refreshとLatest Signals refreshがscheduleで動きます。
 
-その後はscheduleで自動更新されます。
+## GitHub WikiもStandalone Repositoryへ移した
 
-## 導入手順はGitHub Wikiにもまとめた
+継続的なドキュメントはGitHub Wikiへ分けています。
 
-Releaseページだけへ長い説明を詰め込まず、継続的なドキュメントはGitHub Wikiへ分けています。
+https://github.com/mizzz-ivr/profile-signal/wiki
 
-https://github.com/mizzz-ivr/mizzz-ivr/wiki
+現在は英語をdefaultにし、日本語ページも用意しています。
 
-現在は、
-
-- Home
-- Installation
-- Configuration
-- Presets
-- License
-
-を用意しています。
-
-ただしWikiをGitHub UIだけで更新すると、Repository側のドキュメントとズレやすくなります。
-
-そこで編集元は、
+Wiki SourceはRepository内の、
 
 ```text
 docs/wiki/*.md
 ```
 
-です。
+で管理します。
 
-Pull Requestで必須ページと内部リンクを検証し、mainへMergeすると `Sync Profile Signal wiki` Workflowが `.wiki.git` へ自動pushします。
+Pull Requestで必須ページや内部リンクを検証し、main更新後にGitHub Wikiへ同期します。
 
-実Wikiへの同期まで確認済みです。
+## Standalone化でLicense境界もきれいになった
 
-## MIT Licenseの対象も分けた
+旧構成ではOSS runtimeと個人Profile README・画像が同じRepositoryに入っていたため、Licenseの適用範囲を慎重に分ける必要がありました。
 
-Release ZIP内のProfile Signal runtimeはMIT Licenseです。
+Standalone化後の `mizzz-ivr/profile-signal` はRepository全体をMIT Licenseとして扱えます。
 
-一方、配布元は自分自身のGitHub Profile Repositoryでもあります。
-
-Repository root全体をMITにすると、
+一方、Consumer側の `mizzz-ivr/mizzz-ivr` にある、
 
 - 個人Profile README本文
 - Hero / Avatar画像
 - Screenshot
-- 個人用の文章
-- 第三者Logoや商標
-
-まで同じLicense対象に見えやすくなります。
-
-そのためMITの対象は、
-
-```text
-.profile-signal/**
-Release packageの再利用可能コード
-generic config / workflow template
-配布ドキュメント
-```
-
-へ明確に寄せています。
-
-個人プロフィール固有コンテンツはMIT対象外です。
-
-## Forkは補助的な導線にする
-
-Forkで配布する方法もあります。
-
-ただ、自分のProfile RepositoryにはProfile Signal以外にも、
-
-- 自己紹介
-- Featured Project
-- Links
-- Hero画像
 - 個人用文章
 
-が含まれます。
+などへStandalone OSSのMIT Licenseを自動適用するわけではありません。
 
-そのため現在は、
+OSSと個人コンテンツをRepositoryごと分けたことで、この境界も説明しやすくなりました。
 
-```text
-Release ZIP
-→ 既存Profileへ機能だけ追加したい人向け / 推奨
-
-Fork
-→ 完成形のRepository構成を丸ごと参考にしたい人向け
-```
-
-と役割を分けています。
-
-## 更新はruntimeだけ差し替えるのが基本
+## 更新はruntime差し替えを基本にする
 
 新Releaseへ更新するときは、基本的に、
 
@@ -632,9 +493,9 @@ Fork
 
 `.github/profile-signal.yml` は利用者設定なので維持します。
 
-Workflow templateに変更があるReleaseだけ、Release Notesを確認して更新します。
+Workflow templateに変更があるReleaseでは、Release Notesを確認して `.github/workflows/` 側も更新します。
 
-Profile Signalでは自動updateよりも、利用者がdiffを見てからruntimeを更新できることを優先しています。
+自動updateよりも、利用者がdiffを見てからruntimeを更新できることを優先しています。
 
 ## OSS化して一番変わったのはコードより境界だった
 
@@ -645,13 +506,13 @@ Profile Signalでは自動updateよりも、利用者がdiffを見てからrunti
 - runtimeをどこへ置くか
 - user configと何を分離するか
 - READMEを上書きしない方法
-- defaultの挿入位置
 - Update時に何を残すか
 - Private dataをどこで遮断するか
 - Release ZIPだけで本当に起動できるか
-- 配布コードと個人プロフィールのLicense境界
+- 配布コードと個人プロフィールをどう分離するか
 - WikiとRepository内ドキュメントをどう同期するか
 - Presetをどう増やせるようにするか
+- Full refreshとLatest Signalsの責務をどう分けるか
 
 といった境界でした。
 
@@ -659,19 +520,18 @@ Profile Signalでは自動updateよりも、利用者がdiffを見てからrunti
 
 配布しようとすると、その前提を一つずつ外す必要があります。
 
-外部ActionではなくRelease ZIP方式へ変えたのも、その過程でProfile Signalの性質を見直した結果でした。
-
 現在は、
 
-- `v0.2.0` Release公開
+- Standalone OSS Repository
+- `v0.4.0` Release
 - Release ZIP配布
-- 日本語Release Notes
 - clean fixture smoke test
-- GitHub Wiki
-- MIT License境界
+- English / 日本語 GitHub Wiki
+- MIT License
 - YAML Preset Registry
 - 8種類の公式Preset
+- Full refresh / Latest Signals分離
 
-まで整っています。
+まで整いました。
 
-今後も自分のプロフィールでDogfoodingしながら、Profile SignalのThemeや用途別Presetを増やしていく予定です。
+自分のプロフィールをConsumer / Live DemoとしてDogfoodingしながら、Profile Signal本体は専用Repositoryで育てる形にしています。
