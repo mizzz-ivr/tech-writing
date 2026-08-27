@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -7,6 +8,7 @@ MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "writing_analyti
 SPEC = importlib.util.spec_from_file_location("writing_analytics", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 analytics = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = analytics
 SPEC.loader.exec_module(analytics)
 
 
