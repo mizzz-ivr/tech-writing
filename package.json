@@ -8,7 +8,11 @@
     "qiita:preview": "qiita preview",
     "qiita:new:article": "qiita new",
     "qiita:pull": "qiita pull",
-    "qiita:publish": "qiita publish --all"
+    "qiita:publish": "qiita publish --all",
+    "note:copy": "node scripts/note_publish.mjs copy",
+    "note:open": "node scripts/note_publish.mjs open",
+    "note:publish": "node scripts/note_publish.mjs publish",
+    "note:test": "node --test tests/note_publish.test.mjs"
   },
   "devDependencies": {
     "@qiita/qiita-cli": "1.10.0",
