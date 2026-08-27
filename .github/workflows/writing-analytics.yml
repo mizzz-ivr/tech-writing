@@ -3,6 +3,7 @@ name: Writing Analytics
 on:
   pull_request:
     paths:
+      - "README.md"
       - "articles/**"
       - "ideas/backlog.md"
       - "ideas/published.md"
@@ -28,6 +29,7 @@ on:
   push:
     branches: [main]
     paths:
+      - "README.md"
       - "articles/**"
       - "ideas/backlog.md"
       - "ideas/published.md"

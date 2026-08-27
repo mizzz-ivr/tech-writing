@@ -199,5 +199,39 @@ class ReactionAnalyticsTests(unittest.TestCase):
         self.assertNotIn("## Popular Articles", report)
 
 
+class ReadmeUpdateTests(unittest.TestCase):
+    def test_marker_replacement_preserves_details_wrapper(self):
+        original = "\n".join(
+            [
+                "# repo",
+                "",
+                "<details>",
+                "<summary>Analytics</summary>",
+                "",
+                analytics.README_START,
+                "old analytics",
+                analytics.README_END,
+                "",
+                "</details>",
+            ]
+        )
+        replacement = "\n".join(
+            [
+                analytics.README_START,
+                "new analytics",
+                analytics.README_END,
+            ]
+        )
+
+        updated = analytics.update_readme(original, replacement)
+
+        self.assertIn("<details>", updated)
+        self.assertIn("<summary>Analytics</summary>", updated)
+        self.assertIn("new analytics", updated)
+        self.assertNotIn("old analytics", updated)
+        self.assertLess(updated.index("<details>"), updated.index(analytics.README_START))
+        self.assertLess(updated.index(analytics.README_END), updated.index("</details>"))
+
+
 if __name__ == "__main__":
     unittest.main()
