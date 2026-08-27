@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import sys
 from collections import Counter
 from datetime import datetime
@@ -113,13 +114,16 @@ def svg_bar_chart(title: str, entries: Iterable[tuple[str, int]], *, max_items: 
 def chart_payloads(articles: list[analytics.Article], snapshot: dict | None) -> dict[str, str]:
     published = analytics.published_articles(articles)
     pipeline = status_counts(articles)
+    pipeline_entries = pipeline_rows(pipeline)
     domains = analytics.count_field(published, "domains")
     technologies = analytics.count_field(published, "technologies")
     signals = analytics.count_field(published, "portfolio_signals")
     reactions = observed_reaction_counts(snapshot)
 
     return {
-        "pipeline.svg": svg_bar_chart("Editorial pipeline", pipeline_rows(pipeline)),
+        "pipeline.svg": svg_bar_chart(
+            "Editorial pipeline", pipeline_entries, max_items=len(pipeline_entries)
+        ),
         "domains.svg": svg_bar_chart("Published domains", domains.most_common(8)),
         "technologies.svg": svg_bar_chart("Technology coverage", technologies.most_common(8)),
         "portfolio-signals.svg": svg_bar_chart("Portfolio signals", signals.most_common(8)),
@@ -127,10 +131,31 @@ def chart_payloads(articles: list[analytics.Article], snapshot: dict | None) -> 
     }
 
 
+def is_readable_metric_snapshot(path: Path) -> bool:
+    """Accept only parseable snapshot files with the fields required for history analysis."""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+
+    if not isinstance(payload, dict):
+        return False
+    if not isinstance(payload.get("articles"), list):
+        return False
+    collected_at = payload.get("collected_at")
+    if not isinstance(collected_at, str) or not collected_at.strip():
+        return False
+    return True
+
+
 def latest_snapshot_count() -> int:
     if not analytics.METRICS_DIR.exists():
         return 0
-    return len(list(analytics.METRICS_DIR.glob("*.json")))
+    return sum(
+        1
+        for path in analytics.METRICS_DIR.glob("*.json")
+        if is_readable_metric_snapshot(path)
+    )
 
 
 def snapshot_source_time(snapshot: dict | None) -> str:
