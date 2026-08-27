@@ -1,14 +1,10 @@
 ---
 title: "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計"
-status: review
-topics: ["TypeScript", "生成AI", "OpenAI", "設計", "セキュリティ"]
-source_repositories: ["ivRooom/Herta"]
-published:
-  qiita: null
-  zenn: null
+emoji: "🔐"
+type: "tech"
+topics: ["typescript", "生成ai", "openai", "security", "architecture"]
+published: false
 ---
-
-# 生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計
 
 個人開発のDiscord Botに生成AIを入れ始めたとき、最初は単純でした。
 

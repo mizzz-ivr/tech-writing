@@ -5,6 +5,8 @@
 ## このリポジトリの役割
 
 - 技術記事とnote記事の元原稿・企画を管理する
+- Zennの記事・本をGitHub連携で投稿・更新する
+- Zennスクラップの原稿・履歴・バックアップを管理する
 - 記事から展開するSNS投稿を管理する
 - 次に書きたいテーマや公開済み記事を整理する
 - 執筆時のテンプレートと文章方針を共通化する
@@ -26,6 +28,29 @@
 | note | 経験・思想・キャリア・社会 | Why personally / What I think: なぜそう考えるか |
 
 noteは月1本程度を目安にし、エンジニアとしての考え方、個人開発の裏側、キャリア・仕事・学習、技術×経済・社会を主な柱にします。詳細は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
+
+## Zenn GitHub Deploy
+
+ZennアカウントにこのRepositoryを連携し、同期branchを `main` にします。
+
+| 種別 | 管理場所 | GitHubからZennへ同期 |
+| --- | --- | --- |
+| 記事 | `articles/<slug>.md` | 対応 |
+| 本 | `books/<book-slug>/` | 対応 |
+| スクラップ | `scraps/<slug>.md` | 非対応（Repository管理 + Zenn Web UI） |
+
+2026-08-27時点のZenn公式仕様ではGitHub同期対象は記事と本のみで、スクラップは非対応です。スクラップについて自動投稿できるものとして扱いません。
+
+記事・本は公開準備中 `published: false` を維持し、公開PRで `true` にして `main` へmergeします。
+
+```bash
+npm install
+npm run zenn:preview
+npm run zenn:new:article -- --slug <article-slug>
+npm run zenn:new:book -- --slug <book-slug>
+```
+
+初回接続・公開・削除・スクラップ運用の詳細は [Zenn GitHub Deploy Runbook](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
 
 ## Writing Analytics
 
@@ -57,12 +82,21 @@ noteは月1本程度を目安にし、エンジニアとしての考え方、個
 tech-writing/
 ├─ README.md
 ├─ STYLE_GUIDE.md
+├─ package.json
 ├─ requirements.txt
 ├─ articles/
-│  └─ <article-slug>/
+│  ├─ <zenn-article-slug>.md      # Zenn GitHub Deploy対象
+│  └─ <article-slug>/             # 媒体共通原稿・notes
 │     ├─ article.md
 │     ├─ notes.md
 │     └─ assets/
+├─ books/                         # Zenn GitHub Deploy対象
+│  └─ <book-slug>/
+│     ├─ config.yaml
+│     ├─ cover.png
+│     └─ <chapter-slug>.md
+├─ scraps/                        # Git管理のみ。Zenn同期非対応
+│  └─ <scrap-slug>.md
 ├─ social/
 │  └─ <article-slug>/
 │     └─ x.md
@@ -76,13 +110,15 @@ tech-writing/
 │  └─ writing-profile.md
 ├─ docs/
 │  ├─ NOTE_EDITORIAL.md
-│  └─ WRITING_ANALYTICS.md
+│  ├─ WRITING_ANALYTICS.md
+│  └─ ZENN_GITHUB_DEPLOY.md
 ├─ scripts/
 │  └─ writing_analytics.py
 ├─ templates/
 │  ├─ article.md
 │  ├─ note.md
-│  └─ social-post.md
+│  ├─ social-post.md
+│  └─ zenn-scrap.md
 └─ .github/
    ├─ PULL_REQUEST_TEMPLATE.md
    └─ workflows/
@@ -91,15 +127,15 @@ tech-writing/
 
 ## 基本フロー
 
-1. `ideas/backlog.md` にテーマを残す
-2. `articles/<slug>/notes.md` に実体験・根拠・使いたい具体例を集める
-3. `article.md` を媒体共通の元原稿として書く
-4. Qiita / Zenn / noteそれぞれの目的に合わせて公開時に最終調整する
-5. noteでは必要に応じて `templates/note.md` の構成を使い、技術解説より経験・判断・価値観を主役にする
-6. `social/<slug>/` にSNS投稿案を作る
-7. 公開後にfront matterの `status` / `published_at` / 公開URLを更新する
-8. `ideas/published.md` にURLと公開日を記録する
-9. Writing AnalyticsがREADME / report / metrics snapshotを更新する
+1. `ideas/backlog.md` にテーマを残す。
+2. 実体験・根拠・具体例をnotesへ集める。
+3. Qiita / note等は `articles/<slug>/article.md` を元原稿として整える。
+4. Zenn記事は `articles/<slug>.md`、Zenn本は `books/<book-slug>/` をcanonicalな公開ソースとして扱う。
+5. Zenn記事・本は `published: false` でPR・Previewし、公開時に `true` へ変更して `main` へmergeする。
+6. Zennスクラップは `scraps/` で原稿・履歴をGit管理し、Zenn Web UIへ手動反映する。
+7. `social/<slug>/` にSNS投稿案を作る。
+8. 公開後に公開URL・公開日を `ideas/published.md` 等へ記録する。
+9. Writing AnalyticsがREADME / report / metrics snapshotを更新する。
 
 ## 執筆方針
 
@@ -109,7 +145,7 @@ tech-writing/
 
 noteでは技術的な正確性を維持しつつ、実装手順の網羅よりも「なぜその考えに至ったか」「経験して何が変わったか」を優先します。経済・社会・制度・時事情報を扱う場合は、事実と意見を分け、公開時点の情報を確認します。
 
-詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md) と [docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md) を参照してください。
+詳しくは [STYLE_GUIDE.md](./STYLE_GUIDE.md)、[docs/NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md)、[docs/ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) を参照してください。
 
 ## Writing Analyticsの実行
 

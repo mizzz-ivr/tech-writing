@@ -1,0 +1,12 @@
+{
+  "name": "tech-writing",
+  "private": true,
+  "scripts": {
+    "zenn:preview": "zenn preview",
+    "zenn:new:article": "zenn new:article",
+    "zenn:new:book": "zenn new:book"
+  },
+  "devDependencies": {
+    "zenn-cli": "0.5.2"
+  }
+}
