@@ -31,6 +31,10 @@ README_START = "<!-- WRITING_ANALYTICS:START -->"
 README_END = "<!-- WRITING_ANALYTICS:END -->"
 JST = ZoneInfo("Asia/Tokyo")
 USER_AGENT = "mizzz-ivr-tech-writing-analytics/1.0"
+REACTION_FIELDS: dict[str, tuple[tuple[str, str], ...]] = {
+    "qiita": (("likes", "likes"), ("stocks", "stocks"), ("comments", "comments")),
+    "zenn": (("likes", "likes"), ("bookmarks", "bookmarks"), ("comments", "comments")),
+}
 
 
 @dataclass
@@ -330,16 +334,57 @@ def cadence_summary(articles: list[Article]) -> tuple[str, str]:
     return last, f"{mean(gaps):.1f}日"
 
 
-def latest_metric_rows(snapshot: dict[str, Any] | None) -> list[tuple[int, str, str, str]]:
+def metric_display(metrics: dict[str, Any], key: str) -> str:
+    """Render snapshot values without conflating zero, unavailable, and missing fields."""
+    if key not in metrics:
+        return "not collected"
+    value = metrics.get(key)
+    if value is None:
+        return "unavailable"
+    if isinstance(value, bool):
+        return "not collected"
+    if isinstance(value, (int, float)):
+        return str(value)
+    return "not collected"
+
+
+def reaction_fields(platform: str) -> tuple[tuple[str, str], ...]:
+    """Keep platform-specific reaction semantics separate instead of normalizing scores."""
+    return REACTION_FIELDS.get(platform, (("likes", "likes"), ("comments", "comments")))
+
+
+def reaction_rows(snapshot: dict[str, Any] | None) -> list[tuple[str, str, str, dict[str, Any]]]:
     if not snapshot:
         return []
-    rows: list[tuple[int, str, str, str]] = []
+    rows: list[tuple[str, str, str, dict[str, Any]]] = []
     for article in snapshot.get("articles", []):
-        for platform, metrics in article.get("platforms", {}).items():
-            likes = metrics.get("likes")
-            if isinstance(likes, int):
-                rows.append((likes, str(article.get("title") or article.get("slug")), platform, str(metrics.get("url") or "")))
-    return sorted(rows, reverse=True)
+        title = str(article.get("title") or article.get("slug") or "Untitled")
+        for platform, raw_metrics in article.get("platforms", {}).items():
+            metrics = raw_metrics if isinstance(raw_metrics, dict) else {}
+            rows.append((title, str(platform), str(metrics.get("url") or ""), metrics))
+    return rows
+
+
+def has_positive_reaction(platform: str, metrics: dict[str, Any]) -> bool:
+    for key, _ in reaction_fields(platform):
+        value = metrics.get(key)
+        if isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0:
+            return True
+    return False
+
+
+def notable_reaction_rows(snapshot: dict[str, Any] | None) -> list[tuple[str, str, str, dict[str, Any]]]:
+    """Return observed positive reactions without inventing a cross-metric ranking."""
+    return [row for row in reaction_rows(snapshot) if has_positive_reaction(row[1], row[3])]
+
+
+def reaction_summary(platform: str, metrics: dict[str, Any], include_page_views: bool = False) -> str:
+    parts = [f"{label} {metric_display(metrics, key)}" for key, label in reaction_fields(platform)]
+    if include_page_views:
+        parts.append(f"page views {metric_display(metrics, 'page_views')}")
+    if metrics.get("error"):
+        parts.append("metrics error")
+    return " · ".join(parts)
 
 
 def md_link(title: str, url: str | None) -> str:
@@ -385,11 +430,29 @@ def build_report(articles: list[Article], snapshot: dict[str, Any] | None) -> st
             url = article.platform_url("qiita") or article.platform_url("zenn")
             lines.append(f"- {article.effective_published_at or '-'} — {md_link(article.title, url)}")
 
-    lines.extend(["", "## Popular Articles", ""])
-    metric_rows = latest_metric_rows(snapshot)
-    if metric_rows:
-        for likes, title, platform, url in metric_rows[:5]:
-            lines.append(f"- {md_link(title, url)} — {likes} likes ({platform})")
+    lines.extend(["", "## Reactions", ""])
+    rows = reaction_rows(snapshot)
+    if rows:
+        lines.append("Latest snapshot. Metrics stay platform-specific; no combined popularity score is calculated.")
+        lines.append("")
+        for title, platform, url, metrics in rows:
+            lines.append(
+                f"- {md_link(title, url)} — {platform}: {reaction_summary(platform, metrics, include_page_views=True)}"
+            )
+        lines.extend([
+            "",
+            "`0` means an observed zero. `unavailable` means the snapshot explicitly contains `null`; `not collected` means the field is absent. `page_views: null` is a normal state.",
+        ])
+    else:
+        lines.append("- Metrics snapshot is not available yet")
+
+    lines.extend(["", "### Notable", ""])
+    notable = notable_reaction_rows(snapshot)
+    if notable:
+        for title, platform, url, metrics in notable[:5]:
+            lines.append(f"- {md_link(title, url)} — {platform}: {reaction_summary(platform, metrics)}")
+    elif rows:
+        lines.append("- No positive reactions observed in the latest snapshot")
     else:
         lines.append("- Metrics snapshot is not available yet")
 
@@ -405,7 +468,7 @@ def build_report(articles: list[Article], snapshot: dict[str, Any] | None) -> st
         "",
         "- `Unclassified` が多い軸は、次回の記事更新時にfront matterを整備する",
         "- 30/90日単位でtopic / domain / languageの偏りを見る",
-        "- metrics snapshotが蓄積したら、likesの絶対値だけでなく7日/30日の増分を見る",
+        "- metrics snapshotが蓄積したら、likes / stocks / comments等を別指標のまま7日/30日の増分で見る",
         "- Portfolio用途では、記事数より `portfolio_signals` とsource repositoryの対応を重視する",
         "",
     ])
@@ -425,10 +488,16 @@ def build_readme_section(articles: list[Article], snapshot: dict[str, Any] | Non
     if not recent_lines:
         recent_lines = ["- No published articles"]
 
-    popular = latest_metric_rows(snapshot)
-    popular_lines = [f"- {md_link(title, url)} — {likes} likes ({platform})" for likes, title, platform, url in popular[:3]]
-    if not popular_lines:
-        popular_lines = ["- 外部メトリクスはまだ未取得"]
+    rows = reaction_rows(snapshot)
+    notable = notable_reaction_rows(snapshot)
+    notable_lines = [
+        f"- {md_link(title, url)} — {reaction_summary(platform, metrics)} ({platform})"
+        for title, platform, url, metrics in notable[:3]
+    ]
+    if not notable_lines:
+        notable_lines = [
+            "- 最新snapshotではpositive reaction未観測" if rows else "- 外部メトリクスはまだ未取得"
+        ]
 
     return "\n".join([
         README_START,
@@ -444,11 +513,11 @@ def build_readme_section(articles: list[Article], snapshot: dict[str, Any] | Non
         "",
         *recent_lines,
         "",
-        "#### Popular",
+        "#### Notable",
         "",
-        *popular_lines,
+        *notable_lines,
         "",
-        "詳細: [Writing Profile / Analytics](./reports/writing-profile.md) · [運用設計](./docs/WRITING_ANALYTICS.md)",
+        "詳細なreaction値と未取得状態: [Writing Profile / Analytics](./reports/writing-profile.md) · [運用設計](./docs/WRITING_ANALYTICS.md)",
         README_END,
     ])
 

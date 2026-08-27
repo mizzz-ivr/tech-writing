@@ -81,7 +81,8 @@ Writing Analyticsでは次のように区別します。
 - 最終投稿日
 - 最近の公開記事
 - topics / domains / languages / technologies / portfolio signalsの集計
-- 外部指標が取得できる場合の人気記事
+- latest snapshotのplatform別Reactions
+- positive reactionが観測された記事のNotable表示
 - data quality
 
 ### README
@@ -90,9 +91,11 @@ READMEは外向けプロフィールとして短く保ちます。
 
 - Writing Profile summary
 - 最近のピックアップ
-- 人気記事
+- Notable記事
 - 主な技術テーマ
 - 詳細レポートへのリンク
+
+READMEではreactionの全件表を出さず、positive reactionが観測された記事だけをNotableとして短く表示します。likes同率などを理由に順位付けはしません。
 
 READMEの自動生成部分はmarker内だけを更新し、手書き部分を壊しません。
 
@@ -127,6 +130,27 @@ Zennの記事一覧JSON endpointは公式ドキュメントで安定性が保証
 
 PVは取得できる前提にしません。
 
+### Reaction / Notableのderived view
+
+Phase 2Aではraw snapshot schemaを変更せず、表示時だけderived viewを作ります。
+
+値の意味は次のように分けます。
+
+- 数値 `0`: APIから取得できた **観測済み0**
+- `null`: snapshotにfieldは存在するが値を取得できない **unavailable**
+- field欠落: **not collected**
+
+特に `page_views: null` は正常状態です。PVが取得できないことだけでdata quality errorにはしません。
+
+reaction指標は媒体ごとの意味を維持します。
+
+- Qiita: likes / stocks / comments
+- Zenn: likes / bookmarks / comments
+
+QiitaのstocksとZennのbookmarksを同じ尺度として扱いません。また、likes / stocks / commentsを加算した総合Popularity Scoreは作りません。
+
+`Notable` はpositive reactionが1つ以上観測された記事を抽出するだけで、異なる指標間の順位付けは行いません。全指標が0の場合は「positive reaction未観測」として扱い、likes同率0による意味のない人気順を作りません。
+
 ## Snapshotを残す理由
 
 最新値だけ上書きすると、「公開後7日でどれくらい伸びたか」「long-tailで伸びたか」が分かりません。
@@ -140,6 +164,8 @@ PVは取得できる前提にしません。
 - QiitaとZennの媒体差
 
 記事数が少ないうちはデータ量も小さいため、JSONをGit管理する方式で十分です。規模が増えた時点でSQLite / DuckDB / external storageを検討します。
+
+Trend計算では、必要な日付のsnapshotが存在する場合だけ差分を計算します。欠測値を補間したり、存在しない7日前の値を推測したりしません。
 
 ## Data Quality
 
@@ -179,7 +205,7 @@ GitHub Actions bot自身のanalytics commitではrefresh jobを再実行しな�
 - 最近90日で扱った技術分野
 - 継続的に書いている言語・技術
 - 設計 / Security / CI/CD / OSSなどのportfolio signals
-- 注目された記事
+- Notable記事とplatform別reaction
 - 実装Repositoryと記事の対応
 - 公開頻度と継続期間
 
@@ -188,6 +214,6 @@ GitHub Actions bot自身のanalytics commitではrefresh jobを再実行しな�
 ## Review cadence
 
 - Weekly: 最終投稿日 / 次記事候補 / 未分類metadata
-- Monthly: topic / domain / languageの偏り、人気記事、投稿頻度
+- Monthly: topic / domain / languageの偏り、platform別reaction、投稿頻度
 - Quarterly: 転職・フリーランス・営業で見せたいportfolio signalsと実際の記事構成の差
 - Yearly: 年間テーマ、技術スタック変化、long-tail記事、翌年の重点分野

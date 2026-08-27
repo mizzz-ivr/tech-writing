@@ -102,5 +102,102 @@ class ExternalMetricHardeningTests(unittest.TestCase):
         self.assertIn("error", result["articles"][0]["platforms"]["zenn"])
 
 
+class ReactionAnalyticsTests(unittest.TestCase):
+    def test_metric_display_distinguishes_zero_null_and_missing(self):
+        metrics = {"likes": 0, "page_views": None}
+
+        self.assertEqual(analytics.metric_display(metrics, "likes"), "0")
+        self.assertEqual(analytics.metric_display(metrics, "page_views"), "unavailable")
+        self.assertEqual(analytics.metric_display(metrics, "stocks"), "not collected")
+
+    def test_stock_reaction_is_notable_even_when_likes_are_zero(self):
+        snapshot = {
+            "articles": [
+                {
+                    "title": "Stocked article",
+                    "platforms": {
+                        "qiita": {
+                            "url": "https://example.test/article",
+                            "likes": 0,
+                            "stocks": 2,
+                            "comments": 0,
+                            "page_views": None,
+                        }
+                    },
+                }
+            ]
+        }
+
+        rows = analytics.notable_reaction_rows(snapshot)
+
+        self.assertEqual(len(rows), 1)
+        self.assertIn("stocks 2", analytics.reaction_summary(rows[0][1], rows[0][3]))
+
+    def test_all_zero_reactions_do_not_create_fake_notable_order(self):
+        snapshot = {
+            "articles": [
+                {
+                    "title": "Zero article",
+                    "platforms": {
+                        "qiita": {
+                            "url": "https://example.test/article",
+                            "likes": 0,
+                            "stocks": 0,
+                            "comments": 0,
+                            "page_views": None,
+                        }
+                    },
+                }
+            ]
+        }
+
+        self.assertEqual(analytics.notable_reaction_rows(snapshot), [])
+
+    def test_platform_specific_fields_are_not_normalized(self):
+        qiita = analytics.reaction_summary("qiita", {"likes": 1, "stocks": 2, "comments": 3})
+        zenn = analytics.reaction_summary("zenn", {"likes": 1, "bookmarks": 2, "comments": 3})
+
+        self.assertIn("stocks 2", qiita)
+        self.assertNotIn("bookmarks", qiita)
+        self.assertIn("bookmarks 2", zenn)
+        self.assertNotIn("stocks", zenn)
+
+    def test_page_views_null_is_normal_renderable_state(self):
+        summary = analytics.reaction_summary(
+            "qiita",
+            {"likes": 0, "stocks": 0, "comments": 0, "page_views": None},
+            include_page_views=True,
+        )
+
+        self.assertIn("page views unavailable", summary)
+        self.assertNotIn("metrics error", summary)
+
+    def test_report_uses_reactions_and_notable_instead_of_popular_ranking(self):
+        snapshot = {
+            "articles": [
+                {
+                    "title": "Stocked article",
+                    "platforms": {
+                        "qiita": {
+                            "url": "https://example.test/article",
+                            "likes": 0,
+                            "stocks": 2,
+                            "comments": 0,
+                            "page_views": None,
+                        }
+                    },
+                }
+            ]
+        }
+
+        report = analytics.build_report([], snapshot)
+
+        self.assertIn("## Reactions", report)
+        self.assertIn("### Notable", report)
+        self.assertIn("stocks 2", report)
+        self.assertIn("page views unavailable", report)
+        self.assertNotIn("## Popular Articles", report)
+
+
 if __name__ == "__main__":
     unittest.main()
