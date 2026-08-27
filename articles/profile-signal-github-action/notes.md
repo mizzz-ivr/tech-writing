@@ -26,6 +26,26 @@
 - Profile Signal本体のSource of Truthではない
 - installed `.profile-signal` runtimeをDogfooding
 - 個人README / 画像 / ScreenshotはStandalone OSSのMIT対象として扱わない
+- Profile全景はQiita記事内へ画像掲載せず、`https://github.com/mizzz-ivr` へ直接誘導する
+
+## Sample Profile
+
+`mizzz-ivr/profile-signal` に deterministic sample page を追加する。
+
+```text
+examples/sample-profile/README.md
+examples/sample-profile/assets/dev-pulse.svg
+```
+
+方針:
+
+- GitHub上でREADMEをレンダリングして実Profileに近い見た目を確認できる
+- 値はすべて架空の固定データ
+- Private Repository / 実ユーザーのActivity値を使わない
+- Screenshotやドキュメントを再現可能にする
+- 実Consumerのcustom workflow/treeを標準導入例として見せない
+
+Tracking implementation: `mizzz-ivr/profile-signal` PR #7。
 
 ## Release history relevant to article
 
@@ -101,25 +121,22 @@ Consumer `mizzz-ivr/mizzz-ivr` ではlive-facing signalをより短い間隔でD
 
 記事ではGitHub Actions scheduleをリアルタイム保証として表現しない。
 
-## Screenshot selection — v0.4.0へ撮り直す
+## Screenshot selection — 4枚
 
-継続利用候補:
-
-1. `01-profile-overview.jpeg`
-   - 現在のProfile表示として内容に問題がなければ再利用
+Profile overviewは使わない。実プロフィールへ直接誘導する。
 
 新規撮影:
 
 2. `02-standalone-repository.png`
-   - `mizzz-ivr/profile-signal` root / Latest Release
+   - `mizzz-ivr/profile-signal` root tree
 3. `03-release-package-ci-success.png`
    - standalone Repositoryのv0.4.0 Release workflow success
 4. `04-release-v0.4.0.png`
    - v0.4.0 Release + ZIP asset
-5. `05-installed-repository.png`
-   - Consumer側 `.profile-signal/` / config / workflow配置
+5. `05-sample-profile.png`
+   - `examples/sample-profile/README.md` のGitHubレンダリング表示
 
-古いv0.2.0 Release画像は記事から外す。
+Consumer installed treeと古いv0.2.0 Release画像は記事から外す。
 
 ## Before publish
 
@@ -133,7 +150,10 @@ Consumer `mizzz-ivr/mizzz-ivr` ではlive-facing signalをより短い間隔でD
 - [x] root MIT License確認
 - [x] YAML Preset Registry / 8公式Preset確認
 - [x] article本文をv0.4.0へ追従
-- [ ] v0.4.0基準Screenshotを撮影 / 選定
+- [x] Profile overview Screenshotを不採用に変更
+- [x] Sample Profile追加PR #7作成
+- [ ] Sample Profile PR #7 CI / Merge
+- [ ] 02〜05 Screenshotを撮影 / 選定
 - [ ] Qiitaへ画像Upload
 - [ ] Qiita image Markdownをplaceholderへ反映
 - [ ] Qiita Preview / mobile preview
