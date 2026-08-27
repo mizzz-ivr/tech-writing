@@ -141,6 +141,42 @@ noteはQiita / Zennの代替ではなく、**エンジニアとして何を考�
 - 数字・制度・時事情報を扱う場合は公開前に最新情報を確認する
 - Qiita / Zennで既に書いた内容を、そのまま文章だけ柔らかくして再投稿しない
 
+## GitHubからnoteへ公開するフロー
+
+note記事の生成・編集・履歴管理はRepositoryをSource of Truthとし、公開自体はnote Web Editorで行う。
+
+生成・編集後の記事は次のコマンドでMarkdown本文をクリップボードへコピーできる。
+
+```bash
+npm run note:copy -- articles/<slug>/article.md
+```
+
+Repository管理用のYAML front matterはnote本文ではないため、コピー時に自動で除外する。
+
+noteの新規投稿画面だけを開く場合:
+
+```bash
+npm run note:open
+```
+
+通常の公開準備では、コピーと投稿画面起動をまとめて行う。
+
+```bash
+npm run note:publish -- articles/<slug>/article.md
+```
+
+`note:publish` は次の順番で動く。
+
+1. Markdownファイルを読む
+2. Repository用front matterを除外する
+3. Markdown本文をOS clipboardへコピーする
+4. `https://note.com/new` を既定ブラウザで開く
+5. note Editorへ貼り付け、見た目・画像・ハッシュタグ・公開設定を最終確認する
+
+noteのID / Password / Cookie / API Tokenは扱わず、自動公開やブラウザ自動操作も行わない。
+
+詳細は [note Publish Helper Runbook](./NOTE_PUBLISH_HELPER.md) を参照する。
+
 ## Writing Analyticsとの関係
 
 現時点のWriting AnalyticsはQiita / Zennの外部reaction取得を対象としている。noteはまず編集方針と記事企画に組み込み、外部reaction取得は安定した取得方法を確認できるまで実装前提にしない。

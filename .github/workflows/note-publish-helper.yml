@@ -1,0 +1,30 @@
+name: Validate note publish helper
+
+on:
+  pull_request:
+    paths:
+      - "scripts/note_publish.mjs"
+      - "tests/note_publish.test.mjs"
+      - "package.json"
+      - "README.md"
+      - "docs/NOTE_EDITORIAL.md"
+      - ".github/workflows/note-publish-helper.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: note-publish-helper-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22.23.2"
+      - name: Run note publish helper tests
+        run: npm run note:test
