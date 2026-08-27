@@ -10,13 +10,16 @@ Writing Analytics Phase 2Cで生成する `reports/content-opportunities.md` の
 
 優先順位は次のとおりです。
 
-1. `articles/<slug>/article.md` のfront matter
-2. `ideas/published.md` の公開記録
-3. `ideas/backlog.md` に明示された候補・Source of Truth
-4. `data/metrics/YYYY-MM-DD.json` のplatform別reaction
-5. `reports/content-opportunities.md` は再生成可能なderived report
+1. `articles/<slug>/article.md` のWriting Analytics front matter
+2. `articles/*.md` のZenn-native front matter + `ideas/published.md` の公開記録
+3. `ideas/published.md` の公開記録
+4. `ideas/backlog.md` に明示された候補・Source of Truth
+5. `data/metrics/YYYY-MM-DD.json` のplatform別reaction
+6. `reports/content-opportunities.md` は再生成可能なderived report
 
-本文やbacklog自由文からdomain / technology / source repositoryを推測してmetadataへ書き戻しません。
+Zenn-native `articles/*.md` は、タイトルが `ideas/published.md` に存在する公開済み記事だけcoverageへ追加します。Zennの `published: false` だけからWriting Analytics上の `draft` / `review` を推測しません。
+
+本文やbacklog自由文からdomain / language / technology / source repositoryを推測してmetadataへ書き戻しません。
 
 ## 推薦優先順位
 
@@ -24,9 +27,11 @@ Writing Analytics Phase 2Cで生成する `reports/content-opportunities.md` の
 
 1. Portfolio / career coverage gap
 2. `source_repositories` 等で実装・検証根拠が明示されているか
-3. 未公開classification / 最終投稿日からのcoverage gap
+3. 未公開classification / 最終投稿日からのcoverage gap・recency
 4. 関連する公開記事のpositive reaction
 5. 同条件なら `review` を `draft` よりreadyとして扱う
+
+3番目の軸ではgap数だけでなく、同じ条件なら最も古い最終投稿日を持つ候補を先にします。公開実績がないclassificationは365日超相当のgapとして扱います。
 
 reactionは補助情報です。stocks / likes / commentsなどを合算して、反応が良いテーマだけを推薦することはしません。
 
@@ -41,6 +46,8 @@ reactionは補助情報です。stocks / likes / commentsなどを合算して�
 - portfolio_signals
 
 各値について、公開記事数、最終投稿日、基準日からの経過日数、30 / 90 / 365日coverageを表示します。
+
+Zenn-native記事は明示されているfront matterだけを集計します。例えば `topics` は利用できますが、`languages` が存在しない記事へ本文中のTypeScript等を自動分類することはしません。
 
 基準日は最新の正常なmetrics snapshotの日付を優先し、snapshotが無ければ公開済みmetadataの最新日を使用します。欠測日を補間しません。
 
@@ -65,7 +72,7 @@ reactionは補助情報です。stocks / likes / commentsなどを合算して�
 
 候補記事に `domains` / `languages` / `technologies` / `portfolio_signals` / `source_repositories` が無い場合、スクリプトは値を補完しません。
 
-`not recorded` / `Metadata needed before stronger scoring` として可視化し、推測による推薦精度の水増しを避けます。
+`not recorded` / `Metadata needed before stronger scoring` として可視化し、推測による推薦精度の水増しを避けます。明示的な空配列 `[]` はN/Aとして扱い、missingにはしません。
 
 ## コマンド
 
@@ -90,6 +97,7 @@ python scripts/writing_opportunities.py --check
 - PR: unit tests + `writing_opportunities.py --check`
 - main / schedule / manual refresh: metrics/profile更新後にcontent opportunitiesを生成
 - `reports/content-opportunities.md` に差分があればanalytics bot commitへ含める
+- generator / tests / backlog / Runbook / generated report変更時にvalidationを起動する
 
 ## 制約
 
