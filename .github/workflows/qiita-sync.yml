@@ -32,6 +32,17 @@ jobs:
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
 
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install validator dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate pulled Qiita articles
+        run: python scripts/validate_qiita_articles.py
+
       - name: Detect article changes
         id: changes
         shell: bash
@@ -67,7 +78,7 @@ jobs:
             --base main \
             --head "$BRANCH" \
             --title "chore(qiita): sync existing articles from Qiita" \
-            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。"
+            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。"
 
       - name: No changes
         if: steps.changes.outputs.changed != 'true'
