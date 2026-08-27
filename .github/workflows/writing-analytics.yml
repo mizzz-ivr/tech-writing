@@ -7,6 +7,7 @@ on:
       - "ideas/published.md"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "requirements.txt"
       - ".github/workflows/writing-analytics.yml"
@@ -17,6 +18,7 @@ on:
       - "ideas/published.md"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "requirements.txt"
       - ".github/workflows/writing-analytics.yml"
@@ -41,6 +43,8 @@ jobs:
           python-version: "3.13"
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Run analytics unit tests
+        run: python -m unittest discover -s tests -v
       - name: Validate article metadata and analytics rendering
         run: python scripts/writing_analytics.py --check
       - name: Exercise external metric adapters (best effort)
@@ -61,6 +65,8 @@ jobs:
           python-version: "3.13"
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Run analytics unit tests
+        run: python -m unittest discover -s tests -v
       - name: Refresh metrics and generated profile
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
