@@ -126,7 +126,7 @@ def build_dashboard(model: dict[str, Any]) -> str:
     lines = [
         "# Writing Analytics — Decision Dashboard",
         "",
-        f"> As of: {model['as_of']} · Derived from Repository metadata / publication registry / stored metric snapshots",
+        f"> Analytics as of: {model['as_of']} · Freshness as of: {freshness['as_of']} · Derived from Repository metadata / publication registry / stored metric snapshots",
         "",
         "## まず見る",
         "",
@@ -191,6 +191,8 @@ def build_dashboard(model: dict[str, Any]) -> str:
             *pipeline_gap_lines(model),
             "",
             "## Source Freshness",
+            "",
+            f"> Freshness as of: **{freshness['as_of']}**",
             "",
             "技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。",
             "",
@@ -307,6 +309,7 @@ def build_dashboard(model: dict[str, Any]) -> str:
             "## Source of Truth",
             "",
             "- Article metadata: `articles/**`",
+            "- Platform-native analytics evidence: `metadata/platform-native-analytics.yml`",
             "- Publication registry: `ideas/published.md`",
             "- Raw external metrics: `data/metrics/YYYY-MM-DD.json`",
             "- Data Mart / Dashboard / reports: **derived / regeneratable**",
@@ -319,13 +322,19 @@ def validate_dashboard(model: dict[str, Any], dashboard: str) -> None:
     published = model["overview"]["published_articles"]
     if f"| Published | **{published}** |" not in dashboard:
         raise ValueError("dashboard published KPI does not match data mart")
-    initial = model["freshness"]["needs_initial_verification"]
-    verified = model["freshness"]["verified_articles"]
+    freshness_model = model["freshness"]
+    initial = freshness_model["needs_initial_verification"]
+    verified = freshness_model["verified_articles"]
     expected_freshness = (
         f"| Source freshness | Initial verification **{initial}** / Verified **{verified}** |"
     )
     if expected_freshness not in dashboard:
         raise ValueError("dashboard freshness KPI does not match data mart")
+    expected_clock = (
+        f"Analytics as of: {model['as_of']} · Freshness as of: {freshness_model['as_of']}"
+    )
+    if expected_clock not in dashboard:
+        raise ValueError("dashboard does not distinguish analytics and freshness clocks")
     if "## まず見る" not in dashboard or "## Source Freshness" not in dashboard:
         raise ValueError("dashboard decision sections are missing")
     if "## Analysis Data" not in dashboard:
