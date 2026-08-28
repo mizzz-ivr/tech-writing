@@ -241,7 +241,7 @@ def build_data_mart(
     candidates = opportunities.build_candidates(articles, snapshot, as_of)
     statuses = status_payload(articles)
     last_published = published[0].effective_published_at if published else None
-    freshness_model = freshness.freshness_payload(articles, as_of)
+    freshness_model = freshness.freshness_payload(articles)
 
     coverage = {
         key: coverage_payload(articles, key, as_of) for key in COVERAGE_KEYS
