@@ -21,7 +21,8 @@ class UnifiedArticleCatalogTests(unittest.TestCase):
 
             common_dir = articles_dir / "common"
             common_dir.mkdir()
-            (common_dir / "article.md").write_text(
+            common_path = common_dir / "article.md"
+            common_path.write_text(
                 """---
 title: Common article
 status: published
@@ -35,6 +36,12 @@ published:
 body
 """,
                 encoding="utf-8",
+            )
+            common = analytics.Article(
+                slug="common",
+                path=common_path,
+                meta=analytics.read_frontmatter(common_path),
+                registry=None,
             )
 
             (articles_dir / "native.md").write_text(
@@ -62,7 +69,9 @@ body
 
             with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
                 analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            ), patch.object(analytics, "load_articles", return_value=[common]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 articles = catalog.load_articles()
 
         by_slug = {article.slug: article for article in articles}
@@ -124,7 +133,9 @@ articles:
 
             with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
                 analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 native = catalog.load_articles()[0]
 
         self.assertEqual(native.title, "Native Zenn article")
@@ -216,7 +227,9 @@ articles:
 
             with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
                 analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 with self.assertRaisesRegex(ValueError, "outside the published native catalog"):
                     catalog.load_articles()
 
@@ -243,7 +256,9 @@ body
 
             with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
                 analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 articles = catalog.load_articles()
 
         self.assertEqual(articles, [])
