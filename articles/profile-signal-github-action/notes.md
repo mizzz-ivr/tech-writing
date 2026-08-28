@@ -63,20 +63,22 @@ https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 - 実Consumer固有情報を使わない
 - GitHub上で出力イメージを確認可能
 
-## Screenshot selection — 3枚
+## Screenshot selection — 2枚
 
 採用:
 
-- `02-standalone-repository.png`
-- `04-release-v0.4.0.png`
-- `05-sample-profile.png`
+- Standalone Repository
+- Sample Profile
 
 不採用:
 
 - Profile overview
 - Release CI
+- v0.4.0 Release
 - Consumer installed tree
 - 古いv0.2.0画像
+
+Qiita Web Editorで画像反映済み。canonicalにもQiita Image Store URLを同期済み。
 
 ## Before publish
 
@@ -86,13 +88,13 @@ https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 - [x] Sample Profile追加
 - [x] 記事本文をv0.4.0へ更新
 - [x] 記事を簡潔化
-- [x] Screenshotを3枚へ削減
-- [x] 02 / 04 / 05 Screenshot撮影
-- [ ] Qiita canonical `public/*.md` を作成
-- [ ] Qiita Preview
-- [ ] 公開直前にRepository / Releaseを再確認
-- [ ] Qiitaへ反映
-- [ ] `ideas/published.md` とmetadataへ公開URL反映
+- [x] Screenshotを2枚へ削減
+- [x] Qiita canonical `public/profile-signal-standalone-oss.md` 作成
+- [x] Qiita限定共有でPreview
+- [x] Qiita Web Editorの画像をGitHub canonicalへ同期
+- [x] Release画像を不採用に確定
+- [ ] 公開PRをmergeしてQiita一般公開
+- [ ] 公開成功後に `ideas/published.md` とmetadataへ公開URL反映
 
 ## Tags
 
