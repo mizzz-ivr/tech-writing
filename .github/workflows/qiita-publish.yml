@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: qiita-publish-${{ github.ref }}
+  group: tech-writing-main-write-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

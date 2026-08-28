@@ -20,6 +20,7 @@ Qiita #3では、実装詳細を網羅しない。
 - Asset: `profile-signal-v0.4.0.zip`
 - public-only / 標準PAT・API Key不要
 - 8 Preset
+- Qiita: `https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904`
 
 ## Distribution
 
@@ -80,7 +81,7 @@ https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 
 Qiita Web Editorで画像反映済み。canonicalにもQiita Image Store URLを同期済み。
 
-## Before publish
+## Publication completion
 
 - [x] Qiita #2公開
 - [x] Standalone OSS移行
@@ -93,8 +94,18 @@ Qiita Web Editorで画像反映済み。canonicalにもQiita Image Store URLを�
 - [x] Qiita限定共有でPreview
 - [x] Qiita Web Editorの画像をGitHub canonicalへ同期
 - [x] Release画像を不採用に確定
-- [ ] 公開PRをmergeしてQiita一般公開
-- [ ] 公開成功後に `ideas/published.md` とmetadataへ公開URL反映
+- [x] PR #57 merge
+- [x] Qiita publish command success (`Updated: profile-signal-standalone-oss -> f20a2d58f623097a5904`)
+- [x] 公開URLをarticle metadataへ反映
+- [x] `ideas/published.md` へ公開記録追加
+
+## Publish workflow incident
+
+PR #57 merge後の `Publish Qiita articles` run #4では、Qiita側のupdate自体は `Successful!` まで完了した。
+
+その直後、Qiita CLI actionが生成したmetadata commitをmainへpushする際に、同時実行中のWriting Analyticsが先にmainへcommitしたためnon-fast-forwardでworkflow全体はfailureになった。
+
+対策としてQiita PublishとWriting Analyticsのmain書込みconcurrency groupを共通化し、`cancel-in-progress: false` で直列化する。
 
 ## Tags
 
