@@ -8,6 +8,7 @@ import sys
 from typing import Any
 
 import writing_analytics as analytics
+import writing_catalog as catalog
 import writing_funnel as funnel
 import writing_opportunities as opportunities
 
@@ -60,7 +61,7 @@ def funnel_section(payload: dict[str, Any]) -> str:
 
 
 def build_report() -> tuple[str, dict[str, Any]]:
-    articles = opportunities.load_opportunity_articles()
+    articles = catalog.load_articles()
     backlog = opportunities.load_backlog()
     snapshot = analytics.load_latest_snapshot()
     as_of = opportunities.resolve_as_of(articles)
