@@ -18,6 +18,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 import writing_analytics as analytics
+import writing_catalog as catalog
 
 BACKLOG_PATH = analytics.ROOT / "ideas" / "backlog.md"
 REPORT_PATH = analytics.ROOT / "reports" / "content-opportunities.md"
@@ -57,37 +58,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_opportunity_articles() -> list[analytics.Article]:
-    """Load analytics articles plus published Zenn-native article files.
+    """Load the shared sidecar-aware article catalog used by all analytics products."""
 
-    The main analytics loader intentionally scans ``articles/*/article.md``.
-    Phase 2C also needs published native Zenn files such as ``articles/<slug>.md``
-    so Portfolio coverage does not silently omit a published article. Native files
-    are included only when their title exists in ``ideas/published.md``; draft
-    state is not inferred from Zenn's separate front matter schema.
-    """
-
-    articles = analytics.load_articles()
-    registry = analytics.read_published_registry()
-    known_paths = {article.path.resolve() for article in articles}
-
-    for path in sorted(analytics.ARTICLES_DIR.glob("*.md")):
-        if path.resolve() in known_paths:
-            continue
-        meta = analytics.read_frontmatter(path)
-        title = str(meta.get("title") or path.stem)
-        published_entry = registry.get(title)
-        if published_entry is None:
-            continue
-        articles.append(
-            analytics.Article(
-                slug=path.stem,
-                path=path,
-                meta=meta,
-                registry=published_entry,
-            )
-        )
-
-    return sorted(articles, key=lambda article: article.path.as_posix())
+    return catalog.load_articles()
 
 
 def parse_iso_date(value: Any) -> date | None:
@@ -181,103 +154,121 @@ def parse_backlog_text(text: str) -> list[BacklogItem]:
             flush()
             section = heading.group(1).strip()
             continue
-
-        checkbox = re.match(r"^\s*-\s*\[([ xX])\]\s+(.+?)\s*$", line)
-        if checkbox:
+        item = re.match(r"^- \[([ xX])\]\s+(.+?)\s*$", line)
+        if item:
             flush()
-            if checkbox.group(1).strip():
+            if item.group(1).casefold() == "x":
                 continue
-            title = checkbox.group(2).strip()
+            title = item.group(2).strip()
             item_section = section
             continue
-
         if title is not None:
-            meta = re.match(r"^\s{2,}-\s+([^:：]+)[:：]\s*(.+?)\s*$", line)
-            if meta:
-                metadata[meta.group(1).strip()] = meta.group(2).strip()
-
+            detail = re.match(r"^\s{2,}-\s+([^:：]+)[:：]\s*(.+?)\s*$", line)
+            if detail:
+                metadata[detail.group(1).strip()] = detail.group(2).strip()
     flush()
     return items
 
 
-def load_backlog() -> list[BacklogItem]:
-    if not BACKLOG_PATH.exists():
+def load_backlog(path: Path = BACKLOG_PATH) -> list[BacklogItem]:
+    if not path.exists():
         return []
-    return parse_backlog_text(BACKLOG_PATH.read_text(encoding="utf-8"))
+    return parse_backlog_text(path.read_text(encoding="utf-8"))
+
+
+def source_of_truth(item: BacklogItem) -> str | None:
+    for key, value in item.metadata.items():
+        if key.casefold() in {"source of truth", "source", "repository", "repo"}:
+            return value
+    return None
 
 
 def best_title_overlap(
-    item: BacklogItem, title_pool: list[tuple[str, str]]
+    item: BacklogItem, article_titles: list[tuple[str, str]]
 ) -> tuple[str, str, float] | None:
     best: tuple[str, str, float] | None = None
-    for status, title in title_pool:
-        ratio = title_similarity(item.title, title)
-        if best is None or ratio > best[2]:
-            best = (status, title, ratio)
-    return best if best and best[2] >= OVERLAP_THRESHOLD else None
+    for status, title in article_titles:
+        similarity = title_similarity(item.title, title)
+        if best is None or similarity > best[2]:
+            best = (status, title, similarity)
+    if best and best[2] >= OVERLAP_THRESHOLD:
+        return best
+    return None
 
 
-def related_reaction_context(
-    candidate: analytics.Article,
-    articles: list[analytics.Article],
-    snapshot: dict[str, Any] | None,
-) -> int:
-    notable_titles = {title for title, _, _, _ in analytics.notable_reaction_rows(snapshot)}
-    candidate_terms = set(analytics.list_values(candidate.meta, "topics"))
-    candidate_terms.update(analytics.list_values(candidate.meta, "domains"))
-    if not notable_titles or not candidate_terms:
-        return 0
+def explicit_values(article: analytics.Article, key: str) -> list[str] | None:
+    if not analytics.has_explicit_classification(article.meta, key):
+        return None
+    return analytics.list_values(article.meta, key)
 
-    count = 0
-    for article in analytics.published_articles(articles):
-        if article.title not in notable_titles:
-            continue
-        terms = set(analytics.list_values(article.meta, "topics"))
-        terms.update(analytics.list_values(article.meta, "domains"))
-        if candidate_terms.intersection(terms):
-            count += 1
-    return count
+
+def missing_classification(article: analytics.Article) -> tuple[str, ...]:
+    return tuple(
+        key for key in COVERAGE_KEYS if not analytics.has_explicit_classification(article.meta, key)
+    )
+
+
+def candidate_sort_key(candidate: Candidate) -> tuple[Any, ...]:
+    status_rank = 1 if candidate.article.effective_status == "review" else 0
+    return (
+        len(candidate.portfolio_gaps),
+        bool(candidate.sources),
+        len(candidate.coverage_gaps),
+        candidate.oldest_gap_age,
+        candidate.reaction_context,
+        status_rank,
+        candidate.article.title.casefold(),
+    )
 
 
 def build_candidates(
-    articles: list[analytics.Article],
-    snapshot: dict[str, Any] | None,
-    as_of: date,
+    articles: list[analytics.Article], snapshot: dict[str, Any] | None, as_of: date
 ) -> list[Candidate]:
-    published_signals = published_values(articles, "portfolio_signals")
-    coverage = {key: published_value_dates(articles, key) for key in GAP_KEYS}
-    candidates: list[Candidate] = []
+    published = analytics.published_articles(articles)
+    published_signals = published_values(published, "portfolio_signals")
+    published_by_key = {
+        key: published_value_dates(published, key) for key in GAP_KEYS
+    }
+    reaction_titles = {
+        title
+        for title, _, _, metrics in analytics.notable_reaction_rows(snapshot)
+        if any((metrics.get(key) or 0) > 0 for key in metrics)
+    }
 
+    candidates = []
     for article in articles:
         if article.effective_status not in {"draft", "review"}:
             continue
-
+        signals = explicit_values(article, "portfolio_signals")
         portfolio_gaps = tuple(
-            value
-            for value in analytics.list_values(article.meta, "portfolio_signals")
-            if value not in published_signals
+            value for value in (signals or []) if value not in published_signals
         )
         coverage_gaps: list[str] = []
         oldest_gap_age = 0
         for key in GAP_KEYS:
-            if not analytics.has_explicit_classification(article.meta, key):
+            values = explicit_values(article, key)
+            if values is None:
                 continue
-            for value in analytics.list_values(article.meta, key):
-                dates = coverage[key].get(value, [])
-                if not dates:
-                    coverage_gaps.append(f"{key}:{value} (not yet published)")
-                    oldest_gap_age = max(oldest_gap_age, UNPUBLISHED_GAP_AGE)
-                    continue
-                age = max(0, (as_of - max(dates)).days)
+            for value in values:
+                dates = published_by_key[key].get(value, [])
+                age = (
+                    max(0, (as_of - max(dates)).days)
+                    if dates
+                    else UNPUBLISHED_GAP_AGE
+                )
                 if age > WINDOWS[0]:
-                    coverage_gaps.append(f"{key}:{value} ({age}d since last post)")
+                    coverage_gaps.append(f"{key}:{value}")
                     oldest_gap_age = max(oldest_gap_age, age)
-
         sources = tuple(analytics.list_values(article.meta, "source_repositories"))
-        missing = tuple(
-            key
-            for key in (*GAP_KEYS, "portfolio_signals", "source_repositories")
-            if not analytics.has_explicit_classification(article.meta, key)
+        reaction_context = sum(
+            1
+            for published_article in published
+            if published_article.title in reaction_titles
+            and any(
+                value in analytics.list_values(published_article.meta, key)
+                for key in COVERAGE_KEYS
+                for value in (explicit_values(article, key) or [])
+            )
         )
         candidates.append(
             Candidate(
@@ -286,52 +277,50 @@ def build_candidates(
                 coverage_gaps=tuple(coverage_gaps),
                 oldest_gap_age=oldest_gap_age,
                 sources=sources,
-                reaction_context=related_reaction_context(article, articles, snapshot),
-                missing_metadata=missing,
+                reaction_context=reaction_context,
+                missing_metadata=missing_classification(article),
             )
         )
 
-    def priority(candidate: Candidate) -> tuple[Any, ...]:
-        readiness = 2 if candidate.article.effective_status == "review" else 1
-        return (
-            len(candidate.portfolio_gaps),
-            bool(candidate.sources),
-            len(candidate.coverage_gaps),
-            candidate.oldest_gap_age,
-            candidate.reaction_context,
-            readiness,
-            candidate.article.title.casefold(),
+    return sorted(candidates, key=candidate_sort_key, reverse=True)
+
+
+def render_coverage(
+    articles: list[analytics.Article], key: str, as_of: date
+) -> list[str]:
+    lines = [
+        f"### {key}",
+        "",
+        "| Value | Published | Last published | Age | 30d | 90d | 365d |",
+        "| --- | ---: | --- | ---: | :---: | :---: | :---: |",
+    ]
+    rows = coverage_rows(articles, key, as_of)
+    if not rows:
+        lines.append("| - | 0 | - | - | - | - | - |")
+    for value, count, last, age in rows:
+        markers = ["✓" if age <= window else "-" for window in WINDOWS]
+        lines.append(
+            f"| {value} | {count} | {last.isoformat()} | {age}d | {markers[0]} | {markers[1]} | {markers[2]} |"
         )
+    lines.append("")
+    return lines
 
-    return sorted(candidates, key=priority, reverse=True)
 
-
-def pipeline_only_values(articles: list[analytics.Article], key: str) -> list[str]:
+def pipeline_only_values(
+    articles: list[analytics.Article], key: str
+) -> list[str]:
     published = published_values(articles, key)
-    pending: set[str] = set()
+    pending = set()
     for article in articles:
-        if article.effective_status in {"draft", "review"}:
-            pending.update(analytics.list_values(article.meta, key))
+        if article.effective_status not in {"draft", "review"}:
+            continue
+        values = explicit_values(article, key)
+        if values:
+            pending.update(values)
     return sorted(pending - published, key=str.casefold)
 
 
-def md_escape(value: str) -> str:
-    return value.replace("|", "\\|").replace("\n", " ")
-
-
-def article_link(article: analytics.Article) -> str:
-    relative = article.path.relative_to(analytics.ROOT).as_posix()
-    return f"[{md_escape(article.title)}](../{relative})"
-
-
-def source_of_truth(item: BacklogItem) -> str | None:
-    for key in ("Source of Truth", "Source repository", "Source Repository"):
-        if item.metadata.get(key):
-            return item.metadata[key]
-    return None
-
-
-def build_report(
+def render_report(
     articles: list[analytics.Article],
     backlog: list[BacklogItem],
     snapshot: dict[str, Any] | None,
@@ -339,21 +328,6 @@ def build_report(
 ) -> str:
     published = analytics.published_articles(articles)
     candidates = build_candidates(articles, snapshot, as_of)
-    title_pool = [("published", title) for title in analytics.read_published_registry()]
-    title_pool.extend((article.effective_status, article.title) for article in articles)
-
-    overlaps: list[tuple[BacklogItem, tuple[str, str, float]]] = []
-    evidence_backlog: list[BacklogItem] = []
-    unscored_backlog: list[BacklogItem] = []
-    for item in backlog:
-        overlap = best_title_overlap(item, title_pool)
-        if overlap:
-            overlaps.append((item, overlap))
-        elif source_of_truth(item):
-            evidence_backlog.append(item)
-        else:
-            unscored_backlog.append(item)
-
     lines = [
         "# Content Gap / Next Article Opportunities",
         "",
@@ -383,24 +357,7 @@ def build_report(
     ]
 
     for key in COVERAGE_KEYS:
-        lines.extend(
-            [
-                f"### {key}",
-                "",
-                "| Value | Published | Last published | Age | 30d | 90d | 365d |",
-                "| --- | ---: | --- | ---: | :---: | :---: | :---: |",
-            ]
-        )
-        rows = coverage_rows(articles, key, as_of)
-        if not rows:
-            lines.append("| - | 0 | - | - | - | - | - |")
-        for value, count, last, age in rows:
-            marks = ["✓" if age <= window else "—" for window in WINDOWS]
-            lines.append(
-                f"| {md_escape(value)} | {count} | {last.isoformat()} | {age}d | "
-                f"{marks[0]} | {marks[1]} | {marks[2]} |"
-            )
-        lines.append("")
+        lines.extend(render_coverage(published, key, as_of))
 
     lines.extend(
         [
@@ -410,52 +367,55 @@ def build_report(
             "",
         ]
     )
-    found_gap = False
+    any_gap = False
     for key in COVERAGE_KEYS:
         values = pipeline_only_values(articles, key)
         if values:
-            found_gap = True
-            lines.append(f"- **{key}:** {', '.join(f'`{value}`' for value in values)}")
-    if not found_gap:
-        lines.append("- No pipeline-only classifications")
-    lines.append("")
+            any_gap = True
+            lines.append(f"- **{key}:** " + ", ".join(f"`{value}`" for value in values))
+    if not any_gap:
+        lines.append("- None")
+    lines.extend(["", "## Next Article Candidates", ""])
 
-    lines.extend(["## Next Article Candidates", ""])
     if not candidates:
-        lines.append("- No draft/review article candidates")
+        lines.extend(["- None", ""])
     for index, candidate in enumerate(candidates, start=1):
+        relative = candidate.article.path.relative_to(analytics.ROOT).as_posix()
         lines.extend(
             [
-                f"### {index}. {article_link(candidate.article)}",
+                f"### {index}. [{candidate.article.title}](../{relative})",
                 "",
                 f"- Status: `{candidate.article.effective_status}`",
                 "- Portfolio gap: "
-                + (
-                    ", ".join(f"`{value}`" for value in candidate.portfolio_gaps)
-                    if candidate.portfolio_gaps
-                    else "no new published portfolio signal detected"
-                ),
+                + (", ".join(f"`{value}`" for value in candidate.portfolio_gaps) or "no new published portfolio signal detected"),
                 "- Implementation evidence: "
-                + (
-                    ", ".join(f"`{value}`" for value in candidate.sources)
-                    if candidate.sources
-                    else "not recorded"
-                ),
+                + (", ".join(f"`{value}`" for value in candidate.sources) or "not recorded"),
                 "- Coverage gap / recency: "
-                + (
-                    "; ".join(candidate.coverage_gaps)
-                    if candidate.coverage_gaps
-                    else "no >30d or unpublished domain/language/technology gap detected"
-                ),
+                + (", ".join(f"`{value}`" for value in candidate.coverage_gaps) or "no >30d or unpublished domain/language/technology gap detected"),
                 f"- Related positive-reaction context: {candidate.reaction_context} published article(s)",
             ]
         )
         if candidate.missing_metadata:
             lines.append(
                 "- Metadata needed before stronger scoring: "
-                + ", ".join(f"`{key}`" for key in candidate.missing_metadata)
+                + ", ".join(f"`{value}`" for value in candidate.missing_metadata)
             )
         lines.append("")
+
+    article_titles = [
+        (article.effective_status or "tracked", article.title) for article in articles
+    ]
+    overlaps = []
+    unscored = []
+    evidence_backlog = []
+    for item in backlog:
+        overlap = best_title_overlap(item, article_titles)
+        if overlap:
+            overlaps.append((item, overlap))
+        elif source_of_truth(item):
+            evidence_backlog.append(item)
+        else:
+            unscored.append(item)
 
     lines.extend(
         [
@@ -466,36 +426,31 @@ def build_report(
         ]
     )
     if overlaps:
-        for item, (status, title, ratio) in sorted(overlaps, key=lambda row: row[1][2], reverse=True):
+        for item, (status, title, similarity) in overlaps:
             lines.append(
-                f"- `{item.title}` → **{status}** `{title}` "
-                f"(title similarity {ratio:.2f}, section: {item.section})"
+                f"- `{item.title}` → **{status}** `{title}` (title similarity {similarity:.2f}, section: {item.section})"
             )
     else:
-        lines.append("- No likely backlog overlaps detected")
+        lines.append("- None")
 
     lines.extend(["", "### Evidence-backed backlog items not already tracked", ""])
     if evidence_backlog:
         for item in evidence_backlog:
             lines.append(
-                f"- `{item.title}` — source: `{source_of_truth(item)}` — section: {item.section}"
+                f"- `{item.title}` — Source of Truth: `{source_of_truth(item)}` (section: {item.section})"
             )
     else:
         lines.append("- None")
 
-    lines.extend(
-        [
-            "",
-            "### Backlog items intentionally left unscored",
-            "",
-            f"- Count: **{len(unscored_backlog)}**",
-            "- 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。",
-        ]
+    lines.extend(["", "### Backlog items intentionally left unscored", ""])
+    lines.append(f"- Count: **{len(unscored)}**")
+    lines.append(
+        "- 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。"
     )
-    for item in unscored_backlog[:10]:
+    for item in unscored[:10]:
         lines.append(f"  - `{item.title}` ({item.section})")
-    if len(unscored_backlog) > 10:
-        lines.append(f"  - … and {len(unscored_backlog) - 10} more")
+    if len(unscored) > 10:
+        lines.append(f"  - … and {len(unscored) - 10} more")
 
     lines.extend(
         [
@@ -520,21 +475,23 @@ def main() -> int:
         articles = load_opportunity_articles()
         backlog = load_backlog()
         snapshot = analytics.load_latest_snapshot()
-        report = build_report(articles, backlog, snapshot, resolve_as_of(articles))
-    except (OSError, ValueError) as exc:
+        as_of = resolve_as_of(articles)
+        rendered = render_report(articles, backlog, snapshot, as_of)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
     if args.check:
         print(
-            f"check completed: {len(articles)} articles, {len(backlog)} backlog items, "
-            f"{len(report)} report chars",
+            f"check completed: {len(articles)} tracked articles, "
+            f"{len(analytics.published_articles(articles))} published, "
+            f"{len(load_backlog())} backlog item(s)",
             file=sys.stderr,
         )
         return 0
 
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REPORT_PATH.write_text(report, encoding="utf-8")
+    REPORT_PATH.write_text(rendered, encoding="utf-8")
     print(f"wrote {REPORT_PATH.relative_to(analytics.ROOT)}")
     return 0
 
