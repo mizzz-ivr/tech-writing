@@ -114,11 +114,15 @@ def freshness_payload(
     freshness_as_of = as_of or datetime.now(analytics.JST).date()
     validated: dict[str, tuple[date | None, list[dict[str, str]]]] = {}
     for article in articles:
-        validated[article.slug] = validate_article(article, freshness_as_of)
+        path = catalog.relative_path(article)
+        if path in validated:
+            raise ValueError(f"duplicate analytics article path: {path}")
+        validated[path] = validate_article(article, freshness_as_of)
 
     rows: list[dict[str, Any]] = []
     for article in analytics.published_articles(articles):
-        verified_at, refs = validated[article.slug]
+        path = catalog.relative_path(article)
+        verified_at, refs = validated[path]
         age = (
             (freshness_as_of - verified_at).days
             if verified_at is not None
@@ -128,7 +132,7 @@ def freshness_payload(
             {
                 "slug": article.slug,
                 "title": article.title,
-                "path": catalog.relative_path(article),
+                "path": path,
                 "status": (
                     "verified" if verified_at is not None else "needs_initial_verification"
                 ),
@@ -143,6 +147,7 @@ def freshness_payload(
             0 if row["status"] == "needs_initial_verification" else 1,
             -(row["days_since_verified"] or 0),
             str(row["title"]).casefold(),
+            str(row["path"]),
         )
     )
     verified_ages = [
