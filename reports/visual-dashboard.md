@@ -11,7 +11,7 @@
 | Last published | **2026-08-28** |
 | Source freshness | Initial verification **4** / Verified **1** |
 | Metric snapshots | **2** / observed span **1d** |
-| Data Quality | **3件 — 下のData Qualityを確認** |
+| Data Quality | **問題なし** |
 | Pipeline-only coverage gaps | **5** |
 | GitHub → Writing Funnel | Untracked **297** / Evidence **297** |
 | 次の記事候補 | [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md) (`draft`) |
@@ -21,7 +21,7 @@
 - GitHub実装evidenceに未記事化候補が **297件** あります。先頭候補: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0。
 - Published記事 **4件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendはまだ待機中です。現在の実snapshot spanは **1日** で、補間はしません。
-- Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
+- Data Quality blockerはありません。
 - 次記事候補の主な根拠: `communication`
 
 ## Editorial Pipeline
@@ -97,9 +97,9 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | Article | Platform | Reactions / observed metrics |
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
-| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 159 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 160 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 0 · stocks 0 · comments 0 · page_views 80 |
+| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 160 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 162 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 0 · stocks 0 · comments 0 · page_views 100 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 346 |
 
 ## Trend Readiness
@@ -119,9 +119,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 
 ## Data Quality
 
-- `ai-runtime-safety-boundary`: `domains` が未分類
-- `ai-runtime-safety-boundary`: `languages` が未分類
-- `ai-runtime-safety-boundary`: `technologies` が未分類
+- No issues detected
 
 ## Analysis Data
 

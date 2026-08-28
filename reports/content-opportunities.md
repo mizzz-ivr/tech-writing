@@ -48,13 +48,14 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
 | developer-productivity | 4 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | devops | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
-| ai | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
 | Python | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 
 ### technologies
 
@@ -68,13 +69,14 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | GitHub Pull Requests | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | GitHub Releases | 1 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | GitHub Search API | 1 | 2026-08-26 | 2d | ✓ | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
+| architecture | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | automation | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
-| architecture | 2 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | ai-assisted-development | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | ci-cd | 1 | 2026-08-26 | 2d | ✓ | ✓ | ✓ |
 | development-process | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |

@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-08-28 11:18 JST
+> Generated: 2026-08-28 12:24 JST
 
 ## Overview
 
@@ -12,10 +12,10 @@
 ## Technology Mix
 
 - Topics: GitHubActions (3), GitHub (3), Python (3), 個人開発 (3), GitHubAPI (2), OSS (1), typescript (1), 生成ai (1), openai (1), security (1)
-- Domains: developer-productivity (4), devops (3), Unclassified (1), ai (1)
-- Languages: Python (3), Unclassified (1)
-- Technologies: GitHub Actions (4), GitHub API (2), GitHub Releases (1), Unclassified (1), GitHub Events API (1), GitHub Search API (1), GitHub (1), GitHub Issues (1), GitHub Pull Requests (1)
-- Portfolio signals: automation (3), architecture (2), oss (1), Unclassified (1), ci-cd (1), development-process (1), ai-assisted-development (1)
+- Domains: developer-productivity (4), devops (3), ai (2)
+- Languages: Python (3), TypeScript (1)
+- Technologies: GitHub Actions (4), GitHub API (2), GitHub Releases (1), OpenAI API (1), GitHub Events API (1), GitHub Search API (1), GitHub (1), GitHub Issues (1), GitHub Pull Requests (1)
+- Portfolio signals: automation (3), architecture (3), oss (1), ci-cd (1), development-process (1), ai-assisted-development (1)
 
 ## Recent Articles
 
@@ -30,9 +30,9 @@
 Latest snapshot. Metrics stay platform-specific; no combined popularity score is calculated.
 
 - [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) — zenn: likes 1 · bookmarks 0 · comments 0 · page views unavailable
-- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 159
-- [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 160
-- [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — qiita: likes 0 · stocks 0 · comments 0 · page views 80
+- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 160
+- [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 162
+- [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — qiita: likes 0 · stocks 0 · comments 0 · page views 100
 - [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views 346
 
 `0` means an observed zero. `unavailable` means the snapshot explicitly contains `null`; `not collected` means the field is absent. `page_views: null` is a normal state.
@@ -44,9 +44,7 @@ Latest snapshot. Metrics stay platform-specific; no combined popularity score is
 
 ## Data Quality
 
-- `ai-runtime-safety-boundary`: `domains` が未分類
-- `ai-runtime-safety-boundary`: `languages` が未分類
-- `ai-runtime-safety-boundary`: `technologies` が未分類
+- No issues detected
 
 ## Review Hints
 

@@ -36,9 +36,9 @@
       },
       {
         "value": "ai",
-        "published_count": 1,
-        "last_published_at": "2026-08-24",
-        "days_since_last": 4,
+        "published_count": 2,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
         "coverage": {
           "30": true,
           "90": true,
@@ -52,6 +52,17 @@
         "published_count": 3,
         "last_published_at": "2026-08-28",
         "days_since_last": 0,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "TypeScript",
+        "published_count": 1,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
         "coverage": {
           "30": true,
           "90": true,
@@ -147,11 +158,22 @@
           "90": true,
           "365": true
         }
+      },
+      {
+        "value": "OpenAI API",
+        "published_count": 1,
+        "last_published_at": "2026-08-27",
+        "days_since_last": 1,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
       }
     ],
     "portfolio_signals": [
       {
-        "value": "automation",
+        "value": "architecture",
         "published_count": 3,
         "last_published_at": "2026-08-28",
         "days_since_last": 0,
@@ -162,8 +184,8 @@
         }
       },
       {
-        "value": "architecture",
-        "published_count": 2,
+        "value": "automation",
+        "published_count": 3,
         "last_published_at": "2026-08-28",
         "days_since_last": 0,
         "coverage": {
@@ -269,10 +291,18 @@
         "security",
         "architecture"
       ],
-      "domains": [],
-      "languages": [],
-      "technologies": [],
-      "portfolio_signals": [],
+      "domains": [
+        "ai"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "technologies": [
+        "OpenAI API"
+      ],
+      "portfolio_signals": [
+        "architecture"
+      ],
       "source_repositories": [],
       "published": {
         "zenn": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary"

@@ -67,8 +67,8 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 **5 published** · Last post **2026-08-28** · Avg interval **1.0日**
 
 - Topics: GitHubActions (3), GitHub (3), Python (3), 個人開発 (3), GitHubAPI (2)
-- Domains: developer-productivity (4), devops (3), Unclassified (1), ai (1)
-- Languages: Python (3), Unclassified (1)
+- Domains: developer-productivity (4), devops (3), ai (2)
+- Languages: Python (3), TypeScript (1)
 
 #### Recent
 

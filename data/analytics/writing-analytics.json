@@ -8,7 +8,7 @@
     "review_articles": 1,
     "last_published_at": "2026-08-28",
     "average_publish_interval_days": 1,
-    "data_quality_findings": 3,
+    "data_quality_findings": 0,
     "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
     "backlog_items": 48,
@@ -277,9 +277,9 @@
         },
         {
           "value": "ai",
-          "published_count": 1,
-          "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -287,7 +287,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 1,
+      "unclassified_published_articles": 0,
       "pipeline_only_values": []
     },
     "languages": {
@@ -302,9 +302,20 @@
             "90": true,
             "365": true
           }
+        },
+        {
+          "value": "TypeScript",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
         }
       ],
-      "unclassified_published_articles": 1,
+      "unclassified_published_articles": 0,
       "pipeline_only_values": []
     },
     "technologies": {
@@ -396,15 +407,26 @@
             "90": true,
             "365": true
           }
+        },
+        {
+          "value": "OpenAI API",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
         }
       ],
-      "unclassified_published_articles": 1,
+      "unclassified_published_articles": 0,
       "pipeline_only_values": []
     },
     "portfolio_signals": {
       "values": [
         {
-          "value": "automation",
+          "value": "architecture",
           "published_count": 3,
           "last_published_at": "2026-08-28",
           "days_since_last": 0,
@@ -415,8 +437,8 @@
           }
         },
         {
-          "value": "architecture",
-          "published_count": 2,
+          "value": "automation",
+          "published_count": 3,
           "last_published_at": "2026-08-28",
           "days_since_last": 0,
           "windows": {
@@ -470,7 +492,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 1,
+      "unclassified_published_articles": 0,
       "pipeline_only_values": [
         "communication"
       ]
@@ -487,7 +509,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 745
+        "page_views": 768
       }
     },
     "observations": [
@@ -510,7 +532,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 159
+          "page_views": 160
         }
       },
       {
@@ -521,7 +543,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 160
+          "page_views": 162
         }
       },
       {
@@ -532,7 +554,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 80
+          "page_views": 100
         }
       },
       {
@@ -586,12 +608,8 @@
     }
   ],
   "data_quality": {
-    "finding_count": 3,
-    "findings": [
-      "`ai-runtime-safety-boundary`: `domains` が未分類",
-      "`ai-runtime-safety-boundary`: `languages` が未分類",
-      "`ai-runtime-safety-boundary`: `technologies` が未分類"
-    ]
+    "finding_count": 0,
+    "findings": []
   },
   "articles": [
     {
@@ -645,10 +663,18 @@
           "security",
           "architecture"
         ],
-        "domains": [],
-        "languages": [],
-        "technologies": [],
-        "portfolio_signals": []
+        "domains": [
+          "ai"
+        ],
+        "languages": [
+          "TypeScript"
+        ],
+        "technologies": [
+          "OpenAI API"
+        ],
+        "portfolio_signals": [
+          "architecture"
+        ]
       },
       "source_evidence": {
         "repository_count": 0,
