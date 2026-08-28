@@ -38,7 +38,7 @@ class DecisionDashboardTests(unittest.TestCase):
         self.assertNotIn("qiita page_views", entries)
         self.assertNotIn("zenn page_views", entries)
 
-    def test_dashboard_published_kpi_comes_from_data_mart(self):
+    def test_dashboard_published_and_freshness_kpis_come_from_data_mart(self):
         model = {
             "as_of": "2026-08-28",
             "overview": {
@@ -47,6 +47,7 @@ class DecisionDashboardTests(unittest.TestCase):
                 "review_articles": 2,
                 "last_published_at": "2026-08-27",
                 "pipeline_only_coverage_gaps": 1,
+                "freshness_needs_initial_verification": 4,
             },
             "pipeline": {"draft": 1, "review": 2, "published": 4, "archived": 0},
             "trend_readiness": {
@@ -55,6 +56,23 @@ class DecisionDashboardTests(unittest.TestCase):
                 "last_snapshot_at": "2026-08-28",
                 "observed_span_days": 1,
                 "windows": {"7": False, "30": False, "90": False},
+            },
+            "freshness": {
+                "published_articles": 4,
+                "verified_articles": 0,
+                "needs_initial_verification": 4,
+                "oldest_verification_age_days": None,
+                "articles": [
+                    {
+                        "slug": "example",
+                        "title": "Example article",
+                        "path": "articles/example/article.md",
+                        "status": "needs_initial_verification",
+                        "verified_at": None,
+                        "days_since_verified": None,
+                        "source_ref_count": 0,
+                    }
+                ],
             },
             "coverage": {
                 key: {"values": [], "pipeline_only_values": []}
@@ -72,6 +90,12 @@ class DecisionDashboardTests(unittest.TestCase):
         dashboard.validate_dashboard(model, rendered)
 
         self.assertIn("| Published | **4** |", rendered)
+        self.assertIn(
+            "| Source freshness | Initial verification **4** / Verified **0** |",
+            rendered,
+        )
+        self.assertIn("## Source Freshness", rendered)
+        self.assertIn("Needs initial verification", rendered)
         self.assertIn("7日Trendはまだ待機中", rendered)
 
 
