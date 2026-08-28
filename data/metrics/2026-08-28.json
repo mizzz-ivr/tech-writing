@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-08-28T01:17:08+00:00",
+  "collected_at": "2026-08-28T01:27:04+00:00",
   "articles": [
     {
       "slug": "ai-runtime-safety-boundary",
@@ -54,7 +54,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 51
+          "page_views": 54
         }
       }
     },

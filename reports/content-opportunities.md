@@ -21,7 +21,7 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 - Tracked articles: **7**
 - Published articles: **5**
 - Draft / review candidates: **2**
-- Unchecked backlog items: **50**
+- Unchecked backlog items: **48**
 
 ### topics
 
@@ -120,7 +120,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 ### Backlog items intentionally left unscored
 
-- Count: **47**
+- Count: **45**
 - 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。
   - `AI Runtimeへ2つ目のProviderを追加したとき、どこまで共通化できたか` (Zenn候補 — Design / Deep Dive)
   - `Discord BotをPlugin Runtime中心の構成にしていった話` (Zenn候補 — Design / Deep Dive)
@@ -132,7 +132,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
   - `趣味の個人開発なのにIssue・PR・CIまで使う理由` (エンジニアとしての考え方)
   - `技術者として「何を知っているか」より「どう判断するか」が大事になってきた` (エンジニアとしての考え方)
   - `コードを書く時間が減ってもエンジニアと言えるのか` (エンジニアとしての考え方)
-  - … and 37 more
+  - … and 35 more
 
 ## Interpretation
 

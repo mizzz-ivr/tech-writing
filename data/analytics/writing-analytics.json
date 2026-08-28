@@ -11,7 +11,7 @@
     "data_quality_findings": 3,
     "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
-    "backlog_items": 50
+    "backlog_items": 48
   },
   "pipeline": {
     "draft": 1,
@@ -486,7 +486,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 708
+        "page_views": 711
       }
     },
     "observations": [
@@ -531,7 +531,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 51
+          "page_views": 54
         }
       },
       {
