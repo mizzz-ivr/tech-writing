@@ -28,21 +28,24 @@ def funnel_section(payload: dict[str, Any]) -> str:
         "",
         f"> GitHub snapshot as of: **{payload['as_of'] or 'not available'}**",
         "",
-        "最近のpublic Repository実装から、article/backlog titleと明示的に重複していないevidenceを確認します。意味的な重複や重要度は推測しません。",
+        "最近のpublic Repository実装から、article/backlog titleと明示的に重複していないevidenceだけを日常判断用に表示します。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。",
         "",
-        "| Repository | Kind | Evidence | Date | Tracking |",
-        "| --- | --- | --- | --- | --- |",
+        "| Repository | Kind | Untracked evidence | Date |",
+        "| --- | --- | --- | --- |",
     ]
-    if not payload["candidates"]:
-        lines.append("| - | - | Snapshot/evidence is not available yet | - | - |")
-    for row in payload["candidates"]:
+    untracked = payload["untracked_candidates"]
+    if not untracked:
+        message = (
+            "No untracked evidence detected"
+            if payload["snapshot_available"]
+            else "Snapshot/evidence is not available yet"
+        )
+        lines.append(f"| - | - | {message} | - |")
+    for row in untracked:
         title = md_escape(row["title"])
         evidence = f"[{title}]({row['url']})" if row.get("url") else title
-        tracking = str(row["tracking_status"])
-        if tracking == "tracked":
-            tracking += f" → {md_escape(row.get('matched_source'))}"
         lines.append(
-            f"| `{md_escape(row['repository'])}` | `{md_escape(row['kind'])}` | {evidence} | {str(row['occurred_at'])[:10] or '-'} | {tracking} |"
+            f"| `{md_escape(row['repository'])}` | `{md_escape(row['kind'])}` | {evidence} | {str(row['occurred_at'])[:10] or '-'} |"
         )
     lines.extend(
         [
@@ -108,6 +111,9 @@ def validate_dashboard(model: dict[str, Any], rendered: str) -> None:
         raise ValueError("dashboard GitHub funnel section is missing")
     if funnel["untracked_count"] and not funnel["untracked_candidates"]:
         raise ValueError("dashboard cannot represent non-zero untracked funnel evidence")
+    for row in funnel["untracked_candidates"]:
+        if md_escape(row["title"]) not in rendered:
+            raise ValueError("dashboard is missing an untracked GitHub evidence row")
 
 
 def main() -> int:
