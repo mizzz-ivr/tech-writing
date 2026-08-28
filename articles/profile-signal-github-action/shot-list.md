@@ -4,7 +4,7 @@ Qiita #3用。
 
 ## 方針
 
-画像は**3枚だけ**使う。
+画像は**2枚だけ**使う。
 
 GitHubプロフィール全景は縦長すぎるため掲載せず、本文から実プロフィールへ直接誘導する。
 
@@ -12,16 +12,22 @@ GitHubプロフィール全景は縦長すぎるため掲載せず、本文か�
 https://github.com/mizzz-ivr
 ```
 
-Release CIのスクリーンショットも使わない。CIでZIPの展開smoke testをしていることは本文で短く説明する。
+Release CIとv0.4.0 Releaseページのスクリーンショットも使わない。Release ZIPやsmoke testについては本文とリンクだけで説明する。
 
-## 採用3枚
+## 採用2枚
 
-### 02. `02-standalone-repository.png`
+### 02. Standalone Repository
 
 撮影場所:
 
 ```text
 https://github.com/mizzz-ivr/profile-signal
+```
+
+Qiita image:
+
+```markdown
+![IMG_3770.jpeg](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4394245/a0ce3241-e6a0-44ce-89dc-bd2724ce7b84.jpeg)
 ```
 
 見せたいもの:
@@ -40,31 +46,18 @@ https://github.com/mizzz-ivr/profile-signal
 
 Standalone OSSとして独立したRepositoryになっていることを見せる。
 
-### 04. `04-release-v0.4.0.png`
-
-撮影場所:
-
-```text
-https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0
-```
-
-見せたいもの:
-
-- `Profile Signal v0.4.0`
-- `Latest`
-- Release Notes冒頭
-- Assets
-
-目的:
-
-Standalone RepositoryからRelease ZIPを正式配布していることを見せる。
-
-### 05. `05-sample-profile.png`
+### 05. Sample Profile
 
 撮影場所:
 
 ```text
 https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
+```
+
+Qiita image:
+
+```markdown
+![IMG_3774.jpeg](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4394245/bc017304-a056-4bc1-9096-436fc4177385.jpeg)
 ```
 
 見せたいもの:
@@ -84,27 +77,15 @@ https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 
 - Profile overview screenshot
 - Release workflow / CI screenshot
+- v0.4.0 Release screenshot
 - Consumer installed tree screenshot
 - v0.2.0 Release screenshot
 - test用tree screenshot
 
-## Qiita placeholder mapping
-
-```text
-02-standalone-repository.png
-→ <!-- QIITA_IMAGE: 02-standalone-repository.jpg -->
-
-04-release-v0.4.0.png
-→ <!-- QIITA_IMAGE: 04-release-v0.4.0.jpg -->
-
-05-sample-profile.png
-→ <!-- QIITA_IMAGE: 05-sample-profile.jpg -->
-```
-
 ## Safety check
 
-- [ ] Token / Secretなし
-- [ ] Private Repositoryなし
-- [ ] Authorization headerなし
-- [ ] 公開GitHub Repositoryだけを使用
-- [ ] 内部管理用Issue / PR情報を不要に映さない
+- [x] Token / Secretなし
+- [x] Private Repositoryなし
+- [x] Authorization headerなし
+- [x] 公開GitHub Repositoryだけを使用
+- [x] 内部管理用Issue / PR情報を不要に映さない
