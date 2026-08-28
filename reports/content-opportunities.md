@@ -97,7 +97,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Portfolio gap: `communication`
 - Implementation evidence: `mizzz-ivr/tech-writing`
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
-- Related positive-reaction context: 1 published article(s)
+- Related positive-reaction context: 2 published article(s)
 
 ### 2. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
 

@@ -8,11 +8,12 @@
 <text x="854" y="98" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
 <text x="234" y="139" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">qiita likes</text>
 <rect x="250" y="125" width="590" height="20" rx="5" fill="#21262d"/>
-<text x="854" y="140" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
+<rect x="250" y="125" width="196" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="140" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
 <text x="234" y="181" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">qiita stocks</text>
 <rect x="250" y="167" width="590" height="20" rx="5" fill="#21262d"/>
 <rect x="250" y="167" width="590" height="20" rx="5" fill="#58a6ff"/>
-<text x="854" y="182" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">2</text>
+<text x="854" y="182" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">3</text>
 <text x="234" y="223" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">zenn bookmarks</text>
 <rect x="250" y="209" width="590" height="20" rx="5" fill="#21262d"/>
 <text x="854" y="224" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
@@ -21,6 +22,6 @@
 <text x="854" y="266" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
 <text x="234" y="307" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">zenn likes</text>
 <rect x="250" y="293" width="590" height="20" rx="5" fill="#21262d"/>
-<rect x="250" y="293" width="295" height="20" rx="5" fill="#58a6ff"/>
+<rect x="250" y="293" width="196" height="20" rx="5" fill="#58a6ff"/>
 <text x="854" y="308" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
 </svg>

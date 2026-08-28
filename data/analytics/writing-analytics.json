@@ -507,10 +507,10 @@
         "comments": 0
       },
       "qiita": {
-        "likes": 0,
-        "stocks": 2,
+        "likes": 1,
+        "stocks": 3,
         "comments": 0,
-        "page_views": 777
+        "page_views": 887
       }
     },
     "observations": [
@@ -533,7 +533,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 160
+          "page_views": 166
         }
       },
       {
@@ -544,7 +544,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 163
+          "page_views": 173
         }
       },
       {
@@ -552,10 +552,10 @@
         "platform": "qiita",
         "url": "https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904",
         "metrics": {
-          "likes": 0,
-          "stocks": 0,
+          "likes": 1,
+          "stocks": 1,
           "comments": 0,
-          "page_views": 108
+          "page_views": 189
         }
       },
       {
@@ -566,11 +566,11 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 346
+          "page_views": 359
         }
       }
     ],
-    "notable_observation_count": 2
+    "notable_observation_count": 3
   },
   "next_article_candidates": [
     {
@@ -585,7 +585,7 @@
       "oldest_gap_age_days": 0,
       "source_evidence_recorded": true,
       "source_repository_count": 1,
-      "related_positive_reaction_articles": 1,
+      "related_positive_reaction_articles": 2,
       "missing_metadata": []
     },
     {
