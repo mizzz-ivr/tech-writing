@@ -40,7 +40,7 @@ class DecisionDashboardTests(unittest.TestCase):
 
     def test_dashboard_published_and_freshness_kpis_come_from_data_mart(self):
         model = {
-            "as_of": "2026-08-28",
+            "as_of": "2026-08-27",
             "overview": {
                 "published_articles": 4,
                 "draft_articles": 1,
@@ -58,6 +58,7 @@ class DecisionDashboardTests(unittest.TestCase):
                 "windows": {"7": False, "30": False, "90": False},
             },
             "freshness": {
+                "as_of": "2026-08-28",
                 "published_articles": 4,
                 "verified_articles": 0,
                 "needs_initial_verification": 4,
@@ -94,6 +95,11 @@ class DecisionDashboardTests(unittest.TestCase):
             "| Source freshness | Initial verification **4** / Verified **0** |",
             rendered,
         )
+        self.assertIn(
+            "Analytics as of: 2026-08-27 · Freshness as of: 2026-08-28",
+            rendered,
+        )
+        self.assertIn("Freshness as of: **2026-08-28**", rendered)
         self.assertIn("## Source Freshness", rendered)
         self.assertIn("Needs initial verification", rendered)
         self.assertIn("7日Trendはまだ待機中", rendered)
