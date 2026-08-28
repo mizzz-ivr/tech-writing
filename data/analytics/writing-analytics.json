@@ -10,6 +10,7 @@
     "average_publish_interval_days": 1,
     "data_quality_findings": 3,
     "pipeline_only_coverage_gaps": 6,
+    "freshness_needs_initial_verification": 4,
     "backlog_items": 50
   },
   "pipeline": {
@@ -28,6 +29,51 @@
       "30": false,
       "90": false
     }
+  },
+  "freshness": {
+    "as_of": "2026-08-28",
+    "published_articles": 4,
+    "verified_articles": 0,
+    "needs_initial_verification": 4,
+    "oldest_verification_age_days": null,
+    "articles": [
+      {
+        "slug": "repository-is-source-of-truth",
+        "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+        "path": "articles/repository-is-source-of-truth/article.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      },
+      {
+        "slug": "github-profile-daily-activity",
+        "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+        "path": "articles/github-profile-daily-activity/article.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      },
+      {
+        "slug": "github-profile-live-dashboard",
+        "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+        "path": "articles/github-profile-live-dashboard/article.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      },
+      {
+        "slug": "ai-runtime-safety-boundary",
+        "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+        "path": "articles/ai-runtime-safety-boundary.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      }
+    ]
   },
   "coverage": {
     "topics": {
@@ -399,7 +445,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 655
+        "page_views": 657
       }
     },
     "observations": [
@@ -433,7 +479,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 156
+          "page_views": 158
         }
       },
       {

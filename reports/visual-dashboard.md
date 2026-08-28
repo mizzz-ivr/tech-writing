@@ -1,6 +1,6 @@
 # Writing Analytics — Decision Dashboard
 
-> As of: 2026-08-28 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-08-28 · Freshness as of: 2026-08-28 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
@@ -9,6 +9,7 @@
 | Published | **4** |
 | Pipeline | Draft **1** / Review **2** |
 | Last published | **2026-08-27** |
+| Source freshness | Initial verification **4** / Verified **0** |
 | Metric snapshots | **2** / observed span **1d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **6** |
@@ -16,6 +17,7 @@
 
 ### 今の判断
 
+- Published記事 **4件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendはまだ待機中です。現在の実snapshot spanは **1日** で、補間はしません。
 - Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
 - 次記事候補の主な根拠: `communication`
@@ -30,6 +32,19 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 
 - **topics:** `ci`, `engineering`, `github-actions`, `OSS`, `writing`
 - **portfolio_signals:** `communication`
+
+## Source Freshness
+
+> Freshness as of: **2026-08-28**
+
+技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
+
+| Article | Status | Verified at | Age | Commit refs |
+| --- | --- | --- | ---: | ---: |
+| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](../articles/repository-is-source-of-truth/article.md) | Needs initial verification | - | - | 0 |
+| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
+| [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
 
 ## Portfolio Coverage
 
@@ -57,7 +72,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 156 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 156 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 158 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 343 |
 
 ## Trend Readiness
@@ -91,6 +106,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 ## Source of Truth
 
 - Article metadata: `articles/**`
+- Platform-native analytics evidence: `metadata/platform-native-analytics.yml`
 - Publication registry: `ideas/published.md`
 - Raw external metrics: `data/metrics/YYYY-MM-DD.json`
 - Data Mart / Dashboard / reports: **derived / regeneratable**
