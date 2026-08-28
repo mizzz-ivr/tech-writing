@@ -12,7 +12,8 @@
     "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
     "backlog_items": 48,
-    "github_untracked_evidence": 297
+    "github_untracked_evidence": 297,
+    "github_untracked_themes": 224
   },
   "pipeline": {
     "draft": 1,
@@ -509,7 +510,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 768
+        "page_views": 777
       }
     },
     "observations": [
@@ -543,7 +544,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 162
+          "page_views": 163
         }
       },
       {
@@ -554,7 +555,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 100
+          "page_views": 108
         }
       },
       {
@@ -1173,6 +1174,472 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.286
+      }
+    ],
+    "untracked_theme_count": 224,
+    "compression_ratio": 1.33,
+    "theme_groups": [
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "grouping": "release",
+        "scope": null,
+        "label": "Profile Signal v0.4.0",
+        "event_count": 1,
+        "latest_at": "2026-08-27T04:51:49Z",
+        "kinds": [
+          "release"
+        ],
+        "representative": {
+          "kind": "release",
+          "source_id": "v0.4.0",
+          "title": "Profile Signal v0.4.0",
+          "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0",
+          "occurred_at": "2026-08-27T04:51:49Z"
+        },
+        "evidence": [
+          {
+            "kind": "release",
+            "source_id": "v0.4.0",
+            "title": "Profile Signal v0.4.0",
+            "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0",
+            "occurred_at": "2026-08-27T04:51:49Z"
+          }
+        ],
+        "identity": "v0.4.0"
+      },
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "grouping": "release",
+        "scope": null,
+        "label": "Profile Signal v0.3.0",
+        "event_count": 1,
+        "latest_at": "2026-08-27T03:55:42Z",
+        "kinds": [
+          "release"
+        ],
+        "representative": {
+          "kind": "release",
+          "source_id": "v0.3.0",
+          "title": "Profile Signal v0.3.0",
+          "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0",
+          "occurred_at": "2026-08-27T03:55:42Z"
+        },
+        "evidence": [
+          {
+            "kind": "release",
+            "source_id": "v0.3.0",
+            "title": "Profile Signal v0.3.0",
+            "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0",
+            "occurred_at": "2026-08-27T03:55:42Z"
+          }
+        ],
+        "identity": "v0.3.0"
+      },
+      {
+        "repository": "mizzz-ivr/roomate-voice",
+        "grouping": "release",
+        "scope": null,
+        "label": "RooMate Voice v0.1.0 (Preview)",
+        "event_count": 1,
+        "latest_at": "2026-08-26T01:08:42Z",
+        "kinds": [
+          "release"
+        ],
+        "representative": {
+          "kind": "release",
+          "source_id": "v0.1.0",
+          "title": "RooMate Voice v0.1.0 (Preview)",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0",
+          "occurred_at": "2026-08-26T01:08:42Z"
+        },
+        "evidence": [
+          {
+            "kind": "release",
+            "source_id": "v0.1.0",
+            "title": "RooMate Voice v0.1.0 (Preview)",
+            "url": "https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0",
+            "occurred_at": "2026-08-26T01:08:42Z"
+          }
+        ],
+        "identity": "v0.1.0"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "studio",
+        "label": "studio",
+        "event_count": 19,
+        "latest_at": "2026-08-27T03:34:26Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#343",
+          "title": "feat(studio): AI Runtime Settingsをprovider-agnostic化する",
+          "url": "https://github.com/ivRooom/Herta/pull/343",
+          "occurred_at": "2026-08-27T03:34:26Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#343",
+            "title": "feat(studio): AI Runtime Settingsをprovider-agnostic化する",
+            "url": "https://github.com/ivRooom/Herta/pull/343",
+            "occurred_at": "2026-08-27T03:34:26Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#334",
+            "title": "feat(studio): OpenAI APIキーを管理コンソールから設定",
+            "url": "https://github.com/ivRooom/Herta/pull/334",
+            "occurred_at": "2026-08-26T12:07:27Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#322",
+            "title": "feat(studio): reorganize server navigation and configurable plugin tabs",
+            "url": "https://github.com/ivRooom/Herta/pull/322",
+            "occurred_at": "2026-08-24T12:55:45Z"
+          }
+        ],
+        "identity": "studio"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "deps",
+        "label": "deps",
+        "event_count": 12,
+        "latest_at": "2026-08-06T06:32:43Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#83",
+          "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
+          "url": "https://github.com/ivRooom/Herta/pull/83",
+          "occurred_at": "2026-08-06T06:32:43Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#83",
+            "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
+            "url": "https://github.com/ivRooom/Herta/pull/83",
+            "occurred_at": "2026-08-06T06:32:43Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#68",
+            "title": "build(deps): bump actions/upload-artifact from 4.6.2 to 7.0.1",
+            "url": "https://github.com/ivRooom/Herta/pull/68",
+            "occurred_at": "2026-07-27T04:09:50Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#67",
+            "title": "build(deps): bump pnpm/action-setup from 4 to 6",
+            "url": "https://github.com/ivRooom/Herta/pull/67",
+            "occurred_at": "2026-07-27T04:09:30Z"
+          }
+        ],
+        "identity": "deps"
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "grouping": "explicit_scope",
+        "scope": "profile",
+        "label": "profile",
+        "event_count": 10,
+        "latest_at": "2026-08-27T22:11:01Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#55",
+          "title": "fix(profile): add scheduler freshness fallback",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
+          "occurred_at": "2026-08-27T22:11:01Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#55",
+            "title": "fix(profile): add scheduler freshness fallback",
+            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
+            "occurred_at": "2026-08-27T22:11:01Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#54",
+            "title": "fix(profile): reactivate schedules with direct workflow edit",
+            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
+            "occurred_at": "2026-08-27T13:44:51Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#53",
+            "title": "fix(profile): re-register Profile Signal schedules",
+            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
+            "occurred_at": "2026-08-27T13:39:45Z"
+          }
+        ],
+        "identity": "profile"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "birthday",
+        "label": "birthday",
+        "event_count": 9,
+        "latest_at": "2026-08-21T23:28:42Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#301",
+          "title": "fix(birthday): 未登録Guildメンバーの自己登録を許可",
+          "url": "https://github.com/ivRooom/Herta/pull/301",
+          "occurred_at": "2026-08-21T23:28:42Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#301",
+            "title": "fix(birthday): 未登録Guildメンバーの自己登録を許可",
+            "url": "https://github.com/ivRooom/Herta/pull/301",
+            "occurred_at": "2026-08-21T23:28:42Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#300",
+            "title": "feat(birthday): 背景画像ライブラリとGuild Preset管理を追加",
+            "url": "https://github.com/ivRooom/Herta/pull/300",
+            "occurred_at": "2026-08-21T09:08:01Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#298",
+            "title": "fix(birthday): 背景画像パイプラインの読込・アップロード・テスト送信を修復",
+            "url": "https://github.com/ivRooom/Herta/pull/298",
+            "occurred_at": "2026-08-21T05:02:20Z"
+          }
+        ],
+        "identity": "birthday"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "ai",
+        "label": "ai",
+        "event_count": 6,
+        "latest_at": "2026-08-27T23:00:38Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#349",
+          "title": "feat(ai): add secure image generation artifact runtime",
+          "url": "https://github.com/ivRooom/Herta/pull/349",
+          "occurred_at": "2026-08-27T23:00:38Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#349",
+            "title": "feat(ai): add secure image generation artifact runtime",
+            "url": "https://github.com/ivRooom/Herta/pull/349",
+            "occurred_at": "2026-08-27T23:00:38Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#348",
+            "title": "feat(ai): add isolated Python code execution runtime",
+            "url": "https://github.com/ivRooom/Herta/pull/348",
+            "occurred_at": "2026-08-27T12:39:11Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#347",
+            "title": "feat(ai): add Phase 1 artifact runtime and Discord attachment delivery",
+            "url": "https://github.com/ivRooom/Herta/pull/347",
+            "occurred_at": "2026-08-27T08:54:58Z"
+          }
+        ],
+        "identity": "ai"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "moderation",
+        "label": "moderation",
+        "event_count": 5,
+        "latest_at": "2026-08-18T22:28:08Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#274",
+          "title": "feat(moderation): 設定画面をNGワード・自動検知中心に再編",
+          "url": "https://github.com/ivRooom/Herta/pull/274",
+          "occurred_at": "2026-08-18T22:28:08Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#274",
+            "title": "feat(moderation): 設定画面をNGワード・自動検知中心に再編",
+            "url": "https://github.com/ivRooom/Herta/pull/274",
+            "occurred_at": "2026-08-18T22:28:08Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#272",
+            "title": "feat(moderation): 自動検知レビューの根拠表示とNGワード導線を改善",
+            "url": "https://github.com/ivRooom/Herta/pull/272",
+            "occurred_at": "2026-08-18T21:49:00Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#257",
+            "title": "fix(moderation): allow owner message actions and expose decision outcome",
+            "url": "https://github.com/ivRooom/Herta/pull/257",
+            "occurred_at": "2026-08-18T03:42:22Z"
+          }
+        ],
+        "identity": "moderation"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "runtime",
+        "label": "runtime",
+        "event_count": 4,
+        "latest_at": "2026-08-24T04:32:12Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#317",
+          "title": "docs(runtime): Worker Runtime consumer要否を明文化",
+          "url": "https://github.com/ivRooom/Herta/pull/317",
+          "occurred_at": "2026-08-24T04:32:12Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#317",
+            "title": "docs(runtime): Worker Runtime consumer要否を明文化",
+            "url": "https://github.com/ivRooom/Herta/pull/317",
+            "occurred_at": "2026-08-24T04:32:12Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#308",
+            "title": "feat(runtime): Plugin Runtime ACKをconsumer別に識別",
+            "url": "https://github.com/ivRooom/Herta/pull/308",
+            "occurred_at": "2026-08-23T14:19:29Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#306",
+            "title": "feat(runtime): 起動時のPlugin復旧ACKを自動記録",
+            "url": "https://github.com/ivRooom/Herta/pull/306",
+            "occurred_at": "2026-08-23T08:39:09Z"
+          }
+        ],
+        "identity": "runtime"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "suggestion",
+        "label": "suggestion",
+        "event_count": 3,
+        "latest_at": "2026-08-25T08:25:12Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#327",
+          "title": "feat(suggestion): Staff向けSuggestion履歴を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/327",
+          "occurred_at": "2026-08-25T08:25:12Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#327",
+            "title": "feat(suggestion): Staff向けSuggestion履歴を追加",
+            "url": "https://github.com/ivRooom/Herta/pull/327",
+            "occurred_at": "2026-08-25T08:25:12Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#326",
+            "title": "feat(suggestion): 投稿者によるSuggestion編集を追加",
+            "url": "https://github.com/ivRooom/Herta/pull/326",
+            "occurred_at": "2026-08-25T05:18:33Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#325",
+            "title": "feat(suggestion): Staff Queueを追加",
+            "url": "https://github.com/ivRooom/Herta/pull/325",
+            "occurred_at": "2026-08-25T04:03:28Z"
+          }
+        ],
+        "identity": "suggestion"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "operations",
+        "label": "operations",
+        "event_count": 3,
+        "latest_at": "2026-08-24T03:02:23Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#315",
+          "title": "feat(operations): add expected Runtime consumer state",
+          "url": "https://github.com/ivRooom/Herta/pull/315",
+          "occurred_at": "2026-08-24T03:02:23Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#315",
+            "title": "feat(operations): add expected Runtime consumer state",
+            "url": "https://github.com/ivRooom/Herta/pull/315",
+            "occurred_at": "2026-08-24T03:02:23Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#311",
+            "title": "feat(operations): Runtime監査表示をconsumer-aware化",
+            "url": "https://github.com/ivRooom/Herta/pull/311",
+            "occurred_at": "2026-08-24T02:05:39Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#61",
+            "title": "feat(operations): ivrm-status-agentを追加",
+            "url": "https://github.com/ivRooom/Herta/pull/61",
+            "occurred_at": "2026-07-27T04:07:53Z"
+          }
+        ],
+        "identity": "operations"
       }
     ]
   }
