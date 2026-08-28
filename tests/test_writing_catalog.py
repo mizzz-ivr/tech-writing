@@ -21,7 +21,8 @@ class UnifiedArticleCatalogTests(unittest.TestCase):
 
             common_dir = articles_dir / "common"
             common_dir.mkdir()
-            (common_dir / "article.md").write_text(
+            common_path = common_dir / "article.md"
+            common_path.write_text(
                 """---
 title: Common article
 status: published
@@ -35,6 +36,12 @@ published:
 body
 """,
                 encoding="utf-8",
+            )
+            common = analytics.Article(
+                slug="common",
+                path=common_path,
+                meta=analytics.read_frontmatter(common_path),
+                registry=None,
             )
 
             (articles_dir / "native.md").write_text(
@@ -60,9 +67,11 @@ body
             sidecar = root / "platform-native-analytics.yml"
             sidecar.write_text("schema_version: 1\narticles: {}\n", encoding="utf-8")
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[common]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 articles = catalog.load_articles()
 
         by_slug = {article.slug: article for article in articles}
@@ -75,7 +84,7 @@ body
         )
         self.assertEqual(native.meta["article_type"], "tech")
 
-    def test_native_sidecar_adds_evidence_without_overriding_platform_fields(self):
+    def test_native_sidecar_adds_evidence_and_classification_without_overriding_platform_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             articles_dir = root / "articles"
@@ -110,13 +119,23 @@ articles:
     source_refs:
       - repository: example/repo
         commit: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    domains:
+      - ai
+    languages:
+      - TypeScript
+    technologies:
+      - OpenAI API
+    portfolio_signals:
+      - architecture
 """,
                 encoding="utf-8",
             )
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 native = catalog.load_articles()[0]
 
         self.assertEqual(native.title, "Native Zenn article")
@@ -125,9 +144,28 @@ articles:
         self.assertEqual(native.meta["source_repositories"], ["example/repo"])
         self.assertEqual(native.meta["verified_at"], "2026-08-28")
         self.assertEqual(len(native.meta["source_refs"]), 1)
+        self.assertEqual(native.meta["domains"], ["ai"])
+        self.assertEqual(native.meta["languages"], ["TypeScript"])
+        self.assertEqual(native.meta["technologies"], ["OpenAI API"])
+        self.assertEqual(native.meta["portfolio_signals"], ["architecture"])
         self.assertEqual(
             native.platform_url("zenn"), "https://zenn.dev/example/articles/native"
         )
+
+    def test_native_sidecar_rejects_invalid_classification_list(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            sidecar = Path(tmp) / "platform-native-analytics.yml"
+            sidecar.write_text(
+                """schema_version: 1
+articles:
+  articles/native.md:
+    technologies: OpenAI API
+""",
+                encoding="utf-8",
+            )
+            with patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+                with self.assertRaisesRegex(ValueError, "`technologies` must be a list"):
+                    catalog.load_native_analytics_metadata()
 
     def test_native_sidecar_cannot_override_publication_or_title_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -187,9 +225,11 @@ articles:
                 encoding="utf-8",
             )
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 with self.assertRaisesRegex(ValueError, "outside the published native catalog"):
                     catalog.load_articles()
 
@@ -214,9 +254,11 @@ body
             sidecar = root / "platform-native-analytics.yml"
             sidecar.write_text("schema_version: 1\narticles: {}\n", encoding="utf-8")
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
+                catalog, "NATIVE_ANALYTICS_PATH", sidecar
+            ):
                 articles = catalog.load_articles()
 
         self.assertEqual(articles, [])

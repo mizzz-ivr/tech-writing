@@ -1,2 +1,11 @@
 schema_version: 1
-articles: {}
+articles:
+  articles/ai-runtime-safety-boundary.md:
+    domains:
+      - ai
+    languages:
+      - TypeScript
+    technologies:
+      - OpenAI API
+    portfolio_signals:
+      - architecture
