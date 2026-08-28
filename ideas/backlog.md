@@ -89,23 +89,33 @@ noteはQiita / Zennの技術記事を言い換える場所にしない。実体�
 ## Profile Signal シリーズ
 
 - [x] GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた
-- [x] GitHubプロフィールをライブな開発ダッシュボードにしてみる
+- [x] GitHubプロフィールをライブな開発ダッシュボードにしてみた
   - LIVE SIGNAL
   - CURRENT FOCUS
   - DEV PULSE
   - NOW BUILDING
   - ACTIVITY STREAM
-- [ ] 自作GitHubプロフィール機能をGitHub ActionとしてOSS化してみた
-  - Widget selector
-  - Preset
-  - Theme
-  - Marker
-  - 導入手順
-- [ ] GitHub ActionsだけでWeekly / Monthly開発レポートを自動生成する
+- [x] 自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた
+  - 公開: https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904
+  - Standalone Repository / Release ZIP + local runtime / v0.4.0 Latest Signals分離を記事化
+
+### 次記事は現時点では保留
+
+Profile Signalだけで連続投稿を増やすのではなく、**新しい実装・運用知見が十分に増えたときだけ再開する**。
+
+候補として残すテーマ:
+
+- GitHub ActionsだけでWeekly / Monthly開発レポートを自動生成する
   - Weekly recap
   - Monthly report
   - Achievements
   - CI / Project health
+  - 現時点では既存3記事との重複が大きいため「次に着手」には置かない
+  - 実運用データが蓄積し、履歴・集計・運用上の学びが独立した記事になる段階で再評価する
+- v0.5+で配布方式・Preset / Theme・Analytics・運用設計に大きな変化が入った場合のDeep Dive
+- 外部利用者から導入フィードバックや実運用事例が得られた場合の導入・改善記事
+
+**現在の方針:** Profile Signalシリーズは一旦3本で区切る。投稿本数のためだけに第4弾を作らない。
 
 ## AI開発 / 開発運用
 
