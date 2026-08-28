@@ -142,3 +142,31 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 - `source_repositories` が無い候補は、実装根拠が無いと断定せず **not recorded** とする。
 - backlog自由文は分類推測しない。推薦精度を上げる場合はfront matterまたはbacklogへ根拠を明示する。
 - metricsが無い / positive reactionが無い場合も推薦自体は成立する。
+
+## GitHub → Writing Funnel
+
+configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
+
+- Snapshot: **2026-08-28**
+- Monitored repositories: **5**
+- Evidence rows: **297**
+- Untracked evidence: **297**
+- Tracked by explicit title overlap: **0**
+
+| Repository | Kind | Evidence | Date | Tracking |
+| --- | --- | --- | --- | --- |
+| `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.4.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0) | 2026-08-27 | untracked |
+| `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.3.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0) | 2026-08-27 | untracked |
+| `mizzz-ivr/roomate-voice` | `release` | [RooMate Voice v0.1.0 (Preview)](https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0) | 2026-08-26 | untracked |
+| `mizzz-ivr/ivmz-home` | `pull_request` | [security: isolate Netlify preview database migrations](https://github.com/mizzz-ivr/ivmz-home/pull/21) | 2026-08-28 | untracked |
+| `mizzz-ivr/ivmz-home` | `pull_request` | [security: harden Payload admin and auth boundaries](https://github.com/mizzz-ivr/ivmz-home/pull/19) | 2026-08-27 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(ai): add secure image generation artifact runtime](https://github.com/ivRooom/Herta/pull/349) | 2026-08-27 | untracked |
+| `mizzz-ivr/profile-signal` | `pull_request` | [docs: add deterministic sample profile page](https://github.com/mizzz-ivr/profile-signal/pull/7) | 2026-08-27 | untracked |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): add scheduler freshness fallback](https://github.com/mizzz-ivr/mizzz-ivr/pull/55) | 2026-08-27 | untracked |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): reactivate schedules with direct workflow edit](https://github.com/mizzz-ivr/mizzz-ivr/pull/54) | 2026-08-27 | untracked |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): re-register Profile Signal schedules](https://github.com/mizzz-ivr/mizzz-ivr/pull/53) | 2026-08-27 | untracked |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [chore: prune merged profile work branches](https://github.com/mizzz-ivr/mizzz-ivr/pull/51) | 2026-08-27 | untracked |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [feat(profile): add Engineering DNA public evidence profile](https://github.com/mizzz-ivr/mizzz-ivr/pull/50) | 2026-08-27 | untracked |
+
+Priorityは `release` → `pull_request` → labeled `issue` → recency の明示ルールです。単一のAI significance scoreは作りません。
+

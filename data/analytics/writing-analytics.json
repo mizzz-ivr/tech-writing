@@ -11,7 +11,8 @@
     "data_quality_findings": 3,
     "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
-    "backlog_items": 48
+    "backlog_items": 48,
+    "github_untracked_evidence": 297
   },
   "pipeline": {
     "draft": 1,
@@ -486,7 +487,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 711
+        "page_views": 745
       }
     },
     "observations": [
@@ -509,7 +510,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 156
+          "page_views": 159
         }
       },
       {
@@ -520,7 +521,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 158
+          "page_views": 160
         }
       },
       {
@@ -531,7 +532,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 54
+          "page_views": 80
         }
       },
       {
@@ -542,7 +543,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 343
+          "page_views": 346
         }
       }
     ],
@@ -842,5 +843,311 @@
         "recorded": true
       }
     }
-  ]
+  ],
+  "github_writing_funnel": {
+    "as_of": "2026-08-28",
+    "snapshot_available": true,
+    "monitored_repositories": [
+      "ivRooom/Herta",
+      "mizzz-ivr/profile-signal",
+      "mizzz-ivr/roomate-voice",
+      "mizzz-ivr/ivmz-home",
+      "mizzz-ivr/mizzz-ivr"
+    ],
+    "evidence_count": 297,
+    "untracked_count": 297,
+    "tracked_count": 0,
+    "candidates": [
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "release",
+        "source_id": "v0.4.0",
+        "title": "Profile Signal v0.4.0",
+        "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0",
+        "occurred_at": "2026-08-27T04:51:49Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.213
+      },
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "release",
+        "source_id": "v0.3.0",
+        "title": "Profile Signal v0.3.0",
+        "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0",
+        "occurred_at": "2026-08-27T03:55:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.213
+      },
+      {
+        "repository": "mizzz-ivr/roomate-voice",
+        "kind": "release",
+        "source_id": "v0.1.0",
+        "title": "RooMate Voice v0.1.0 (Preview)",
+        "url": "https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0",
+        "occurred_at": "2026-08-26T01:08:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.217
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#21",
+        "title": "security: isolate Netlify preview database migrations",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/21",
+        "occurred_at": "2026-08-28T01:17:25Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.231
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#19",
+        "title": "security: harden Payload admin and auth boundaries",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/19",
+        "occurred_at": "2026-08-27T23:10:26Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.304
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#349",
+        "title": "feat(ai): add secure image generation artifact runtime",
+        "url": "https://github.com/ivRooom/Herta/pull/349",
+        "occurred_at": "2026-08-27T23:00:38Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.34
+      },
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "pull_request",
+        "source_id": "#7",
+        "title": "docs: add deterministic sample profile page",
+        "url": "https://github.com/mizzz-ivr/profile-signal/pull/7",
+        "occurred_at": "2026-08-27T22:46:20Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.324
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#55",
+        "title": "fix(profile): add scheduler freshness fallback",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
+        "occurred_at": "2026-08-27T22:11:01Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.291
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#54",
+        "title": "fix(profile): reactivate schedules with direct workflow edit",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
+        "occurred_at": "2026-08-27T13:44:51Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.328
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#53",
+        "title": "fix(profile): re-register Profile Signal schedules",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
+        "occurred_at": "2026-08-27T13:39:45Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.29
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#51",
+        "title": "chore: prune merged profile work branches",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/51",
+        "occurred_at": "2026-08-27T13:31:05Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.31
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#50",
+        "title": "feat(profile): add Engineering DNA public evidence profile",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/50",
+        "occurred_at": "2026-08-27T13:01:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      }
+    ],
+    "untracked_candidates": [
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "release",
+        "source_id": "v0.4.0",
+        "title": "Profile Signal v0.4.0",
+        "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0",
+        "occurred_at": "2026-08-27T04:51:49Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.213
+      },
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "release",
+        "source_id": "v0.3.0",
+        "title": "Profile Signal v0.3.0",
+        "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0",
+        "occurred_at": "2026-08-27T03:55:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.213
+      },
+      {
+        "repository": "mizzz-ivr/roomate-voice",
+        "kind": "release",
+        "source_id": "v0.1.0",
+        "title": "RooMate Voice v0.1.0 (Preview)",
+        "url": "https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0",
+        "occurred_at": "2026-08-26T01:08:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.217
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#21",
+        "title": "security: isolate Netlify preview database migrations",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/21",
+        "occurred_at": "2026-08-28T01:17:25Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.231
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#19",
+        "title": "security: harden Payload admin and auth boundaries",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/19",
+        "occurred_at": "2026-08-27T23:10:26Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.304
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#349",
+        "title": "feat(ai): add secure image generation artifact runtime",
+        "url": "https://github.com/ivRooom/Herta/pull/349",
+        "occurred_at": "2026-08-27T23:00:38Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.34
+      },
+      {
+        "repository": "mizzz-ivr/profile-signal",
+        "kind": "pull_request",
+        "source_id": "#7",
+        "title": "docs: add deterministic sample profile page",
+        "url": "https://github.com/mizzz-ivr/profile-signal/pull/7",
+        "occurred_at": "2026-08-27T22:46:20Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.324
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#55",
+        "title": "fix(profile): add scheduler freshness fallback",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
+        "occurred_at": "2026-08-27T22:11:01Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.291
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#54",
+        "title": "fix(profile): reactivate schedules with direct workflow edit",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
+        "occurred_at": "2026-08-27T13:44:51Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.328
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#53",
+        "title": "fix(profile): re-register Profile Signal schedules",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
+        "occurred_at": "2026-08-27T13:39:45Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.29
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#51",
+        "title": "chore: prune merged profile work branches",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/51",
+        "occurred_at": "2026-08-27T13:31:05Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.31
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#50",
+        "title": "feat(profile): add Engineering DNA public evidence profile",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/50",
+        "occurred_at": "2026-08-27T13:01:42Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      }
+    ]
+  }
 }

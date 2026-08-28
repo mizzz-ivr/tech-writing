@@ -13,10 +13,12 @@
 | Metric snapshots | **2** / observed span **1d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **5** |
+| GitHub → Writing Funnel | Untracked **297** / Evidence **297** |
 | 次の記事候補 | [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md) (`draft`) |
 
 ### 今の判断
 
+- GitHub実装evidenceに未記事化候補が **297件** あります。先頭候補: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0。
 - Published記事 **4件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendはまだ待機中です。現在の実snapshot spanは **1日** で、補間はしません。
 - Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
@@ -32,6 +34,29 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 
 - **topics:** `ci`, `engineering`, `github-actions`, `writing`
 - **portfolio_signals:** `communication`
+
+## GitHub → Writing Funnel
+
+> GitHub snapshot as of: **2026-08-28**
+
+最近のpublic Repository実装から、article/backlog titleと明示的に重複していないevidenceだけを日常判断用に表示します。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。
+
+| Repository | Kind | Untracked evidence | Date |
+| --- | --- | --- | --- |
+| `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.4.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0) | 2026-08-27 |
+| `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.3.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0) | 2026-08-27 |
+| `mizzz-ivr/roomate-voice` | `release` | [RooMate Voice v0.1.0 (Preview)](https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0) | 2026-08-26 |
+| `mizzz-ivr/ivmz-home` | `pull_request` | [security: isolate Netlify preview database migrations](https://github.com/mizzz-ivr/ivmz-home/pull/21) | 2026-08-28 |
+| `mizzz-ivr/ivmz-home` | `pull_request` | [security: harden Payload admin and auth boundaries](https://github.com/mizzz-ivr/ivmz-home/pull/19) | 2026-08-27 |
+| `ivRooom/Herta` | `pull_request` | [feat(ai): add secure image generation artifact runtime](https://github.com/ivRooom/Herta/pull/349) | 2026-08-27 |
+| `mizzz-ivr/profile-signal` | `pull_request` | [docs: add deterministic sample profile page](https://github.com/mizzz-ivr/profile-signal/pull/7) | 2026-08-27 |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): add scheduler freshness fallback](https://github.com/mizzz-ivr/mizzz-ivr/pull/55) | 2026-08-27 |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): reactivate schedules with direct workflow edit](https://github.com/mizzz-ivr/mizzz-ivr/pull/54) | 2026-08-27 |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): re-register Profile Signal schedules](https://github.com/mizzz-ivr/mizzz-ivr/pull/53) | 2026-08-27 |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [chore: prune merged profile work branches](https://github.com/mizzz-ivr/mizzz-ivr/pull/51) | 2026-08-27 |
+| `mizzz-ivr/mizzz-ivr` | `pull_request` | [feat(profile): add Engineering DNA public evidence profile](https://github.com/mizzz-ivr/mizzz-ivr/pull/50) | 2026-08-27 |
+
+Priority: `release` → `pull_request` → labeled `issue` → recency。AI significance scoreは使いません。
 
 ## Source Freshness
 
@@ -72,10 +97,10 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | Article | Platform | Reactions / observed metrics |
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
-| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 156 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 158 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 0 · stocks 0 · comments 0 · page_views 54 |
-| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 343 |
+| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 159 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 160 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 0 · stocks 0 · comments 0 · page_views 80 |
+| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 346 |
 
 ## Trend Readiness
 
@@ -111,4 +136,5 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 - Platform-native analytics evidence: `metadata/platform-native-analytics.yml`
 - Publication registry: `ideas/published.md`
 - Raw external metrics: `data/metrics/YYYY-MM-DD.json`
+- Raw GitHub writing evidence: `data/github-funnel/YYYY-MM-DD.json`
 - Data Mart / Dashboard / reports: **derived / regeneratable**
