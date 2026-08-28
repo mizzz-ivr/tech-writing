@@ -3,20 +3,20 @@
   "as_of": "2026-08-28",
   "overview": {
     "tracked_articles": 7,
-    "published_articles": 4,
+    "published_articles": 5,
     "draft_articles": 1,
-    "review_articles": 2,
-    "last_published_at": "2026-08-27",
+    "review_articles": 1,
+    "last_published_at": "2026-08-28",
     "average_publish_interval_days": 1,
     "data_quality_findings": 3,
-    "pipeline_only_coverage_gaps": 6,
+    "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
     "backlog_items": 50
   },
   "pipeline": {
     "draft": 1,
-    "review": 2,
-    "published": 4,
+    "review": 1,
+    "published": 5,
     "archived": 0
   },
   "trend_readiness": {
@@ -32,10 +32,10 @@
   },
   "freshness": {
     "as_of": "2026-08-28",
-    "published_articles": 4,
-    "verified_articles": 0,
+    "published_articles": 5,
+    "verified_articles": 1,
     "needs_initial_verification": 4,
-    "oldest_verification_age_days": null,
+    "oldest_verification_age_days": 0,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -72,6 +72,15 @@
         "verified_at": null,
         "days_since_verified": null,
         "source_ref_count": 0
+      },
+      {
+        "slug": "profile-signal-github-action",
+        "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
+        "path": "articles/profile-signal-github-action/article.md",
+        "status": "verified",
+        "verified_at": "2026-08-28",
+        "days_since_verified": 0,
+        "source_ref_count": 0
       }
     ]
   },
@@ -80,9 +89,9 @@
       "values": [
         {
           "value": "GitHub",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -91,20 +100,9 @@
         },
         {
           "value": "GitHubActions",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "GitHubAPI",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -113,9 +111,9 @@
         },
         {
           "value": "Python",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -124,6 +122,17 @@
         },
         {
           "value": "個人開発",
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
           "days_since_last": 1,
@@ -189,6 +198,17 @@
           }
         },
         {
+          "value": "OSS",
+          "published_count": 1,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
@@ -227,7 +247,6 @@
         "ci",
         "engineering",
         "github-actions",
-        "OSS",
         "writing"
       ]
     },
@@ -235,9 +254,9 @@
       "values": [
         {
           "value": "developer-productivity",
-          "published_count": 3,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 4,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -246,9 +265,9 @@
         },
         {
           "value": "devops",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -274,9 +293,9 @@
       "values": [
         {
           "value": "Python",
-          "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -291,9 +310,9 @@
       "values": [
         {
           "value": "GitHub Actions",
-          "published_count": 3,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "published_count": 4,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -356,6 +375,17 @@
           }
         },
         {
+          "value": "GitHub Releases",
+          "published_count": 1,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
@@ -374,9 +404,20 @@
       "values": [
         {
           "value": "automation",
+          "published_count": 3,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "architecture",
           "published_count": 2,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -388,17 +429,6 @@
           "published_count": 1,
           "last_published_at": "2026-08-24",
           "days_since_last": 4,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "architecture",
-          "published_count": 1,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -426,6 +456,17 @@
             "90": true,
             "365": true
           }
+        },
+        {
+          "value": "oss",
+          "published_count": 1,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
         }
       ],
       "unclassified_published_articles": 1,
@@ -445,7 +486,7 @@
         "likes": 0,
         "stocks": 2,
         "comments": 0,
-        "page_views": 657
+        "page_views": 708
       }
     },
     "observations": [
@@ -483,6 +524,17 @@
         }
       },
       {
+        "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
+        "platform": "qiita",
+        "url": "https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904",
+        "metrics": {
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 51
+        }
+      },
+      {
         "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
         "platform": "qiita",
         "url": "https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e",
@@ -511,24 +563,6 @@
       "source_repository_count": 1,
       "related_positive_reaction_articles": 1,
       "missing_metadata": []
-    },
-    {
-      "slug": "profile-signal-github-action",
-      "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
-      "status": "review",
-      "path": "articles/profile-signal-github-action/article.md",
-      "portfolio_gaps": [],
-      "coverage_gaps": [],
-      "oldest_gap_age_days": 0,
-      "source_evidence_recorded": true,
-      "source_repository_count": 2,
-      "related_positive_reaction_articles": 1,
-      "missing_metadata": [
-        "domains",
-        "languages",
-        "technologies",
-        "portfolio_signals"
-      ]
     },
     {
       "slug": "personal-dev-pr-ci",
@@ -733,11 +767,13 @@
       "slug": "profile-signal-github-action",
       "path": "articles/profile-signal-github-action/article.md",
       "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
-      "status": "review",
-      "published_at": null,
-      "article_type": null,
-      "level": null,
-      "publication_platforms": [],
+      "status": "published",
+      "published_at": "2026-08-28",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [
+        "qiita"
+      ],
       "classifications": {
         "topics": [
           "GitHubActions",
@@ -746,10 +782,22 @@
           "OSS",
           "個人開発"
         ],
-        "domains": [],
-        "languages": [],
-        "technologies": [],
-        "portfolio_signals": []
+        "domains": [
+          "devops",
+          "developer-productivity"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "technologies": [
+          "GitHub Actions",
+          "GitHub Releases"
+        ],
+        "portfolio_signals": [
+          "automation",
+          "architecture",
+          "oss"
+        ]
       },
       "source_evidence": {
         "repository_count": 2,

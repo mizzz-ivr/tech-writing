@@ -6,13 +6,13 @@
 
 | 判断軸 | 現在 |
 | --- | --- |
-| Published | **4** |
-| Pipeline | Draft **1** / Review **2** |
-| Last published | **2026-08-27** |
-| Source freshness | Initial verification **4** / Verified **0** |
+| Published | **5** |
+| Pipeline | Draft **1** / Review **1** |
+| Last published | **2026-08-28** |
+| Source freshness | Initial verification **4** / Verified **1** |
 | Metric snapshots | **2** / observed span **1d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
-| Pipeline-only coverage gaps | **6** |
+| Pipeline-only coverage gaps | **5** |
 | 次の記事候補 | [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md) (`draft`) |
 
 ### 今の判断
@@ -30,7 +30,7 @@
 
 draft / reviewにはあるが、公開済みPortfolioではまだ示せていないclassificationです。
 
-- **topics:** `ci`, `engineering`, `github-actions`, `OSS`, `writing`
+- **topics:** `ci`, `engineering`, `github-actions`, `writing`
 - **portfolio_signals:** `communication`
 
 ## Source Freshness
@@ -45,6 +45,7 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 0d | 0 |
 
 ## Portfolio Coverage
 
@@ -73,6 +74,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 156 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 158 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 0 · stocks 0 · comments 0 · page_views 51 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 343 |
 
 ## Trend Readiness

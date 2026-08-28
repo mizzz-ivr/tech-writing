@@ -19,24 +19,25 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 ## Current Portfolio Coverage
 
 - Tracked articles: **7**
-- Published articles: **4**
-- Draft / review candidates: **3**
+- Published articles: **5**
+- Draft / review candidates: **2**
 - Unchecked backlog items: **50**
 
 ### topics
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
-| GitHubActions | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| 個人開発 | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | GitHubAPI | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
-| Python | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
-| 個人開発 | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | ai-development | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | architecture | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | github | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | individual-development | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | openai | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | security | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | typescript | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | 生成ai | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
@@ -45,43 +46,45 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| developer-productivity | 3 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
-| devops | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| devops | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | ai | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 3 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| GitHub Actions | 4 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | GitHub API | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | GitHub | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | GitHub Events API | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | GitHub Issues | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
 | GitHub Pull Requests | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | GitHub Search API | 1 | 2026-08-26 | 2d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| automation | 2 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
+| automation | 3 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
+| architecture | 2 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 | ai-assisted-development | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
-| architecture | 1 | 2026-08-27 | 1d | ✓ | ✓ | ✓ |
 | ci-cd | 1 | 2026-08-26 | 2d | ✓ | ✓ | ✓ |
 | development-process | 1 | 2026-08-24 | 4d | ✓ | ✓ | ✓ |
+| oss | 1 | 2026-08-28 | 0d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
 draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。
 
-- **topics:** `ci`, `engineering`, `github-actions`, `OSS`, `writing`
+- **topics:** `ci`, `engineering`, `github-actions`, `writing`
 - **portfolio_signals:** `communication`
 
 ## Next Article Candidates
@@ -94,16 +97,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 1 published article(s)
 
-### 2. [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/profile-signal-github-action/article.md)
-
-- Status: `review`
-- Portfolio gap: no new published portfolio signal detected
-- Implementation evidence: `mizzz-ivr/profile-signal`, `mizzz-ivr/mizzz-ivr`
-- Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
-- Related positive-reaction context: 1 published article(s)
-- Metadata needed before stronger scoring: `domains`, `languages`, `technologies`, `portfolio_signals`
-
-### 3. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
+### 2. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
