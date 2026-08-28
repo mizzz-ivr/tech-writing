@@ -67,9 +67,9 @@ body
             sidecar = root / "platform-native-analytics.yml"
             sidecar.write_text("schema_version: 1\narticles: {}\n", encoding="utf-8")
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(analytics, "load_articles", return_value=[common]), patch.object(
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[common]), patch.object(
                 catalog, "NATIVE_ANALYTICS_PATH", sidecar
             ):
                 articles = catalog.load_articles()
@@ -131,9 +131,9 @@ articles:
                 encoding="utf-8",
             )
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
                 catalog, "NATIVE_ANALYTICS_PATH", sidecar
             ):
                 native = catalog.load_articles()[0]
@@ -225,9 +225,9 @@ articles:
                 encoding="utf-8",
             )
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
                 catalog, "NATIVE_ANALYTICS_PATH", sidecar
             ):
                 with self.assertRaisesRegex(ValueError, "outside the published native catalog"):
@@ -254,9 +254,9 @@ body
             sidecar = root / "platform-native-analytics.yml"
             sidecar.write_text("schema_version: 1\narticles: {}\n", encoding="utf-8")
 
-            with patch.object(analytics, "ARTICLES_DIR", articles_dir), patch.object(
-                analytics, "PUBLISHED_PATH", published_path
-            ), patch.object(analytics, "load_articles", return_value=[]), patch.object(
+            with patch.object(catalog.analytics, "ARTICLES_DIR", articles_dir), patch.object(
+                catalog.analytics, "PUBLISHED_PATH", published_path
+            ), patch.object(catalog.analytics, "load_articles", return_value=[]), patch.object(
                 catalog, "NATIVE_ANALYTICS_PATH", sidecar
             ):
                 articles = catalog.load_articles()
