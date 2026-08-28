@@ -39,6 +39,7 @@ class WritingFreshnessTests(unittest.TestCase):
         self.assertEqual(payload["published_articles"], 1)
         self.assertEqual(payload["verified_articles"], 0)
         self.assertEqual(payload["needs_initial_verification"], 1)
+        self.assertEqual(payload["as_of"], "2026-08-28")
         row = payload["articles"][0]
         self.assertEqual(row["status"], "needs_initial_verification")
         self.assertIsNone(row["verified_at"])
@@ -74,7 +75,7 @@ class WritingFreshnessTests(unittest.TestCase):
             )
 
     def test_future_verified_at_is_rejected(self):
-        with self.assertRaisesRegex(ValueError, "cannot be after"):
+        with self.assertRaisesRegex(ValueError, "cannot be in the future"):
             freshness.freshness_payload(
                 [self.article(verified_at="2026-08-29")], date(2026, 8, 28)
             )
