@@ -13,12 +13,12 @@ import json
 import sys
 from collections import Counter
 from datetime import date
-from pathlib import Path
 from statistics import mean
 from typing import Any
 
 import writing_analytics as analytics
 import writing_catalog as catalog
+import writing_freshness as freshness
 import writing_opportunities as opportunities
 
 DATA_MART_PATH = analytics.ROOT / "data" / "analytics" / "writing-analytics.json"
@@ -241,6 +241,7 @@ def build_data_mart(
     candidates = opportunities.build_candidates(articles, snapshot, as_of)
     statuses = status_payload(articles)
     last_published = published[0].effective_published_at if published else None
+    freshness_model = freshness.freshness_payload(articles)
 
     coverage = {
         key: coverage_payload(articles, key, as_of) for key in COVERAGE_KEYS
@@ -261,10 +262,14 @@ def build_data_mart(
             "average_publish_interval_days": average_interval_days(articles),
             "data_quality_findings": len(quality),
             "pipeline_only_coverage_gaps": pipeline_gap_count,
+            "freshness_needs_initial_verification": freshness_model[
+                "needs_initial_verification"
+            ],
             "backlog_items": len(backlog),
         },
         "pipeline": statuses,
         "trend_readiness": trend_readiness(readable_snapshot_dates()),
+        "freshness": freshness_model,
         "coverage": coverage,
         "reactions": reaction_payload(snapshot),
         "next_article_candidates": [
@@ -306,6 +311,21 @@ def validate_data_mart(payload: dict[str, Any]) -> None:
     ]
     if overview.get("published_articles") != len(published_rows):
         raise ValueError("published article count does not match normalized article rows")
+
+    freshness_model = payload.get("freshness")
+    if not isinstance(freshness_model, dict):
+        raise ValueError("analytics data mart freshness must be a mapping")
+    if freshness_model.get("published_articles") != len(published_rows):
+        raise ValueError("freshness published count does not match normalized article rows")
+    verified = freshness_model.get("verified_articles")
+    initial = freshness_model.get("needs_initial_verification")
+    if not isinstance(verified, int) or not isinstance(initial, int):
+        raise ValueError("freshness summary counts must be integers")
+    if verified + initial != len(published_rows):
+        raise ValueError("freshness summary counts do not cover all published articles")
+    if overview.get("freshness_needs_initial_verification") != initial:
+        raise ValueError("overview freshness count does not match freshness summary")
+
     if sensitive_paths(payload):
         raise ValueError("analytics data mart contains sensitive-looking field names")
 
@@ -331,7 +351,8 @@ def main() -> int:
             "check completed: "
             f"schema v{payload['schema_version']}, "
             f"{payload['overview']['published_articles']} published, "
-            f"{payload['overview']['tracked_articles']} tracked",
+            f"{payload['overview']['tracked_articles']} tracked, "
+            f"{payload['freshness']['needs_initial_verification']} need initial verification",
             file=sys.stderr,
         )
         return 0

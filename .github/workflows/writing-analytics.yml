@@ -7,6 +7,7 @@ on:
       - "articles/**"
       - "ideas/backlog.md"
       - "ideas/published.md"
+      - "metadata/platform-native-analytics.yml"
       - "data/metrics/**"
       - "data/analytics/**"
       - "data/exports/**"
@@ -16,6 +17,7 @@ on:
       - "scripts/writing_analytics_pipeline.py"
       - "scripts/writing_catalog.py"
       - "scripts/writing_data_mart.py"
+      - "scripts/writing_freshness.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_decision_dashboard.py"
       - "scripts/writing_opportunities.py"
@@ -24,6 +26,7 @@ on:
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/ANALYTICS_DATA_MART.md"
+      - "docs/SOURCE_FRESHNESS.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -39,6 +42,7 @@ on:
       - "articles/**"
       - "ideas/backlog.md"
       - "ideas/published.md"
+      - "metadata/platform-native-analytics.yml"
       - "data/metrics/**"
       - "data/analytics/**"
       - "data/exports/**"
@@ -48,6 +52,7 @@ on:
       - "scripts/writing_analytics_pipeline.py"
       - "scripts/writing_catalog.py"
       - "scripts/writing_data_mart.py"
+      - "scripts/writing_freshness.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_decision_dashboard.py"
       - "scripts/writing_opportunities.py"
@@ -56,6 +61,7 @@ on:
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/ANALYTICS_DATA_MART.md"
+      - "docs/SOURCE_FRESHNESS.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -93,7 +99,7 @@ jobs:
         run: python scripts/writing_analytics_pipeline.py --check
       - name: Validate content opportunity rendering
         run: python scripts/writing_opportunities.py --check
-      - name: Validate normalized analytics data mart
+      - name: Validate normalized analytics data mart and source freshness
         run: python scripts/writing_data_mart.py --check
       - name: Validate public portfolio export
         run: python scripts/writing_portfolio_export.py --check
@@ -127,7 +133,7 @@ jobs:
         run: python scripts/writing_analytics_pipeline.py --refresh-metrics
       - name: Refresh content opportunities
         run: python scripts/writing_opportunities.py
-      - name: Refresh normalized analytics data mart
+      - name: Refresh normalized analytics data mart and source freshness
         run: python scripts/writing_data_mart.py
       - name: Refresh public portfolio export
         run: python scripts/writing_portfolio_export.py
