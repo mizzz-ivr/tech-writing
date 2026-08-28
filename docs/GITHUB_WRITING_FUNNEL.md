@@ -62,6 +62,18 @@ Issue本文から「重要そう」を推測しません。
 
 `significant_issue_labels` に明示されたlabelを持つclosed Issueだけを対象にします。PRとして返されるIssue rowは除外します。
 
+## Pagination
+
+GitHub collectionは1ページだけで打ち切りません。
+
+- `per_page=100`
+- PR / Issue: `updated desc`
+- Release: publication順
+
+full pageが返る限りpageを進め、末尾rowのordering timestampがlookback cutoffより古くなった時点で停止します。
+
+PRがlookback内にmergeされていれば `updated_at >= merged_at`、Issueがlookback内にcloseされていれば `updated_at >= closed_at` なので、`updated desc` のcutoffを越えた後のpageに対象eventが残ることはありません。
+
 ## Snapshot
 
 通常:
@@ -81,6 +93,20 @@ python scripts/writing_funnel.py --check
 `--check` はnetwork accessを行わず、configとstored snapshotだけを検証します。
 
 GitHub API取得はmain / daily refreshでbest-effortです。失敗した場合も既存stored snapshotをData Mart / reportsから利用できるため、Writing Analytics全体を停止させません。
+
+### Historical snapshotとcurrent allowlist
+
+過去snapshotは、その日に収集した事実としてimmutableに保持します。
+
+後からRepositoryをrename / allowlist削除しても、過去snapshotを書き換えたり削除したりしません。
+
+- historical validation: schema / repository名 / row shapeを検証
+- new collection: current allowlistを厳密に検証
+- current analytics: latest stored snapshotから**現在もallowlistに存在するRepositoryだけ**をfilterして読む
+
+これにより、allowlist変更で過去snapshot全体がinvalidになることを防ぎます。
+
+同日にallowlistを変更し既存snapshotがある場合、その日付のraw snapshotはimmutableのままです。新しい監視対象は次のsnapshotから入ります。
 
 ## Tracked / Untracked判定
 
@@ -109,6 +135,8 @@ GitHub evidence titleと、次を比較します。
 
 同一Repository・正規化titleが重複する場合は、上位kindのevidenceを代表として残します。
 
+`max_candidates` は表示量の上限です。通常priority順の `candidates` に加えて `untracked_candidates` を別viewとして保持するため、tracked evidenceが上限を埋めても未記事化候補がDashboardから消えません。
+
 ## Analytics統合
 
 ### Content Opportunities
@@ -120,6 +148,8 @@ GitHub evidence titleと、次を比較します。
 ```bash
 python scripts/writing_opportunities_funnel.py
 ```
+
+ここではtracked / untrackedを含むevidenceを監査できます。
 
 ### Data Mart
 
@@ -140,6 +170,7 @@ python scripts/writing_data_mart_funnel.py
 - `untracked_count`
 - `tracked_count`
 - `candidates`
+- `untracked_candidates`
 
 ### Decision Dashboard
 
@@ -151,6 +182,8 @@ python scripts/writing_data_mart_funnel.py
 python scripts/writing_decision_dashboard_funnel.py
 ```
 
+Dashboardは日常判断用なので**untracked evidenceだけ**を一覧表示します。trackedを含む全evidenceはContent Opportunities / Data Martへ委譲し、Dashboardを情報過多にしません。
+
 ## Security / Privacy
 
 - private repositoryはallowlistへ入れない
@@ -159,6 +192,18 @@ python scripts/writing_decision_dashboard_funnel.py
 - APIはpublic endpointだけを利用する
 - raw snapshotへPR/Issue本文、comment、author email、Secret、Tokenを保存しない
 - Public Portfolio JSON schemaは変更しない
+
+## CI / main write safety
+
+Writing Analyticsのmain書込みはQiita Publishと同じconcurrency groupを維持します。
+
+```yaml
+concurrency:
+  group: tech-writing-main-write-${{ github.ref }}
+  cancel-in-progress: false
+```
+
+GitHub Funnel導入によって、既存のQiita Publish / Analytics同時push防止を巻き戻しません。
 
 ## 運用変更
 
