@@ -92,9 +92,18 @@ def trend_status(model: dict[str, Any], window: int) -> str:
     return "Ready" if model["trend_readiness"]["windows"].get(str(window)) else "Waiting"
 
 
+def freshness_status(value: str) -> str:
+    if value == "needs_initial_verification":
+        return "Needs initial verification"
+    if value == "verified":
+        return "Verified"
+    return value
+
+
 def build_dashboard(model: dict[str, Any]) -> str:
     overview = model["overview"]
     trend = model["trend_readiness"]
+    freshness = model["freshness"]
     quality = model["data_quality"]
     candidates = model["next_article_candidates"]
     next_candidate = candidates[0] if candidates else None
@@ -126,6 +135,7 @@ def build_dashboard(model: dict[str, Any]) -> str:
         f"| Published | **{overview['published_articles']}** |",
         f"| Pipeline | Draft **{overview['draft_articles']}** / Review **{overview['review_articles']}** |",
         f"| Last published | **{overview['last_published_at'] or '-'}** |",
+        f"| Source freshness | Initial verification **{freshness['needs_initial_verification']}** / Verified **{freshness['verified_articles']}** |",
         f"| Metric snapshots | **{trend['snapshot_count']}** / observed span **{trend['observed_span_days']}d** |",
         f"| Data Quality | **{quality_summary}** |",
         f"| Pipeline-only coverage gaps | **{overview['pipeline_only_coverage_gaps']}** |",
@@ -134,6 +144,15 @@ def build_dashboard(model: dict[str, Any]) -> str:
         "### 今の判断",
         "",
     ]
+
+    if freshness["needs_initial_verification"]:
+        lines.append(
+            f"- Published記事 **{freshness['needs_initial_verification']}件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。"
+        )
+    elif freshness["oldest_verification_age_days"] is not None:
+        lines.append(
+            f"- Published記事はすべてverification記録済みです。最も古いverificationは **{freshness['oldest_verification_age_days']}日前** です。"
+        )
 
     if trend["windows"].get("7"):
         lines.append("- 7日Trendを実データだけで分析できる状態です。")
@@ -170,6 +189,34 @@ def build_dashboard(model: dict[str, Any]) -> str:
             "draft / reviewにはあるが、公開済みPortfolioではまだ示せていないclassificationです。",
             "",
             *pipeline_gap_lines(model),
+            "",
+            "## Source Freshness",
+            "",
+            "技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。",
+            "",
+            "| Article | Status | Verified at | Age | Commit refs |",
+            "| --- | --- | --- | ---: | ---: |",
+        ]
+    )
+
+    if freshness["articles"]:
+        for row in freshness["articles"]:
+            title = str(row["title"]).replace("|", "\\|")
+            linked = f"[{title}](../{row['path']})"
+            verified_at = row["verified_at"] or "-"
+            age = (
+                f"{row['days_since_verified']}d"
+                if row["days_since_verified"] is not None
+                else "-"
+            )
+            lines.append(
+                f"| {linked} | {freshness_status(str(row['status']))} | {verified_at} | {age} | {row['source_ref_count']} |"
+            )
+    else:
+        lines.append("| - | No published articles | - | - | 0 |")
+
+    lines.extend(
+        [
             "",
             "## Portfolio Coverage",
             "",
@@ -272,8 +319,17 @@ def validate_dashboard(model: dict[str, Any], dashboard: str) -> None:
     published = model["overview"]["published_articles"]
     if f"| Published | **{published}** |" not in dashboard:
         raise ValueError("dashboard published KPI does not match data mart")
-    if "## まず見る" not in dashboard or "## Analysis Data" not in dashboard:
+    initial = model["freshness"]["needs_initial_verification"]
+    verified = model["freshness"]["verified_articles"]
+    expected_freshness = (
+        f"| Source freshness | Initial verification **{initial}** / Verified **{verified}** |"
+    )
+    if expected_freshness not in dashboard:
+        raise ValueError("dashboard freshness KPI does not match data mart")
+    if "## まず見る" not in dashboard or "## Source Freshness" not in dashboard:
         raise ValueError("dashboard decision sections are missing")
+    if "## Analysis Data" not in dashboard:
+        raise ValueError("dashboard analysis data section is missing")
 
 
 def main() -> int:
@@ -295,6 +351,7 @@ def main() -> int:
         print(
             "check completed: "
             f"{model['overview']['published_articles']} published, "
+            f"{model['freshness']['needs_initial_verification']} need initial verification, "
             f"{model['overview']['pipeline_only_coverage_gaps']} coverage gap(s), "
             f"{model['data_quality']['finding_count']} quality finding(s)",
             file=sys.stderr,
