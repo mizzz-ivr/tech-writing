@@ -89,8 +89,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: writing-analytics-${{ github.ref }}
-  cancel-in-progress: true
+  group: tech-writing-main-write-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   validate:
