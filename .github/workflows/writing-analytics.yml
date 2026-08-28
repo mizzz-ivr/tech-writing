@@ -8,16 +8,22 @@ on:
       - "ideas/backlog.md"
       - "ideas/published.md"
       - "data/metrics/**"
+      - "data/analytics/**"
       - "data/exports/**"
       - "config/portfolio-export.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/writing_analytics_pipeline.py"
+      - "scripts/writing_catalog.py"
+      - "scripts/writing_data_mart.py"
       - "scripts/writing_dashboard.py"
+      - "scripts/writing_decision_dashboard.py"
       - "scripts/writing_opportunities.py"
       - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
+      - "docs/ANALYTICS_DATA_MART.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -34,16 +40,22 @@ on:
       - "ideas/backlog.md"
       - "ideas/published.md"
       - "data/metrics/**"
+      - "data/analytics/**"
       - "data/exports/**"
       - "config/portfolio-export.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
+      - "scripts/writing_analytics_pipeline.py"
+      - "scripts/writing_catalog.py"
+      - "scripts/writing_data_mart.py"
       - "scripts/writing_dashboard.py"
+      - "scripts/writing_decision_dashboard.py"
       - "scripts/writing_opportunities.py"
       - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
+      - "docs/ANALYTICS_DATA_MART.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -77,17 +89,19 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate curated metadata migration
         run: python scripts/migrations/20260827_normalize_published_metadata.py --check
-      - name: Validate article metadata and analytics rendering
-        run: python scripts/writing_analytics.py --check
+      - name: Validate unified article universe and analytics rendering
+        run: python scripts/writing_analytics_pipeline.py --check
       - name: Validate content opportunity rendering
         run: python scripts/writing_opportunities.py --check
+      - name: Validate normalized analytics data mart
+        run: python scripts/writing_data_mart.py --check
       - name: Validate public portfolio export
         run: python scripts/writing_portfolio_export.py --check
-      - name: Validate visual dashboard rendering
-        run: python scripts/writing_dashboard.py --check
+      - name: Validate decision dashboard rendering
+        run: python scripts/writing_decision_dashboard.py --check
       - name: Exercise external metric adapters (best effort)
         continue-on-error: true
-        run: python scripts/writing_analytics.py --refresh-metrics --check
+        run: python scripts/writing_analytics_pipeline.py --refresh-metrics --check
 
   refresh:
     if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
@@ -110,22 +124,24 @@ jobs:
       - name: Refresh metrics and generated profile
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
-        run: python scripts/writing_analytics.py --refresh-metrics
+        run: python scripts/writing_analytics_pipeline.py --refresh-metrics
       - name: Refresh content opportunities
         run: python scripts/writing_opportunities.py
+      - name: Refresh normalized analytics data mart
+        run: python scripts/writing_data_mart.py
       - name: Refresh public portfolio export
         run: python scripts/writing_portfolio_export.py
-      - name: Refresh visual dashboard
-        run: python scripts/writing_dashboard.py
+      - name: Refresh decision dashboard
+        run: python scripts/writing_decision_dashboard.py
       - name: Commit analytics and metadata when changed
         run: |
-          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/exports)" ]; then
+          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/analytics data/exports)" ]; then
             echo "No analytics or metadata changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/exports
+          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/analytics data/exports
           git commit -m "chore: normalize metadata and refresh writing analytics"
           git push

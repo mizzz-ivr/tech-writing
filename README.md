@@ -39,8 +39,9 @@ npm run note:publish -- articles/YYMMDD-<slug>/article.md
 npm run qiita:preview
 npm run zenn:preview
 
-# Writing Analyticsの検証
-python scripts/writing_analytics.py --check
+# Writing Analytics全体の検証
+python scripts/writing_analytics_pipeline.py --check
+python scripts/writing_data_mart.py --check
 ```
 
 Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップなどの詳細コマンドは各Runbookへ集約しています。
@@ -49,12 +50,13 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 
 公開履歴・技術分野・Portfolio coverage・外部reactionをRepository内のデータから生成します。
 
-- [Writing Profile](./reports/writing-profile.md) — 公開頻度・技術傾向・reaction
-- [Content Opportunities](./reports/content-opportunities.md) — 次の記事候補・coverage gap
-- [Visual Dashboard](./reports/visual-dashboard.md) — 可視化
+- [Decision Dashboard](./reports/visual-dashboard.md) — 現状・次の記事候補・gap・qualityを最初に確認する画面
+- [Writing Profile](./reports/writing-profile.md) — 公開頻度・技術傾向・reactionの詳細
+- [Content Opportunities](./reports/content-opportunities.md) — 次の記事候補・coverage gapの詳細
+- [Normalized Analytics Data Mart](./data/analytics/writing-analytics.json) — 集計・分析用の共通derived JSON
 - [Public Writing Portfolio JSON](./data/exports/writing-portfolio.json) — 外部Portfolio向けstable schema
 
-**Portfolio全体の公開記事数やcoverageは `writing-portfolio.json` を参照してください。** Zenn-native記事を含む統合データはこちらを正とします。
+**日々の確認はDecision Dashboard、機械的な集計・分析はData Martを入口にします。** 外部公開向けの安定schemaは `writing-portfolio.json` を使用します。
 
 <details>
 <summary>README用の詳細Writing Analyticsを表示</summary>
@@ -94,7 +96,7 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 | `ideas/` | backlog / 公開記録 |
 | `social/` | SNS投稿案 |
 | `reports/` | Writing Analytics生成レポート |
-| `data/` | metrics snapshot / public export |
+| `data/` | metrics snapshot / analytics Data Mart / public export |
 | `docs/` | 詳細Runbook・設計 |
 
 ## Docs
@@ -108,6 +110,7 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 | [NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md) | note媒体戦略 |
 | [NOTE_PUBLISH_HELPER.md](./docs/NOTE_PUBLISH_HELPER.md) | note公開helper |
 | [WRITING_ANALYTICS.md](./docs/WRITING_ANALYTICS.md) | Writing Analytics設計 |
+| [ANALYTICS_DATA_MART.md](./docs/ANALYTICS_DATA_MART.md) | 集計・分析・Dashboard用の共通data model |
 | [PORTFOLIO_EXPORT.md](./docs/PORTFOLIO_EXPORT.md) | public Portfolio JSON |
 
 ## 執筆方針
