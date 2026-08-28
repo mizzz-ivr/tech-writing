@@ -38,16 +38,23 @@ def validate_data_mart(payload: dict[str, Any]) -> None:
     if not isinstance(github_funnel, dict):
         raise ValueError("analytics data mart GitHub writing funnel must be a mapping")
     candidates = github_funnel.get("candidates")
+    untracked_candidates = github_funnel.get("untracked_candidates")
     if not isinstance(candidates, list):
         raise ValueError("GitHub writing funnel candidates must be a list")
+    if not isinstance(untracked_candidates, list):
+        raise ValueError("GitHub writing funnel untracked_candidates must be a list")
     if payload["overview"].get("github_untracked_evidence") != github_funnel.get("untracked_count"):
         raise ValueError("overview GitHub funnel count does not match funnel summary")
+    if github_funnel.get("untracked_count", 0) and not untracked_candidates:
+        raise ValueError("non-zero GitHub untracked count must expose an untracked candidate")
     allowed = set(github_funnel.get("monitored_repositories", []))
-    for row in candidates:
+    for row in [*candidates, *untracked_candidates]:
         if row.get("repository") not in allowed:
             raise ValueError("GitHub writing funnel candidate is outside monitored repositories")
         if row.get("tracking_status") not in {"tracked", "untracked"}:
             raise ValueError("invalid GitHub writing funnel tracking_status")
+    if any(row.get("tracking_status") != "untracked" for row in untracked_candidates):
+        raise ValueError("GitHub writing funnel untracked_candidates contains tracked evidence")
 
 
 def render_json(payload: dict[str, Any]) -> str:
