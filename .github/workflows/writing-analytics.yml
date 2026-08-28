@@ -9,24 +9,31 @@ on:
       - "ideas/published.md"
       - "metadata/platform-native-analytics.yml"
       - "data/metrics/**"
+      - "data/github-funnel/**"
       - "data/analytics/**"
       - "data/exports/**"
       - "config/portfolio-export.yml"
+      - "config/github-writing-funnel.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_analytics_pipeline.py"
       - "scripts/writing_catalog.py"
       - "scripts/writing_data_mart.py"
+      - "scripts/writing_data_mart_funnel.py"
       - "scripts/writing_freshness.py"
+      - "scripts/writing_funnel.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_decision_dashboard.py"
+      - "scripts/writing_decision_dashboard_funnel.py"
       - "scripts/writing_opportunities.py"
+      - "scripts/writing_opportunities_funnel.py"
       - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/ANALYTICS_DATA_MART.md"
       - "docs/SOURCE_FRESHNESS.md"
+      - "docs/GITHUB_WRITING_FUNNEL.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -44,24 +51,31 @@ on:
       - "ideas/published.md"
       - "metadata/platform-native-analytics.yml"
       - "data/metrics/**"
+      - "data/github-funnel/**"
       - "data/analytics/**"
       - "data/exports/**"
       - "config/portfolio-export.yml"
+      - "config/github-writing-funnel.yml"
       - "templates/article.md"
       - "scripts/writing_analytics.py"
       - "scripts/writing_analytics_pipeline.py"
       - "scripts/writing_catalog.py"
       - "scripts/writing_data_mart.py"
+      - "scripts/writing_data_mart_funnel.py"
       - "scripts/writing_freshness.py"
+      - "scripts/writing_funnel.py"
       - "scripts/writing_dashboard.py"
       - "scripts/writing_decision_dashboard.py"
+      - "scripts/writing_decision_dashboard_funnel.py"
       - "scripts/writing_opportunities.py"
+      - "scripts/writing_opportunities_funnel.py"
       - "scripts/writing_portfolio_export.py"
       - "scripts/migrations/**"
       - "tests/**"
       - "docs/WRITING_ANALYTICS.md"
       - "docs/ANALYTICS_DATA_MART.md"
       - "docs/SOURCE_FRESHNESS.md"
+      - "docs/GITHUB_WRITING_FUNNEL.md"
       - "docs/CONTENT_OPPORTUNITIES.md"
       - "docs/PORTFOLIO_EXPORT.md"
       - "docs/PORTFOLIO_EXPORT_SCHEMA_V1.md"
@@ -97,14 +111,16 @@ jobs:
         run: python scripts/migrations/20260827_normalize_published_metadata.py --check
       - name: Validate unified article universe and analytics rendering
         run: python scripts/writing_analytics_pipeline.py --check
-      - name: Validate content opportunity rendering
-        run: python scripts/writing_opportunities.py --check
-      - name: Validate normalized analytics data mart and source freshness
-        run: python scripts/writing_data_mart.py --check
+      - name: Validate GitHub writing funnel policy and stored snapshots
+        run: python scripts/writing_funnel.py --check
+      - name: Validate content opportunity rendering with GitHub funnel
+        run: python scripts/writing_opportunities_funnel.py --check
+      - name: Validate normalized analytics data mart, source freshness, and GitHub funnel
+        run: python scripts/writing_data_mart_funnel.py --check
       - name: Validate public portfolio export
         run: python scripts/writing_portfolio_export.py --check
-      - name: Validate decision dashboard rendering
-        run: python scripts/writing_decision_dashboard.py --check
+      - name: Validate decision dashboard rendering with GitHub funnel
+        run: python scripts/writing_decision_dashboard_funnel.py --check
       - name: Exercise external metric adapters (best effort)
         continue-on-error: true
         run: python scripts/writing_analytics_pipeline.py --refresh-metrics --check
@@ -127,27 +143,30 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Normalize pre-analytics published metadata
         run: python scripts/migrations/20260827_normalize_published_metadata.py
+      - name: Refresh GitHub writing funnel snapshot (best effort)
+        continue-on-error: true
+        run: python scripts/writing_funnel.py --refresh
       - name: Refresh metrics and generated profile
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
         run: python scripts/writing_analytics_pipeline.py --refresh-metrics
-      - name: Refresh content opportunities
-        run: python scripts/writing_opportunities.py
-      - name: Refresh normalized analytics data mart and source freshness
-        run: python scripts/writing_data_mart.py
+      - name: Refresh content opportunities with GitHub funnel
+        run: python scripts/writing_opportunities_funnel.py
+      - name: Refresh normalized analytics data mart, source freshness, and GitHub funnel
+        run: python scripts/writing_data_mart_funnel.py
       - name: Refresh public portfolio export
         run: python scripts/writing_portfolio_export.py
-      - name: Refresh decision dashboard
-        run: python scripts/writing_decision_dashboard.py
+      - name: Refresh decision dashboard with GitHub funnel
+        run: python scripts/writing_decision_dashboard_funnel.py
       - name: Commit analytics and metadata when changed
         run: |
-          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/analytics data/exports)" ]; then
+          if [ -z "$(git status --porcelain -- articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/github-funnel data/analytics data/exports)" ]; then
             echo "No analytics or metadata changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/analytics data/exports
+          git add articles README.md reports/writing-profile.md reports/visual-dashboard.md reports/content-opportunities.md reports/assets data/metrics data/github-funnel data/analytics data/exports
           git commit -m "chore: normalize metadata and refresh writing analytics"
           git push
