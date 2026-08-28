@@ -70,7 +70,7 @@ def build_dashboard(model: dict[str, Any]) -> str:
     judgment_anchor = "### 今の判断\n\n"
     if judgment_anchor not in rendered:
         raise ValueError("dashboard judgment anchor is missing")
-    untracked = [row for row in funnel["candidates"] if row["tracking_status"] == "untracked"]
+    untracked = funnel["untracked_candidates"]
     if untracked:
         first = untracked[0]
         judgment = (
@@ -86,7 +86,9 @@ def build_dashboard(model: dict[str, Any]) -> str:
     section_anchor = "## Source Freshness\n"
     if section_anchor not in rendered:
         raise ValueError("dashboard Source Freshness anchor is missing")
-    rendered = rendered.replace(section_anchor, funnel_section(funnel) + "\n" + section_anchor, 1)
+    rendered = rendered.replace(
+        section_anchor, funnel_section(funnel) + "\n" + section_anchor, 1
+    )
 
     source_anchor = "- Raw external metrics: `data/metrics/YYYY-MM-DD.json`\n"
     source_line = "- Raw GitHub writing evidence: `data/github-funnel/YYYY-MM-DD.json`\n"
@@ -104,6 +106,8 @@ def validate_dashboard(model: dict[str, Any], rendered: str) -> None:
         raise ValueError("dashboard GitHub funnel KPI does not match data mart")
     if "## GitHub → Writing Funnel" not in rendered:
         raise ValueError("dashboard GitHub funnel section is missing")
+    if funnel["untracked_count"] and not funnel["untracked_candidates"]:
+        raise ValueError("dashboard cannot represent non-zero untracked funnel evidence")
 
 
 def main() -> int:
@@ -119,7 +123,9 @@ def main() -> int:
         return 1
 
     if args.check:
-        print(f"check completed: {model['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s)")
+        print(
+            f"check completed: {model['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s)"
+        )
         return 0
 
     base.DASHBOARD_PATH.parent.mkdir(parents=True, exist_ok=True)
