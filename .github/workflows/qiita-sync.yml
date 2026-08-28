@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "qiita.config.json"
+      - ".github/workflows/qiita-sync.yml"
 
 permissions:
   contents: write
@@ -34,7 +35,7 @@ jobs:
         run: npm install --global @qiita/qiita-cli@1.10.0
 
       - name: Pull articles from Qiita
-        run: qiita pull
+        run: qiita pull --force
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
 
@@ -85,7 +86,7 @@ jobs:
             --base main \
             --head "$BRANCH" \
             --title "chore(qiita): sync existing articles from Qiita" \
-            --body "Qiita CLIの \`qiita pull\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。" \
+            --body "Qiita CLIの \`qiita pull --force\` で取得した \`public/*.md\` を取り込む同期PRです。このsync workflow内でfront matter validationを実行済みです。Qiitaの記事ID・title・tags・本文を確認してからmergeしてください。" \
             2>&1)
           status=$?
           set -e
