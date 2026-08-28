@@ -28,7 +28,24 @@ import writing_analytics as analytics
 NATIVE_ANALYTICS_PATH = analytics.ROOT / "metadata" / "platform-native-analytics.yml"
 NATIVE_ANALYTICS_SCHEMA_VERSION = 1
 NATIVE_ANALYTICS_KEYS = frozenset(
-    {"source_repositories", "verified_at", "source_refs"}
+    {
+        "source_repositories",
+        "verified_at",
+        "source_refs",
+        "domains",
+        "languages",
+        "technologies",
+        "portfolio_signals",
+    }
+)
+NATIVE_ANALYTICS_STRING_LIST_KEYS = frozenset(
+    {
+        "source_repositories",
+        "domains",
+        "languages",
+        "technologies",
+        "portfolio_signals",
+    }
 )
 
 
@@ -92,14 +109,15 @@ def load_native_analytics_metadata() -> dict[str, dict[str, Any]]:
                 f"{normalized_path}: unsupported platform-native analytics field(s): {rendered}"
             )
 
-        sources = raw_meta.get("source_repositories")
-        if sources is not None and (
-            not isinstance(sources, list)
-            or any(not isinstance(item, str) or not item.strip() for item in sources)
-        ):
-            raise ValueError(
-                f"{normalized_path}: `source_repositories` must be a list of non-empty strings"
-            )
+        for key in NATIVE_ANALYTICS_STRING_LIST_KEYS:
+            values = raw_meta.get(key)
+            if values is not None and (
+                not isinstance(values, list)
+                or any(not isinstance(item, str) or not item.strip() for item in values)
+            ):
+                raise ValueError(
+                    f"{normalized_path}: `{key}` must be a list of non-empty strings"
+                )
 
         result[normalized_path] = dict(raw_meta)
 
