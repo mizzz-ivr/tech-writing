@@ -7,7 +7,7 @@ tags:
   - OSS
   - 個人開発
 private: true
-updated_at: '2026-08-28T08:43:17+09:00'
+updated_at: '2026-08-28T09:18:43+09:00'
 id: f20a2d58f623097a5904
 organization_url_name: null
 slide: false
@@ -98,7 +98,8 @@ mizzz-ivr/mizzz-ivr
 → Consumer / Live Demo / Dogfooding
 ```
 
-<!-- QIITA_IMAGE: 02-standalone-repository.jpg -->
+![IMG_3770.jpeg](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4394245/a0ce3241-e6a0-44ce-89dc-bd2724ce7b84.jpeg)
+
 
 これで「配布するOSS」と「自分のプロフィール固有コンテンツ」の境界がかなり分かりやすくなりました。
 
@@ -167,7 +168,8 @@ ZIPは作って終わりではなく、CIで展開してruntimeを実行するsm
 
 https://github.com/mizzz-ivr/profile-signal/tree/main/examples/sample-profile
 
-<!-- QIITA_IMAGE: 05-sample-profile.jpg -->
+![IMG_3774.jpeg](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4394245/bc017304-a056-4bc1-9096-436fc4177385.jpeg)
+
 
 `LIVE SIGNAL`、`TODAY`、`CURRENT FOCUS`、`DEV PULSE`、`NOW BUILDING`、`ACTIVITY STREAM`、`DEV RECAP` をGitHub上で確認できます。
 
