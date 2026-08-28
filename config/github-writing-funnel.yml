@@ -1,0 +1,17 @@
+schema_version: 1
+lookback_days: 45
+release_lookback_days: 90
+title_overlap_threshold: 0.88
+max_candidates: 12
+repositories:
+  - ivRooom/Herta
+  - mizzz-ivr/profile-signal
+  - mizzz-ivr/roomate-voice
+  - mizzz-ivr/ivmz-home
+  - mizzz-ivr/mizzz-ivr
+significant_issue_labels:
+  - feature
+  - enhancement
+  - security
+  - architecture
+  - performance
