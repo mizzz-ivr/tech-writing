@@ -4,6 +4,7 @@
 
 | 公開日 | タイトル | Qiita | Zenn | note | その他 |
 | --- | --- | --- | --- | --- | --- |
+| 2026-08-28 | 自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた | https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904 | - | - | - |
 | 2026-08-27 | 生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計 | - | https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary | - | - |
 | 2026-08-27 | GitHubプロフィールをライブな開発ダッシュボードにしてみた | https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630 | - | - | - |
 | 2026-08-26 | GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた | https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a | - | - | - |
