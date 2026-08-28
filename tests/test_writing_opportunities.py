@@ -1,5 +1,6 @@
 import importlib.util
 import sys
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
@@ -25,27 +26,52 @@ def article(slug: str, status: str, **meta):
 
 
 class ArticleLoadingTests(unittest.TestCase):
-    def test_opportunity_loader_delegates_to_unified_catalog(self):
-        native = article(
-            "native-zenn",
-            "published",
-            title="Native Zenn article",
+    def test_published_native_zenn_article_is_included(self):
+        title = "Native Zenn article"
+        registry = analytics.RegistryEntry(
             published_at="2026-08-27",
-            topics=["typescript", "security"],
-            domains=["ai"],
-            languages=["TypeScript"],
-            technologies=["OpenAI API"],
-            portfolio_signals=["architecture"],
+            title=title,
+            qiita=None,
+            zenn="https://zenn.dev/example/articles/native-zenn",
         )
 
-        with patch.object(
-            opportunities.catalog, "load_articles", return_value=[native]
-        ) as loader:
-            loaded = opportunities.load_opportunity_articles()
+        with tempfile.TemporaryDirectory() as tmp:
+            articles_dir = Path(tmp)
+            (articles_dir / "native-zenn.md").write_text(
+                "---\n"
+                f"title: {title}\n"
+                "topics: [typescript, security]\n"
+                "published: true\n"
+                "---\n"
+                "body\n",
+                encoding="utf-8",
+            )
+            with (
+                patch.object(analytics, "ARTICLES_DIR", articles_dir),
+                patch.object(analytics, "load_articles", return_value=[]),
+                patch.object(analytics, "read_published_registry", return_value={title: registry}),
+            ):
+                loaded = opportunities.load_opportunity_articles()
 
-        loader.assert_called_once_with()
-        self.assertEqual(loaded, [native])
-        self.assertEqual(loaded[0].meta["technologies"], ["OpenAI API"])
+        self.assertEqual(len(loaded), 1)
+        self.assertEqual(loaded[0].effective_status, "published")
+        self.assertEqual(analytics.list_values(loaded[0].meta, "topics"), ["typescript", "security"])
+
+    def test_unregistered_native_zenn_draft_is_not_assigned_a_status(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            articles_dir = Path(tmp)
+            (articles_dir / "draft.md").write_text(
+                "---\ntitle: Draft native\ntopics: [typescript]\npublished: false\n---\nbody\n",
+                encoding="utf-8",
+            )
+            with (
+                patch.object(analytics, "ARTICLES_DIR", articles_dir),
+                patch.object(analytics, "load_articles", return_value=[]),
+                patch.object(analytics, "read_published_registry", return_value={}),
+            ):
+                loaded = opportunities.load_opportunity_articles()
+
+        self.assertEqual(loaded, [])
 
 
 class BacklogParsingTests(unittest.TestCase):
