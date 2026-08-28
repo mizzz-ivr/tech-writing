@@ -327,6 +327,18 @@
   ],
   "notable_articles": [
     {
+      "slug": "ai-runtime-safety-boundary",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "published_at": "2026-08-27",
+      "platform": "zenn",
+      "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
+      "reactions": {
+        "likes": 1,
+        "bookmarks": 0,
+        "comments": 0
+      }
+    },
+    {
       "slug": "github-profile-daily-activity",
       "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
       "published_at": "2026-08-26",

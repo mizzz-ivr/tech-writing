@@ -64,20 +64,21 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 <!-- WRITING_ANALYTICS:START -->
 ### Writing Profile
 
-**3 published** · Last post **2026-08-27** · Avg interval **1.5日**
+**4 published** · Last post **2026-08-27** · Avg interval **1.0日**
 
 - Topics: GitHub (2), GitHubActions (2), GitHubAPI (2), Python (2), 個人開発 (2)
-- Domains: developer-productivity (3), devops (2), ai (1)
-- Languages: Python (2)
+- Domains: developer-productivity (3), devops (2), Unclassified (1), ai (1)
+- Languages: Python (2), Unclassified (1)
 
 #### Recent
 
+- 2026-08-27 — [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary)
 - 2026-08-27 — [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630)
 - 2026-08-26 — [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a)
-- 2026-08-24 — [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e)
 
 #### Notable
 
+- [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) — likes 1 · bookmarks 0 · comments 0 (zenn)
 - [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — likes 0 · stocks 2 · comments 0 (qiita)
 
 詳細なreaction値と未取得状態: [Writing Profile / Analytics](./reports/writing-profile.md) · [運用設計](./docs/WRITING_ANALYTICS.md)

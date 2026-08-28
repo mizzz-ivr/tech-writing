@@ -1,0 +1,752 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-28",
+  "overview": {
+    "tracked_articles": 7,
+    "published_articles": 4,
+    "draft_articles": 1,
+    "review_articles": 2,
+    "last_published_at": "2026-08-27",
+    "average_publish_interval_days": 1,
+    "data_quality_findings": 3,
+    "pipeline_only_coverage_gaps": 6,
+    "backlog_items": 50
+  },
+  "pipeline": {
+    "draft": 1,
+    "review": 2,
+    "published": 4,
+    "archived": 0
+  },
+  "trend_readiness": {
+    "snapshot_count": 2,
+    "first_snapshot_at": "2026-08-27",
+    "last_snapshot_at": "2026-08-28",
+    "observed_span_days": 1,
+    "windows": {
+      "7": false,
+      "30": false,
+      "90": false
+    }
+  },
+  "coverage": {
+    "topics": {
+      "values": [
+        {
+          "value": "GitHub",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHubActions",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHubAPI",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "Python",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "個人開発",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ai-development",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "architecture",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "github",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "individual-development",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "openai",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "security",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "typescript",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "生成ai",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        }
+      ],
+      "unclassified_published_articles": 0,
+      "pipeline_only_values": [
+        "ci",
+        "engineering",
+        "github-actions",
+        "OSS",
+        "writing"
+      ]
+    },
+    "domains": {
+      "values": [
+        {
+          "value": "developer-productivity",
+          "published_count": 3,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "devops",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ai",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        }
+      ],
+      "unclassified_published_articles": 1,
+      "pipeline_only_values": []
+    },
+    "languages": {
+      "values": [
+        {
+          "value": "Python",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        }
+      ],
+      "unclassified_published_articles": 1,
+      "pipeline_only_values": []
+    },
+    "technologies": {
+      "values": [
+        {
+          "value": "GitHub Actions",
+          "published_count": 3,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub API",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub Events API",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub Issues",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub Pull Requests",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "GitHub Search API",
+          "published_count": 1,
+          "last_published_at": "2026-08-26",
+          "days_since_last": 2,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        }
+      ],
+      "unclassified_published_articles": 1,
+      "pipeline_only_values": []
+    },
+    "portfolio_signals": {
+      "values": [
+        {
+          "value": "automation",
+          "published_count": 2,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ai-assisted-development",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "architecture",
+          "published_count": 1,
+          "last_published_at": "2026-08-27",
+          "days_since_last": 1,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ci-cd",
+          "published_count": 1,
+          "last_published_at": "2026-08-26",
+          "days_since_last": 2,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "development-process",
+          "published_count": 1,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 4,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        }
+      ],
+      "unclassified_published_articles": 1,
+      "pipeline_only_values": [
+        "communication"
+      ]
+    }
+  },
+  "reactions": {
+    "observed_numeric_totals": {
+      "zenn": {
+        "likes": 1,
+        "bookmarks": 0,
+        "comments": 0
+      },
+      "qiita": {
+        "likes": 0,
+        "stocks": 2,
+        "comments": 0,
+        "page_views": 655
+      }
+    },
+    "observations": [
+      {
+        "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+        "platform": "zenn",
+        "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
+        "metrics": {
+          "likes": 1,
+          "bookmarks": 0,
+          "comments": 0,
+          "page_views": null
+        }
+      },
+      {
+        "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+        "platform": "qiita",
+        "url": "https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a",
+        "metrics": {
+          "likes": 0,
+          "stocks": 2,
+          "comments": 0,
+          "page_views": 156
+        }
+      },
+      {
+        "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+        "platform": "qiita",
+        "url": "https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630",
+        "metrics": {
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 156
+        }
+      },
+      {
+        "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+        "platform": "qiita",
+        "url": "https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e",
+        "metrics": {
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 343
+        }
+      }
+    ],
+    "notable_observation_count": 2
+  },
+  "next_article_candidates": [
+    {
+      "slug": "260827-engineer-thinking-place",
+      "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
+      "status": "draft",
+      "path": "articles/260827-engineer-thinking-place/article.md",
+      "portfolio_gaps": [
+        "communication"
+      ],
+      "coverage_gaps": [],
+      "oldest_gap_age_days": 0,
+      "source_evidence_recorded": true,
+      "source_repository_count": 1,
+      "related_positive_reaction_articles": 1,
+      "missing_metadata": []
+    },
+    {
+      "slug": "profile-signal-github-action",
+      "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
+      "status": "review",
+      "path": "articles/profile-signal-github-action/article.md",
+      "portfolio_gaps": [],
+      "coverage_gaps": [],
+      "oldest_gap_age_days": 0,
+      "source_evidence_recorded": true,
+      "source_repository_count": 2,
+      "related_positive_reaction_articles": 1,
+      "missing_metadata": [
+        "domains",
+        "languages",
+        "technologies",
+        "portfolio_signals"
+      ]
+    },
+    {
+      "slug": "personal-dev-pr-ci",
+      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
+      "status": "review",
+      "path": "articles/personal-dev-pr-ci/article.md",
+      "portfolio_gaps": [],
+      "coverage_gaps": [],
+      "oldest_gap_age_days": 0,
+      "source_evidence_recorded": false,
+      "source_repository_count": 0,
+      "related_positive_reaction_articles": 0,
+      "missing_metadata": [
+        "domains",
+        "languages",
+        "technologies",
+        "portfolio_signals",
+        "source_repositories"
+      ]
+    }
+  ],
+  "data_quality": {
+    "finding_count": 3,
+    "findings": [
+      "`ai-runtime-safety-boundary`: `domains` が未分類",
+      "`ai-runtime-safety-boundary`: `languages` が未分類",
+      "`ai-runtime-safety-boundary`: `technologies` が未分類"
+    ]
+  },
+  "articles": [
+    {
+      "slug": "260827-engineer-thinking-place",
+      "path": "articles/260827-engineer-thinking-place/article.md",
+      "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
+      "status": "draft",
+      "published_at": null,
+      "article_type": "essay",
+      "level": null,
+      "publication_platforms": [],
+      "classifications": {
+        "topics": [
+          "engineering",
+          "individual-development",
+          "writing"
+        ],
+        "domains": [
+          "developer-productivity"
+        ],
+        "languages": [],
+        "technologies": [
+          "GitHub"
+        ],
+        "portfolio_signals": [
+          "communication",
+          "development-process"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
+      }
+    },
+    {
+      "slug": "ai-runtime-safety-boundary",
+      "path": "articles/ai-runtime-safety-boundary.md",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "status": "published",
+      "published_at": "2026-08-27",
+      "article_type": "tech",
+      "level": null,
+      "publication_platforms": [
+        "zenn"
+      ],
+      "classifications": {
+        "topics": [
+          "typescript",
+          "生成ai",
+          "openai",
+          "security",
+          "architecture"
+        ],
+        "domains": [],
+        "languages": [],
+        "technologies": [],
+        "portfolio_signals": []
+      },
+      "source_evidence": {
+        "repository_count": 0,
+        "recorded": false
+      }
+    },
+    {
+      "slug": "github-profile-daily-activity",
+      "path": "articles/github-profile-daily-activity/article.md",
+      "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+      "status": "published",
+      "published_at": "2026-08-26",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [
+        "qiita"
+      ],
+      "classifications": {
+        "topics": [
+          "GitHub",
+          "GitHubActions",
+          "GitHubAPI",
+          "Python",
+          "個人開発"
+        ],
+        "domains": [
+          "devops",
+          "developer-productivity"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "technologies": [
+          "GitHub Actions",
+          "GitHub API",
+          "GitHub Search API"
+        ],
+        "portfolio_signals": [
+          "automation",
+          "ci-cd"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
+      }
+    },
+    {
+      "slug": "github-profile-live-dashboard",
+      "path": "articles/github-profile-live-dashboard/article.md",
+      "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+      "status": "published",
+      "published_at": "2026-08-27",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [
+        "qiita"
+      ],
+      "classifications": {
+        "topics": [
+          "GitHub",
+          "GitHubActions",
+          "GitHubAPI",
+          "Python",
+          "個人開発"
+        ],
+        "domains": [
+          "devops",
+          "developer-productivity"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "technologies": [
+          "GitHub Actions",
+          "GitHub API",
+          "GitHub Events API"
+        ],
+        "portfolio_signals": [
+          "automation",
+          "architecture"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
+      }
+    },
+    {
+      "slug": "personal-dev-pr-ci",
+      "path": "articles/personal-dev-pr-ci/article.md",
+      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
+      "status": "review",
+      "published_at": null,
+      "article_type": null,
+      "level": null,
+      "publication_platforms": [],
+      "classifications": {
+        "topics": [
+          "individual-development",
+          "github",
+          "github-actions",
+          "ci",
+          "ai-development"
+        ],
+        "domains": [],
+        "languages": [],
+        "technologies": [],
+        "portfolio_signals": []
+      },
+      "source_evidence": {
+        "repository_count": 0,
+        "recorded": false
+      }
+    },
+    {
+      "slug": "profile-signal-github-action",
+      "path": "articles/profile-signal-github-action/article.md",
+      "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
+      "status": "review",
+      "published_at": null,
+      "article_type": null,
+      "level": null,
+      "publication_platforms": [],
+      "classifications": {
+        "topics": [
+          "GitHubActions",
+          "GitHub",
+          "Python",
+          "OSS",
+          "個人開発"
+        ],
+        "domains": [],
+        "languages": [],
+        "technologies": [],
+        "portfolio_signals": []
+      },
+      "source_evidence": {
+        "repository_count": 2,
+        "recorded": true
+      }
+    },
+    {
+      "slug": "repository-is-source-of-truth",
+      "path": "articles/repository-is-source-of-truth/article.md",
+      "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+      "status": "published",
+      "published_at": "2026-08-24",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [
+        "qiita"
+      ],
+      "classifications": {
+        "topics": [
+          "ai-development",
+          "individual-development",
+          "github"
+        ],
+        "domains": [
+          "ai",
+          "developer-productivity"
+        ],
+        "languages": [],
+        "technologies": [
+          "GitHub",
+          "GitHub Issues",
+          "GitHub Pull Requests",
+          "GitHub Actions"
+        ],
+        "portfolio_signals": [
+          "development-process",
+          "ai-assisted-development"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
+      }
+    }
+  ]
+}
