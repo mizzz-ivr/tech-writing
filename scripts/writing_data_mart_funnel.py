@@ -12,6 +12,7 @@ import writing_analytics as analytics
 import writing_catalog as catalog
 import writing_data_mart as base
 import writing_funnel as funnel
+import writing_funnel_themes as themes
 import writing_opportunities as opportunities
 
 
@@ -26,8 +27,23 @@ def build_data_mart() -> dict[str, Any]:
     snapshot = analytics.load_latest_snapshot()
     backlog = opportunities.load_backlog()
     payload = base.build_data_mart(articles, snapshot, backlog)
-    github_funnel = funnel.build_funnel_payload(articles, backlog)
+    policy = funnel.load_policy()
+    github_snapshot = funnel.load_latest_snapshot(policy)
+    github_funnel = funnel.build_funnel_payload(
+        articles,
+        backlog,
+        policy=policy,
+        snapshot=github_snapshot,
+    )
+    github_themes = themes.build_theme_payload(
+        articles,
+        backlog,
+        policy=policy,
+        snapshot=github_snapshot,
+    )
+    github_funnel.update(github_themes)
     payload["overview"]["github_untracked_evidence"] = github_funnel["untracked_count"]
+    payload["overview"]["github_untracked_themes"] = github_funnel["untracked_theme_count"]
     payload["github_writing_funnel"] = github_funnel
     return payload
 
@@ -45,6 +61,8 @@ def validate_data_mart(payload: dict[str, Any]) -> None:
         raise ValueError("GitHub writing funnel untracked_candidates must be a list")
     if payload["overview"].get("github_untracked_evidence") != github_funnel.get("untracked_count"):
         raise ValueError("overview GitHub funnel count does not match funnel summary")
+    if payload["overview"].get("github_untracked_themes") != github_funnel.get("untracked_theme_count"):
+        raise ValueError("overview GitHub funnel theme count does not match funnel summary")
     if github_funnel.get("untracked_count", 0) and not untracked_candidates:
         raise ValueError("non-zero GitHub untracked count must expose an untracked candidate")
     allowed = set(github_funnel.get("monitored_repositories", []))
@@ -55,6 +73,14 @@ def validate_data_mart(payload: dict[str, Any]) -> None:
             raise ValueError("invalid GitHub writing funnel tracking_status")
     if any(row.get("tracking_status") != "untracked" for row in untracked_candidates):
         raise ValueError("GitHub writing funnel untracked_candidates contains tracked evidence")
+
+    themes.validate_theme_payload(
+        github_funnel,
+        untracked_count=int(github_funnel.get("untracked_count", 0)),
+    )
+    for group in github_funnel.get("theme_groups", []):
+        if group.get("repository") not in allowed:
+            raise ValueError("GitHub writing funnel theme is outside monitored repositories")
 
 
 def render_json(payload: dict[str, Any]) -> str:
@@ -74,7 +100,8 @@ def main() -> int:
         print(
             "check completed: "
             f"{payload['overview']['published_articles']} published, "
-            f"{payload['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s)"
+            f"{payload['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s), "
+            f"{payload['github_writing_funnel']['untracked_theme_count']} untracked theme(s)"
         )
         return 0
 

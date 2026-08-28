@@ -22,35 +22,50 @@ def md_escape(value: Any) -> str:
     return str(value).replace("|", "\\|").replace("\n", " ")
 
 
+def theme_label(group: dict[str, Any]) -> str:
+    if group.get("grouping") == "explicit_scope":
+        return f"scope `{md_escape(group.get('scope') or '-')}`"
+    if group.get("grouping") == "release":
+        return "release"
+    return "single event"
+
+
 def funnel_section(payload: dict[str, Any]) -> str:
     lines = [
         "## GitHub → Writing Funnel",
         "",
         f"> GitHub snapshot as of: **{payload['as_of'] or 'not available'}**",
         "",
-        "最近のpublic Repository実装から、article/backlog titleと明示的に重複していないevidenceだけを日常判断用に表示します。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。",
+        "最近のpublic Repository実装を、明示的なConventional Commit scopeだけでtheme groupingして表示します。scopeが無いeventは無理にまとめません。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。",
         "",
-        "| Repository | Kind | Untracked evidence | Date |",
-        "| --- | --- | --- | --- |",
+        "| Repository | Theme | Events | Representative evidence | Latest |",
+        "| --- | --- | ---: | --- | --- |",
     ]
-    untracked = payload["untracked_candidates"]
-    if not untracked:
+    groups = payload["theme_groups"]
+    if not groups:
         message = (
-            "No untracked evidence detected"
+            "No untracked themes detected"
             if payload["snapshot_available"]
             else "Snapshot/evidence is not available yet"
         )
-        lines.append(f"| - | - | {message} | - |")
-    for row in untracked:
-        title = md_escape(row["title"])
-        evidence = f"[{title}]({row['url']})" if row.get("url") else title
+        lines.append(f"| - | - | - | {message} | - |")
+    for group in groups:
+        representative = group["representative"]
+        title = md_escape(representative["title"])
+        evidence = (
+            f"[{title}]({representative['url']})"
+            if representative.get("url")
+            else title
+        )
         lines.append(
-            f"| `{md_escape(row['repository'])}` | `{md_escape(row['kind'])}` | {evidence} | {str(row['occurred_at'])[:10] or '-'} |"
+            f"| `{md_escape(group['repository'])}` | {theme_label(group)} | **{group['event_count']}** | {evidence} | {str(group['latest_at'])[:10] or '-'} |"
         )
     lines.extend(
         [
             "",
-            "Priority: `release` → `pull_request` → labeled `issue` → recency。AI significance scoreは使いません。",
+            f"Raw untracked evidence **{payload['untracked_count']}件** → deterministic theme **{payload['untracked_theme_count']}件**。Compression: **{payload['compression_ratio'] or '-'}x**。",
+            "",
+            "Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repository内の明示scopeでgrouping、scope無しはsingleton。AI semantic clustering / significance scoreは使いません。",
             "",
         ]
     )
@@ -66,22 +81,23 @@ def build_dashboard(model: dict[str, Any]) -> str:
     if index < 0:
         raise ValueError("dashboard next-article KPI anchor is missing")
     funnel_kpi = (
-        f"| GitHub → Writing Funnel | Untracked **{funnel['untracked_count']}** / Evidence **{funnel['evidence_count']}** |\n"
+        f"| GitHub → Writing Funnel | Themes **{funnel['untracked_theme_count']}** / Events **{funnel['untracked_count']}** |\n"
     )
     rendered = rendered[:index] + funnel_kpi + rendered[index:]
 
     judgment_anchor = "### 今の判断\n\n"
     if judgment_anchor not in rendered:
         raise ValueError("dashboard judgment anchor is missing")
-    untracked = funnel["untracked_candidates"]
-    if untracked:
-        first = untracked[0]
+    groups = funnel["theme_groups"]
+    if groups:
+        first = groups[0]
+        representative = first["representative"]
         judgment = (
-            f"- GitHub実装evidenceに未記事化候補が **{funnel['untracked_count']}件** あります。先頭候補: "
-            f"`{md_escape(first['repository'])}` / {md_escape(first['title'])}。\n"
+            f"- GitHub実装の未記事化evidence **{funnel['untracked_count']}件** を、明示scopeで **{funnel['untracked_theme_count']} themes** に整理しています。先頭theme: "
+            f"`{md_escape(first['repository'])}` / {md_escape(first['label'])}（{first['event_count']} events、代表: {md_escape(representative['title'])}）。\n"
         )
     elif funnel["snapshot_available"]:
-        judgment = "- GitHub Writing Funnelで未記事化evidenceは検出されていません。\n"
+        judgment = "- GitHub Writing Funnelで未記事化themeは検出されていません。\n"
     else:
         judgment = "- GitHub Writing Funnel snapshotはまだありません。次回main/daily refresh後に候補が表示されます。\n"
     rendered = rendered.replace(judgment_anchor, judgment_anchor + judgment, 1)
@@ -104,16 +120,17 @@ def build_dashboard(model: dict[str, Any]) -> str:
 def validate_dashboard(model: dict[str, Any], rendered: str) -> None:
     base.validate_dashboard(model, rendered)
     funnel = model["github_writing_funnel"]
-    expected = f"| GitHub → Writing Funnel | Untracked **{funnel['untracked_count']}** / Evidence **{funnel['evidence_count']}** |"
+    expected = f"| GitHub → Writing Funnel | Themes **{funnel['untracked_theme_count']}** / Events **{funnel['untracked_count']}** |"
     if expected not in rendered:
         raise ValueError("dashboard GitHub funnel KPI does not match data mart")
     if "## GitHub → Writing Funnel" not in rendered:
         raise ValueError("dashboard GitHub funnel section is missing")
-    if funnel["untracked_count"] and not funnel["untracked_candidates"]:
+    if funnel["untracked_count"] and not funnel["theme_groups"]:
         raise ValueError("dashboard cannot represent non-zero untracked funnel evidence")
-    for row in funnel["untracked_candidates"]:
-        if md_escape(row["title"]) not in rendered:
-            raise ValueError("dashboard is missing an untracked GitHub evidence row")
+    for group in funnel["theme_groups"]:
+        representative = group["representative"]
+        if md_escape(representative["title"]) not in rendered:
+            raise ValueError("dashboard is missing a GitHub theme representative")
 
 
 def main() -> int:
@@ -130,7 +147,8 @@ def main() -> int:
 
     if args.check:
         print(
-            f"check completed: {model['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s)"
+            f"check completed: {model['github_writing_funnel']['untracked_count']} untracked GitHub evidence row(s), "
+            f"{model['github_writing_funnel']['untracked_theme_count']} theme(s)"
         )
         return 0
 

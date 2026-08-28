@@ -137,6 +137,30 @@ GitHub evidence titleと、次を比較します。
 
 `max_candidates` は表示量の上限です。通常priority順の `candidates` に加えて `untracked_candidates` を別viewとして保持するため、tracked evidenceが上限を埋めても未記事化候補がDashboardから消えません。
 
+## Theme grouping
+
+初回runtimeでは5 Repositoryから297件のuntracked evidenceが得られました。事実件数を削らずDashboardのノイズだけを減らすため、derived layerでdeterministic theme groupingを行います。
+
+使用するのはPR / Issue titleに明示されているConventional Commit scopeだけです。
+
+例:
+
+- `feat(ai): add runtime`
+- `fix(ai): harden runtime`
+
+同じRepository内で上記2件は `ai` themeとしてgroupingします。
+
+ルール:
+
+- Release: 常に独立theme
+- `feat(scope)` / `fix(scope)` / `perf(scope)` 等: 同一Repository・同一明示scopeでgrouping
+- scope無しevent: singletonのまま
+- Repositoryを跨いで自動groupingしない
+- title本文の意味からscopeを推測しない
+- embedding / LLM clustering / AI significance scoreを使わない
+
+したがって、raw `evidence_count / untracked_count` は事実件数として維持し、`untracked_theme_count / theme_groups` を日常判断用の圧縮viewとして追加します。
+
 ## Analytics統合
 
 ### Content Opportunities
@@ -149,7 +173,7 @@ GitHub evidence titleと、次を比較します。
 python scripts/writing_opportunities_funnel.py
 ```
 
-ここではtracked / untrackedを含むevidenceを監査できます。
+ここではtracked / untrackedを含むraw evidenceを監査できます。Theme grouping後も監査用event一覧は失いません。
 
 ### Data Mart
 
@@ -171,6 +195,11 @@ python scripts/writing_data_mart_funnel.py
 - `tracked_count`
 - `candidates`
 - `untracked_candidates`
+- `untracked_theme_count`
+- `compression_ratio`
+- `theme_groups`
+
+`theme_groups` はrepository / grouping / scope / event_count / latest_at / representative / evidenceを持ちます。
 
 ### Decision Dashboard
 
@@ -182,7 +211,7 @@ python scripts/writing_data_mart_funnel.py
 python scripts/writing_decision_dashboard_funnel.py
 ```
 
-Dashboardは日常判断用なので**untracked evidenceだけ**を一覧表示します。trackedを含む全evidenceはContent Opportunities / Data Martへ委譲し、Dashboardを情報過多にしません。
+Dashboardは日常判断用なのでraw event一覧ではなく**untracked theme**を優先表示します。raw event全件はContent Opportunities / Data Martへ委譲します。
 
 ## Security / Privacy
 
@@ -191,6 +220,7 @@ Dashboardは日常判断用なので**untracked evidenceだけ**を一覧表示�
 - GitHub Token用の新規Repository Secretを要求しない
 - APIはpublic endpointだけを利用する
 - raw snapshotへPR/Issue本文、comment、author email、Secret、Tokenを保存しない
+- Theme groupingはstored snapshotのtitle / repository / event metadataだけを使う
 - Public Portfolio JSON schemaは変更しない
 
 ## CI / main write safety
@@ -216,6 +246,8 @@ private→public化直後など判断が必要なRepositoryは、自動追加せ
 - private repositoryの収集
 - PR diffをLLMで読んで記事titleを自動生成
 - Issue本文からsignificanceを推測
+- Conventional Commit scopeが無いeventへのscope推測
+- Repositoryを跨いだsemantic grouping
 - backlogへ自動追記
 - 自動投稿
 - GitHubのlive stateをraw snapshotなしでderived reportへ直接反映
