@@ -1,11 +1,20 @@
 ---
 title: "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた"
-status: review
+status: published
+published_at: '2026-08-28'
+verified_at: '2026-08-28'
+article_type: case-study
+level: intermediate
 topics: [GitHubActions, GitHub, Python, OSS, 個人開発]
+domains: [devops, developer-productivity]
+languages: [Python]
+technologies: [GitHub Actions, GitHub Releases]
+portfolio_signals: [automation, architecture, oss]
 source_repositories: [mizzz-ivr/profile-signal, mizzz-ivr/mizzz-ivr]
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904
   zenn: null
+  note: null
 ---
 
 # 自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた
