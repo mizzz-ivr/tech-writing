@@ -16,6 +16,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 import writing_analytics as analytics
+import writing_catalog as catalog
 import writing_opportunities as opportunities
 
 EXPORT_PATH = analytics.ROOT / "data" / "exports" / "writing-portfolio.json"
@@ -202,7 +203,7 @@ def main() -> int:
     args = parse_args()
     try:
         policy = load_policy()
-        articles = opportunities.load_opportunity_articles()
+        articles = catalog.load_articles()
         snapshot = analytics.load_latest_snapshot()
         payload = build_export(articles, snapshot, policy)
         validate_export(payload, set(policy["public_source_repositories"]))
