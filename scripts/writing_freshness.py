@@ -85,31 +85,45 @@ def source_refs(article: analytics.Article) -> list[dict[str, str]]:
     return refs
 
 
-def validate_article(article: analytics.Article, as_of: date) -> tuple[date | None, list[dict[str, str]]]:
+def validate_article(
+    article: analytics.Article, freshness_as_of: date
+) -> tuple[date | None, list[dict[str, str]]]:
     verified_at = parse_verified_at(article)
     refs = source_refs(article)
     if refs and verified_at is None:
         raise ValueError(
             f"{catalog.relative_path(article)}: `source_refs` requires `verified_at`"
         )
-    if verified_at is not None and verified_at > as_of:
+    if verified_at is not None and verified_at > freshness_as_of:
         raise ValueError(
-            f"{catalog.relative_path(article)}: `verified_at` cannot be after analytics as-of date {as_of.isoformat()}"
+            f"{catalog.relative_path(article)}: `verified_at` cannot be in the future relative to {freshness_as_of.isoformat()}"
         )
     return verified_at, refs
 
 
 def freshness_payload(
-    articles: list[analytics.Article], as_of: date
+    articles: list[analytics.Article], as_of: date | None = None
 ) -> dict[str, Any]:
+    """Return freshness state using a date independent from metric snapshots.
+
+    Source freshness ages with calendar time even when the latest external metric
+    snapshot is older. Tests may inject ``as_of``; production defaults to today's
+    date in the repository's configured JST timezone.
+    """
+
+    freshness_as_of = as_of or datetime.now(analytics.JST).date()
     validated: dict[str, tuple[date | None, list[dict[str, str]]]] = {}
     for article in articles:
-        validated[article.slug] = validate_article(article, as_of)
+        validated[article.slug] = validate_article(article, freshness_as_of)
 
     rows: list[dict[str, Any]] = []
     for article in analytics.published_articles(articles):
         verified_at, refs = validated[article.slug]
-        age = (as_of - verified_at).days if verified_at is not None else None
+        age = (
+            (freshness_as_of - verified_at).days
+            if verified_at is not None
+            else None
+        )
         rows.append(
             {
                 "slug": article.slug,
@@ -141,6 +155,7 @@ def freshness_payload(
     )
 
     return {
+        "as_of": freshness_as_of.isoformat(),
         "published_articles": len(rows),
         "verified_articles": len(rows) - initial,
         "needs_initial_verification": initial,
