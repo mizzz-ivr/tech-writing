@@ -75,7 +75,7 @@ body
         )
         self.assertEqual(native.meta["article_type"], "tech")
 
-    def test_native_sidecar_adds_evidence_without_overriding_platform_fields(self):
+    def test_native_sidecar_adds_evidence_and_classification_without_overriding_platform_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             articles_dir = root / "articles"
@@ -110,6 +110,14 @@ articles:
     source_refs:
       - repository: example/repo
         commit: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    domains:
+      - ai
+    languages:
+      - TypeScript
+    technologies:
+      - OpenAI API
+    portfolio_signals:
+      - architecture
 """,
                 encoding="utf-8",
             )
@@ -125,9 +133,28 @@ articles:
         self.assertEqual(native.meta["source_repositories"], ["example/repo"])
         self.assertEqual(native.meta["verified_at"], "2026-08-28")
         self.assertEqual(len(native.meta["source_refs"]), 1)
+        self.assertEqual(native.meta["domains"], ["ai"])
+        self.assertEqual(native.meta["languages"], ["TypeScript"])
+        self.assertEqual(native.meta["technologies"], ["OpenAI API"])
+        self.assertEqual(native.meta["portfolio_signals"], ["architecture"])
         self.assertEqual(
             native.platform_url("zenn"), "https://zenn.dev/example/articles/native"
         )
+
+    def test_native_sidecar_rejects_invalid_classification_list(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            sidecar = Path(tmp) / "platform-native-analytics.yml"
+            sidecar.write_text(
+                """schema_version: 1
+articles:
+  articles/native.md:
+    technologies: OpenAI API
+""",
+                encoding="utf-8",
+            )
+            with patch.object(catalog, "NATIVE_ANALYTICS_PATH", sidecar):
+                with self.assertRaisesRegex(ValueError, "`technologies` must be a list"):
+                    catalog.load_native_analytics_metadata()
 
     def test_native_sidecar_cannot_override_publication_or_title_fields(self):
         with tempfile.TemporaryDirectory() as tmp:
