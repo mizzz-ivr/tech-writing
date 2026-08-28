@@ -68,6 +68,20 @@ class WritingFreshnessTests(unittest.TestCase):
         self.assertNotIn(repository, rendered)
         self.assertNotIn(commit, rendered)
 
+    def test_same_slug_different_layouts_keep_independent_freshness(self):
+        shared = self.article(verified_at="2026-08-20")
+        native = self.article(verified_at="2026-08-27")
+        native.path = Path("articles/example.md")
+
+        payload = freshness.freshness_payload(
+            [shared, native], date(2026, 8, 28)
+        )
+        rows = {row["path"]: row for row in payload["articles"]}
+
+        self.assertEqual(payload["published_articles"], 2)
+        self.assertEqual(rows["articles/example/article.md"]["days_since_verified"], 8)
+        self.assertEqual(rows["articles/example.md"]["days_since_verified"], 1)
+
     def test_invalid_verified_at_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "verified_at"):
             freshness.freshness_payload(
