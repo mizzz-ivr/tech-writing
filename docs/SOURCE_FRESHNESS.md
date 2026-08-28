@@ -6,9 +6,11 @@
 
 Source Freshnessは独立した台帳やDashboardを増やさず、Writing Analyticsの共通Data MartとDecision Dashboardへ統合します。
 
-## Metadata
+## Metadataの保存場所
 
-共通記事front matterでは次をoptionalで使用します。
+### 共通記事
+
+`articles/<slug>/article.md` のfront matterへoptionalで記録します。
 
 ```yaml
 verified_at: 2026-08-28
@@ -19,7 +21,37 @@ source_refs:
     commit: 0123456789abcdef0123456789abcdef01234567
 ```
 
-### `verified_at`
+### Platform-native記事
+
+Zenn-native `articles/<slug>.md` のfront matterはZenn側のschemaを優先し、Analytics専用fieldを追加しません。
+
+代わりに次のsidecarをSource of Truthとして使用します。
+
+```text
+metadata/platform-native-analytics.yml
+```
+
+```yaml
+schema_version: 1
+articles:
+  articles/example.md:
+    source_repositories:
+      - owner/repository
+    verified_at: 2026-08-28
+    source_refs:
+      - repository: owner/repository
+        commit: 0123456789abcdef0123456789abcdef01234567
+```
+
+sidecarで許可するfieldは次の3つだけです。
+
+- `source_repositories`
+- `verified_at`
+- `source_refs`
+
+`title` / `status` / `published_at` / 公開URL等はoverrideできません。sidecarはPublication Registryに存在する公開済みの直接 `articles/<slug>.md` だけを対象にできます。
+
+## `verified_at`
 
 - 形式: `YYYY-MM-DD`
 - 意味: 元Repository / Docs / CI等を見て、記事内の技術的事実を最後に実確認した日
@@ -27,9 +59,9 @@ source_refs:
 - Source Freshnessは外部metrics snapshotの日付に依存せず、JSTの当日を独立した `freshness.as_of` として使う
 - `freshness.as_of` より未来の日付はCIでrejectする
 
-これにより、最新metrics snapshotが昨日でも、今日行った正当な記事verificationをfuture dateとして誤判定しません。
+これにより、最新metrics snapshotが昨日でも、今日行った正当なarticle verificationをfuture dateとして誤判定しません。
 
-### `source_refs`
+## `source_refs`
 
 verification時に確認したimmutable source commitを残したい場合だけ使用します。
 
@@ -74,7 +106,7 @@ data/analytics/writing-analytics.json
 - oldest verification age
 - articleごとのverified date / age / source ref count
 
-Data Martには `source_refs.repository` やcommit SHAそのものを複製せず、`source_ref_count` だけを出します。元のevidenceはarticle metadataをSource of Truthとします。
+Data Martには `source_refs.repository` やcommit SHAそのものを複製せず、`source_ref_count` だけを出します。元のevidenceはarticle front matterまたはplatform-native sidecarをSource of Truthとします。
 
 同じslugを持つ `articles/<slug>.md` と `articles/<slug>/article.md` が存在しても、Freshnessのarticle identityはrepository内pathで分離します。
 
@@ -100,8 +132,6 @@ reports/visual-dashboard.md
 
 ## CI
 
-次でvalidationできます。
-
 ```bash
 python scripts/writing_data_mart.py --check
 python -m unittest discover -s tests -v
@@ -110,14 +140,12 @@ python -m unittest discover -s tests -v
 reject対象:
 
 - invalid / future `verified_at`
-- `source_refs` がlistではない
-- source refのfield不足・余分なfield
-- malformed repository
-- malformed 40-character commit SHA
+- malformed / duplicate source ref
 - `source_refs.repository` と `source_repositories` の不整合
 - `verified_at` が無い状態で `source_refs` を記録
-- duplicate source ref
 - duplicate analytics article path
+- sidecarのunsupported field
+- sidecarから共通記事や未公開native記事をoverrideすること
 
 ## Non-goals
 
