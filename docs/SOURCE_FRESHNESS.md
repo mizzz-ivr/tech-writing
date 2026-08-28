@@ -24,7 +24,10 @@ source_refs:
 - 形式: `YYYY-MM-DD`
 - 意味: 元Repository / Docs / CI等を見て、記事内の技術的事実を最後に実確認した日
 - 実確認していない過去日を推測して入れない
-- Analyticsのas-of dateより未来の日付はCIでrejectする
+- Source Freshnessは外部metrics snapshotの日付に依存せず、JSTの当日を独立した `freshness.as_of` として使う
+- `freshness.as_of` より未来の日付はCIでrejectする
+
+これにより、最新metrics snapshotが昨日でも、今日行った正当な記事verificationをfuture dateとして誤判定しません。
 
 ### `source_refs`
 
@@ -64,6 +67,7 @@ data/analytics/writing-analytics.json
 
 `freshness` sectionでは次を確認できます。
 
+- `as_of`: Freshness専用のJST基準日
 - published article総数
 - verified article数
 - needs initial verification件数
@@ -71,6 +75,8 @@ data/analytics/writing-analytics.json
 - articleごとのverified date / age / source ref count
 
 Data Martには `source_refs.repository` やcommit SHAそのものを複製せず、`source_ref_count` だけを出します。元のevidenceはarticle metadataをSource of Truthとします。
+
+同じslugを持つ `articles/<slug>.md` と `articles/<slug>/article.md` が存在しても、Freshnessのarticle identityはrepository内pathで分離します。
 
 Decision Dashboard:
 
@@ -111,6 +117,7 @@ reject対象:
 - `source_refs.repository` と `source_repositories` の不整合
 - `verified_at` が無い状態で `source_refs` を記録
 - duplicate source ref
+- duplicate analytics article path
 
 ## Non-goals
 
