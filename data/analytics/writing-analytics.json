@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-08-28",
+  "as_of": "2026-08-29",
   "overview": {
     "tracked_articles": 7,
     "published_articles": 5,
@@ -12,8 +12,8 @@
     "pipeline_only_coverage_gaps": 5,
     "freshness_needs_initial_verification": 4,
     "backlog_items": 48,
-    "github_untracked_evidence": 297,
-    "github_untracked_themes": 224
+    "github_untracked_evidence": 293,
+    "github_untracked_themes": 223
   },
   "pipeline": {
     "draft": 1,
@@ -22,10 +22,10 @@
     "archived": 0
   },
   "trend_readiness": {
-    "snapshot_count": 2,
+    "snapshot_count": 3,
     "first_snapshot_at": "2026-08-27",
-    "last_snapshot_at": "2026-08-28",
-    "observed_span_days": 1,
+    "last_snapshot_at": "2026-08-29",
+    "observed_span_days": 2,
     "windows": {
       "7": false,
       "30": false,
@@ -33,11 +33,11 @@
     }
   },
   "freshness": {
-    "as_of": "2026-08-28",
+    "as_of": "2026-08-29",
     "published_articles": 5,
     "verified_articles": 1,
     "needs_initial_verification": 4,
-    "oldest_verification_age_days": 0,
+    "oldest_verification_age_days": 1,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -81,7 +81,7 @@
         "path": "articles/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
-        "days_since_verified": 0,
+        "days_since_verified": 1,
         "source_ref_count": 0
       }
     ]
@@ -93,7 +93,7 @@
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -104,7 +104,7 @@
           "value": "GitHubActions",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -115,7 +115,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -126,7 +126,7 @@
           "value": "個人開発",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -137,7 +137,7 @@
           "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -148,7 +148,7 @@
           "value": "ai-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -159,7 +159,7 @@
           "value": "architecture",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -170,7 +170,7 @@
           "value": "github",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -181,7 +181,7 @@
           "value": "individual-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -192,7 +192,7 @@
           "value": "openai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -203,7 +203,7 @@
           "value": "OSS",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -214,7 +214,7 @@
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -225,7 +225,7 @@
           "value": "typescript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -236,7 +236,7 @@
           "value": "生成ai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -258,7 +258,7 @@
           "value": "developer-productivity",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -269,7 +269,7 @@
           "value": "devops",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -280,7 +280,7 @@
           "value": "ai",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -297,7 +297,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -308,7 +308,7 @@
           "value": "TypeScript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -325,7 +325,7 @@
           "value": "GitHub Actions",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -336,7 +336,7 @@
           "value": "GitHub API",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -347,7 +347,7 @@
           "value": "GitHub",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -358,7 +358,7 @@
           "value": "GitHub Events API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -369,7 +369,7 @@
           "value": "GitHub Issues",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -380,7 +380,7 @@
           "value": "GitHub Pull Requests",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -391,7 +391,7 @@
           "value": "GitHub Releases",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -402,7 +402,7 @@
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 2,
+          "days_since_last": 3,
           "windows": {
             "30": true,
             "90": true,
@@ -413,7 +413,7 @@
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 1,
+          "days_since_last": 2,
           "windows": {
             "30": true,
             "90": true,
@@ -430,7 +430,7 @@
           "value": "architecture",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -441,7 +441,7 @@
           "value": "automation",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -452,7 +452,7 @@
           "value": "ai-assisted-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -463,7 +463,7 @@
           "value": "ci-cd",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 2,
+          "days_since_last": 3,
           "windows": {
             "30": true,
             "90": true,
@@ -474,7 +474,7 @@
           "value": "development-process",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -485,7 +485,7 @@
           "value": "oss",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 0,
+          "days_since_last": 1,
           "windows": {
             "30": true,
             "90": true,
@@ -510,7 +510,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 887
+        "page_views": 936
       }
     },
     "observations": [
@@ -533,7 +533,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 166
+          "page_views": 171
         }
       },
       {
@@ -544,7 +544,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 173
+          "page_views": 181
         }
       },
       {
@@ -555,7 +555,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 189
+          "page_views": 221
         }
       },
       {
@@ -566,7 +566,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 359
+          "page_views": 363
         }
       }
     ],
@@ -872,7 +872,7 @@
     }
   ],
   "github_writing_funnel": {
-    "as_of": "2026-08-28",
+    "as_of": "2026-08-29",
     "snapshot_available": true,
     "monitored_repositories": [
       "ivRooom/Herta",
@@ -881,8 +881,8 @@
       "mizzz-ivr/ivmz-home",
       "mizzz-ivr/mizzz-ivr"
     ],
-    "evidence_count": 297,
-    "untracked_count": 297,
+    "evidence_count": 293,
+    "untracked_count": 293,
     "tracked_count": 0,
     "candidates": [
       {
@@ -922,6 +922,90 @@
         "title_similarity": 0.217
       },
       {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#351",
+        "title": "feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加",
+        "url": "https://github.com/ivRooom/Herta/pull/351",
+        "occurred_at": "2026-08-29T06:43:38Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.276
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#59",
+        "title": "fix(profile): make Profile Signal dashboard full width",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/59",
+        "occurred_at": "2026-08-29T04:33:06Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.242
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#34",
+        "title": "security: add CSP Report-Only observation harness",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/34",
+        "occurred_at": "2026-08-28T17:37:50Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#28",
+        "title": "docs(security): align post-rollout production guardrails",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/28",
+        "occurred_at": "2026-08-28T11:44:29Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.39
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#26",
+        "title": "feat(ops): add independent Netlify Profile Signal scheduler",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/26",
+        "occurred_at": "2026-08-28T11:19:25Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#24",
+        "title": "test: harden Netlify Preview E2E transient GET retries",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/24",
+        "occurred_at": "2026-08-28T06:34:56Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.2
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#57",
+        "title": "feat(profile): accept independent external refresh dispatch",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/57",
+        "occurred_at": "2026-08-28T06:15:24Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.242
+      },
+      {
         "repository": "mizzz-ivr/ivmz-home",
         "kind": "pull_request",
         "source_id": "#21",
@@ -944,90 +1028,6 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.304
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#349",
-        "title": "feat(ai): add secure image generation artifact runtime",
-        "url": "https://github.com/ivRooom/Herta/pull/349",
-        "occurred_at": "2026-08-27T23:00:38Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.34
-      },
-      {
-        "repository": "mizzz-ivr/profile-signal",
-        "kind": "pull_request",
-        "source_id": "#7",
-        "title": "docs: add deterministic sample profile page",
-        "url": "https://github.com/mizzz-ivr/profile-signal/pull/7",
-        "occurred_at": "2026-08-27T22:46:20Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.324
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#55",
-        "title": "fix(profile): add scheduler freshness fallback",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
-        "occurred_at": "2026-08-27T22:11:01Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.291
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#54",
-        "title": "fix(profile): reactivate schedules with direct workflow edit",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
-        "occurred_at": "2026-08-27T13:44:51Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.328
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#53",
-        "title": "fix(profile): re-register Profile Signal schedules",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
-        "occurred_at": "2026-08-27T13:39:45Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.29
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#51",
-        "title": "chore: prune merged profile work branches",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/51",
-        "occurred_at": "2026-08-27T13:31:05Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.31
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#50",
-        "title": "feat(profile): add Engineering DNA public evidence profile",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/50",
-        "occurred_at": "2026-08-27T13:01:42Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.286
       }
     ],
     "untracked_candidates": [
@@ -1068,6 +1068,90 @@
         "title_similarity": 0.217
       },
       {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#351",
+        "title": "feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加",
+        "url": "https://github.com/ivRooom/Herta/pull/351",
+        "occurred_at": "2026-08-29T06:43:38Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.276
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#59",
+        "title": "fix(profile): make Profile Signal dashboard full width",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/59",
+        "occurred_at": "2026-08-29T04:33:06Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.242
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#34",
+        "title": "security: add CSP Report-Only observation harness",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/34",
+        "occurred_at": "2026-08-28T17:37:50Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#28",
+        "title": "docs(security): align post-rollout production guardrails",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/28",
+        "occurred_at": "2026-08-28T11:44:29Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.39
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#26",
+        "title": "feat(ops): add independent Netlify Profile Signal scheduler",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/26",
+        "occurred_at": "2026-08-28T11:19:25Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.286
+      },
+      {
+        "repository": "mizzz-ivr/ivmz-home",
+        "kind": "pull_request",
+        "source_id": "#24",
+        "title": "test: harden Netlify Preview E2E transient GET retries",
+        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/24",
+        "occurred_at": "2026-08-28T06:34:56Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.2
+      },
+      {
+        "repository": "mizzz-ivr/mizzz-ivr",
+        "kind": "pull_request",
+        "source_id": "#57",
+        "title": "feat(profile): accept independent external refresh dispatch",
+        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/57",
+        "occurred_at": "2026-08-28T06:15:24Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.242
+      },
+      {
         "repository": "mizzz-ivr/ivmz-home",
         "kind": "pull_request",
         "source_id": "#21",
@@ -1090,94 +1174,10 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.304
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#349",
-        "title": "feat(ai): add secure image generation artifact runtime",
-        "url": "https://github.com/ivRooom/Herta/pull/349",
-        "occurred_at": "2026-08-27T23:00:38Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.34
-      },
-      {
-        "repository": "mizzz-ivr/profile-signal",
-        "kind": "pull_request",
-        "source_id": "#7",
-        "title": "docs: add deterministic sample profile page",
-        "url": "https://github.com/mizzz-ivr/profile-signal/pull/7",
-        "occurred_at": "2026-08-27T22:46:20Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.324
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#55",
-        "title": "fix(profile): add scheduler freshness fallback",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
-        "occurred_at": "2026-08-27T22:11:01Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.291
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#54",
-        "title": "fix(profile): reactivate schedules with direct workflow edit",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
-        "occurred_at": "2026-08-27T13:44:51Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.328
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#53",
-        "title": "fix(profile): re-register Profile Signal schedules",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
-        "occurred_at": "2026-08-27T13:39:45Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.29
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#51",
-        "title": "chore: prune merged profile work branches",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/51",
-        "occurred_at": "2026-08-27T13:31:05Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.31
-      },
-      {
-        "repository": "mizzz-ivr/mizzz-ivr",
-        "kind": "pull_request",
-        "source_id": "#50",
-        "title": "feat(profile): add Engineering DNA public evidence profile",
-        "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/50",
-        "occurred_at": "2026-08-27T13:01:42Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.286
       }
     ],
-    "untracked_theme_count": 224,
-    "compression_ratio": 1.33,
+    "untracked_theme_count": 223,
+    "compression_ratio": 1.31,
     "theme_groups": [
       {
         "repository": "mizzz-ivr/profile-signal",
@@ -1306,85 +1306,43 @@
         "identity": "studio"
       },
       {
-        "repository": "ivRooom/Herta",
-        "grouping": "explicit_scope",
-        "scope": "deps",
-        "label": "deps",
-        "event_count": 12,
-        "latest_at": "2026-08-06T06:32:43Z",
-        "kinds": [
-          "pull_request"
-        ],
-        "representative": {
-          "kind": "pull_request",
-          "source_id": "#83",
-          "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
-          "url": "https://github.com/ivRooom/Herta/pull/83",
-          "occurred_at": "2026-08-06T06:32:43Z"
-        },
-        "evidence": [
-          {
-            "kind": "pull_request",
-            "source_id": "#83",
-            "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
-            "url": "https://github.com/ivRooom/Herta/pull/83",
-            "occurred_at": "2026-08-06T06:32:43Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#68",
-            "title": "build(deps): bump actions/upload-artifact from 4.6.2 to 7.0.1",
-            "url": "https://github.com/ivRooom/Herta/pull/68",
-            "occurred_at": "2026-07-27T04:09:50Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#67",
-            "title": "build(deps): bump pnpm/action-setup from 4 to 6",
-            "url": "https://github.com/ivRooom/Herta/pull/67",
-            "occurred_at": "2026-07-27T04:09:30Z"
-          }
-        ],
-        "identity": "deps"
-      },
-      {
         "repository": "mizzz-ivr/mizzz-ivr",
         "grouping": "explicit_scope",
         "scope": "profile",
         "label": "profile",
-        "event_count": 10,
-        "latest_at": "2026-08-27T22:11:01Z",
+        "event_count": 12,
+        "latest_at": "2026-08-29T04:33:06Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#55",
-          "title": "fix(profile): add scheduler freshness fallback",
-          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
-          "occurred_at": "2026-08-27T22:11:01Z"
+          "source_id": "#59",
+          "title": "fix(profile): make Profile Signal dashboard full width",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/59",
+          "occurred_at": "2026-08-29T04:33:06Z"
         },
         "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#59",
+            "title": "fix(profile): make Profile Signal dashboard full width",
+            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/59",
+            "occurred_at": "2026-08-29T04:33:06Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#57",
+            "title": "feat(profile): accept independent external refresh dispatch",
+            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/57",
+            "occurred_at": "2026-08-28T06:15:24Z"
+          },
           {
             "kind": "pull_request",
             "source_id": "#55",
             "title": "fix(profile): add scheduler freshness fallback",
             "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
             "occurred_at": "2026-08-27T22:11:01Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#54",
-            "title": "fix(profile): reactivate schedules with direct workflow edit",
-            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
-            "occurred_at": "2026-08-27T13:44:51Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#53",
-            "title": "fix(profile): re-register Profile Signal schedules",
-            "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
-            "occurred_at": "2026-08-27T13:39:45Z"
           }
         ],
         "identity": "profile"
@@ -1436,19 +1394,26 @@
         "grouping": "explicit_scope",
         "scope": "ai",
         "label": "ai",
-        "event_count": 6,
-        "latest_at": "2026-08-27T23:00:38Z",
+        "event_count": 7,
+        "latest_at": "2026-08-29T06:43:38Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#349",
-          "title": "feat(ai): add secure image generation artifact runtime",
-          "url": "https://github.com/ivRooom/Herta/pull/349",
-          "occurred_at": "2026-08-27T23:00:38Z"
+          "source_id": "#351",
+          "title": "feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/351",
+          "occurred_at": "2026-08-29T06:43:38Z"
         },
         "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#351",
+            "title": "feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加",
+            "url": "https://github.com/ivRooom/Herta/pull/351",
+            "occurred_at": "2026-08-29T06:43:38Z"
+          },
           {
             "kind": "pull_request",
             "source_id": "#349",
@@ -1462,16 +1427,51 @@
             "title": "feat(ai): add isolated Python code execution runtime",
             "url": "https://github.com/ivRooom/Herta/pull/348",
             "occurred_at": "2026-08-27T12:39:11Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#347",
-            "title": "feat(ai): add Phase 1 artifact runtime and Discord attachment delivery",
-            "url": "https://github.com/ivRooom/Herta/pull/347",
-            "occurred_at": "2026-08-27T08:54:58Z"
           }
         ],
         "identity": "ai"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "deps",
+        "label": "deps",
+        "event_count": 7,
+        "latest_at": "2026-08-06T06:32:43Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#83",
+          "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
+          "url": "https://github.com/ivRooom/Herta/pull/83",
+          "occurred_at": "2026-08-06T06:32:43Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#83",
+            "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
+            "url": "https://github.com/ivRooom/Herta/pull/83",
+            "occurred_at": "2026-08-06T06:32:43Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#68",
+            "title": "build(deps): bump actions/upload-artifact from 4.6.2 to 7.0.1",
+            "url": "https://github.com/ivRooom/Herta/pull/68",
+            "occurred_at": "2026-07-27T04:09:50Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#67",
+            "title": "build(deps): bump pnpm/action-setup from 4 to 6",
+            "url": "https://github.com/ivRooom/Herta/pull/67",
+            "occurred_at": "2026-07-27T04:09:30Z"
+          }
+        ],
+        "identity": "deps"
       },
       {
         "repository": "ivRooom/Herta",
@@ -1518,48 +1518,6 @@
       {
         "repository": "ivRooom/Herta",
         "grouping": "explicit_scope",
-        "scope": "runtime",
-        "label": "runtime",
-        "event_count": 4,
-        "latest_at": "2026-08-24T04:32:12Z",
-        "kinds": [
-          "pull_request"
-        ],
-        "representative": {
-          "kind": "pull_request",
-          "source_id": "#317",
-          "title": "docs(runtime): Worker Runtime consumer要否を明文化",
-          "url": "https://github.com/ivRooom/Herta/pull/317",
-          "occurred_at": "2026-08-24T04:32:12Z"
-        },
-        "evidence": [
-          {
-            "kind": "pull_request",
-            "source_id": "#317",
-            "title": "docs(runtime): Worker Runtime consumer要否を明文化",
-            "url": "https://github.com/ivRooom/Herta/pull/317",
-            "occurred_at": "2026-08-24T04:32:12Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#308",
-            "title": "feat(runtime): Plugin Runtime ACKをconsumer別に識別",
-            "url": "https://github.com/ivRooom/Herta/pull/308",
-            "occurred_at": "2026-08-23T14:19:29Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#306",
-            "title": "feat(runtime): 起動時のPlugin復旧ACKを自動記録",
-            "url": "https://github.com/ivRooom/Herta/pull/306",
-            "occurred_at": "2026-08-23T08:39:09Z"
-          }
-        ],
-        "identity": "runtime"
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "grouping": "explicit_scope",
         "scope": "suggestion",
         "label": "suggestion",
         "event_count": 3,
@@ -1598,6 +1556,48 @@
           }
         ],
         "identity": "suggestion"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "runtime",
+        "label": "runtime",
+        "event_count": 3,
+        "latest_at": "2026-08-24T04:32:12Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#317",
+          "title": "docs(runtime): Worker Runtime consumer要否を明文化",
+          "url": "https://github.com/ivRooom/Herta/pull/317",
+          "occurred_at": "2026-08-24T04:32:12Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#317",
+            "title": "docs(runtime): Worker Runtime consumer要否を明文化",
+            "url": "https://github.com/ivRooom/Herta/pull/317",
+            "occurred_at": "2026-08-24T04:32:12Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#308",
+            "title": "feat(runtime): Plugin Runtime ACKをconsumer別に識別",
+            "url": "https://github.com/ivRooom/Herta/pull/308",
+            "occurred_at": "2026-08-23T14:19:29Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#306",
+            "title": "feat(runtime): 起動時のPlugin復旧ACKを自動記録",
+            "url": "https://github.com/ivRooom/Herta/pull/306",
+            "occurred_at": "2026-08-23T08:39:09Z"
+          }
+        ],
+        "identity": "runtime"
       },
       {
         "repository": "ivRooom/Herta",
