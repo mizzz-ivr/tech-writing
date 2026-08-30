@@ -133,6 +133,12 @@ Profile Signalだけで連続投稿を増やすのではなく、**新しい実�
 
 ## CI / Security / Platform
 
+- [~] Qiita: GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた
+  - 媒体: Qiita
+  - 本文: draft (`articles/260831-selfhosted-graviton-runner/article.md`)
+  - Source of Truth: `ivRooom/ivrm-web`
+  - 注意: account id / instance id / subnet / GitHub App id は記事に出さない
+  - 続編候補(Zenn): 常時起動runner → ephemeral scale-to-zero の設計判断
 - [ ] 個人開発にSBOMとGrypeを入れてみた話
 - [ ] CIをDefinition of DoneとしてAI開発エージェントに守らせる
 
