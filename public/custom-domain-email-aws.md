@@ -29,7 +29,7 @@ agreed_posting_campaign_term: false
 - 受信には何が必要か
 - 送信には何が必要か
 - MX / SPF / DKIM / DMARCは何をしているのか
-- AWSではSES / WorkMail等をどう使い分けるのか
+- Amazon SESでできること / できないことは何か
 - 既存DNSを壊さず移行するには何を確認するか
 - 実際に送受信できたことをどう検証するか
 
@@ -64,7 +64,11 @@ Domain / DNS
 
 AWSを使う場合も、この2つを分けて考える。
 
-Amazon SESはメール送信だけでなく受信も扱えるが、SESの受信endpointはIMAP / POP3メールボックスではない。通常のメールクライアントで直接Inboxとして使う場合はAmazon WorkMail等、別のmailbox設計が必要になる。
+Amazon SESはメール送信だけでなく受信も扱えるが、SESの受信endpointはIMAP / POP3メールボックスではない。SES Email ReceivingではReceipt Rulesを使ってS3 / Lambda / SNS等へメールを処理する。
+
+通常のメールクライアントで直接Inboxとして使いたい場合は、SESとは別にmailbox providerが必要になる。
+
+Amazon WorkMailは2026年4月30日から新規顧客受付を終了し、2027年3月31日にサービス終了予定のため、新規構成の候補にはしない。
 
 ## AWSでどの受信構成にするか
 
@@ -73,8 +77,8 @@ Amazon SESはメール送信だけでなく受信も扱えるが、SESの受信e
 候補:
 
 1. 現行受信経路を維持し、送信だけAmazon SESへ移す
-2. Amazon SES Email Receiving + Receipt RulesでS3 / Lambda等へ処理する
-3. 通常のメールボックスが必要ならAmazon WorkMailを採用する
+2. Amazon SES Email Receiving + Receipt RulesでS3 / Lambda / SNS等へ処理する
+3. 通常のメールボックスが必要ならAWS外を含む別mailbox providerを組み合わせる
 
 最終記事では、実際に採用した構成だけを手順として説明し、不採用案は判断理由として簡潔に残す。
 
@@ -138,7 +142,19 @@ DMARC : TODO
 
 <!-- IMAGE: Authentication-Results -->
 
-### 受信経路も実測する
+### bounce / complaintを扱う
+
+TODO: 実際に採用したSNS / Event Destinations等の構成と運用。
+
+### 受信方式を構築する
+
+TODO: 現行受信維持 / SES Email Receivingのどちらを採用したか、理由と構成を記載する。
+
+AWSへ受信も移す場合は、Receipt RulesとS3 / Lambda / SNS等の実際の処理を記録する。
+
+<!-- IMAGE: inbound architecture -->
+
+### 受信を実測する
 
 TODO: 採用した受信方式で `ivmz@ivrm.jp` 等が正常に届くことを確認。
 
@@ -147,6 +163,25 @@ TODO: 採用した受信方式で `ivmz@ivrm.jp` 等が正常に届くことを�
 ### 変更後も既存アドレスが壊れていないか確認する
 
 TODO: `ivmz@` / `ivuru@` / `mizzz@` / `contact@` / `security@` / legacyの回帰テスト。
+
+## 独自ドメイン取得後にやったこと
+
+最終的には、実体験から次のようなチェックリストにまとめる。
+
+- [ ] 使うメールアドレス / Roleを決める
+- [ ] 現在のMX / SPF / DKIM / DMARCを記録する
+- [ ] 受信方式を決める
+- [ ] 送信providerを決める
+- [ ] Amazon SES domain identityをverifyする
+- [ ] DKIM / SPF / DMARCを設定する
+- [ ] custom MAIL FROMの要否を決める
+- [ ] sandbox / Production accessを整理する
+- [ ] least-privilege IAMを用意する
+- [ ] bounce / complaint handlingを用意する
+- [ ] 実際に送信する
+- [ ] SPF / DKIM / DMARCを実測する
+- [ ] 実際に受信する
+- [ ] 既存アドレスの回帰テストを行う
 
 ## 公開前チェック
 
