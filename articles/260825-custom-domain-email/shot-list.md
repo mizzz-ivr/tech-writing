@@ -1,139 +1,143 @@
 # 独自ドメインメール記事 — スクリーンショット計画
 
-Qiita canonical: `public/custom-domain-email-cloudflare.md`
+Qiita canonical: `public/custom-domain-email-aws.md`
 
 無加工原本は公開Repositoryへ置かない。公開時はmask / cropしたコピーだけを使う。
 
-## 取得済み
+## 取得済みBefore素材
 
 - [x] `ivrm.jp` DNS一覧
 - [x] `mizzz.jp` DNS一覧
-- [x] `ivrm.jp` Email Routing rules
-- [x] `mizzz.jp` Email Routing rule
+- [x] 現在の受信Routing構成
 - [x] Destination Addresses一覧（内部証跡のみ）
-- [x] Email Sending / Workers Paid gate
 
-## 公開記事で使う候補
+Cloudflare Email Sending / Workers Paid画面はAWS採用後の主手順には使用しない。必要なら「検討した代替案」の補助画像として扱う。
 
-### 01-before-dns.png
+## AWS実装時の必須画像
 
-`ivrm.jp` のメール関連DNS。MX / SPF / DKIM / DMARCと、必要ならSES / Resend系既存レコードが分かる範囲。
+### 01-before-mail-dns.png
 
-公開時:
-- unrelated A / CNAME / origin IPをcrop
-- Account / Zone情報を不要なら除外
+AWS変更前のMX / SPF / DKIM / DMARC。公開時はメール関連だけcropする。
 
-### 02-email-routing-rule.png
+### 02-ses-domain-identity.png
 
-Email RoutingでCustom AddressからVerified Destinationへ転送する設定が分かる画面。
+Amazon SESで `ivrm.jp` のdomain identityを作成する画面。
 
-公開時:
-- destination addressを完全にmask
-- Inbox側の個人情報を含めない
+Secret / AWS account情報は映さない。
 
-### 03-inbound-test.png
+### 03-ses-dkim-records.png
 
-`ivmz@ivrm.jp` 等へ外部から送り、実際に受信できた代表1件。
+SESが要求するDKIM用DNSレコード。
 
-公開時:
-- destination mailboxをmask
-- unrelated inbox contentをcrop
+実際に表示された値を基に記事を書く。推測値は使わない。
 
-### 04-workers-paid-gate.png
+### 04-mail-from-records.png
 
-Free状態でEmail Sendingを開いた際のWorkers Paid要求画面。
+custom MAIL FROMを採用する場合のみ。
 
-記事で伝えること:
-- 「無料でできる」が主題ではない
-- 送信基盤選択には料金・制約がある
-- 今回のCloudflare Email Sending採用判断ではここがgateになった
+MX / SPFの追加内容が分かる画面を残す。
 
-### 05-onboard-domain.png
+### 05-ses-identity-verified.png
 
-`Email Service > Email Sending > Onboard Domain` で `ivrm.jp` を選ぶ画面。
+identity / DKIM / MAIL FROMのverification完了状態。
 
-### 06-dns-preview.png
+### 06-ses-production-access.png
 
-Onboard確定前のDNS Preview。
+Sandbox / Production accessの状態が分かる範囲。
 
-**最重要。Done / Confirm前に撮る。**
+申請本文やaccount情報など公開不要情報は映さない。
 
-記事で伝えること:
-- 送信基盤導入時に何がDNSへ追加されるのか確認してから変更した
+### 07-iam-permission.png
 
-### 07-after-dns.png
+SES送信用IAMの権限設計が分かる画面または公開可能なpolicy抜粋。
 
-Email Sending Onboard後のメール関連DNS。
+Access Key / Secret Access Keyは絶対に映さない。
 
-Beforeと比較できる粒度に揃える。
+### 08-send-success.png
 
-### 08-api-token-permission.png
+`ivmz@ivrm.jp` から実際に送信できたことが分かるログ / UI。
 
-API Token作成時の `Email Sending: Edit` Permission設定。
+recipientやrequest IDは必要に応じてmaskする。
 
-**Token値が表示される発行完了画面は撮らない。**
+### 09-authentication-results.png
 
-### 09-curl-smtp-success.png
+受信メールのSPF / DKIM / DMARC実測。
 
-`ivmz@ivrm.jp` からcurl SMTP送信が成功したターミナル。
+PASSを前提にせず、実際の結果を掲載する。
 
-mask:
-- API Token
-- recipient
-- unnecessary Message-ID
+### 10-bounce-complaint.png
 
-### 10-delivery-logs.png
+bounce / complaint handlingを記事で扱う場合のみ。
 
-Cloudflare Delivery Logs。
+第三者アドレスやMessage-ID等を公開しない。
 
-mask:
-- recipient
-- unnecessary Message-ID
+### 11-inbound-architecture.png
 
-### 11-authentication-results.png
+最終的に採用した受信方式が分かる画面。
 
-受信側メールヘッダーのSPF / DKIM / DMARC実測。
+- 現行受信を維持する場合: 代表Routing画面
+- SES Email Receivingの場合: receipt rule / action
+- WorkMailの場合: domain / mailbox設定の公開可能部分
 
-記事では実測値をそのまま使い、最初からPASS前提にしない。
+### 12-inbound-test.png
 
-### 12-inbound-regression.png
+`ivmz@ivrm.jp` 等への受信成功を示す代表1枚。
 
-Email Sending追加後もEmail Routingで受信できることを示す代表1件。
+Inbox全体は不要。destinationと他メールはmaskする。
 
-## 補助素材
+### 13-after-mail-dns.png
 
-次は記事本文の理解に必要な場合だけ使う。
+AWS構築後のメール関連DNS。
 
-- `mizzz.jp` legacy DNS
-- `ivuru@ivrm.jp` からの送信
-- `mizzz@ivrm.jp` からの送信
-- `contact@ivrm.jp` からの送信
-- `security@ivrm.jp` からの送信
-- legacy `contact@mizzz.jp` の送信判断
+Beforeと同じ粒度で比較できるようにする。
 
-同じ結果を示すスクリーンショットを大量に並べない。
+## エラー時に必ず残す画像
 
-## エラーが出た場合
-
-成功画面より価値が高い可能性があるため、その場で保存する。
-
-候補:
-- SMTP auth failure (`535`)
-- sender domain not onboarded (`550`)
-- TLS / portミス
-- DNS verification待ち
+- SES identity verification待ち / failure
+- DKIM verification failure
+- custom MAIL FROM failure
+- sandbox宛先制限
+- IAM AccessDenied
+- MessageRejected
 - SPF / DKIM / DMARC failure
-- SES / Resend既存DNSとの競合
+- MX migration failure
+- receipt rule / Lambda / S3 delivery failure
 
-Secretやrecipientを含む場合は原本のみ保持し、公開用コピーを別に作る。
+成功だけでなく、実際に詰まった箇所を記事の価値にする。
 
-## 画像を入れるタイミング
+## 公開しないもの
 
-現時点ではQiita原稿にHTML commentのplaceholderだけを置く。
+- AWS Access Key / Secret Access Key
+- SMTP credential
+- Session token
+- AWS Account ID（記事に不要なら）
+- verified destinationの実アドレス
+- Billing情報
+- Inbox全体
+- Production origin IP
+- 不要なMessage-ID / request ID
 
-理由:
-- 無加工スクリーンショットをpublic Repositoryへ置かない
-- 現RepositoryにQiita画像の共通アップロード規約がまだない
-- 検証途中で画像を確定するとBefore / After差分が崩れる
+## 作業順 = 撮影順
 
-公開直前にmask / crop済み画像の置き場所・URLを確定して本文へ差し込む。
+1. Before DNS（取得済み）
+2. AWS受信方式を決定
+3. SES domain identity
+4. DKIM設定
+5. custom MAIL FROMを使う場合のみ設定
+6. identity verification
+7. sandbox / Production access
+8. least-privilege IAM
+9. SES adapter / 実送信
+10. SPF / DKIM / DMARC
+11. bounce / complaint handling
+12. 採用した受信方式を構築
+13. 受信テスト
+14. After DNS
+15. 全アドレス回帰テスト
+16. 公開用mask / crop
+
+## Dependency
+
+この撮影は `mizzz-ivr/ivmz-home` Issue #35 のAWS mail implementationと同時に行う。
+
+記事作業だけを先行させない。
