@@ -59,13 +59,15 @@ Amazon SESを第一候補にする。
 
 AWS利用を理由に即座にMXを変更しない。
 
+Amazon SES Email Receivingは受信処理を行えるがIMAP / POP mailboxではない。
+
 受信方式は実装時に次から確定する。
 
 1. 現行受信経路を維持し、送信だけSESへ移行
-2. SES Email Receiving + Receipt Rules + S3 / Lambda等
-3. 通常mailboxが必要ならAmazon WorkMail等
+2. SES Email Receiving + Receipt Rules + S3 / Lambda / SNS等
+3. 通常mailboxが必要ならAWS外を含む別mailbox providerを組み合わせる
 
-SES Email Receiving自体はIMAP / POP mailboxではないため、読者にもこの違いを説明する。
+Amazon WorkMailは2026-04-30から新規顧客受付終了、2027-03-31にend of support予定のため、新規採用しない。
 
 ## Dependency
 
@@ -81,7 +83,7 @@ https://github.com/mizzz-ivr/ivmz-home/issues/35
 
 - `ivrm.jp` 変更前DNS
 - `mizzz.jp` 変更前DNS
-- 現行Email Routing /受信構成
+- 現行受信構成
 - destination一覧（内部証跡のみ）
 
 Cloudflare Email Sending / Workers Paid画面は、最終的にAWSを採用したため記事の主役から外す。必要なら「検討したが不採用にした案」として小さく扱う。
@@ -97,6 +99,7 @@ Cloudflare Email Sending / Workers Paid画面は、最終的にAWSを採用し�
 - bounce / complaint handling
 - SPF / DKIM / DMARC実測
 - 採用した受信方式
+- SES Email Receivingを採用した場合のReceipt Rules / S3 / Lambda / SNS
 - 変更後受信テスト
 - 既存DNSから削除したもの / 残したものと理由
 - ハマった点と修正
@@ -116,9 +119,10 @@ Cloudflare Email Sending / Workers Paid画面は、最終的にAWSを採用し�
 11. `ivmz@ivrm.jp`から実送信する
 12. SPF / DKIM / DMARCを実メールで確認する
 13. bounce / complaintを扱う
-14. 受信を実測する
-15. 既存アドレスが壊れていないか回帰テストする
-16. 独自ドメイン取得後にやったことをチェックリスト化する
+14. 採用した受信方式を構築する
+15. 受信を実測する
+16. 既存アドレスが壊れていないか回帰テストする
+17. 独自ドメイン取得後にやったことをチェックリスト化する
 
 ## 公開条件
 
