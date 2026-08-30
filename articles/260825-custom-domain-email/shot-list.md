@@ -76,8 +76,8 @@ bounce / complaint handlingを記事で扱う場合のみ。
 最終的に採用した受信方式が分かる画面。
 
 - 現行受信を維持する場合: 代表Routing画面
-- SES Email Receivingの場合: receipt rule / action
-- WorkMailの場合: domain / mailbox設定の公開可能部分
+- SES Email Receivingの場合: receipt rule / S3 / Lambda / SNS action
+- 通常mailboxを別providerへ置く場合: AWS側との境界が分かる範囲
 
 ### 12-inbound-test.png
 
