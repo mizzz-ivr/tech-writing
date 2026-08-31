@@ -138,7 +138,12 @@ Profile Signalだけで連続投稿を増やすのではなく、**新しい実�
   - 本文: draft (`articles/260831-selfhosted-graviton-runner/article.md`)
   - Source of Truth: `ivRooom/ivrm-web`
   - 注意: account id / instance id / subnet / GitHub App id は記事に出さない
-  - 続編候補(Zenn): 常時起動runner → ephemeral scale-to-zero の設計判断
+- [~] Zenn: 常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話
+  - 媒体: Zenn
+  - 本文: draft (`articles/260831-runner-scale-to-zero-design/article.md`)
+  - Source of Truth: `ivRooom/ivrm-web`
+  - 上記 Qiita と同題材だが、Qiita=立てる手順 / Zenn=移行の設計判断と失敗（module アーカイブ、prefix 衝突、OOM、未マージ infra ブランチの個別 apply）
+  - 注意: account id / instance id / subnet / GitHub App id は非掲載
 - [ ] 個人開発にSBOMとGrypeを入れてみた話
 - [ ] CIをDefinition of DoneとしてAI開発エージェントに守らせる
 
