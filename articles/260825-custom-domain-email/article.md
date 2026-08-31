@@ -14,7 +14,17 @@ Canonical source:
 
 ## 記事の主題
 
-「無料で独自ドメインメールを作る」ではなく、**独自ドメインを取得したあと、実際にメールを受信・送信できる状態へ持っていくには何が必要か**を実体験ベースでまとめる。
+**独自ドメインを取得したあと、メールを受信・送信できるようにするには何が必要か**を、代表的な3つの方法を比較したうえで、AWSを使った実構築を紹介する。
+
+「無料で独自ドメインメールを作る」ことを主題にはしない。
+
+記事冒頭では次の3パターンを整理する。
+
+1. お名前.com等のメールサーバー / メールサービスを契約する
+2. Cloudflare Email Routing / Email Sendingを使う
+3. AWSでメール基盤を構築する
+
+そのうえで、**今回はAWSを採用し、Amazon SESを中心に構築した方法を紹介する**という流れにする。
 
 AWSを利用した実装を完成させてから記事を仕上げる。
 
@@ -23,7 +33,30 @@ AWSを利用した実装を完成させてから記事を仕上げる。
 - 独自ドメインを取得した
 - Webサイトには使えている
 - `name@example.com` でメールを使いたい
+- メールサーバーを別契約すべきか、CloudflareやAWSで構築すべきか迷っている
 - MX / SPF / DKIM / DMARCやSESの役割がまだ整理できていない
+
+## 比較パートで扱うこと
+
+### お名前.com等のメールサービス
+
+- ドメイン取得だけではメール運用できず、別途メールサーバー / サービスが必要
+- 一般的なmailbox / Webメール / SMTP / IMAP等をまとめて用意しやすい
+- 既にWeb / DNSを別providerで使っている場合は、メール用に追加契約する形になる
+
+### Cloudflare
+
+- Email Routingで独自ドメイン宛メールを既存mailboxへ転送できる
+- 受信と送信は別
+- arbitrary recipientへのEmail SendingはWorkers Paidが必要
+- 今回は候補として実画面まで確認したが不採用
+
+### AWS
+
+- OutboundはAmazon SESを第一候補
+- SES Email Receivingもあるが通常のIMAP / POP mailboxではない
+- IAM / event / logging / application adapter等をAWS基盤と統合しやすい
+- 今回の記事ではこの方法を実装する
 
 ## 実環境
 
@@ -85,8 +118,9 @@ https://github.com/mizzz-ivr/ivmz-home/issues/35
 - `mizzz.jp` 変更前DNS
 - 現行受信構成
 - destination一覧（内部証跡のみ）
+- Cloudflare Email Sending / Workers Paid gate画面
 
-Cloudflare Email Sending / Workers Paid画面は、最終的にAWSを採用したため記事の主役から外す。必要なら「検討したが不採用にした案」として小さく扱う。
+Cloudflareの画面は主手順にはせず、「比較検討した方法」の補助素材として必要最小限に使う。
 
 ## AWS実装時に記録すること
 
@@ -108,21 +142,27 @@ Cloudflare Email Sending / Workers Paid画面は、最終的にAWSを採用し�
 
 1. 独自ドメインを取った。でもメールはどうする？
 2. ドメイン取得だけではメールは使えない
-3. 受信と送信は別の仕組み
-4. 使うメールアドレスを先に決める
-5. MX / SPF / DKIM / DMARCをざっくり理解する
-6. 変更前DNSを記録する
-7. AWSで受信をどうするか決める
-8. Amazon SESで送信ドメインをverifyする
-9. DKIM / MAIL FROM / SPF / DMARCを設定する
-10. Sandbox / Production accessを整理する
-11. `ivmz@ivrm.jp`から実送信する
-12. SPF / DKIM / DMARCを実メールで確認する
-13. bounce / complaintを扱う
-14. 採用した受信方式を構築する
-15. 受信を実測する
-16. 既存アドレスが壊れていないか回帰テストする
-17. 独自ドメイン取得後にやったことをチェックリスト化する
+3. 独自ドメインメールを使う3つの方法
+   - お名前.com等でメールサービスを契約
+   - Cloudflare Email Routing / Email Sending
+   - AWSで構築
+4. 今回AWSを選んだ理由
+5. 受信と送信は別の仕組み
+6. 使うメールアドレスを先に決める
+7. MX / SPF / DKIM / DMARCをざっくり理解する
+8. 変更前DNSを記録する
+9. AWSで受信をどうするか決める
+10. Amazon SESで送信ドメインをverifyする
+11. DKIM / MAIL FROM / SPF / DMARCを設定する
+12. Sandbox / Production accessを整理する
+13. `ivmz@ivrm.jp`から実送信する
+14. SPF / DKIM / DMARCを実メールで確認する
+15. bounce / complaintを扱う
+16. 採用した受信方式を構築する
+17. 受信を実測する
+18. 既存アドレスが壊れていないか回帰テストする
+19. 独自ドメイン取得後にやったことをチェックリスト化する
+20. 3方式を振り返り、どんな人にどれが向くかまとめる
 
 ## 公開条件
 
