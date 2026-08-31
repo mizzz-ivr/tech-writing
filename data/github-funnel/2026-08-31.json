@@ -1,0 +1,1830 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-31",
+  "collected_at": "2026-08-31T05:34:48.767523Z",
+  "repositories": [
+    {
+      "repository": "ivRooom/Herta",
+      "merged_pull_requests": [
+        {
+          "number": 357,
+          "title": "fix(deploy): Runtime Secret Encryption master keyをproductionへ注入する",
+          "url": "https://github.com/ivRooom/Herta/pull/357",
+          "merged_at": "2026-08-29T16:04:44Z"
+        },
+        {
+          "number": 355,
+          "title": "docs(ai): #354 production E2E rollout Runbookを更新",
+          "url": "https://github.com/ivRooom/Herta/pull/355",
+          "merged_at": "2026-08-29T13:05:28Z"
+        },
+        {
+          "number": 352,
+          "title": "chore(deps): Next.js security patchとReact Query更新",
+          "url": "https://github.com/ivRooom/Herta/pull/352",
+          "merged_at": "2026-08-29T11:59:36Z"
+        },
+        {
+          "number": 353,
+          "title": "feat(ai): Code Interpreterのbinary成果物を安全に配信する",
+          "url": "https://github.com/ivRooom/Herta/pull/353",
+          "merged_at": "2026-08-29T07:57:11Z"
+        },
+        {
+          "number": 351,
+          "title": "feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/351",
+          "merged_at": "2026-08-29T06:43:38Z"
+        },
+        {
+          "number": 349,
+          "title": "feat(ai): add secure image generation artifact runtime",
+          "url": "https://github.com/ivRooom/Herta/pull/349",
+          "merged_at": "2026-08-27T23:00:38Z"
+        },
+        {
+          "number": 348,
+          "title": "feat(ai): add isolated Python code execution runtime",
+          "url": "https://github.com/ivRooom/Herta/pull/348",
+          "merged_at": "2026-08-27T12:39:11Z"
+        },
+        {
+          "number": 347,
+          "title": "feat(ai): add Phase 1 artifact runtime and Discord attachment delivery",
+          "url": "https://github.com/ivRooom/Herta/pull/347",
+          "merged_at": "2026-08-27T08:54:58Z"
+        },
+        {
+          "number": 346,
+          "title": "feat(ai): concise conversation policyとhallucination guardを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/346",
+          "merged_at": "2026-08-27T03:56:38Z"
+        },
+        {
+          "number": 343,
+          "title": "feat(studio): AI Runtime Settingsをprovider-agnostic化する",
+          "url": "https://github.com/ivRooom/Herta/pull/343",
+          "merged_at": "2026-08-27T03:34:26Z"
+        },
+        {
+          "number": 339,
+          "title": "fix(ai): AI Foundation post-merge hardeningを適用",
+          "url": "https://github.com/ivRooom/Herta/pull/339",
+          "merged_at": "2026-08-27T01:31:17Z"
+        },
+        {
+          "number": 335,
+          "title": "feat(ai): AI Foundation v1をCredential Storeへ統合",
+          "url": "https://github.com/ivRooom/Herta/pull/335",
+          "merged_at": "2026-08-26T13:18:10Z"
+        },
+        {
+          "number": 334,
+          "title": "feat(studio): OpenAI APIキーを管理コンソールから設定",
+          "url": "https://github.com/ivRooom/Herta/pull/334",
+          "merged_at": "2026-08-26T12:07:27Z"
+        },
+        {
+          "number": 333,
+          "title": "fix(edge): AOP有効後もproduction health checkを成立させる",
+          "url": "https://github.com/ivRooom/Herta/pull/333",
+          "merged_at": "2026-08-26T09:49:04Z"
+        },
+        {
+          "number": 328,
+          "title": "fix(edge): AOP Caddy再起動を依存サービスから分離",
+          "url": "https://github.com/ivRooom/Herta/pull/328",
+          "merged_at": "2026-08-26T08:04:32Z"
+        },
+        {
+          "number": 332,
+          "title": "test(db): concurrent index migration guardを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/332",
+          "merged_at": "2026-08-26T07:51:59Z"
+        },
+        {
+          "number": 336,
+          "title": "security: remove expired OpenSSL vulnerability exception",
+          "url": "https://github.com/ivRooom/Herta/pull/336",
+          "merged_at": "2026-08-26T04:59:49Z"
+        },
+        {
+          "number": 327,
+          "title": "feat(suggestion): Staff向けSuggestion履歴を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/327",
+          "merged_at": "2026-08-25T08:25:12Z"
+        },
+        {
+          "number": 326,
+          "title": "feat(suggestion): 投稿者によるSuggestion編集を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/326",
+          "merged_at": "2026-08-25T05:18:33Z"
+        },
+        {
+          "number": 325,
+          "title": "feat(suggestion): Staff Queueを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/325",
+          "merged_at": "2026-08-25T04:03:28Z"
+        },
+        {
+          "number": 324,
+          "title": "Suggestion投稿者による取下げ機能を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/324",
+          "merged_at": "2026-08-25T01:48:37Z"
+        },
+        {
+          "number": 323,
+          "title": "Suggestionの詳細表示コマンドを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/323",
+          "merged_at": "2026-08-24T23:44:10Z"
+        },
+        {
+          "number": 322,
+          "title": "feat(studio): reorganize server navigation and configurable plugin tabs",
+          "url": "https://github.com/ivRooom/Herta/pull/322",
+          "merged_at": "2026-08-24T12:55:45Z"
+        },
+        {
+          "number": 321,
+          "title": "feat(bot): Core Utility v5にJSONコマンドを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/321",
+          "merged_at": "2026-08-24T09:11:22Z"
+        },
+        {
+          "number": 320,
+          "title": "fix(studio): Plugin Operationsのモバイル表示を改善",
+          "url": "https://github.com/ivRooom/Herta/pull/320",
+          "merged_at": "2026-08-24T07:50:02Z"
+        },
+        {
+          "number": 319,
+          "title": "fix(daily-content): maxAttempts変更をqueued deliveryへ安全に反映",
+          "url": "https://github.com/ivRooom/Herta/pull/319",
+          "merged_at": "2026-08-24T06:40:08Z"
+        },
+        {
+          "number": 317,
+          "title": "docs(runtime): Worker Runtime consumer要否を明文化",
+          "url": "https://github.com/ivRooom/Herta/pull/317",
+          "merged_at": "2026-08-24T04:32:12Z"
+        },
+        {
+          "number": 315,
+          "title": "feat(operations): add expected Runtime consumer state",
+          "url": "https://github.com/ivRooom/Herta/pull/315",
+          "merged_at": "2026-08-24T03:02:23Z"
+        },
+        {
+          "number": 311,
+          "title": "feat(operations): Runtime監査表示をconsumer-aware化",
+          "url": "https://github.com/ivRooom/Herta/pull/311",
+          "merged_at": "2026-08-24T02:05:39Z"
+        },
+        {
+          "number": 308,
+          "title": "feat(runtime): Plugin Runtime ACKをconsumer別に識別",
+          "url": "https://github.com/ivRooom/Herta/pull/308",
+          "merged_at": "2026-08-23T14:19:29Z"
+        },
+        {
+          "number": 306,
+          "title": "feat(runtime): 起動時のPlugin復旧ACKを自動記録",
+          "url": "https://github.com/ivRooom/Herta/pull/306",
+          "merged_at": "2026-08-23T08:39:09Z"
+        },
+        {
+          "number": 303,
+          "title": "feat(studio): Plugin Runtime反映状態をOperationsへ統合",
+          "url": "https://github.com/ivRooom/Herta/pull/303",
+          "merged_at": "2026-08-23T06:25:00Z"
+        },
+        {
+          "number": 305,
+          "title": "feat(iam): Plugin設定をnested path単位で権限制御",
+          "url": "https://github.com/ivRooom/Herta/pull/305",
+          "merged_at": "2026-08-23T01:59:57Z"
+        },
+        {
+          "number": 294,
+          "title": "test: Herta IAM producerをshared contractへ接続",
+          "url": "https://github.com/ivRooom/Herta/pull/294",
+          "merged_at": "2026-08-22T04:00:43Z"
+        },
+        {
+          "number": 301,
+          "title": "fix(birthday): 未登録Guildメンバーの自己登録を許可",
+          "url": "https://github.com/ivRooom/Herta/pull/301",
+          "merged_at": "2026-08-21T23:28:42Z"
+        },
+        {
+          "number": 300,
+          "title": "feat(birthday): 背景画像ライブラリとGuild Preset管理を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/300",
+          "merged_at": "2026-08-21T09:08:01Z"
+        },
+        {
+          "number": 298,
+          "title": "fix(birthday): 背景画像パイプラインの読込・アップロード・テスト送信を修復",
+          "url": "https://github.com/ivRooom/Herta/pull/298",
+          "merged_at": "2026-08-21T05:02:20Z"
+        },
+        {
+          "number": 299,
+          "title": "fix(iam): Moderation階層でExplicit Denyを必ず優先",
+          "url": "https://github.com/ivRooom/Herta/pull/299",
+          "merged_at": "2026-08-21T05:02:06Z"
+        },
+        {
+          "number": 296,
+          "title": "feat: ModerationのIAMと自動検知設定を細分化",
+          "url": "https://github.com/ivRooom/Herta/pull/296",
+          "merged_at": "2026-08-20T22:21:35Z"
+        },
+        {
+          "number": 295,
+          "title": "feat(birthday): Member自己登録URLとpreset配信を強化",
+          "url": "https://github.com/ivRooom/Herta/pull/295",
+          "merged_at": "2026-08-20T14:14:01Z"
+        },
+        {
+          "number": 293,
+          "title": "feat(birthday): 実メンバーをDiscordテスト送信へ反映",
+          "url": "https://github.com/ivRooom/Herta/pull/293",
+          "merged_at": "2026-08-20T05:51:17Z"
+        },
+        {
+          "number": 292,
+          "title": "fix(birthday): 壊れたBirthday Card preset画像を修復",
+          "url": "https://github.com/ivRooom/Herta/pull/292",
+          "merged_at": "2026-08-20T04:24:53Z"
+        },
+        {
+          "number": 290,
+          "title": "feat(studio): ivrm Admin向けIAM Access Group作成を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/290",
+          "merged_at": "2026-08-20T03:11:21Z"
+        },
+        {
+          "number": 291,
+          "title": "feat(birthday): 実Discordメンバーのカードプレビューを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/291",
+          "merged_at": "2026-08-20T03:11:01Z"
+        },
+        {
+          "number": 289,
+          "title": "feat(studio): ivrm admin向けIAM read integrationを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/289",
+          "merged_at": "2026-08-20T01:02:23Z"
+        },
+        {
+          "number": 288,
+          "title": "feat(birthday): カスタム背景とDiscordテスト送信を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/288",
+          "merged_at": "2026-08-20T01:01:54Z"
+        },
+        {
+          "number": 287,
+          "title": "perf(search): Command Paletteのnavigation embeddingを再利用",
+          "url": "https://github.com/ivRooom/Herta/pull/287",
+          "merged_at": "2026-08-19T12:36:20Z"
+        },
+        {
+          "number": 285,
+          "title": "feat(search): Command Paletteにserver-side Semantic Searchを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/285",
+          "merged_at": "2026-08-19T08:36:56Z"
+        },
+        {
+          "number": 284,
+          "title": "feat(search): Command Paletteに安全なIntent rankingを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/284",
+          "merged_at": "2026-08-19T06:06:16Z"
+        },
+        {
+          "number": 283,
+          "title": "feat(studio): Birthday Cardをプレビュー上で直接リサイズ可能にする",
+          "url": "https://github.com/ivRooom/Herta/pull/283",
+          "merged_at": "2026-08-19T05:28:47Z"
+        },
+        {
+          "number": 282,
+          "title": "feat(studio): Birthday Cardの保存前比較とリセットを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/282",
+          "merged_at": "2026-08-19T05:06:17Z"
+        },
+        {
+          "number": 281,
+          "title": "feat(studio): Birthday Cardライブプレビューを強化",
+          "url": "https://github.com/ivRooom/Herta/pull/281",
+          "merged_at": "2026-08-19T04:37:30Z"
+        },
+        {
+          "number": 280,
+          "title": "fix(studio): archived Forum投稿のPreview投稿先を解決",
+          "url": "https://github.com/ivRooom/Herta/pull/280",
+          "merged_at": "2026-08-19T03:54:38Z"
+        },
+        {
+          "number": 278,
+          "title": "feat(birthday): 生年・年齢・Birthday Card・サーバー周年を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/278",
+          "merged_at": "2026-08-19T03:30:44Z"
+        },
+        {
+          "number": 276,
+          "title": "feat(access): IAM型の細粒度PolicyとResource一覧を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/276",
+          "merged_at": "2026-08-19T00:31:15Z"
+        },
+        {
+          "number": 274,
+          "title": "feat(moderation): 設定画面をNGワード・自動検知中心に再編",
+          "url": "https://github.com/ivRooom/Herta/pull/274",
+          "merged_at": "2026-08-18T22:28:08Z"
+        },
+        {
+          "number": 272,
+          "title": "feat(moderation): 自動検知レビューの根拠表示とNGワード導線を改善",
+          "url": "https://github.com/ivRooom/Herta/pull/272",
+          "merged_at": "2026-08-18T21:49:00Z"
+        },
+        {
+          "number": 270,
+          "title": "feat(studio): Guild OverviewにCommand期間切替を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/270",
+          "merged_at": "2026-08-18T15:45:10Z"
+        },
+        {
+          "number": 265,
+          "title": "feat(studio): Guild Consoleの補完とkeyboard historyを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/265",
+          "merged_at": "2026-08-18T15:44:52Z"
+        },
+        {
+          "number": 263,
+          "title": "feat(studio): Forumから既存投稿へBot送信できるようにする",
+          "url": "https://github.com/ivRooom/Herta/pull/263",
+          "merged_at": "2026-08-18T12:55:59Z"
+        },
+        {
+          "number": 261,
+          "title": "feat(studio): Guild Console OverviewにTerminalと統計グラフを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/261",
+          "merged_at": "2026-08-18T10:12:31Z"
+        },
+        {
+          "number": 259,
+          "title": "fix(deploy): reclaim production Docker disk space",
+          "url": "https://github.com/ivRooom/Herta/pull/259",
+          "merged_at": "2026-08-18T07:53:56Z"
+        },
+        {
+          "number": 258,
+          "title": "fix(deploy): surface production failure diagnostics",
+          "url": "https://github.com/ivRooom/Herta/pull/258",
+          "merged_at": "2026-08-18T06:49:38Z"
+        },
+        {
+          "number": 257,
+          "title": "fix(moderation): allow owner message actions and expose decision outcome",
+          "url": "https://github.com/ivRooom/Herta/pull/257",
+          "merged_at": "2026-08-18T03:42:22Z"
+        },
+        {
+          "number": 256,
+          "title": "fix(moderation): make message deletion outcomes auditable",
+          "url": "https://github.com/ivRooom/Herta/pull/256",
+          "merged_at": "2026-08-18T00:58:40Z"
+        },
+        {
+          "number": 255,
+          "title": "feat(rule-engine): add member role assignment action",
+          "url": "https://github.com/ivRooom/Herta/pull/255",
+          "merged_at": "2026-08-17T23:24:40Z"
+        },
+        {
+          "number": 253,
+          "title": "feat(rule-engine): add member.joined production trigger",
+          "url": "https://github.com/ivRooom/Herta/pull/253",
+          "merged_at": "2026-08-17T23:01:26Z"
+        },
+        {
+          "number": 249,
+          "title": "security: remove resolved Node.js Grype allowlist",
+          "url": "https://github.com/ivRooom/Herta/pull/249",
+          "merged_at": "2026-08-17T22:12:04Z"
+        },
+        {
+          "number": 245,
+          "title": "feat(studio): add Rule Studio v1",
+          "url": "https://github.com/ivRooom/Herta/pull/245",
+          "merged_at": "2026-08-17T21:54:34Z"
+        },
+        {
+          "number": 243,
+          "title": "feat(studio): clarify permission-restricted controls",
+          "url": "https://github.com/ivRooom/Herta/pull/243",
+          "merged_at": "2026-08-17T21:32:56Z"
+        },
+        {
+          "number": 242,
+          "title": "feat(rule-engine): connect schedule runtime to Discord Role lifecycle",
+          "url": "https://github.com/ivRooom/Herta/pull/242",
+          "merged_at": "2026-08-17T14:04:50Z"
+        },
+        {
+          "number": 240,
+          "title": "feat(studio): add IAM-style managed access policies",
+          "url": "https://github.com/ivRooom/Herta/pull/240",
+          "merged_at": "2026-08-17T13:13:52Z"
+        },
+        {
+          "number": 239,
+          "title": "Role ManagerにDiscord Role Lifecycleを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/239",
+          "merged_at": "2026-08-17T09:13:27Z"
+        },
+        {
+          "number": 236,
+          "title": "Role ManagerをIAM風Access Inventoryへ刷新する",
+          "url": "https://github.com/ivRooom/Herta/pull/236",
+          "merged_at": "2026-08-17T07:20:23Z"
+        },
+        {
+          "number": 235,
+          "title": "Config StudioにPlugin実効権限を反映する",
+          "url": "https://github.com/ivRooom/Herta/pull/235",
+          "merged_at": "2026-08-17T06:42:58Z"
+        },
+        {
+          "number": 234,
+          "title": "Bot Guild内部APIの認証境界を統一する",
+          "url": "https://github.com/ivRooom/Herta/pull/234",
+          "merged_at": "2026-08-17T06:05:17Z"
+        },
+        {
+          "number": 233,
+          "title": "Blackjackにカード演出とメンバー対戦を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/233",
+          "merged_at": "2026-08-17T05:16:55Z"
+        },
+        {
+          "number": 232,
+          "title": "Message Studioに下書きとVoice Message投稿を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/232",
+          "merged_at": "2026-08-17T05:16:37Z"
+        },
+        {
+          "number": 231,
+          "title": "Plugin項目単位のRole権限とAPI強制を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/231",
+          "merged_at": "2026-08-17T05:13:51Z"
+        },
+        {
+          "number": 230,
+          "title": "Studio Role ManagerとIAM風Policy基盤を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/230",
+          "merged_at": "2026-08-17T02:50:56Z"
+        },
+        {
+          "number": 229,
+          "title": "StudioにGuild Command Catalogを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/229",
+          "merged_at": "2026-08-17T01:44:13Z"
+        },
+        {
+          "number": 226,
+          "title": "Help v2でCommand一覧をRegistry連動化する",
+          "url": "https://github.com/ivRooom/Herta/pull/226",
+          "merged_at": "2026-08-17T01:03:24Z"
+        },
+        {
+          "number": 225,
+          "title": "Command ownership監査とUtility v4コマンドを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/225",
+          "merged_at": "2026-08-16T23:21:42Z"
+        },
+        {
+          "number": 224,
+          "title": "Core Fun Utility回帰修正とhashコマンド追加",
+          "url": "https://github.com/ivRooom/Herta/pull/224",
+          "merged_at": "2026-08-16T21:51:14Z"
+        },
+        {
+          "number": 223,
+          "title": "Message Studioに投稿カレンダーと即時Embed発言を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/223",
+          "merged_at": "2026-08-16T14:51:34Z"
+        },
+        {
+          "number": 222,
+          "title": "Botで発言コンソールと画像付き即時投稿を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/222",
+          "merged_at": "2026-08-16T14:17:17Z"
+        },
+        {
+          "number": 221,
+          "title": "YouTube Watching Presence検索とサムネイルプレビューを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/221",
+          "merged_at": "2026-08-16T13:32:59Z"
+        },
+        {
+          "number": 220,
+          "title": "Mini Games演出・あみだくじ盤面・Spotify Presenceプレビューを強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/220",
+          "merged_at": "2026-08-16T13:09:14Z"
+        },
+        {
+          "number": 219,
+          "title": "Spotify検索・あみだくじ結果ラベル・本番Deploy判定を修正する",
+          "url": "https://github.com/ivRooom/Herta/pull/219",
+          "merged_at": "2026-08-16T12:01:02Z"
+        },
+        {
+          "number": 218,
+          "title": "Mini GamesのCoreコマンド競合を解消する",
+          "url": "https://github.com/ivRooom/Herta/pull/218",
+          "merged_at": "2026-08-16T08:37:54Z"
+        },
+        {
+          "number": 217,
+          "title": "Mini Games runtime同期とSpotify本番Secret配線を強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/217",
+          "merged_at": "2026-08-16T08:11:32Z"
+        },
+        {
+          "number": 216,
+          "title": "PresenceをSpotify検索対応へ拡張する",
+          "url": "https://github.com/ivRooom/Herta/pull/216",
+          "merged_at": "2026-08-16T05:54:26Z"
+        },
+        {
+          "number": 214,
+          "title": "Mini Gamesに画像付きあみだくじを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/214",
+          "merged_at": "2026-08-16T05:04:31Z"
+        },
+        {
+          "number": 215,
+          "title": "Message StudioをCurrent Serverナビへ昇格する",
+          "url": "https://github.com/ivRooom/Herta/pull/215",
+          "merged_at": "2026-08-16T04:54:13Z"
+        },
+        {
+          "number": 210,
+          "title": "Plugin Operations Centerで要対応状態を可視化する",
+          "url": "https://github.com/ivRooom/Herta/pull/210",
+          "merged_at": "2026-08-16T03:40:15Z"
+        },
+        {
+          "number": 213,
+          "title": "Botプロフィール取得と本番Origin判定を修正する",
+          "url": "https://github.com/ivRooom/Herta/pull/213",
+          "merged_at": "2026-08-16T03:05:14Z"
+        },
+        {
+          "number": 212,
+          "title": "StudioのSelected Server ContextとBotプロフィール管理を強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/212",
+          "merged_at": "2026-08-16T02:00:04Z"
+        },
+        {
+          "number": 208,
+          "title": "Plugin管理ハブとStudioコンソール導線を強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/208",
+          "merged_at": "2026-08-15T12:49:41Z"
+        },
+        {
+          "number": 207,
+          "title": "LeaderboardにSeason SnapshotとOfficial Awardsを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/207",
+          "merged_at": "2026-08-15T12:05:53Z"
+        },
+        {
+          "number": 206,
+          "title": "LeaderboardにSeason ArchiveとViewer Rankを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/206",
+          "merged_at": "2026-08-15T09:26:35Z"
+        },
+        {
+          "number": 205,
+          "title": "StudioにアカウントセンターとProfile Menuを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/205",
+          "merged_at": "2026-08-15T08:54:29Z"
+        },
+        {
+          "number": 204,
+          "title": "Command PaletteにQuick Accessを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/204",
+          "merged_at": "2026-08-15T08:38:25Z"
+        },
+        {
+          "number": 203,
+          "title": "StudioにConsole Command Paletteを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/203",
+          "merged_at": "2026-08-15T04:46:32Z"
+        },
+        {
+          "number": 202,
+          "title": "StudioヘッダーにGuild Switcher v2を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/202",
+          "merged_at": "2026-08-14T08:26:33Z"
+        },
+        {
+          "number": 201,
+          "title": "StudioヘッダーにGuild管理Quick Navを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/201",
+          "merged_at": "2026-08-14T05:26:31Z"
+        },
+        {
+          "number": 200,
+          "title": "Activity Rulesの判定診断をStudioへ追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/200",
+          "merged_at": "2026-08-14T02:07:24Z"
+        },
+        {
+          "number": 199,
+          "title": "Activity Rules・Birthday管理を最新mainへ追従して強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/199",
+          "merged_at": "2026-08-14T01:36:36Z"
+        },
+        {
+          "number": 197,
+          "title": "Mini Games v3にArcadeランキング・Dice・チンチロを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/197",
+          "merged_at": "2026-08-14T00:41:47Z"
+        },
+        {
+          "number": 193,
+          "title": "Mini Games v2に戦績・Achievement・Daily Weekly Challengeを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/193",
+          "merged_at": "2026-08-14T00:30:28Z"
+        },
+        {
+          "number": 192,
+          "title": "stacked PR #189〜#191の変更をmainへ回収する",
+          "url": "https://github.com/ivRooom/Herta/pull/192",
+          "merged_at": "2026-08-13T06:25:13Z"
+        },
+        {
+          "number": 191,
+          "title": "GIF演出付きMini GamesにCoin Flip・High-Low・Blackjackを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/191",
+          "merged_at": "2026-08-13T05:20:19Z"
+        },
+        {
+          "number": 190,
+          "title": "DiscordのRankとLeaderboardをCommunity指標へ拡張する",
+          "url": "https://github.com/ivRooom/Herta/pull/190",
+          "merged_at": "2026-08-13T05:19:53Z"
+        },
+        {
+          "number": 189,
+          "title": "Guild全体のXP報酬Roleを追跡可能に一括修復する",
+          "url": "https://github.com/ivRooom/Herta/pull/189",
+          "merged_at": "2026-08-13T05:19:38Z"
+        },
+        {
+          "number": 188,
+          "title": "XP変更後のLevel報酬Roleを自動再同期する",
+          "url": "https://github.com/ivRooom/Herta/pull/188",
+          "merged_at": "2026-08-13T05:14:10Z"
+        },
+        {
+          "number": 187,
+          "title": "Community Leaderboard v2とXP Admin Controlsを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/187",
+          "merged_at": "2026-08-13T03:22:58Z"
+        },
+        {
+          "number": 185,
+          "title": "Achievements v3.3にOperations Dashboardと手動解除管理を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/185",
+          "merged_at": "2026-08-13T02:07:07Z"
+        },
+        {
+          "number": 184,
+          "title": "Achievements v3.2にTemplate GalleryとContent Packsを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/184",
+          "merged_at": "2026-08-13T00:11:23Z"
+        },
+        {
+          "number": 183,
+          "title": "Achievements v3.1にStudio専用Builderを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/183",
+          "merged_at": "2026-08-13T00:07:24Z"
+        },
+        {
+          "number": 182,
+          "title": "Achievements v3にCustom Achievement Builderを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/182",
+          "merged_at": "2026-08-12T23:03:22Z"
+        },
+        {
+          "number": 181,
+          "title": "全PluginのDiscord ID入力をPickerへ統一する",
+          "url": "https://github.com/ivRooom/Herta/pull/181",
+          "merged_at": "2026-08-12T21:58:23Z"
+        },
+        {
+          "number": 180,
+          "title": "Plugin Hubに複数選択と一括ON/OFFを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/180",
+          "merged_at": "2026-08-12T19:58:09Z"
+        },
+        {
+          "number": 179,
+          "title": "Config StudioのPlugin設定保存を修復する",
+          "url": "https://github.com/ivRooom/Herta/pull/179",
+          "merged_at": "2026-08-12T14:01:02Z"
+        },
+        {
+          "number": 177,
+          "title": "Announcement / Message Studio v2で予約投稿・Bot発言・返信・Embed Composerを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/177",
+          "merged_at": "2026-08-12T13:37:08Z"
+        },
+        {
+          "number": 176,
+          "title": "Community Profile v3でSeason・Momentum・Profile Compareを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/176",
+          "merged_at": "2026-08-12T07:45:24Z"
+        },
+        {
+          "number": 175,
+          "title": "Community Challenge / Season v1で日次・週間課題とSeason進行を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/175",
+          "merged_at": "2026-08-12T06:58:43Z"
+        },
+        {
+          "number": 174,
+          "title": "Community Profile v2とAchievement Catalogを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/174",
+          "merged_at": "2026-08-12T06:03:23Z"
+        },
+        {
+          "number": 173,
+          "title": "Community Profile v1でプロフィールとBadge Showcaseを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/173",
+          "merged_at": "2026-08-12T04:48:36Z"
+        },
+        {
+          "number": 172,
+          "title": "Achievements v2で活動実績・自動解除・Badgeランキングを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/172",
+          "merged_at": "2026-08-12T02:52:07Z"
+        },
+        {
+          "number": 171,
+          "title": "Activity Rules v1で活動集計の除外・anti-spam・VCルールを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/171",
+          "merged_at": "2026-08-12T02:13:57Z"
+        },
+        {
+          "number": 170,
+          "title": "Community Insights v2で活動推移と個人順位を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/170",
+          "merged_at": "2026-08-12T02:13:42Z"
+        },
+        {
+          "number": 168,
+          "title": "Community Activity v1で活動リーダーボードとダッシュボードを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/168",
+          "merged_at": "2026-08-11T23:31:59Z"
+        },
+        {
+          "number": 169,
+          "title": "Hertaのステータス報告をstatus.ivrm.jpへ統一",
+          "url": "https://github.com/ivRooom/Herta/pull/169",
+          "merged_at": "2026-08-11T23:28:45Z"
+        },
+        {
+          "number": 167,
+          "title": "Achievements / Badges v1でコミュニティ実績と進捗表示を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/167",
+          "merged_at": "2026-08-11T22:51:33Z"
+        },
+        {
+          "number": 166,
+          "title": "Event / RSVP v1でイベント参加管理と開催前Reminderを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/166",
+          "merged_at": "2026-08-11T15:31:26Z"
+        },
+        {
+          "number": 165,
+          "title": "Community Dashboard v1でGuild運用状況と要対応を可視化する",
+          "url": "https://github.com/ivRooom/Herta/pull/165",
+          "merged_at": "2026-08-11T13:57:28Z"
+        },
+        {
+          "number": 164,
+          "title": "Server Stats v1でサーバー統計・Activity・Plugin一覧を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/164",
+          "merged_at": "2026-08-11T13:56:34Z"
+        },
+        {
+          "number": 163,
+          "title": "XP / Level v1でRank・Leaderboard・Level Roleを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/163",
+          "merged_at": "2026-08-11T12:36:59Z"
+        },
+        {
+          "number": 162,
+          "title": "AFK v1で離席状態・メンション通知・自動解除を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/162",
+          "merged_at": "2026-08-11T09:14:53Z"
+        },
+        {
+          "number": 161,
+          "title": "Suggestion v1で要望箱と投票・Staff対応を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/161",
+          "merged_at": "2026-08-11T09:13:29Z"
+        },
+        {
+          "number": 160,
+          "title": "Giveaway v1で永続抽選と再抽選を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/160",
+          "merged_at": "2026-08-11T08:04:48Z"
+        },
+        {
+          "number": 159,
+          "title": "Poll v1で永続投票と自動集計を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/159",
+          "merged_at": "2026-08-11T04:47:40Z"
+        },
+        {
+          "number": 158,
+          "title": "Config StudioにPlugin設定ガイドを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/158",
+          "merged_at": "2026-08-11T02:46:11Z"
+        },
+        {
+          "number": 157,
+          "title": "Reminder v1で永続リマインダーを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/157",
+          "merged_at": "2026-08-11T02:45:59Z"
+        },
+        {
+          "number": 156,
+          "title": "Core Utility v3で実用コマンドを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/156",
+          "merged_at": "2026-08-11T00:36:03Z"
+        },
+        {
+          "number": 154,
+          "title": "Fun Utility v2で日常コマンドを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/154",
+          "merged_at": "2026-08-11T00:13:10Z"
+        },
+        {
+          "number": 155,
+          "title": "Onboarding v1でWelcome・Goodbye・Auto Roleを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/155",
+          "merged_at": "2026-08-11T00:13:01Z"
+        },
+        {
+          "number": 152,
+          "title": "Role Manager v2でRole Panelを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/152",
+          "merged_at": "2026-08-10T15:09:48Z"
+        },
+        {
+          "number": 153,
+          "title": "モバイルでDiscordチャンネル選択が閉じる問題を修正する",
+          "url": "https://github.com/ivRooom/Herta/pull/153",
+          "merged_at": "2026-08-10T15:09:31Z"
+        },
+        {
+          "number": 151,
+          "title": "Birthday Role v1で誕生日Roleとお祝い通知を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/151",
+          "merged_at": "2026-08-10T10:09:18Z"
+        },
+        {
+          "number": 150,
+          "title": "Role Manager v1でSelf Role機能を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/150",
+          "merged_at": "2026-08-10T09:38:02Z"
+        },
+        {
+          "number": 149,
+          "title": "チャンネル投稿ルール機能を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/149",
+          "merged_at": "2026-08-10T04:38:11Z"
+        },
+        {
+          "number": 148,
+          "title": "Moderationの解除とCase状態管理を強化する",
+          "url": "https://github.com/ivRooom/Herta/pull/148",
+          "merged_at": "2026-08-10T02:59:38Z"
+        },
+        {
+          "number": 147,
+          "title": "便利系Core Commandを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/147",
+          "merged_at": "2026-08-10T02:59:13Z"
+        },
+        {
+          "number": 144,
+          "title": "情報系Core Commandを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/144",
+          "merged_at": "2026-08-10T01:39:32Z"
+        },
+        {
+          "number": 142,
+          "title": "Daily Contentの配信先にForumとThreadを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/142",
+          "merged_at": "2026-08-10T01:39:15Z"
+        },
+        {
+          "number": 141,
+          "title": "Analytics v2とコマンド履歴検索を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/141",
+          "merged_at": "2026-08-09T23:37:09Z"
+        },
+        {
+          "number": 140,
+          "title": "Config Studioに条件分岐UIを接続する",
+          "url": "https://github.com/ivRooom/Herta/pull/140",
+          "merged_at": "2026-08-09T23:00:58Z"
+        },
+        {
+          "number": 139,
+          "title": "Config Studioに条件付きSchema解決基盤を追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/139",
+          "merged_at": "2026-08-09T22:11:43Z"
+        },
+        {
+          "number": 138,
+          "title": "Config Studioにリアルタイム検証UIを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/138",
+          "merged_at": "2026-08-09T12:59:33Z"
+        },
+        {
+          "number": 137,
+          "title": "Config Studio向け検証エラーをfield path付きで返す",
+          "url": "https://github.com/ivRooom/Herta/pull/137",
+          "merged_at": "2026-08-09T09:51:06Z"
+        },
+        {
+          "number": 136,
+          "title": "Config StudioにSchema検証基盤を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/136",
+          "merged_at": "2026-08-09T09:21:31Z"
+        },
+        {
+          "number": 133,
+          "title": "Moderation自動対応にDecision Traceを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/133",
+          "merged_at": "2026-08-09T03:08:23Z"
+        },
+        {
+          "number": 130,
+          "title": "LFG募集PresetをGuild設定へ昇格",
+          "url": "https://github.com/ivRooom/Herta/pull/130",
+          "merged_at": "2026-08-09T03:08:10Z"
+        },
+        {
+          "number": 131,
+          "title": "Operationsに過去稼働履歴とグラフを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/131",
+          "merged_at": "2026-08-08T23:52:49Z"
+        },
+        {
+          "number": 128,
+          "title": "Config StudioにDiscord Message Target Pickerを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/128",
+          "merged_at": "2026-08-08T23:52:28Z"
+        },
+        {
+          "number": 135,
+          "title": "Plugin HubにGuild Install Preflightを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/135",
+          "merged_at": "2026-08-08T09:28:17Z"
+        },
+        {
+          "number": 134,
+          "title": "Custom Plugin HubにCatalog Explorerを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/134",
+          "merged_at": "2026-08-08T08:48:08Z"
+        },
+        {
+          "number": 129,
+          "title": "StudioモバイルSwitchとDiscordログイン画面を刷新",
+          "url": "https://github.com/ivRooom/Herta/pull/129",
+          "merged_at": "2026-08-08T07:42:39Z"
+        },
+        {
+          "number": 132,
+          "title": "nanoid CVE-2026-67213を修正",
+          "url": "https://github.com/ivRooom/Herta/pull/132",
+          "merged_at": "2026-08-08T07:32:45Z"
+        },
+        {
+          "number": 122,
+          "title": "Team Split参加者入力を検索式User Pickerへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/122",
+          "merged_at": "2026-08-08T06:54:34Z"
+        },
+        {
+          "number": 127,
+          "title": "Moderation除外User設定を検索式Pickerへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/127",
+          "merged_at": "2026-08-08T06:50:34Z"
+        },
+        {
+          "number": 125,
+          "title": "Quote設定UIを非エンジニア向けに改善",
+          "url": "https://github.com/ivRooom/Herta/pull/125",
+          "merged_at": "2026-08-08T06:46:01Z"
+        },
+        {
+          "number": 124,
+          "title": "Config StudioにDiscord Emoji Pickerを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/124",
+          "merged_at": "2026-08-08T06:40:50Z"
+        },
+        {
+          "number": 121,
+          "title": "Config Studioに検索式Discord User Pickerを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/121",
+          "merged_at": "2026-08-08T06:05:45Z"
+        },
+        {
+          "number": 120,
+          "title": "Team Split設定を検索式Channel UIへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/120",
+          "merged_at": "2026-08-08T05:51:44Z"
+        },
+        {
+          "number": 119,
+          "title": "LFG募集作成を検索式Channel UIへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/119",
+          "merged_at": "2026-08-08T04:04:52Z"
+        },
+        {
+          "number": 118,
+          "title": "Daily Content設定を検索式Channel UIへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/118",
+          "merged_at": "2026-08-08T03:56:22Z"
+        },
+        {
+          "number": 117,
+          "title": "Auto Response設定を検索式Discord Pickerへ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/117",
+          "merged_at": "2026-08-08T03:38:45Z"
+        },
+        {
+          "number": 116,
+          "title": "Config StudioにDiscord Channel/Role Pickerを統合",
+          "url": "https://github.com/ivRooom/Herta/pull/116",
+          "merged_at": "2026-08-08T03:27:08Z"
+        },
+        {
+          "number": 115,
+          "title": "全Plugin向けConfig Studio v1を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/115",
+          "merged_at": "2026-08-08T02:58:43Z"
+        },
+        {
+          "number": 112,
+          "title": "feat: Plugin Managerに検索とカテゴリフィルターを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/112",
+          "merged_at": "2026-08-08T02:29:35Z"
+        },
+        {
+          "number": 110,
+          "title": "feat: Studio Next UIとDiscordスマート設定を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/110",
+          "merged_at": "2026-08-08T01:59:06Z"
+        },
+        {
+          "number": 109,
+          "title": "feat: Discord Visual Kitを共通化しLFGとTeam Splitへ展開",
+          "url": "https://github.com/ivRooom/Herta/pull/109",
+          "merged_at": "2026-08-07T14:46:18Z"
+        },
+        {
+          "number": 107,
+          "title": "feat: Discord通知を生成画像付きVisual UIへ刷新",
+          "url": "https://github.com/ivRooom/Herta/pull/107",
+          "merged_at": "2026-08-07T14:02:33Z"
+        },
+        {
+          "number": 105,
+          "title": "feat: Moderation自動対応と緊急Alertを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/105",
+          "merged_at": "2026-08-07T11:31:39Z"
+        },
+        {
+          "number": 103,
+          "title": "feat: Moderation設定をRule Builder UIで編集可能にする",
+          "url": "https://github.com/ivRooom/Herta/pull/103",
+          "merged_at": "2026-08-07T09:43:59Z"
+        },
+        {
+          "number": 101,
+          "title": "feat: 正検知確定時にルール単位でCaseを自動作成",
+          "url": "https://github.com/ivRooom/Herta/pull/101",
+          "merged_at": "2026-08-07T04:35:29Z"
+        },
+        {
+          "number": 99,
+          "title": "fix: Discord Guild一覧の429をStudioで安全に扱う",
+          "url": "https://github.com/ivRooom/Herta/pull/99",
+          "merged_at": "2026-08-07T04:06:23Z"
+        },
+        {
+          "number": 98,
+          "title": "fix: 通常Moderation CaseのAdvisory Lock実行を修正",
+          "url": "https://github.com/ivRooom/Herta/pull/98",
+          "merged_at": "2026-08-07T03:38:29Z"
+        },
+        {
+          "number": 95,
+          "title": "fix: 自動検知ケースのAdvisory Lock実行を修正",
+          "url": "https://github.com/ivRooom/Herta/pull/95",
+          "merged_at": "2026-08-06T23:39:02Z"
+        },
+        {
+          "number": 93,
+          "title": "feat: 確認済み自動検知をModeration Caseへ変換",
+          "url": "https://github.com/ivRooom/Herta/pull/93",
+          "merged_at": "2026-08-06T13:20:55Z"
+        },
+        {
+          "number": 91,
+          "title": "fix: Pluginトグルの表示位置を修正",
+          "url": "https://github.com/ivRooom/Herta/pull/91",
+          "merged_at": "2026-08-06T12:17:05Z"
+        },
+        {
+          "number": 90,
+          "title": "feat: Studioのモバイル運用UIとクイックレビューを改善",
+          "url": "https://github.com/ivRooom/Herta/pull/90",
+          "merged_at": "2026-08-06T11:03:46Z"
+        },
+        {
+          "number": 88,
+          "title": "feat: Moderation自動検知履歴と誤検知レビューを実装",
+          "url": "https://github.com/ivRooom/Herta/pull/88",
+          "merged_at": "2026-08-06T08:23:06Z"
+        },
+        {
+          "number": 86,
+          "title": "feat: Moderation v2のobserve-only自動検知基盤を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/86",
+          "merged_at": "2026-08-06T07:25:33Z"
+        },
+        {
+          "number": 83,
+          "title": "chore(deps): bump the production-dependencies group across 1 directory with 2 updates",
+          "url": "https://github.com/ivRooom/Herta/pull/83",
+          "merged_at": "2026-08-06T06:32:43Z"
+        },
+        {
+          "number": 82,
+          "title": "feat(team-split): Team Split Plugin v1とチーム編成を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/82",
+          "merged_at": "2026-08-06T06:00:04Z"
+        },
+        {
+          "number": 81,
+          "title": "feat(lfg): LFG Plugin v1と募集管理を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/81",
+          "merged_at": "2026-07-29T06:08:03Z"
+        },
+        {
+          "number": 80,
+          "title": "feat(daily-content): Daily Content Plugin v1と配信基盤を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/80",
+          "merged_at": "2026-07-29T02:13:43Z"
+        },
+        {
+          "number": 79,
+          "title": "feat(auto-response): Auto Response Plugin v1とルール管理を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/79",
+          "merged_at": "2026-07-28T22:51:22Z"
+        },
+        {
+          "number": 73,
+          "title": "feat(moderation): Moderation Plugin v1とケース管理を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/73",
+          "merged_at": "2026-07-28T07:23:59Z"
+        },
+        {
+          "number": 71,
+          "title": "fix(status): 既存ステータスAPIへAgentを統合",
+          "url": "https://github.com/ivRooom/Herta/pull/71",
+          "merged_at": "2026-07-27T09:51:51Z"
+        },
+        {
+          "number": 70,
+          "title": "fix(status): 既存ステータスと受信APIのホストを分離",
+          "url": "https://github.com/ivRooom/Herta/pull/70",
+          "merged_at": "2026-07-27T06:56:00Z"
+        },
+        {
+          "number": 69,
+          "title": "feat(status): OCI status-ingest APIを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/69",
+          "merged_at": "2026-07-27T06:22:01Z"
+        },
+        {
+          "number": 62,
+          "title": "build(deps): bump the production-dependencies group with 7 updates",
+          "url": "https://github.com/ivRooom/Herta/pull/62",
+          "merged_at": "2026-07-27T04:08:08Z"
+        },
+        {
+          "number": 68,
+          "title": "build(deps): bump actions/upload-artifact from 4.6.2 to 7.0.1",
+          "url": "https://github.com/ivRooom/Herta/pull/68",
+          "merged_at": "2026-07-27T04:09:50Z"
+        },
+        {
+          "number": 67,
+          "title": "build(deps): bump pnpm/action-setup from 4 to 6",
+          "url": "https://github.com/ivRooom/Herta/pull/67",
+          "merged_at": "2026-07-27T04:09:30Z"
+        },
+        {
+          "number": 66,
+          "title": "build(deps): bump actions/setup-node from 4 to 7",
+          "url": "https://github.com/ivRooom/Herta/pull/66",
+          "merged_at": "2026-07-27T04:09:17Z"
+        },
+        {
+          "number": 65,
+          "title": "build(deps): bump actions/checkout from 4 to 7",
+          "url": "https://github.com/ivRooom/Herta/pull/65",
+          "merged_at": "2026-07-27T04:09:00Z"
+        },
+        {
+          "number": 61,
+          "title": "feat(operations): ivrm-status-agentを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/61",
+          "merged_at": "2026-07-27T04:07:53Z"
+        },
+        {
+          "number": 60,
+          "title": "feat: Guild監査ログビューアを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/60",
+          "merged_at": "2026-07-27T04:06:25Z"
+        },
+        {
+          "number": 59,
+          "title": "feat: Bot利用状況ダッシュボードを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/59",
+          "merged_at": "2026-07-27T04:05:27Z"
+        },
+        {
+          "number": 58,
+          "title": "feat: Bot稼働状況ダッシュボードを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/58",
+          "merged_at": "2026-07-26T14:43:28Z"
+        },
+        {
+          "number": 57,
+          "title": "fix: メトリクス障害時もバックアップ通知を継続する",
+          "url": "https://github.com/ivRooom/Herta/pull/57",
+          "merged_at": "2026-07-26T13:48:50Z"
+        },
+        {
+          "number": 56,
+          "title": "feat: バックアップ監視ダッシュボードを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/56",
+          "merged_at": "2026-07-26T12:36:43Z"
+        },
+        {
+          "number": 55,
+          "title": "feat: バックアップ鮮度監視をCloudFormation管理へ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/55",
+          "merged_at": "2026-07-26T11:26:49Z"
+        },
+        {
+          "number": 54,
+          "title": "feat: PostgreSQLバックアップの週次リストア検証を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/54",
+          "merged_at": "2026-07-26T10:58:00Z"
+        },
+        {
+          "number": 53,
+          "title": "本番Dockerビルドのタイムアウトを改善",
+          "url": "https://github.com/ivRooom/Herta/pull/53",
+          "merged_at": "2026-07-25T12:59:44Z"
+        },
+        {
+          "number": 52,
+          "title": "Herta Botに内部ヘルスエンドポイントを追加",
+          "url": "https://github.com/ivRooom/Herta/pull/52",
+          "merged_at": "2026-07-25T07:17:48Z"
+        },
+        {
+          "number": 39,
+          "title": "build(deps-dev): bump the development-dependencies group across 1 directory with 7 updates",
+          "url": "https://github.com/ivRooom/Herta/pull/39",
+          "merged_at": "2026-07-25T03:31:46Z"
+        },
+        {
+          "number": 40,
+          "title": "chore(deps): bump actions/setup-node from 6 to 7",
+          "url": "https://github.com/ivRooom/Herta/pull/40",
+          "merged_at": "2026-07-25T03:31:30Z"
+        },
+        {
+          "number": 50,
+          "title": "security(supply-chain): SBOM生成とコンテナ脆弱性scanをCIへ追加",
+          "url": "https://github.com/ivRooom/Herta/pull/50",
+          "merged_at": "2026-07-24T03:31:52Z"
+        },
+        {
+          "number": 47,
+          "title": "security(container): 本番runtimeイメージを最小化",
+          "url": "https://github.com/ivRooom/Herta/pull/47",
+          "merged_at": "2026-07-23T09:50:08Z"
+        },
+        {
+          "number": 46,
+          "title": "feat(plugin): Quote Plugin v1を実装",
+          "url": "https://github.com/ivRooom/Herta/pull/46",
+          "merged_at": "2026-07-23T04:57:59Z"
+        },
+        {
+          "number": 45,
+          "title": "feat(onboarding): Discord Guild Install導線を追加",
+          "url": "https://github.com/ivRooom/Herta/pull/45",
+          "merged_at": "2026-07-22T22:29:32Z"
+        },
+        {
+          "number": 43,
+          "title": "fix(deploy): GHCR事前ビルド方式へ移行",
+          "url": "https://github.com/ivRooom/Herta/pull/43",
+          "merged_at": "2026-07-22T13:12:41Z"
+        },
+        {
+          "number": 41,
+          "title": "fix(studio): Next.js standaloneへPrisma Query Engineを同梱",
+          "url": "https://github.com/ivRooom/Herta/pull/41",
+          "merged_at": "2026-07-22T10:14:44Z"
+        }
+      ],
+      "releases": [],
+      "significant_issues": [
+        {
+          "number": 85,
+          "title": "security: 2026年8月のGrype検出2件を追跡する",
+          "url": "https://github.com/ivRooom/Herta/issues/85",
+          "closed_at": "2026-08-17T22:15:57Z",
+          "matched_labels": [
+            "security"
+          ]
+        },
+        {
+          "number": 246,
+          "title": "security: Grype Node.js false-positive allowlistを削除してIssue #85を完了する",
+          "url": "https://github.com/ivRooom/Herta/issues/246",
+          "closed_at": "2026-08-17T22:12:05Z",
+          "matched_labels": [
+            "security"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "mizzz-ivr/profile-signal",
+      "merged_pull_requests": [
+        {
+          "number": 7,
+          "title": "docs: add deterministic sample profile page",
+          "url": "https://github.com/mizzz-ivr/profile-signal/pull/7",
+          "merged_at": "2026-08-27T22:46:20Z"
+        },
+        {
+          "number": 6,
+          "title": "docs: update Wiki current release to v0.4.0",
+          "url": "https://github.com/mizzz-ivr/profile-signal/pull/6",
+          "merged_at": "2026-08-27T04:57:31Z"
+        },
+        {
+          "number": 4,
+          "title": "docs: prepare v0.4.0 latest-signals release",
+          "url": "https://github.com/mizzz-ivr/profile-signal/pull/4",
+          "merged_at": "2026-08-27T04:33:04Z"
+        },
+        {
+          "number": 3,
+          "title": "feat: refresh latest public signals every 30 minutes",
+          "url": "https://github.com/mizzz-ivr/profile-signal/pull/3",
+          "merged_at": "2026-08-27T04:21:48Z"
+        },
+        {
+          "number": 1,
+          "title": "feat: migrate Profile Signal to standalone OSS repository",
+          "url": "https://github.com/mizzz-ivr/profile-signal/pull/1",
+          "merged_at": "2026-08-27T03:54:17Z"
+        }
+      ],
+      "releases": [
+        {
+          "tag_name": "v0.4.0",
+          "name": "Profile Signal v0.4.0",
+          "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0",
+          "published_at": "2026-08-27T04:51:49Z",
+          "prerelease": false
+        },
+        {
+          "tag_name": "v0.3.0",
+          "name": "Profile Signal v0.3.0",
+          "url": "https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0",
+          "published_at": "2026-08-27T03:55:42Z",
+          "prerelease": false
+        }
+      ],
+      "significant_issues": []
+    },
+    {
+      "repository": "mizzz-ivr/roomate-voice",
+      "merged_pull_requests": [
+        {
+          "number": 12,
+          "title": "docs: Windows Preview利用者向け導入・使い方ガイドを整備する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/12",
+          "merged_at": "2026-08-26T02:17:46Z"
+        },
+        {
+          "number": 9,
+          "title": "fix: Release FFmpeg検証のexit code取得を安定化する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/9",
+          "merged_at": "2026-08-26T01:05:14Z"
+        },
+        {
+          "number": 8,
+          "title": "fix: Release未作成時もDesktop Release workflowを継続する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/8",
+          "merged_at": "2026-08-26T00:43:40Z"
+        },
+        {
+          "number": 7,
+          "title": "feat: Windows Desktop App foundationを追加する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/7",
+          "merged_at": "2026-08-26T00:38:13Z"
+        },
+        {
+          "number": 5,
+          "title": "fix: Voice production readiness review follow-up",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/5",
+          "merged_at": "2026-08-25T22:10:09Z"
+        },
+        {
+          "number": 4,
+          "title": "feat: Wake word文字起こしゲートを実装する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/4",
+          "merged_at": "2026-08-25T07:40:50Z"
+        },
+        {
+          "number": 3,
+          "title": "WindowsローカルE2E音声テスト手順を整備する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/3",
+          "merged_at": "2026-07-30T04:47:38Z"
+        },
+        {
+          "number": 1,
+          "title": "Realtime音声Botのローカル開発基盤を構築する",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/pull/1",
+          "merged_at": "2026-07-30T02:30:41Z"
+        }
+      ],
+      "releases": [
+        {
+          "tag_name": "v0.1.0",
+          "name": "RooMate Voice v0.1.0 (Preview)",
+          "url": "https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0",
+          "published_at": "2026-08-26T01:08:42Z",
+          "prerelease": true
+        }
+      ],
+      "significant_issues": []
+    },
+    {
+      "repository": "mizzz-ivr/ivmz-home",
+      "merged_pull_requests": [
+        {
+          "number": 34,
+          "title": "security: add CSP Report-Only observation harness",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/34",
+          "merged_at": "2026-08-28T17:37:50Z"
+        },
+        {
+          "number": 28,
+          "title": "docs(security): align post-rollout production guardrails",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/28",
+          "merged_at": "2026-08-28T11:44:29Z"
+        },
+        {
+          "number": 26,
+          "title": "feat(ops): add independent Netlify Profile Signal scheduler",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/26",
+          "merged_at": "2026-08-28T11:19:25Z"
+        },
+        {
+          "number": 24,
+          "title": "test: harden Netlify Preview E2E transient GET retries",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/24",
+          "merged_at": "2026-08-28T06:34:56Z"
+        },
+        {
+          "number": 21,
+          "title": "security: isolate Netlify preview database migrations",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/21",
+          "merged_at": "2026-08-28T01:17:25Z"
+        },
+        {
+          "number": 19,
+          "title": "security: harden Payload admin and auth boundaries",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/19",
+          "merged_at": "2026-08-27T23:10:26Z"
+        },
+        {
+          "number": 14,
+          "title": "feat: harden CMS operational acceptance",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/14",
+          "merged_at": "2026-08-27T08:09:11Z"
+        },
+        {
+          "number": 16,
+          "title": "feat: shared footerとdocument navigationでMPA体験を明確化",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/16",
+          "merged_at": "2026-08-27T07:35:39Z"
+        },
+        {
+          "number": 12,
+          "title": "feat: harden Issue #7 SEO structured data",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/12",
+          "merged_at": "2026-08-27T04:47:03Z"
+        },
+        {
+          "number": 11,
+          "title": "feat: add Payload-backed dynamic detail routes",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/11",
+          "merged_at": "2026-08-27T01:34:12Z"
+        },
+        {
+          "number": 10,
+          "title": "feat: add multi-page route foundation",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/10",
+          "merged_at": "2026-08-27T00:00:38Z"
+        },
+        {
+          "number": 9,
+          "title": "feat: Payload Content Model Foundation",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/9",
+          "merged_at": "2026-08-26T12:09:45Z"
+        },
+        {
+          "number": 6,
+          "title": "feat: Visual / UX Foundation + Home Experience",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/6",
+          "merged_at": "2026-08-26T09:42:03Z"
+        },
+        {
+          "number": 4,
+          "title": "feat: Payload CMS / PostgreSQL基盤を構築",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/4",
+          "merged_at": "2026-08-26T08:08:57Z"
+        },
+        {
+          "number": 5,
+          "title": "docs: ivmz identity / domain / contact方針を反映",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/5",
+          "merged_at": "2026-08-26T03:56:16Z"
+        },
+        {
+          "number": 3,
+          "title": "feat: bootstrap Netlify deployment baseline",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/3",
+          "merged_at": "2026-08-26T00:56:35Z"
+        },
+        {
+          "number": 1,
+          "title": "feat: establish character-first portable foundation",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/1",
+          "merged_at": "2026-08-25T21:59:03Z"
+        },
+        {
+          "number": 2,
+          "title": "fix: close Next.js 16.3.3 security gate",
+          "url": "https://github.com/mizzz-ivr/ivmz-home/pull/2",
+          "merged_at": "2026-08-25T23:38:22Z"
+        }
+      ],
+      "releases": [],
+      "significant_issues": []
+    },
+    {
+      "repository": "mizzz-ivr/mizzz-ivr",
+      "merged_pull_requests": [
+        {
+          "number": 59,
+          "title": "fix(profile): make Profile Signal dashboard full width",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/59",
+          "merged_at": "2026-08-29T04:33:06Z"
+        },
+        {
+          "number": 57,
+          "title": "feat(profile): accept independent external refresh dispatch",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/57",
+          "merged_at": "2026-08-28T06:15:24Z"
+        },
+        {
+          "number": 55,
+          "title": "fix(profile): add scheduler freshness fallback",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/55",
+          "merged_at": "2026-08-27T22:11:01Z"
+        },
+        {
+          "number": 54,
+          "title": "fix(profile): reactivate schedules with direct workflow edit",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/54",
+          "merged_at": "2026-08-27T13:44:51Z"
+        },
+        {
+          "number": 53,
+          "title": "fix(profile): re-register Profile Signal schedules",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/53",
+          "merged_at": "2026-08-27T13:39:45Z"
+        },
+        {
+          "number": 51,
+          "title": "chore: prune merged profile work branches",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/51",
+          "merged_at": "2026-08-27T13:31:05Z"
+        },
+        {
+          "number": 37,
+          "title": "fix(profile): refresh Activity Stream every 5 minutes",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/37",
+          "merged_at": "2026-08-27T08:37:49Z"
+        },
+        {
+          "number": 38,
+          "title": "fix(profile): consolidate Activity Stream scheduler",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/38",
+          "merged_at": "2026-08-27T09:23:21Z"
+        },
+        {
+          "number": 44,
+          "title": "fix(profile): localize activity event titles",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/44",
+          "merged_at": "2026-08-27T11:24:07Z"
+        },
+        {
+          "number": 47,
+          "title": "feat(profile): add long-term summaries and hybrid labels",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/47",
+          "merged_at": "2026-08-27T12:37:48Z"
+        },
+        {
+          "number": 42,
+          "title": "feat(profile): add Japanese-first profile and repository filters",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/42",
+          "merged_at": "2026-08-27T11:19:30Z"
+        },
+        {
+          "number": 50,
+          "title": "feat(profile): add Engineering DNA public evidence profile",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/50",
+          "merged_at": "2026-08-27T13:01:42Z"
+        },
+        {
+          "number": 40,
+          "title": "feat(profile): add Developer Analytics and manual Skill Sheet",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/40",
+          "merged_at": "2026-08-27T10:27:00Z"
+        },
+        {
+          "number": 36,
+          "title": "docs: expand SIGNAL links with icon badges",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/36",
+          "merged_at": "2026-08-27T08:24:13Z"
+        },
+        {
+          "number": 35,
+          "title": "chore: remove legacy activity chart artifact",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/35",
+          "merged_at": "2026-08-27T05:45:52Z"
+        },
+        {
+          "number": 34,
+          "title": "chore: prune stale profile branches",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/34",
+          "merged_at": "2026-08-27T05:39:39Z"
+        },
+        {
+          "number": 27,
+          "title": "fix: handle uninitialized GitHub Wiki safely",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/27",
+          "merged_at": "2026-08-27T00:59:17Z"
+        },
+        {
+          "number": 26,
+          "title": "ci: sync Profile Signal docs to GitHub Wiki",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/26",
+          "merged_at": "2026-08-27T00:57:15Z"
+        },
+        {
+          "number": 29,
+          "title": "feat: add Profile Signal v0.2 preset pack",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/29",
+          "merged_at": "2026-08-27T01:31:34Z"
+        },
+        {
+          "number": 24,
+          "title": "feat: package Profile Signal for Release ZIP installation",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/24",
+          "merged_at": "2026-08-26T23:15:52Z"
+        },
+        {
+          "number": 28,
+          "title": "feat: move Profile Signal presets to YAML registry",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/28",
+          "merged_at": "2026-08-27T01:20:29Z"
+        },
+        {
+          "number": 23,
+          "title": "feat: dogfood Profile Signal as a config-driven GitHub Action",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/23",
+          "merged_at": "2026-08-26T21:53:39Z"
+        },
+        {
+          "number": 22,
+          "title": "feat: add Profile Signal history and dev recap",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/22",
+          "merged_at": "2026-08-26T13:47:59Z"
+        },
+        {
+          "number": 21,
+          "title": "feat: add Profile Signal operations health and CI",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/21",
+          "merged_at": "2026-08-26T13:01:10Z"
+        },
+        {
+          "number": 20,
+          "title": "feat: add Profile Signal phase 2 widgets",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/20",
+          "merged_at": "2026-08-26T12:44:09Z"
+        },
+        {
+          "number": 19,
+          "title": "feat: add Profile Signal core widgets",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/19",
+          "merged_at": "2026-08-26T09:55:38Z"
+        },
+        {
+          "number": 18,
+          "title": "feat: add automated daily GitHub activity overview",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/18",
+          "merged_at": "2026-08-26T06:52:04Z"
+        },
+        {
+          "number": 25,
+          "title": "docs: add Profile Signal wiki, license scope and Japanese release notes",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/25",
+          "merged_at": "2026-08-26T23:52:58Z"
+        },
+        {
+          "number": 33,
+          "title": "chore: remove unused profile repository resources",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/33",
+          "merged_at": "2026-08-27T05:36:34Z"
+        },
+        {
+          "number": 32,
+          "title": "chore: complete Profile Signal consumer migration",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/32",
+          "merged_at": "2026-08-27T04:33:44Z"
+        },
+        {
+          "number": 30,
+          "title": "chore: reduce profile repository to Profile Signal consumer",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/30",
+          "merged_at": "2026-08-27T03:59:34Z"
+        },
+        {
+          "number": 17,
+          "title": "feat: align profile identity and public domains",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/17",
+          "merged_at": "2026-08-25T06:51:58Z"
+        },
+        {
+          "number": 16,
+          "title": "feat: rebuild GitHub profile around public work",
+          "url": "https://github.com/mizzz-ivr/mizzz-ivr/pull/16",
+          "merged_at": "2026-08-25T05:50:52Z"
+        }
+      ],
+      "releases": [],
+      "significant_issues": []
+    }
+  ]
+}

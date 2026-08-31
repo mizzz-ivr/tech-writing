@@ -78,7 +78,6 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 
 #### Notable
 
-- [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) — likes 1 · bookmarks 0 · comments 0 (zenn)
 - [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — likes 0 · stocks 2 · comments 0 (qiita)
 - [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — likes 1 · stocks 1 · comments 0 (qiita)
 
