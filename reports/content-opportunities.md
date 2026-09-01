@@ -1,6 +1,6 @@
 # Content Gap / Next Article Opportunities
 
-> As of: 2026-08-31
+> As of: 2026-09-01
 
 Repository metadataから再生成するderived reportです。本文やbacklog自由文から技術分類を推測せず、明示されたmetadataだけを使います。
 
@@ -27,60 +27,60 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| GitHubActions | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| Python | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| 個人開発 | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| GitHubAPI | 2 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| architecture | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| github | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| individual-development | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| openai | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| OSS | 1 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| security | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| typescript | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| 生成ai | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| 個人開発 | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| GitHubAPI | 2 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| architecture | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| github | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| individual-development | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| openai | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| security | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| typescript | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| 生成ai | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| developer-productivity | 4 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| devops | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| ai | 2 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| devops | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| TypeScript | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 4 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| GitHub API | 2 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| GitHub | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| GitHub Events API | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
-| GitHub Issues | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| GitHub Pull Requests | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| GitHub Releases | 1 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| GitHub Search API | 1 | 2026-08-26 | 5d | ✓ | ✓ | ✓ |
-| OpenAI API | 1 | 2026-08-27 | 4d | ✓ | ✓ | ✓ |
+| GitHub Actions | 4 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| GitHub API | 2 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| GitHub | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| GitHub Events API | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
+| GitHub Issues | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| GitHub Pull Requests | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| GitHub Search API | 1 | 2026-08-26 | 6d | ✓ | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 5d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| architecture | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| automation | 3 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
-| ai-assisted-development | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| ci-cd | 1 | 2026-08-26 | 5d | ✓ | ✓ | ✓ |
-| development-process | 1 | 2026-08-24 | 7d | ✓ | ✓ | ✓ |
-| oss | 1 | 2026-08-28 | 3d | ✓ | ✓ | ✓ |
+| architecture | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| automation | 3 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
+| ai-assisted-development | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| ci-cd | 1 | 2026-08-26 | 6d | ✓ | ✓ | ✓ |
+| development-process | 1 | 2026-08-24 | 8d | ✓ | ✓ | ✓ |
+| oss | 1 | 2026-08-28 | 4d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
@@ -149,10 +149,10 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-08-31**
+- Snapshot: **2026-09-01**
 - Monitored repositories: **5**
-- Evidence rows: **296**
-- Untracked evidence: **296**
+- Evidence rows: **299**
+- Untracked evidence: **299**
 - Tracked by explicit title overlap: **0**
 
 | Repository | Kind | Evidence | Date | Tracking |
@@ -160,15 +160,15 @@ configured public repositoryのstored GitHub snapshotから、まだarticle/back
 | `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.4.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0) | 2026-08-27 | untracked |
 | `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.3.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0) | 2026-08-27 | untracked |
 | `mizzz-ivr/roomate-voice` | `release` | [RooMate Voice v0.1.0 (Preview)](https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0) | 2026-08-26 | untracked |
+| `mizzz-ivr/ivmz-home` | `pull_request` | [docs(ops): document Production Git sync recovery](https://github.com/mizzz-ivr/ivmz-home/pull/39) | 2026-09-01 | untracked |
+| `ivRooom/Herta` | `pull_request` | [docs(ai): #354 production acceptanceを#359後の境界へ更新](https://github.com/ivRooom/Herta/pull/361) | 2026-09-01 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(ai): Discord返信継続とHerta会話ペルソナを追加する](https://github.com/ivRooom/Herta/pull/359) | 2026-08-31 | untracked |
 | `ivRooom/Herta` | `pull_request` | [fix(deploy): Runtime Secret Encryption master keyをproductionへ注入する](https://github.com/ivRooom/Herta/pull/357) | 2026-08-29 | untracked |
 | `ivRooom/Herta` | `pull_request` | [docs(ai): #354 production E2E rollout Runbookを更新](https://github.com/ivRooom/Herta/pull/355) | 2026-08-29 | untracked |
 | `ivRooom/Herta` | `pull_request` | [chore(deps): Next.js security patchとReact Query更新](https://github.com/ivRooom/Herta/pull/352) | 2026-08-29 | untracked |
 | `ivRooom/Herta` | `pull_request` | [feat(ai): Code Interpreterのbinary成果物を安全に配信する](https://github.com/ivRooom/Herta/pull/353) | 2026-08-29 | untracked |
 | `ivRooom/Herta` | `pull_request` | [feat(ai): Discord会話Q&Aと限定Guild rollout基盤を追加](https://github.com/ivRooom/Herta/pull/351) | 2026-08-29 | untracked |
 | `mizzz-ivr/mizzz-ivr` | `pull_request` | [fix(profile): make Profile Signal dashboard full width](https://github.com/mizzz-ivr/mizzz-ivr/pull/59) | 2026-08-29 | untracked |
-| `mizzz-ivr/ivmz-home` | `pull_request` | [security: add CSP Report-Only observation harness](https://github.com/mizzz-ivr/ivmz-home/pull/34) | 2026-08-28 | untracked |
-| `mizzz-ivr/ivmz-home` | `pull_request` | [docs(security): align post-rollout production guardrails](https://github.com/mizzz-ivr/ivmz-home/pull/28) | 2026-08-28 | untracked |
-| `mizzz-ivr/ivmz-home` | `pull_request` | [feat(ops): add independent Netlify Profile Signal scheduler](https://github.com/mizzz-ivr/ivmz-home/pull/26) | 2026-08-28 | untracked |
 
 Priorityは `release` → `pull_request` → labeled `issue` → recency の明示ルールです。単一のAI significance scoreは作りません。
 
