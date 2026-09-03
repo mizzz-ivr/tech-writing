@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "collected_at": "2026-09-03T04:33:29+00:00",
+  "articles": [
+    {
+      "slug": "ai-runtime-safety-boundary",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "published_at": "2026-08-27",
+      "platforms": {
+        "zenn": {
+          "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
+          "error": "article was not returned by Zenn article list endpoint"
+        }
+      }
+    },
+    {
+      "slug": "github-profile-daily-activity",
+      "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
+      "published_at": "2026-08-26",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a",
+          "likes": 0,
+          "stocks": 2,
+          "comments": 0,
+          "page_views": 209
+        }
+      }
+    },
+    {
+      "slug": "github-profile-live-dashboard",
+      "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
+      "published_at": "2026-08-27",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 211
+        }
+      }
+    },
+    {
+      "slug": "profile-signal-github-action",
+      "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
+      "published_at": "2026-08-28",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904",
+          "likes": 1,
+          "stocks": 1,
+          "comments": 0,
+          "page_views": 294
+        }
+      }
+    },
+    {
+      "slug": "repository-is-source-of-truth",
+      "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
+      "published_at": "2026-08-24",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 386
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "slug": "ai-runtime-safety-boundary",
+      "platform": "zenn",
+      "error": "article was not returned by Zenn article list endpoint"
+    }
+  ]
+}
