@@ -1,9 +1,9 @@
 ---
-title: "常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話"
+title: "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ"
 status: draft
 published_at: null
 verified_at: 2026-09-04
-article_type: design-decision
+article_type: case-study
 level: intermediate
 topics:
   - github-actions
@@ -30,150 +30,306 @@ source_repositories:
 source_refs:
   - repository: ivRooom/ivrm-web
     commit: 1b3c2d9bcc9a3a089ebd534278e8d0939b8776ab
+  - repository: ivRooom/ivrm-web
+    commit: 1a6f2e5e67dd67ca41f3e7951dd53e5f22307b46
 published:
   qiita: null
   zenn: null
   note: null
 ---
 
-# 常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話
+# CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ
 
-個人開発の private repository で、GitHub Actions の無料枠が尽きたので AWS にセルフホストの runner を立てた、という話を[別の記事](https://github.com/mizzz-ivr/tech-writing)で書きました。そのときの構成は「ARM64 の spot インスタンスを1台、24/7 で起動しっぱなし」というものです。
+最初に消したかったのは、月に千円ちょっとの待機コストでした。
 
-これはこれで動いていたのですが、弱点が2つありました。
+ジョブがないなら、EC2も寝ていてほしい。
+ジョブが来たら起きて、1つ仕事をしたら消える。
 
-1つは、**runner が1台しかないのでジョブが直列**になること。rebase した9本のブランチをまとめて push したら、CI が7本待ち行列になりました。
+それだけの構成にしたかった。
 
-もう1つは、この spot インスタンスが `one-time` リクエストで、AWS に回収されると `terminate` されて消えること。自動で立て直す仕組みを入れていなかったので、落ちたら手で起動する前提でした。
+前回、private repositoryのGitHub Actions無料枠が尽きたのをきっかけに、AWSへARM64のself-hosted runnerを立てました。
 
-なので「ジョブが来たときだけ EC2 を起動して、1ジョブで捨てる」構成に移すことにしました。アイドル時は0台。いわゆる scale-to-zero です。
+その話は[GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9)にまとめています。
 
-この記事は、その移行で決めたことと、移行の途中で踏んだ穴の記録です。手順書ではなく、なぜその選択をしたか・何を見落としたかの方に寄せています。
+最初のrunnerは、GravitonのSpotインスタンスを1台、24時間起動しておく構成でした。
 
-## 前提: 何を作っているか
+CIは戻りました。
+でも、runnerは1台なのでジョブは直列です。複数のbranchをまとめてpushすると、後ろに待ち行列が伸びていく。
 
-`ivrm.jp` という個人サイトのモノレポで、Next.js アプリが複数、Cloudflare Worker が複数、共有パッケージがいくつか、という構成です。CI では型チェック・テスト・Lint・複数の Next.js ビルド・OpenNext バンドル・Terraform の validate・Docker イメージのビルド検証まで回しています。
+しかもone-timeのSpotなので、AWSに回収されればそのまま消えます。自動で次を立てる仕組みもありませんでした。
 
-runner は `ivrm-web` だけでなく、別リポジトリ（`ivrm-platform`）の CI からも使いたい、という要件も途中で出てきました。
+だったら、常時起動をやめればいい。
 
-## module をどれにするか
+そうして始めたのが、webhook駆動のephemeral runnerへの移行でした。
 
-webhook 駆動の ephemeral runner を Terraform で組むなら、事実上の定番は `philips-labs/terraform-aws-github-runner` です。API Gateway + Lambda + SQS + EC2 spot で、`workflow_job` の webhook をきっかけに runner を起こす、というやつ。
+ところが、最初の`terraform apply`は名前で止まりました。
+次にrunnerは、ログも残さず消えました。
+ようやく直したswapは、別branchからの`apply`で消えました。
 
-ただ、調べたら **philips-labs のリポジトリは 2026-01 にアーカイブされていて read-only、v6.1.0 で更新が止まっていました**。Lambda の依存パッケージの脆弱性修正が今後入らない、というのは個人開発でも避けたい。
+EC2を眠らせたかっただけなのに。
+気づけば、Terraformのstateとbranchの扱いまで含めて、かなり良い教材ができていました。
 
-後継として `github-aws-runners/terraform-aws-github-runner` という org に移っていて、こちらは活発にメンテされていました（この記事の時点で v7.11）。アーキテクチャは同じで、v7 で一部の変数名が v6 と変わっている、くらいの違い。こちらを採用しました。
+この記事は、その記録です。
 
-元々のプランには philips-labs と書いていたので、この乗り換えは「元の指示と違う判断」になります。こういうのは勝手に決めず、理由を添えて確認を取ってから進めました。
+## 作りたかったものは単純だった
 
-## 設計で決めたこと
+目標はこれです。
 
-### ネットワーク: NAT を置かない
+```text
+GitHub workflow_job=queued
+  ↓
+Webhook
+  ↓
+Lambda / Queue
+  ↓
+必要なときだけEC2 Spotを起動
+  ↓
+1 jobだけ実行
+  ↓
+runnerごと終了
 
-runner の EC2 は GitHub API に outbound で到達できる必要があります。普通は private subnet + NAT Gateway ですが、NAT Gateway は東京リージョンで月4,000円くらいかかる。予算が月5,000円のプロジェクトでこれは重い。
-
-既存の VPC を見たら、subnet が2つとも Internet Gateway にルートされていて（`MapPublicIpOnLaunch` は false）、NAT はありませんでした。なので runner に public IP を振る方針にしました。module の `associate_public_ipv4_address = true` です。scale-up Lambda 自体は VPC 外で動くので、そちらは何もしなくていい。
-
-セキュリティ的には、runner の Security Group は inbound 全拒否・egress のみ。public IP はあるけど誰も入ってこれない。
-
-### アーキテクチャ（v7 の既定は EventBridge 経由）
-
-plan を見て気づいたのですが、v7 の webhook は EventBridge を挟む構成が既定になっていました。
-
-```
-GitHub App の workflow_job webhook
-  → API Gateway (HTTP API)
-  → Lambda: webhook（HMAC 検証）
-  → EventBridge bus
-  → Lambda: dispatcher
-  → SQS
-  → Lambda: scale-up（EC2 spot を RunInstances、JIT config で登録）
-  → EC2 が1ジョブ実行して自己終了
-  → Lambda: scale-down（cron */5 で idle/orphan を掃除）
+idle時: 0台
 ```
 
-部品は増えますが、機能は philips-labs 時代と同じ。これはそのまま受け入れました。
+自前で全部組むのではなく、Terraform moduleを使うことにしました。
 
-### enable_job_queued_check という安全弁
+候補にしていた`philips-labs/terraform-aws-github-runner`を確認すると、repositoryはarchive済みでした。そこで、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えました。2026年9月4日時点で利用しているのはv7.11系です。
 
-`enable_job_queued_check = true` にすると、scale-up Lambda が EC2 を起こす前に GitHub API を叩いて「そのジョブがまだ `queued` か」を確認します。
+ネットワークも、個人開発のコストを考えてNAT Gatewayは置いていません。runnerにはpublic IPv4を付けますが、Security Groupはinboundを許可せず、外へ出る通信だけにしています。
 
-これが移行期間中に効きました。旧 runner（常時起動）と新 runner（webhook 駆動）を併存させていたとき、旧 runner が3秒でジョブを取る → scale-up Lambda が30秒後に処理を始める頃には `in_progress` → 「もう実行中だから EC2 は起こさない」とスキップ。ログには `No runner will be created, job is not queued.` と出ます。
+GitHub Appの`workflow_job` webhookを入口に、API Gateway、Lambda、EventBridge、SQSを経てEC2 Spotを起動します。runnerはephemeralなので、仕事が終わればそのインスタンスごと消えます。
 
-冷えた EC2 を起こすのに1〜2分かかる ephemeral 構成は、常時起動の runner と競争すると必ず負けます。でもそれは「無駄なインスタンスを立てない」という正しい挙動でもある。移行の順番を「新を先に検証 → 旧を落とす」にしていたので、旧を落とすまで新はほとんど仕事をしませんでした。
+設計だけを見ると、きれいでした。
 
-### repo をまたぐ
+ここから、順番に壊れます。
 
-`REPOSITORY_ALLOW_LIST` を空にして、GitHub App を `ivrm-web` と `ivrm-platform` の両方にインストールしました。App レベルの webhook にしておくと、どちらのリポジトリの `workflow_job` も同じ Lambda に届き、scale-up が webhook の `repository` を見てそのリポジトリ scope で runner を登録します。`ivrm-platform` 側に固有の Terraform は要りませんでした。
+## 1つ目の穴 — 最後の1リソースで、名前がぶつかった
 
-## 踏んだ穴
+最初の`terraform apply`は、ほとんど最後まで進みました。
 
-ここからが本題かもしれません。
+そして、最後の方で止まりました。
 
-### 穴1: instance profile の名前衝突
-
-`terraform apply` が最後の1リソースで止まりました。
-
-```
+```text
 Error: creating IAM Instance Profile (ivrm-ci-runner-profile):
   409 EntityAlreadyExists
 ```
 
-module は runner の instance profile を `${prefix}-runner-profile` という名前で作ります。`prefix` を `ivrm-ci` にしていたので `ivrm-ci-runner-profile`。ところがこれは、旧 runner（Terraform に import 済み）の instance profile と完全に同じ名前でした。他のリソースはランダムな suffix 付きで衝突を回避していたのに、instance profile だけ決め打ちだった。
+新しいmoduleは、runner用のinstance profileを`${prefix}-runner-profile`という名前で作ります。
 
-`prefix` を `ivrm-ghr` に変えて解決。ラベルは `prefix` 由来ではない（`self-hosted,linux,arm64,ci-runner`）ので、ワークフローの `runs-on` はそのまま。作りかけの85リソースは作り直しになりましたが、まだ何も動いていない状態だったので実害なし。
+最初は`prefix = "ivrm-ci"`にしていました。
+すると生成される名前は`ivrm-ci-runner-profile`。
 
-### 穴2: OOM
+問題は、その名前を**旧runnerがすでに使っていた**ことでした。
 
-新 runner でジョブが走るようになったら、重い CI ジョブが落ちるようになりました。
+他のAWSリソースにはランダムsuffixが付いていて衝突しないものも多かったので、少し油断していました。instance profileは違った。名前がそのまま、過去と現在をぶつけてきました。
 
-- `ci.yml` の Quality Checks: OpenNext のバンドルビルドのステップで runner が突然死（ステップが `null`、ログなし）
-- Docker イメージ検証: `docker build` の中の `next build` が「Running TypeScript ...」で exit 255
+対応は単純で、新しいrunner群のnamespaceを分けました。
 
-`t4g.small` は 2GB RAM です。Next.js/OpenNext のビルドを何回も連続で回すには足りない。実は旧 runner（Phase 1）は同じ理由で 8GB の swapfile を積んでいて、それで耐えていました。Terraform 化するときに、その swap 設定を module の user-data に持ってくるのを忘れていた。
+```hcl
+prefix = "ivrm-ghr"
+```
 
-対して、`aws-api-runtime.yml` の Docker ビルド（`next build` を含まない）は `t4g.small` で通っていました。犯人がハッキリした。
+runnerのlabelはprefixとは別なので、GitHub Actions側の`runs-on`を変える必要はありません。
 
-`userdata_post_install` に swapfile を戻し、ついでにインスタンスタイプを `t4g.medium`（4GB）を floor にしました。scale-to-zero なのでジョブ実行時だけの課金で、月数百円の差。
+この時点では、まだ新runnerで本番のCIを動かしていなかったので実害はほぼありませんでした。
 
-### 穴3: 未マージのブランチを2本、それぞれから apply した
+ただ、ここで1つ目の教訓が残りました。
 
-これは設計というより手順のミスです。
+**名前はただの名前ではなく、移行境界そのものになる。**
 
-swap 修正の PR と、旧 runner を Terraform から外す decommission の PR が、両方とも未マージで存在していました。両方とも「同じ `main` から分岐した別ファイルの変更」です。
+新旧を並べるなら、IAMも含めてnamespaceを先に分けておくべきでした。
 
-私はこれを、swap ブランチから apply → decommission ブランチから apply、と順にやりました。すると2本目の apply が1本目の変更を巻き戻しました。decommission ブランチには swap 前の `phase2.tf` が入っているので、それが state に書き戻されたわけです。
+## 2つ目の穴 — runnerが、何も言わずに消えた
 
-しかもこの間に、decommission ブランチには旧 runner の import 定義がまだ残っていて、それが「terminated 済みのインスタンスを import しようとして見つからない → 設定に合わせて新規作成」を実行し、**runner bootstrap の無い空の EC2 を1台作りました**。#280 で自分が指摘していた「one-time spot は消えると復旧しない」の穴を、Terraform 経由で踏み直した形。
+名前衝突を直して、新しいrunnerが起動するようになりました。
 
-正解は「関連する infra の PR は全部 `main` にマージしてから、`main` で1回だけ apply する」でした。次からそうします。
+Webhookが届く。
+EC2が起きる。
+GitHubにrunnerが登録される。
+ジョブも取り始める。
 
-### 穴4（外部要因）: 移行の最中に旧 runner がスポット回収された
+ここまでは良かった。
 
-移行の soak 中に、旧 runner の spot インスタンスが AWS に回収されて terminated になりました（`Server.SpotInstanceTermination`）。one-time spot のリスクがそのまま出た。
+ところが、重いCIだけが途中で落ちます。
 
-これは幸い、その時点で新 runner が `ivrm-web` と `ivrm-platform` の両方の CI を処理できるようになっていたので、CI は止まりませんでした。むしろ「旧を手で落とす」という cutover のステップが不要になった。結果オーライですが、狙ってやったわけではないです。
+あるジョブはOpenNextのbundle build付近でrunner自体が消え、GitHub Actions上ではstepが`null`のまま。十分なエラーログも残りませんでした。
 
-## 今の状態
+別のDocker buildでは、`next build`が`Running TypeScript ...`あたりで`exit 255`。
 
-`main` の CI は全部 self-hosted の ephemeral runner（`t4g.medium` + swap）で緑になっています。ジョブが来ると EC2 が1台起きて、1ジョブ実行して、自己終了。アイドル時は0台。
+一方で、Next.js buildを含まない軽いDocker検証は同じrunnerで通る。
 
-その後、EC2 Fleet に渡すインスタンスタイプを `t4g.medium` 単体から `["t4g.medium", "t4g.large"]` の2種類に増やしました（#293）。ある日 spot 在庫が偏って13台中13台が同じAZに集中したのを見て、`instance_allocation_strategy` を module デフォルトの `lowest-price`（一番安いプールに全部乗せる）から `price-capacity-optimized`（在庫が厚いプールも考慮する）に変えたのに合わせての対応です。**これはジョブの大きさで instance type を選んでいるわけではありません**。どのジョブが来ても同じ2択のプールから spot 在庫の厚い方が選ばれるだけで、OOM時の自動リトライでもない。Swap も常に8GB固定です。
+共通点を並べていくと、原因はメモリに寄っていきました。
 
-コストは、常時起動のときが月1,400円くらい（spot + gp3）。今は EC2 がジョブ実行時だけなので、月300〜700円くらいの見込み（`t4g.medium` にした分、当初見積りの100〜350円から少し上がった）。
+使っていた`t4g.small`は2GB RAM。
 
-`ivrm-platform` の方は、そのリポジトリに runner を1台も登録していなかったのが元の詰まりでした。App が両方にインストールされていて `REPOSITORY_ALLOW_LIST` が空なら、`workflow_job` を1回発火させるだけで scale-up がそのリポジトリ用の runner を動的に登録する。追加の Terraform は書いていません。
+そして、ここで一番痛かった事実に気づきます。
 
-## まだ気にしていること
+**旧runnerには8GBのswapを入れていたのに、新runnerへ移植するのを忘れていました。**
 
-- `t4g.medium` + swap でも、CI ジョブがまとめて来たら遅くなるはず。並列度（`runners_maximum_count`）と spot 在庫の兼ね合いは、実運用のデータが溜まってから見直す。
-- module 内部の `inline_policy is deprecated` 警告が90個以上出ている。動作には影響しないけど、module の更新で直るのを待っている状態。
-- ephemeral runner が terminate した後、GitHub 側の runner エントリが offline のまましばらく残る。module の housekeeper Lambda が掃除するはずだけど、挙動を追い切れていない。
+古い構成では、2GBだけでは厳しいことをすでに知っていた。
+一度踏んだ穴だった。
 
-## 今のところの結論
+それなのに、Terraform moduleへ移すときに「EC2をどう作るか」へ意識が寄りすぎて、「そのEC2を実用に耐えさせていた設定」を落としていました。
 
-「常時起動 → scale-to-zero」は、コストとスケールの両方で正しい方向でした。ただ、移行そのものは思ったより穴が多かった。特に「未マージの infra ブランチを個別に apply しない」は、頭では分かっていても手が先に動いてしまった。
+移行で失われるのは、コードだけではありません。
+運用の中で後から足した小さな補強ほど、きれいな再構築のときに消えやすい。
 
-module を選ぶときにアーカイブ状態を確認する、既存リソースとの名前衝突を plan で見る、2GB のマシンで何をビルドするか現実的に見積もる。どれも当たり前ですが、当たり前を1個ずつ飛ばした結果の記録です。
+対策として、user-dataに8GBのswapfileを戻しました。
 
-少なくともこのプロジェクトでは、この構成で続けます。
+```bash
+fallocate -l 8G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+```
+
+さらにinstance floorを`t4g.medium`の4GBへ上げました。現在はSpot capacityの選択肢として`t4g.medium`と`t4g.large`を渡しています。
+
+ここは誤解しやすいのですが、`t4g.large`は「OOMしたら大きなinstanceで自動retryする」ためではありません。jobの重さでinstance typeを選んでいるわけでもありません。
+
+現在の構成では`instance_allocation_strategy`を明示しておらず、module既定の`lowest-price`です。`t4g.large`はSpotのcapacityを広げるためのfallbackで、swapも常に8GB固定です。
+
+修正後、重いCIは通るようになりました。
+
+2つ目の教訓は、少し地味です。
+
+**IaCへ移したからといって、過去の運用知識まで自動でIaCになるわけではない。**
+
+## 3つ目の穴 — 直したはずのswapが消えた
+
+OOM対策を入れて、これで落ち着くと思いました。
+
+次に壊したのはAWSでもmoduleでもなく、自分の`terraform apply`の順番でした。
+
+当時、infraには2本の未マージPRがありました。
+
+- 新runnerへswapを追加するbranch
+- 旧runnerをTerraform管理から外すdecommission branch
+
+どちらも同じ`main`から分岐していました。
+
+私は最初にswap側のbranchから`terraform apply`しました。
+
+新runnerへswapが入る。
+CIも改善する。
+
+そのあと、decommission側のbranchへ切り替えて、もう一度`terraform apply`しました。
+
+ここで、直したはずのものが消えました。
+
+decommission branchが持っていた`phase2.tf`は、swap修正前の状態です。
+
+Terraformから見れば当然です。
+今checkoutされているconfigurationがdesired stateなのだから、それに合わせます。
+
+1本目のbranchで入れた変更を、2本目のbranchが巻き戻しました。
+
+さらに悪いことに、decommission側には旧runnerのimport定義がまだ残っていました。実体のEC2はすでにterminated済みです。
+
+その状態からconfigurationへ合わせようとして、**runner bootstrapの入っていない空のEC2まで1台作りました。**
+
+「Terraformならstateがあるから安全」ではありませんでした。
+
+stateが覚えているのは、どのresourceを管理しているかです。
+何を正しいconfigurationとするかは、今その手元にあるコードが決めます。
+
+つまり、別々の未マージbranchから順番に`apply`するということは、AWSへ別々の「正解」を交互に渡していたことになります。
+
+この事故以降、infraの適用ルールを変えました。
+
+**関連する変更はreviewして`main`へ統合してから、`main`の1つの状態を1回だけapplyする。**
+
+複数branchの差分をAWS上で合成しない。
+
+コードレビューの境界と、infra適用の境界を分けない。
+
+3つ目の教訓は、これが一番大きかったです。
+
+## その途中で、旧runnerは本当に消えた
+
+移行期間中は、旧runnerと新runnerをしばらく並べていました。
+
+新しい方には`enable_job_queued_check = true`を入れていたので、旧runnerが先にジョブを取った場合、新runner側は「もうqueuedではない」と判断して無駄なEC2を起動しません。
+
+安全に切り替えるための並走期間でした。
+
+その最中、旧runnerのSpotインスタンスがAWSに回収されました。
+
+`Server.SpotInstanceTermination`。
+
+最初の記事を書いたときから分かっていた、one-time Spotの弱点がそのまま現実になりました。
+
+ただ、その頃には新しいephemeral runnerがCIを処理できていました。
+
+旧runnerは消えた。
+でもCIは止まらなかった。
+
+狙ったcutoverではありません。
+結果オーライです。
+
+それでも、ここでようやく「新しい方へ移れた」と実感しました。
+
+## 今は、ジョブがないと誰もいない
+
+現在のrunnerは、ジョブが来たときだけ起きます。
+
+- webhook駆動
+- ephemeral runner
+- idle 0台
+- ARM64 / Spot
+- `t4g.medium` / `t4g.large`をcapacity候補として利用
+- allocation strategyはmodule既定の`lowest-price`
+- 8GB swap固定
+- 1 jobで自己終了
+
+常時起動のrunnerを置いていた頃は、何もしていない時間にもEC2がそこにいました。
+
+今は、ジョブがなければ0台です。
+
+最初に欲しかった状態には、ちゃんと辿り着きました。
+
+ただし、そこまでに覚えたことは「scale-to-zeroの作り方」だけではありませんでした。
+
+## 3つの穴から残ったルール
+
+今回の移行で、今後のinfra作業に残したルールは3つです。
+
+1. **新旧を並べるなら、resource名のnamespaceまで先に分ける**
+2. **移行前のマシンに後付けした運用設定を、コード以外も含めて棚卸しする**
+3. **未マージの複数infra branchから、それぞれ`apply`しない**
+
+どれも、書いてしまえば当たり前です。
+
+名前がぶつかるなら変える。
+2GBで足りないなら増やす。
+別branchに別のdesired stateがあるなら、先に統合する。
+
+でも、事故が起きるときは「知らなかったこと」より、「知っていたのに境界を越えるとき落としたこと」の方が多い気がします。
+
+旧runnerにはswapがあった。
+one-time Spotが消えることも知っていた。
+Terraformがconfigurationへ収束することも知っていた。
+
+それでも全部踏みました。
+
+だから今は、applyの前に見るものが少し増えました。
+
+`plan`だけではなく、**どのbranchの、どのcommitの、どの運用前提をapplyしようとしているのか**を見るようになりました。
+
+## まとめ
+
+ジョブがないなら、EC2も寝ていてほしい。
+
+その小さな理由から始めたscale-to-zero移行でした。
+
+最初のapplyは名前で止まり、
+動き始めたrunnerはメモリで倒れ、
+直したswapは別branchのTerraformが消しました。
+
+そして最後には、旧runnerまでSpot回収で本当に消えました。
+
+今、ジョブがない時間のrunnerは0台です。
+
+静かになったのはAWSの請求だけではなくて、applyするときの自分の手順も少しだけ、です。
+
+次にinfraを触るときは、たぶんもう少し静かに進められると思います。
