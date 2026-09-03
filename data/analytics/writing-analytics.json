@@ -638,7 +638,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1162
+        "page_views": 1178
       },
       "zenn": {}
     },
@@ -651,7 +651,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 37
+          "page_views": 53
         }
       },
       {
@@ -712,7 +712,7 @@
   "next_article_candidates": [
     {
       "slug": "260831-runner-scale-to-zero-design",
-      "title": "常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話",
+      "title": "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ",
       "status": "draft",
       "path": "articles/260831-runner-scale-to-zero-design/article.md",
       "portfolio_gaps": [
@@ -803,10 +803,10 @@
     {
       "slug": "260831-runner-scale-to-zero-design",
       "path": "articles/260831-runner-scale-to-zero-design/article.md",
-      "title": "常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話",
+      "title": "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ",
       "status": "draft",
       "published_at": null,
-      "article_type": "design-decision",
+      "article_type": "case-study",
       "level": "intermediate",
       "publication_platforms": [],
       "classifications": {

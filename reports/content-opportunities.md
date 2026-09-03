@@ -103,7 +103,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 
 ## Next Article Candidates
 
-### 1. [常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話](../articles/260831-runner-scale-to-zero-design/article.md)
+### 1. [CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ](../articles/260831-runner-scale-to-zero-design/article.md)
 
 - Status: `draft`
 - Portfolio gap: `cost-optimization`
