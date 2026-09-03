@@ -30,10 +30,8 @@ source_repositories:
 source_refs:
   - repository: ivRooom/ivrm-web
     commit: 6046e04715550d5f989fc9208ba1bcfd00f15d9d
-    note: 本文（Phase 1 セルフホスト runner を立てた時点）
   - repository: ivRooom/ivrm-web
     commit: 3f019f6cd6ff57964f1959f7037f4ca4942a62a3
-    note: 「選択肢を並べてみる」節のコスト比較・現状追記（Phase 2 稼働後に再確認）
 published:
   qiita: null
   zenn: null
