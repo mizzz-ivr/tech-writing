@@ -1,7 +1,7 @@
 ---
 title: "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた"
-status: draft
-published_at: null
+status: published
+published_at: 2026-09-04
 verified_at: 2026-09-04
 article_type: case-study
 level: intermediate
@@ -33,7 +33,7 @@ source_refs:
   - repository: ivRooom/ivrm-web
     commit: 3f019f6cd6ff57964f1959f7037f4ca4942a62a3
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9
   zenn: null
   note: null
 ---
