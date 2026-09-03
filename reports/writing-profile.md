@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-09-04 07:52 JST
+> Generated: 2026-09-04 07:55 JST
 
 ## Overview
 
@@ -29,7 +29,7 @@
 
 Latest snapshot. Metrics stay platform-specific; no combined popularity score is calculated.
 
-- [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) — qiita: likes 0 · stocks 0 · comments 0 · page views 16
+- [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) — qiita: likes 0 · stocks 0 · comments 0 · page views 18
 - [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) — zenn: likes not collected · bookmarks not collected · comments not collected · page views not collected · metrics error
 - [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 216
 - [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 214

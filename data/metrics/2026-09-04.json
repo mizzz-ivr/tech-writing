@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-09-03T22:52:28+00:00",
+  "collected_at": "2026-09-03T22:55:35+00:00",
   "articles": [
     {
       "slug": "260831-selfhosted-graviton-runner",
@@ -12,7 +12,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 16
+          "page_views": 18
         }
       }
     },
