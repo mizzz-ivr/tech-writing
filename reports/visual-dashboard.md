@@ -1,20 +1,20 @@
 # Writing Analytics — Decision Dashboard
 
-> Analytics as of: 2026-09-03 · Freshness as of: 2026-09-03 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-09-04 · Freshness as of: 2026-09-04 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
 | 判断軸 | 現在 |
 | --- | --- |
 | Published | **5** |
-| Pipeline | Draft **1** / Review **1** |
+| Pipeline | Draft **3** / Review **1** |
 | Last published | **2026-08-28** |
 | Source freshness | Initial verification **4** / Verified **1** |
-| Metric snapshots | **8** / observed span **7d** |
+| Metric snapshots | **9** / observed span **8d** |
 | Data Quality | **問題なし** |
-| Pipeline-only coverage gaps | **5** |
+| Pipeline-only coverage gaps | **18** |
 | GitHub → Writing Funnel | Themes **223** / Events **304** |
-| 次の記事候補 | [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md) (`draft`) |
+| 次の記事候補 | [常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話](../articles/260831-runner-scale-to-zero-design/article.md) (`draft`) |
 
 ### 今の判断
 
@@ -22,7 +22,7 @@
 - Published記事 **4件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
 - Data Quality blockerはありません。
-- 次記事候補の主な根拠: `communication`
+- 次記事候補の主な根拠: `infrastructure`, `cost-optimization`, `domains:infra (not yet published)`, `technologies:AWS EC2 (not yet published)`
 
 ## Editorial Pipeline
 
@@ -32,12 +32,14 @@
 
 draft / reviewにはあるが、公開済みPortfolioではまだ示せていないclassificationです。
 
-- **topics:** `ci`, `engineering`, `github-actions`, `writing`
-- **portfolio_signals:** `communication`
+- **topics:** `aws`, `ci`, `engineering`, `github-actions`, `self-hosted-runner`, `terraform`, `writing`
+- **domains:** `infra`
+- **technologies:** `Amazon Linux 2023`, `AWS EC2`, `AWS Graviton`, `AWS Lambda`, `github-aws-runners`, `Terraform`
+- **portfolio_signals:** `ci`, `communication`, `cost-optimization`, `infrastructure`
 
 ## GitHub → Writing Funnel
 
-> GitHub snapshot as of: **2026-09-03**
+> GitHub snapshot as of: **2026-09-04**
 
 最近のpublic Repository実装を、明示的なConventional Commit scopeだけでtheme groupingして表示します。scopeが無いeventは無理にまとめません。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。
 
@@ -62,7 +64,7 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 
 ## Source Freshness
 
-> Freshness as of: **2026-09-03**
+> Freshness as of: **2026-09-04**
 
 技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
 
@@ -72,7 +74,7 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 6d | 0 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 7d | 0 |
 
 ## Portfolio Coverage
 
@@ -99,17 +101,17 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | Article | Platform | Reactions / observed metrics |
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
-| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 209 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 211 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 294 |
-| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 386 |
+| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 216 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 214 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 302 |
+| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 392 |
 
 ## Trend Readiness
 
-- Snapshot count: **8**
+- Snapshot count: **9**
 - First snapshot: **2026-08-27**
-- Latest snapshot: **2026-09-03**
-- Observed span: **7 days**
+- Latest snapshot: **2026-09-04**
+- Observed span: **8 days**
 
 | Window | Status |
 | --- | --- |

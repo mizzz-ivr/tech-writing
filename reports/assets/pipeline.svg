@@ -5,8 +5,8 @@
 <text x="28" y="38" fill="#f0f6fc" font-family="system-ui,sans-serif" font-size="22" font-weight="700">Editorial pipeline</text>
 <text x="234" y="97" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">draft</text>
 <rect x="250" y="83" width="590" height="20" rx="5" fill="#21262d"/>
-<rect x="250" y="83" width="118" height="20" rx="5" fill="#58a6ff"/>
-<text x="854" y="98" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
+<rect x="250" y="83" width="354" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="98" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">3</text>
 <text x="234" y="139" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">review</text>
 <rect x="250" y="125" width="590" height="20" rx="5" fill="#21262d"/>
 <rect x="250" y="125" width="118" height="20" rx="5" fill="#58a6ff"/>

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-09-03",
+  "as_of": "2026-09-04",
   "summary": {
     "published_articles": 5,
     "last_published_at": "2026-08-28",
@@ -16,7 +16,7 @@
         "value": "developer-productivity",
         "published_count": 4,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -27,7 +27,7 @@
         "value": "devops",
         "published_count": 3,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -38,7 +38,7 @@
         "value": "ai",
         "published_count": 2,
         "last_published_at": "2026-08-27",
-        "days_since_last": 7,
+        "days_since_last": 8,
         "coverage": {
           "30": true,
           "90": true,
@@ -51,7 +51,7 @@
         "value": "Python",
         "published_count": 3,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -62,7 +62,7 @@
         "value": "TypeScript",
         "published_count": 1,
         "last_published_at": "2026-08-27",
-        "days_since_last": 7,
+        "days_since_last": 8,
         "coverage": {
           "30": true,
           "90": true,
@@ -75,7 +75,7 @@
         "value": "GitHub Actions",
         "published_count": 4,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -86,7 +86,7 @@
         "value": "GitHub API",
         "published_count": 2,
         "last_published_at": "2026-08-27",
-        "days_since_last": 7,
+        "days_since_last": 8,
         "coverage": {
           "30": true,
           "90": true,
@@ -97,7 +97,7 @@
         "value": "GitHub",
         "published_count": 1,
         "last_published_at": "2026-08-24",
-        "days_since_last": 10,
+        "days_since_last": 11,
         "coverage": {
           "30": true,
           "90": true,
@@ -108,7 +108,7 @@
         "value": "GitHub Events API",
         "published_count": 1,
         "last_published_at": "2026-08-27",
-        "days_since_last": 7,
+        "days_since_last": 8,
         "coverage": {
           "30": true,
           "90": true,
@@ -119,7 +119,7 @@
         "value": "GitHub Issues",
         "published_count": 1,
         "last_published_at": "2026-08-24",
-        "days_since_last": 10,
+        "days_since_last": 11,
         "coverage": {
           "30": true,
           "90": true,
@@ -130,7 +130,7 @@
         "value": "GitHub Pull Requests",
         "published_count": 1,
         "last_published_at": "2026-08-24",
-        "days_since_last": 10,
+        "days_since_last": 11,
         "coverage": {
           "30": true,
           "90": true,
@@ -141,7 +141,7 @@
         "value": "GitHub Releases",
         "published_count": 1,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -152,7 +152,7 @@
         "value": "GitHub Search API",
         "published_count": 1,
         "last_published_at": "2026-08-26",
-        "days_since_last": 8,
+        "days_since_last": 9,
         "coverage": {
           "30": true,
           "90": true,
@@ -163,7 +163,7 @@
         "value": "OpenAI API",
         "published_count": 1,
         "last_published_at": "2026-08-27",
-        "days_since_last": 7,
+        "days_since_last": 8,
         "coverage": {
           "30": true,
           "90": true,
@@ -176,7 +176,7 @@
         "value": "architecture",
         "published_count": 3,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -187,7 +187,7 @@
         "value": "automation",
         "published_count": 3,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,
@@ -198,7 +198,7 @@
         "value": "ai-assisted-development",
         "published_count": 1,
         "last_published_at": "2026-08-24",
-        "days_since_last": 10,
+        "days_since_last": 11,
         "coverage": {
           "30": true,
           "90": true,
@@ -209,7 +209,7 @@
         "value": "ci-cd",
         "published_count": 1,
         "last_published_at": "2026-08-26",
-        "days_since_last": 8,
+        "days_since_last": 9,
         "coverage": {
           "30": true,
           "90": true,
@@ -220,7 +220,7 @@
         "value": "development-process",
         "published_count": 1,
         "last_published_at": "2026-08-24",
-        "days_since_last": 10,
+        "days_since_last": 11,
         "coverage": {
           "30": true,
           "90": true,
@@ -231,7 +231,7 @@
         "value": "oss",
         "published_count": 1,
         "last_published_at": "2026-08-28",
-        "days_since_last": 6,
+        "days_since_last": 7,
         "coverage": {
           "30": true,
           "90": true,

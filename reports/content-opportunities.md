@@ -1,6 +1,6 @@
 # Content Gap / Next Article Opportunities
 
-> As of: 2026-09-03
+> As of: 2026-09-04
 
 Repository metadataから再生成するderived reportです。本文やbacklog自由文から技術分類を推測せず、明示されたmetadataだけを使います。
 
@@ -18,80 +18,98 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 ## Current Portfolio Coverage
 
-- Tracked articles: **7**
+- Tracked articles: **9**
 - Published articles: **5**
-- Draft / review candidates: **2**
+- Draft / review candidates: **4**
 - Unchecked backlog items: **48**
 
 ### topics
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| GitHubActions | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| Python | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| 個人開発 | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| GitHubAPI | 2 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| architecture | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| github | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| individual-development | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| openai | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| OSS | 1 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| security | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| typescript | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| 生成ai | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| 個人開発 | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| GitHubAPI | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| architecture | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| github | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| individual-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| openai | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| security | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| typescript | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| 生成ai | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| developer-productivity | 4 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| devops | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| ai | 2 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| devops | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| TypeScript | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 4 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| GitHub API | 2 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| GitHub | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| GitHub Events API | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
-| GitHub Issues | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| GitHub Pull Requests | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| GitHub Releases | 1 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| GitHub Search API | 1 | 2026-08-26 | 8d | ✓ | ✓ | ✓ |
-| OpenAI API | 1 | 2026-08-27 | 7d | ✓ | ✓ | ✓ |
+| GitHub Actions | 4 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| GitHub API | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| GitHub | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| GitHub Events API | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| GitHub Issues | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| GitHub Pull Requests | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| GitHub Search API | 1 | 2026-08-26 | 9d | ✓ | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| architecture | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| automation | 3 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
-| ai-assisted-development | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| ci-cd | 1 | 2026-08-26 | 8d | ✓ | ✓ | ✓ |
-| development-process | 1 | 2026-08-24 | 10d | ✓ | ✓ | ✓ |
-| oss | 1 | 2026-08-28 | 6d | ✓ | ✓ | ✓ |
+| architecture | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| automation | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| ai-assisted-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| ci-cd | 1 | 2026-08-26 | 9d | ✓ | ✓ | ✓ |
+| development-process | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| oss | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
 draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。
 
-- **topics:** `ci`, `engineering`, `github-actions`, `writing`
-- **portfolio_signals:** `communication`
+- **topics:** `aws`, `ci`, `engineering`, `github-actions`, `self-hosted-runner`, `terraform`, `writing`
+- **domains:** `infra`
+- **technologies:** `Amazon Linux 2023`, `AWS EC2`, `AWS Graviton`, `AWS Lambda`, `github-aws-runners`, `Terraform`
+- **portfolio_signals:** `ci`, `communication`, `cost-optimization`, `infrastructure`
 
 ## Next Article Candidates
 
-### 1. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md)
+### 1. [常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話](../articles/260831-runner-scale-to-zero-design/article.md)
+
+- Status: `draft`
+- Portfolio gap: `infrastructure`, `cost-optimization`
+- Implementation evidence: `ivRooom/ivrm-web`
+- Coverage gap / recency: domains:infra (not yet published); technologies:AWS EC2 (not yet published); technologies:AWS Lambda (not yet published); technologies:Terraform (not yet published); technologies:github-aws-runners (not yet published)
+- Related positive-reaction context: 2 published article(s)
+
+### 2. [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/260831-selfhosted-graviton-runner/article.md)
+
+- Status: `draft`
+- Portfolio gap: `infrastructure`, `ci`
+- Implementation evidence: `ivRooom/ivrm-web`
+- Coverage gap / recency: domains:infra (not yet published); technologies:AWS EC2 (not yet published); technologies:AWS Graviton (not yet published); technologies:Amazon Linux 2023 (not yet published); technologies:Terraform (not yet published)
+- Related positive-reaction context: 2 published article(s)
+
+### 3. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md)
 
 - Status: `draft`
 - Portfolio gap: `communication`
@@ -99,7 +117,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 2 published article(s)
 
-### 2. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
+### 4. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
@@ -149,7 +167,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-09-03**
+- Snapshot: **2026-09-04**
 - Monitored repositories: **5**
 - Evidence rows: **304**
 - Untracked evidence: **304**
