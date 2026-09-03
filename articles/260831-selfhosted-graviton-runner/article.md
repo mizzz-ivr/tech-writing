@@ -2,7 +2,7 @@
 title: "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた"
 status: draft
 published_at: null
-verified_at: 2026-08-31
+verified_at: 2026-09-04
 article_type: case-study
 level: intermediate
 topics:
@@ -46,19 +46,19 @@ published:
 
 最初は一時的な障害かと思って再実行しましたが、何度やっても同じでした。
 
-そのうち、`main` のbranch protectionを設定しようとしたAPIが `403` を返しました。メッセージは「GitHub Proにアップグレードするか、このRepositoryをpublicにしてください」。
+そのうち、`main` のbranch protectionを設定しようとしたAPIが `403` を返しました。メッセージは「GitHub Proにアップグレードするか、このrepositoryをpublicにしてください」。
 
 これで話がつながりました。private repositoryのGitHub Actions無料枠、正確にはspending limitを使い切っていて、hosted runnerがジョブを割り当てる前に弾いていたわけです。
 
-このRepositoryは個人開発の中では規模が大きめで、テスト・型チェック・Lint・ビルド・TerraformのvalidateまでCIで回しています。ここが動かないと、開いているPRが「レビューできない」状態でただ積み上がっていきます。
+このrepositoryは個人開発の中では規模が大きめで、テスト・型チェック・Lint・ビルド・TerraformのvalidateまでCIで回しています。ここが動かないと、開いているPRが「レビューできない」状態でただ積み上がっていきます。
 
 ## 選択肢を並べてみる
 
 CIを動かす場所を用意する方法は、思ったよりいくつもありました。ざっと検討したものを並べてみます。
 
-一番手軽なのは、GitHub Proにして課金してしまうことです。月4ドルで、privateリポジトリのActions無料枠が2,000分から3,000分に増えます。それを超えた分はLinuxで1分0.006ドル（2026年1月の値下げ後のレート）。CIの構成を何も変えなくていいのは魅力ですが、うちのCIは型チェック・テスト・Lint・複数のNext.jsビルド・OpenNextバンドル・Terraform validateまで回していて、1 runで十数分かかります。PRを普通に開いていくだけで3,000分はそれなりに現実味があり、そうなると使った分だけ請求が伸びる変動費になってしまいます。Proにはせず、spending limitだけ上げてpay-as-you-goで溢れた分を払う、という手もありますが、これも実質同じで青天井の変動費という点が気になりました。
+一番手軽なのは、GitHub Proにして課金してしまうことです。月4ドルで、private repositoryのActions無料枠が2,000分から3,000分に増えます。それを超えた分はLinuxで1分0.006ドル（2026年1月の値下げ後のレート）。CIの構成を何も変えなくていいのは魅力ですが、うちのCIは型チェック・テスト・Lint・複数のNext.jsビルド・OpenNextバンドル・Terraform validateまで回していて、1 runで十数分かかります。PRを普通に開いていくだけで3,000分はそれなりに現実味があり、そうなると使った分だけ請求が伸びる変動費になってしまいます。Proにはせず、spending limitだけ上げてpay-as-you-goで溢れた分を払う、という手もありますが、これも実質同じで青天井の変動費という点が気になりました。
 
-リポジトリをpublicにすれば、hosted runnerは無制限で無料になります。これはかなり効くんですが、このプロジェクトはpublicにできない都合があるので、最初から選択肢に入りませんでした。
+repositoryをpublicにすれば、hosted runnerは無制限で無料になります。これはかなり効くんですが、このプロジェクトはpublicにできない都合があるので、最初から選択肢に入りませんでした。
 
 手元のマシンや、常時起動のPCにrunnerを置くという手もあります。コストはゼロに近い。でも自分の開発機だと、CIが走っている間うるさいし重いし、電源を切ったらCIも止まってしまいます。専用の常時起動マシンは持っていないので、これも見送りました。
 
@@ -69,14 +69,14 @@ CIを動かす場所を用意する方法は、思ったよりいくつもあり
 | 方法 | 月額の目安 | 立てる手数 | 保守 | 備考 |
 |---|---|---|---|---|
 | GitHub Pro / 従量課金 | 4ドル〜（超過分は従量） | ほぼゼロ | ゼロ | CIが増えると変動費が伸びる |
-| public化 | 無料 | ゼロ | ゼロ | 今回は不可 |
+| repositoryをpublicにする | 無料 | ゼロ | ゼロ | 今回は不可 |
 | 手元 / 常時PC | ほぼ無料 | 小 | 中（電源・OS） | マシンを占有される |
 | AWS 常時spot 1台 | 約¥1,400 | 中〜大 | 中 | 直列・spot中断で消失（この記事の構成） |
 | AWS scale-to-zero | 約¥300〜700 | 大 | 中 | ジョブ実行時だけ課金（→ 次の構成） |
 
 決め手になったのは、**セルフホストrunnerの実行時間はGitHubの分数課金に含まれない**（＝走らせるマシンのコストだけで済む）という点でした。しかも今回の `runner_id=0` 問題そのものも、hosted runnerを使わなくなれば消えます。
 
-> 補足（2026年に入ってからの動き）: GitHubは2026年1月にhosted runnerを最大39%値下げし、いっぽうで「セルフホストrunnerの実行時間も無料枠を消費させる（超過分は1分0.002ドル）」という変更を一度アナウンスしましたが、反発を受けて無期限延期になっています。この記事の「分数課金に含まれない」という前提は執筆時点のもので、公開前に最新の料金ページで見直します。
+> 補足（2026-09-04確認）: GitHub-hosted runnerは2026年1月1日に最大39%値下げされました。一方、2026年3月1日から予定されていたprivate repository上のself-hosted runnerへの1分0.002ドルのGitHub Actions cloud platform chargeは、GitHubが導入前に延期しています。2026年9月4日時点の公式Docsでも、self-hosted runnerではbillable minutesが発生しないと案内されています。したがって、この記事では現在も「self-hosted runnerの実行時間はGitHubの分数課金に含まれない」前提で記載しています。参考: [GitHub Actions pricing update](https://github.blog/changelog/2025-12-16-coming-soon-simpler-pricing-and-a-better-experience-for-github-actions/) / [Viewing job execution time](https://docs.github.com/en/actions/how-tos/monitor-workflows/view-job-execution-time)
 
 「立てる手数」と「保守」を安く見せていますが、実際にはGitHub App、IAM、Security Group、ephemeralのループ、ワークフローの段階移行と、決めることがそれなりにあります（この後の節がだいたいその話です）。それでも、変動費を増やさずにCIを自分の手元に戻せるなら、個人開発の運用としては引き合うと判断しました。
 
@@ -86,7 +86,7 @@ CIを動かす場所を用意する方法は、思ったよりいくつもあり
 
 理由は主に2つあります。
 
-1つは、このRepositoryのデプロイ用ワークフローが `linux/arm64` のコンテナイメージをビルドしていること。x86のrunnerでARMイメージを作ると `docker/setup-qemu-action` でエミュレーションが必要になりますが、runner自体がARMならネイティブでビルドできます。速いし、安定します。
+1つは、このrepositoryのデプロイ用ワークフローが `linux/arm64` のコンテナイメージをビルドしていること。x86のrunnerでARMイメージを作ると `docker/setup-qemu-action` でエミュレーションが必要になりますが、runner自体がARMならネイティブでビルドできます。速いし、安定します。
 
 もう1つは単純に、同じくらいのスペックならGravitonの方が安いこと。
 
@@ -103,7 +103,7 @@ OSはAmazon Linux 2023。メモリが2GBしかないので、8GBのswapファイ
 やっていることはシンプルで、systemdのサービスがこのループを回しているだけです。
 
 1. GitHub Appの秘密鍵から短命のインストールトークンを作る
-2. そのトークンで、Repositoryのrunner登録トークンを取得する
+2. そのトークンで、repositoryのrunner登録トークンを取得する
 3. `config.sh --ephemeral --replace` で登録する
 4. `run.sh` で1ジョブ待ち受ける
 5. ジョブが終わったら登録解除して、1に戻る
