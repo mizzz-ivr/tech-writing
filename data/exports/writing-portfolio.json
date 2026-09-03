@@ -2,8 +2,8 @@
   "schema_version": 1,
   "as_of": "2026-09-04",
   "summary": {
-    "published_articles": 5,
-    "last_published_at": "2026-08-28",
+    "published_articles": 6,
+    "last_published_at": "2026-09-04",
     "coverage_windows_days": [
       30,
       90,
@@ -25,9 +25,9 @@
       },
       {
         "value": "devops",
-        "published_count": 3,
-        "last_published_at": "2026-08-28",
-        "days_since_last": 7,
+        "published_count": 4,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -39,6 +39,17 @@
         "published_count": 2,
         "last_published_at": "2026-08-27",
         "days_since_last": 8,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "infra",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -73,9 +84,9 @@
     "technologies": [
       {
         "value": "GitHub Actions",
-        "published_count": 4,
-        "last_published_at": "2026-08-28",
-        "days_since_last": 7,
+        "published_count": 5,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -87,6 +98,39 @@
         "published_count": 2,
         "last_published_at": "2026-08-27",
         "days_since_last": 8,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "Amazon Linux 2023",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "AWS EC2",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "AWS Graviton",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -169,14 +213,25 @@
           "90": true,
           "365": true
         }
+      },
+      {
+        "value": "Terraform",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
       }
     ],
     "portfolio_signals": [
       {
-        "value": "architecture",
-        "published_count": 3,
-        "last_published_at": "2026-08-28",
-        "days_since_last": 7,
+        "value": "automation",
+        "published_count": 4,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -184,7 +239,7 @@
         }
       },
       {
-        "value": "automation",
+        "value": "architecture",
         "published_count": 3,
         "last_published_at": "2026-08-28",
         "days_since_last": 7,
@@ -199,6 +254,17 @@
         "published_count": 1,
         "last_published_at": "2026-08-24",
         "days_since_last": 11,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
+        "value": "ci",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
         "coverage": {
           "30": true,
           "90": true,
@@ -228,6 +294,17 @@
         }
       },
       {
+        "value": "infrastructure",
+        "published_count": 1,
+        "last_published_at": "2026-09-04",
+        "days_since_last": 0,
+        "coverage": {
+          "30": true,
+          "90": true,
+          "365": true
+        }
+      },
+      {
         "value": "oss",
         "published_count": 1,
         "last_published_at": "2026-08-28",
@@ -241,6 +318,41 @@
     ]
   },
   "recent_articles": [
+    {
+      "slug": "260831-selfhosted-graviton-runner",
+      "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
+      "published_at": "2026-09-04",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "topics": [
+        "github-actions",
+        "aws",
+        "ci",
+        "self-hosted-runner",
+        "individual-development"
+      ],
+      "domains": [
+        "devops",
+        "infra"
+      ],
+      "languages": [],
+      "technologies": [
+        "GitHub Actions",
+        "AWS EC2",
+        "AWS Graviton",
+        "Amazon Linux 2023",
+        "Terraform"
+      ],
+      "portfolio_signals": [
+        "automation",
+        "infrastructure",
+        "ci"
+      ],
+      "source_repositories": [],
+      "published": {
+        "qiita": "https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9"
+      }
+    },
     {
       "slug": "profile-signal-github-action",
       "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
@@ -441,6 +553,6 @@
     }
   ],
   "export_quality": {
-    "omitted_non_allowlisted_source_repository_references": 0
+    "omitted_non_allowlisted_source_repository_references": 1
   }
 }

@@ -1,7 +1,21 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-09-03T22:46:24+00:00",
+  "collected_at": "2026-09-03T22:52:28+00:00",
   "articles": [
+    {
+      "slug": "260831-selfhosted-graviton-runner",
+      "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
+      "published_at": "2026-09-04",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 16
+        }
+      }
+    },
     {
       "slug": "ai-runtime-safety-boundary",
       "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",

@@ -19,8 +19,8 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 ## Current Portfolio Coverage
 
 - Tracked articles: **9**
-- Published articles: **5**
-- Draft / review candidates: **4**
+- Published articles: **6**
+- Draft / review candidates: **3**
 - Unchecked backlog items: **48**
 
 ### topics
@@ -32,13 +32,17 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | Python | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 | 個人開発 | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 | GitHubAPI | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| individual-development | 2 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | ai-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
 | architecture | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| aws | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
+| ci | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | github | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
-| individual-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| github-actions | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | openai | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 | OSS | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 | security | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| self-hosted-runner | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | typescript | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 | 生成ai | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 
@@ -47,8 +51,9 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
 | developer-productivity | 4 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
-| devops | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| devops | 4 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | ai | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| infra | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 
 ### languages
 
@@ -61,8 +66,11 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 4 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
+| GitHub Actions | 5 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | GitHub API | 2 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| Amazon Linux 2023 | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
+| AWS EC2 | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
+| AWS Graviton | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | GitHub | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
 | GitHub Events API | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
 | GitHub Issues | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
@@ -70,46 +78,40 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | GitHub Releases | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 | GitHub Search API | 1 | 2026-08-26 | 9d | ✓ | ✓ | ✓ |
 | OpenAI API | 1 | 2026-08-27 | 8d | ✓ | ✓ | ✓ |
+| Terraform | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
+| automation | 4 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | architecture | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
-| automation | 3 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 | ai-assisted-development | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| ci | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | ci-cd | 1 | 2026-08-26 | 9d | ✓ | ✓ | ✓ |
 | development-process | 1 | 2026-08-24 | 11d | ✓ | ✓ | ✓ |
+| infrastructure | 1 | 2026-09-04 | 0d | ✓ | ✓ | ✓ |
 | oss | 1 | 2026-08-28 | 7d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
 draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。
 
-- **topics:** `aws`, `ci`, `engineering`, `github-actions`, `self-hosted-runner`, `terraform`, `writing`
-- **domains:** `infra`
-- **technologies:** `Amazon Linux 2023`, `AWS EC2`, `AWS Graviton`, `AWS Lambda`, `github-aws-runners`, `Terraform`
-- **portfolio_signals:** `ci`, `communication`, `cost-optimization`, `infrastructure`
+- **topics:** `engineering`, `terraform`, `writing`
+- **technologies:** `AWS Lambda`, `github-aws-runners`
+- **portfolio_signals:** `communication`, `cost-optimization`
 
 ## Next Article Candidates
 
 ### 1. [常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話](../articles/260831-runner-scale-to-zero-design/article.md)
 
 - Status: `draft`
-- Portfolio gap: `infrastructure`, `cost-optimization`
+- Portfolio gap: `cost-optimization`
 - Implementation evidence: `ivRooom/ivrm-web`
-- Coverage gap / recency: domains:infra (not yet published); technologies:AWS EC2 (not yet published); technologies:AWS Lambda (not yet published); technologies:Terraform (not yet published); technologies:github-aws-runners (not yet published)
+- Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)
 - Related positive-reaction context: 2 published article(s)
 
-### 2. [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/260831-selfhosted-graviton-runner/article.md)
-
-- Status: `draft`
-- Portfolio gap: `infrastructure`, `ci`
-- Implementation evidence: `ivRooom/ivrm-web`
-- Coverage gap / recency: domains:infra (not yet published); technologies:AWS EC2 (not yet published); technologies:AWS Graviton (not yet published); technologies:Amazon Linux 2023 (not yet published); technologies:Terraform (not yet published)
-- Related positive-reaction context: 2 published article(s)
-
-### 3. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md)
+### 2. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md)
 
 - Status: `draft`
 - Portfolio gap: `communication`
@@ -117,7 +119,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 2 published article(s)
 
-### 4. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
+### 3. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
