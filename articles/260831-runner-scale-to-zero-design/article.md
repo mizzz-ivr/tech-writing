@@ -2,7 +2,7 @@
 title: "常時起動のCI runnerをephemeral scale-to-zeroに移す設計と、その途中で全部踏んだ話"
 status: draft
 published_at: null
-verified_at: 2026-08-31
+verified_at: 2026-09-04
 article_type: design-decision
 level: intermediate
 topics:
@@ -29,7 +29,7 @@ source_repositories:
   - ivRooom/ivrm-web
 source_refs:
   - repository: ivRooom/ivrm-web
-    commit: 7208af38ad0ec01a0a7311840562701755c6592e
+    commit: 1b3c2d9bcc9a3a089ebd534278e8d0939b8776ab
 published:
   qiita: null
   zenn: null
@@ -157,6 +157,8 @@ swap 修正の PR と、旧 runner を Terraform から外す decommission の P
 ## 今の状態
 
 `main` の CI は全部 self-hosted の ephemeral runner（`t4g.medium` + swap）で緑になっています。ジョブが来ると EC2 が1台起きて、1ジョブ実行して、自己終了。アイドル時は0台。
+
+その後、EC2 Fleet に渡すインスタンスタイプを `t4g.medium` 単体から `["t4g.medium", "t4g.large"]` の2種類に増やしました（#293）。ある日 spot 在庫が偏って13台中13台が同じAZに集中したのを見て、`instance_allocation_strategy` を module デフォルトの `lowest-price`（一番安いプールに全部乗せる）から `price-capacity-optimized`（在庫が厚いプールも考慮する）に変えたのに合わせての対応です。**これはジョブの大きさで instance type を選んでいるわけではありません**。どのジョブが来ても同じ2択のプールから spot 在庫の厚い方が選ばれるだけで、OOM時の自動リトライでもない。Swap も常に8GB固定です。
 
 コストは、常時起動のときが月1,400円くらい（spot + gp3）。今は EC2 がジョブ実行時だけなので、月300〜700円くらいの見込み（`t4g.medium` にした分、当初見積りの100〜350円から少し上がった）。
 
