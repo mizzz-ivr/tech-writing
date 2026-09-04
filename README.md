@@ -10,7 +10,7 @@
 | --- | --- | --- | --- | --- |
 | Qiita | 実装・検証・問題解決 | `public/*.md` | `main` merge後にGitHub Actionsからpublish | [Runbook](./docs/QIITA_GITHUB_PUBLISH.md) |
 | Zenn | 設計・技術深掘り | `articles/<slug>.md` / `books/` | Zenn GitHub Deploy | [Runbook](./docs/ZENN_GITHUB_DEPLOY.md) |
-| note | 経験・考え・キャリア | `articles/YYMMDD-<slug>/article.md` | `note:publish` → Web Editorで最終公開 | [Runbook](./docs/NOTE_PUBLISH_HELPER.md) |
+| note | 経験・考え・キャリア | `articles/<lifecycle>/YYMMDD-<slug>/article.md` | `note:publish` → Web Editorで最終公開 | [Runbook](./docs/NOTE_PUBLISH_HELPER.md) |
 
 同じ経験を複数媒体で扱うことはありますが、同一本文をそのまま重複投稿しません。媒体ごとの役割は [note Editorial Strategy](./docs/NOTE_EDITORIAL.md) を参照してください。
 
@@ -18,12 +18,13 @@
 
 1. `ideas/backlog.md` にテーマを残す。
 2. 実体験・Issue・PR・コード・CIなど、記事の根拠を集める。
-3. 媒体に合わせて原稿を作り、branch / PRでレビューする。
+3. 共通原稿は `articles/draft/` で作り、内容が固まったら `review/` へ移してbranch / PRでレビューする。
 4. Qiita / Zenn / noteそれぞれの公開フローで公開する。
-5. 公開URLと公開日を `ideas/published.md` に記録する。
-6. Writing Analyticsが公開履歴・技術coverage・外部reactionを更新する。
+5. 公開済み共通原稿は `articles/published/` へ移し、公開URLと公開日を `ideas/published.md` に記録する。
+6. 中止・統合済みで今後更新しない原稿だけ `articles/old/` へ移す。
+7. Writing Analyticsが公開履歴・技術coverage・外部reactionを更新する。
 
-記事ID・ファイル名のルールは [Article ID / File Naming](./docs/ARTICLE_NAMING.md) を参照してください。
+記事ID・ファイル名のルールは [Article ID / File Naming](./docs/ARTICLE_NAMING.md)、状態別directoryは [Article Lifecycle Directories](./docs/ARTICLE_LIFECYCLE.md) を参照してください。
 
 ## よく使うコマンド
 
@@ -33,7 +34,7 @@ npm install
 pip install -r requirements.txt
 
 # note: Markdown本文をコピーして新規投稿画面を開く
-npm run note:publish -- articles/YYMMDD-<slug>/article.md
+npm run note:publish -- articles/review/YYMMDD-<slug>/article.md
 
 # Qiita / Zenn preview
 npm run qiita:preview
@@ -91,7 +92,11 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 | Path | 用途 |
 | --- | --- |
 | `public/` | Qiita publish対象 |
-| `articles/` | Zenn記事 / 共通原稿 / note原稿 |
+| `articles/draft/` | 執筆中の共通原稿・note原稿 |
+| `articles/review/` | レビュー・公開準備中の共通原稿 |
+| `articles/published/` | 公開済み共通原稿・補助資料 |
+| `articles/old/` | 中止・統合済みで今後更新しない原稿。Writing Analytics対象外 |
+| `articles/*.md` | Zenn GitHub Deploy canonical article |
 | `books/` | Zenn本 |
 | `scraps/` | ZennスクラップのGit管理 |
 | `ideas/` | backlog / 公開記録 |
@@ -106,6 +111,7 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 | --- | --- |
 | [STYLE_GUIDE.md](./STYLE_GUIDE.md) | 執筆方針 |
 | [ARTICLE_NAMING.md](./docs/ARTICLE_NAMING.md) | Article ID / ファイル命名 |
+| [ARTICLE_LIFECYCLE.md](./docs/ARTICLE_LIFECYCLE.md) | draft / review / published / old の運用 |
 | [QIITA_GITHUB_PUBLISH.md](./docs/QIITA_GITHUB_PUBLISH.md) | Qiita同期・投稿・rollback |
 | [ZENN_GITHUB_DEPLOY.md](./docs/ZENN_GITHUB_DEPLOY.md) | Zenn GitHub Deploy |
 | [NOTE_EDITORIAL.md](./docs/NOTE_EDITORIAL.md) | note媒体戦略 |

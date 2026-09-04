@@ -17,6 +17,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
+import article_layout
 import writing_analytics as analytics
 
 BACKLOG_PATH = analytics.ROOT / "ideas" / "backlog.md"
@@ -57,16 +58,15 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_opportunity_articles() -> list[analytics.Article]:
-    """Load analytics articles plus published Zenn-native article files.
+    """Load active shared articles plus published Zenn-native article files.
 
-    The main analytics loader intentionally scans ``articles/*/article.md``.
-    Phase 2C also needs published native Zenn files such as ``articles/<slug>.md``
-    so Portfolio coverage does not silently omit a published article. Native files
-    are included only when their title exists in ``ideas/published.md``; draft
-    state is not inferred from Zenn's separate front matter schema.
+    Shared articles are discovered from the lifecycle directories via
+    ``article_layout``. Zenn canonical files remain direct ``articles/<slug>.md``
+    files and are included only when their title exists in ``ideas/published.md``;
+    draft state is not inferred from Zenn's separate front matter schema.
     """
 
-    articles = analytics.load_articles()
+    articles = article_layout.load_shared_articles(analytics)
     registry = analytics.read_published_registry()
     known_paths = {article.path.resolve() for article in articles}
 
