@@ -638,7 +638,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1178
+        "page_views": 1249
       },
       "zenn": {}
     },
@@ -651,7 +651,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 53
+          "page_views": 117
         }
       },
       {
@@ -681,7 +681,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 214
+          "page_views": 215
         }
       },
       {
@@ -692,7 +692,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 302
+          "page_views": 307
         }
       },
       {
@@ -703,7 +703,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 392
+          "page_views": 393
         }
       }
     ],
