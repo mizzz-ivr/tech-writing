@@ -1,5 +1,5 @@
 ---
-title: "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ"
+title: "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった"
 status: draft
 published_at: null
 verified_at: 2026-09-04
@@ -38,7 +38,7 @@ published:
   note: null
 ---
 
-# CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ
+# CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった
 
 最初に消したかったのは、月に千円ちょっとの待機コストでした。
 
@@ -62,14 +62,15 @@ CIは戻りました。
 
 そうして始めたのが、webhook駆動のephemeral runnerへの移行でした。
 
-ところが、最初の`terraform apply`は名前で止まりました。
-次にrunnerは、ログも残さず消えました。
-ようやく直したswapは、別branchからの`apply`で消えました。
+設計図の上では、かなりきれいでした。
 
-EC2を眠らせたかっただけなのに。
-気づけば、Terraformのstateとbranchの扱いまで含めて、かなり良い教材ができていました。
+ジョブが来たら起きる。
+ジョブが終わったら消える。
+アイドル時は0台。
 
-この記事は、その記録です。
+ところが実際に移してみると、問題になったのは「EC2を起動する仕組み」そのものより、**以前のrunnerが暗黙に持っていた運用条件**と、**Terraformがどのconfigurationを正解として見るか**でした。
+
+この記事では、その2つに絞って書きます。
 
 ## 作りたかったものは単純だった
 
@@ -95,60 +96,15 @@ idle時: 0台
 
 候補にしていた`philips-labs/terraform-aws-github-runner`を確認すると、repositoryはarchive済みでした。そこで、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えました。2026年9月4日時点で利用しているのはv7.11系です。
 
-ネットワークも、個人開発のコストを考えてNAT Gatewayは置いていません。runnerにはpublic IPv4を付けますが、Security Groupはinboundを許可せず、外へ出る通信だけにしています。
+ネットワークは、個人開発のコストを考えてNAT Gatewayを置かない構成です。runnerにはpublic IPv4を付けますが、Security Groupはinboundを許可せず、外へ出る通信だけにしています。
 
 GitHub Appの`workflow_job` webhookを入口に、API Gateway、Lambda、EventBridge、SQSを経てEC2 Spotを起動します。runnerはephemeralなので、仕事が終わればそのインスタンスごと消えます。
 
-設計だけを見ると、きれいでした。
+ここまでは、想定どおりでした。
 
-ここから、順番に壊れます。
+## 1つ目の壁 — 2GBのrunnerは、きれいなエラーを残してくれない
 
-## 1つ目の穴 — 最後の1リソースで、名前がぶつかった
-
-最初の`terraform apply`は、ほとんど最後まで進みました。
-
-そして、最後の方で止まりました。
-
-```text
-Error: creating IAM Instance Profile (ivrm-ci-runner-profile):
-  409 EntityAlreadyExists
-```
-
-新しいmoduleは、runner用のinstance profileを`${prefix}-runner-profile`という名前で作ります。
-
-最初は`prefix = "ivrm-ci"`にしていました。
-すると生成される名前は`ivrm-ci-runner-profile`。
-
-問題は、その名前を**旧runnerがすでに使っていた**ことでした。
-
-他のAWSリソースにはランダムsuffixが付いていて衝突しないものも多かったので、少し油断していました。instance profileは違った。名前がそのまま、過去と現在をぶつけてきました。
-
-対応は単純で、新しいrunner群のnamespaceを分けました。
-
-```hcl
-prefix = "ivrm-ghr"
-```
-
-runnerのlabelはprefixとは別なので、GitHub Actions側の`runs-on`を変える必要はありません。
-
-この時点では、まだ新runnerで本番のCIを動かしていなかったので実害はほぼありませんでした。
-
-ただ、ここで1つ目の教訓が残りました。
-
-**名前はただの名前ではなく、移行境界そのものになる。**
-
-新旧を並べるなら、IAMも含めてnamespaceを先に分けておくべきでした。
-
-## 2つ目の穴 — runnerが、何も言わずに消えた
-
-名前衝突を直して、新しいrunnerが起動するようになりました。
-
-Webhookが届く。
-EC2が起きる。
-GitHubにrunnerが登録される。
-ジョブも取り始める。
-
-ここまでは良かった。
+新しいrunnerが起動し、GitHubへ登録され、ジョブも取り始めました。
 
 ところが、重いCIだけが途中で落ちます。
 
@@ -160,21 +116,22 @@ GitHubにrunnerが登録される。
 
 共通点を並べていくと、原因はメモリに寄っていきました。
 
-使っていた`t4g.small`は2GB RAM。
+当時使っていた`t4g.small`は2GB RAMです。
 
-そして、ここで一番痛かった事実に気づきます。
+2GBでも、checkoutして軽いscriptを実行するだけなら十分です。
+でもNext.js、OpenNext、Docker buildのように複数のprocessがメモリを使うCIでは、突然厳しくなる。
 
-**旧runnerには8GBのswapを入れていたのに、新runnerへ移植するのを忘れていました。**
+さらに移行前のrunnerには、実運用の中で追加された8GBのswapがありました。
 
-古い構成では、2GBだけでは厳しいことをすでに知っていた。
-一度踏んだ穴だった。
+新しい構成ではprovisioningの仕組み自体をTerraform moduleへ置き換えたため、このような**後から足されたruntime tuningは、明示的に移さない限り新しいrunnerには存在しません。**
 
-それなのに、Terraform moduleへ移すときに「EC2をどう作るか」へ意識が寄りすぎて、「そのEC2を実用に耐えさせていた設定」を落としていました。
+ここが一番大きなポイントでした。
 
-移行で失われるのは、コードだけではありません。
-運用の中で後から足した小さな補強ほど、きれいな再構築のときに消えやすい。
+**IaCへ移行しても、既存環境の運用知識まで自動的にIaCへ変換されるわけではない。**
 
-対策として、user-dataに8GBのswapfileを戻しました。
+machine imageやinstance typeだけを見て「同じようなEC2を作った」と考えると、以前の環境を実用に耐えさせていた設定が抜けることがあります。
+
+対策として、user-dataで8GBのswapfileを用意しました。
 
 ```bash
 fallocate -l 8G /swapfile
@@ -183,91 +140,101 @@ mkswap /swapfile
 swapon /swapfile
 ```
 
-さらにinstance floorを`t4g.medium`の4GBへ上げました。現在はSpot capacityの選択肢として`t4g.medium`と`t4g.large`を渡しています。
+さらにinstanceのfloorを`t4g.medium`の4GBへ上げました。現在はSpot capacityの候補として`t4g.medium`と`t4g.large`を渡しています。
 
-ここは誤解しやすいのですが、`t4g.large`は「OOMしたら大きなinstanceで自動retryする」ためではありません。jobの重さでinstance typeを選んでいるわけでもありません。
+ここは少し紛らわしいところです。
 
-現在の構成では`instance_allocation_strategy`を明示しておらず、module既定の`lowest-price`です。`t4g.large`はSpotのcapacityを広げるためのfallbackで、swapも常に8GB固定です。
+`t4g.large`は「OOMしたら大きなinstanceで自動retryする」ためではありません。jobの重さを見てinstance typeを選んでいるわけでもありません。
 
-修正後、重いCIは通るようになりました。
+現在の構成では`instance_allocation_strategy`を明示しておらず、module既定の`lowest-price`です。`t4g.large`はSpot capacityの選択肢を広げるための候補で、swapはどちらでも8GB固定です。
 
-2つ目の教訓は、少し地味です。
+修正後、重いCIも通るようになりました。
 
-**IaCへ移したからといって、過去の運用知識まで自動でIaCになるわけではない。**
+ここで残ったのは、「2GBでは足りなかった」という話だけではありません。
 
-## 3つ目の穴 — 直したはずのswapが消えた
+**移行前に確認すべきなのはinstance specだけではなく、そのmachineが本番運用の中で獲得した設定まで含めた“実際のruntime”である。**
 
-OOM対策を入れて、これで落ち着くと思いました。
+## 2つ目の壁 — Terraformのstateがあっても、branchごとの「正解」は1つではない
 
-次に壊したのはAWSでもmoduleでもなく、自分の`terraform apply`の順番でした。
+OOM対策と並行して、infra側では複数の変更を進めていました。
 
-当時、infraには2本の未マージPRがありました。
+たとえば、こんな2つです。
 
-- 新runnerへswapを追加するbranch
-- 旧runnerをTerraform管理から外すdecommission branch
+- 新しいrunnerのruntime設定を改善する変更
+- 古いrunnerをTerraform管理から外す変更
 
-どちらも同じ`main`から分岐していました。
+どちらも未マージのPRとして存在し、同じ`main`から分岐しているとします。
 
-私は最初にswap側のbranchから`terraform apply`しました。
+このとき注意が必要なのが、**それぞれのbranchから順番に`terraform apply`すること**です。
 
-新runnerへswapが入る。
-CIも改善する。
+1本目のbranchをapplyすると、そのbranchが持つconfigurationへAWSが収束します。
 
-そのあと、decommission側のbranchへ切り替えて、もう一度`terraform apply`しました。
+次に2本目のbranchへ切り替えてapplyすると、Terraformは当然、今checkoutされている2本目のconfigurationをdesired stateとして扱います。
 
-ここで、直したはずのものが消えました。
+もし2本目のbranchに1本目の変更が入っていなければ、Terraformから見ればそれは「存在すべき変更」ではありません。
 
-decommission branchが持っていた`phase2.tf`は、swap修正前の状態です。
+結果として、1本目で入れた変更が2本目のapplyで戻ることがあります。
 
-Terraformから見れば当然です。
-今checkoutされているconfigurationがdesired stateなのだから、それに合わせます。
+```text
+main
+ ├─ PR A: runner runtime改善
+ └─ PR B: old runner decommission
 
-1本目のbranchで入れた変更を、2本目のbranchが巻き戻しました。
+PR Aから apply
+  ↓
+AWS = Aのdesired state
 
-さらに悪いことに、decommission側には旧runnerのimport定義がまだ残っていました。実体のEC2はすでにterminated済みです。
+PR Bから apply
+  ↓
+AWS = Bのdesired state
+  ↓
+Aにしか無い変更は消える可能性がある
+```
 
-その状態からconfigurationへ合わせようとして、**runner bootstrapの入っていない空のEC2まで1台作りました。**
+これはTerraformが壊れたわけではありません。
 
-「Terraformならstateがあるから安全」ではありませんでした。
+むしろTerraformは、非常に正しく動いています。
 
-stateが覚えているのは、どのresourceを管理しているかです。
-何を正しいconfigurationとするかは、今その手元にあるコードが決めます。
+stateが覚えているのは、「どのresourceを管理しているか」です。
 
-つまり、別々の未マージbranchから順番に`apply`するということは、AWSへ別々の「正解」を交互に渡していたことになります。
+**何を正しい状態とするかは、apply時点のconfigurationが決めます。**
 
-この事故以降、infraの適用ルールを変えました。
+だから、同じstateを共有するinfraで複数の未マージbranchを個別にapplyすると、AWS上でbranch同士をmergeしてくれるわけではありません。
 
-**関連する変更はreviewして`main`へ統合してから、`main`の1つの状態を1回だけapplyする。**
+別々のdesired stateを、順番に適用しているだけです。
 
-複数branchの差分をAWS上で合成しない。
+さらにdecommissionのような変更では、すでに実体が無くなったresourceのconfigurationが別branchに残っていると、「消えているから作る」という収束が起きることもあります。
 
-コードレビューの境界と、infra適用の境界を分けない。
+ここから、infraの適用ルールをシンプルにしました。
 
-3つ目の教訓は、これが一番大きかったです。
+**同じstateへ影響する関連変更は、reviewして`main`へ統合してから、統合済みのconfigurationをapplyする。**
 
-## その途中で、旧runnerは本当に消えた
+複数のbranchを、cloud上で合成しない。
+
+コードのmerge boundaryと、infraのapply boundaryをできるだけ揃える。
+
+これはTerraformに限らず、「Git上のbranch」と「外部に存在するmutableな環境」を一緒に扱うときにかなり重要だと思います。
+
+## 移行中に、旧runnerは本当に消えた
 
 移行期間中は、旧runnerと新runnerをしばらく並べていました。
 
 新しい方には`enable_job_queued_check = true`を入れていたので、旧runnerが先にジョブを取った場合、新runner側は「もうqueuedではない」と判断して無駄なEC2を起動しません。
 
-安全に切り替えるための並走期間でした。
+つまり、新旧を並行稼働させながら、新しい経路だけを少しずつ検証できる構成です。
 
 その最中、旧runnerのSpotインスタンスがAWSに回収されました。
 
 `Server.SpotInstanceTermination`。
 
-最初の記事を書いたときから分かっていた、one-time Spotの弱点がそのまま現実になりました。
+one-time Spotを常時runnerとして使う弱点が、そのまま現実になりました。
 
-ただ、その頃には新しいephemeral runnerがCIを処理できていました。
+ただ、その時点では新しいephemeral runnerがCIを処理できる状態になっていました。
 
 旧runnerは消えた。
 でもCIは止まらなかった。
 
-狙ったcutoverではありません。
-結果オーライです。
-
-それでも、ここでようやく「新しい方へ移れた」と実感しました。
+この出来事で、scale-to-zero側へ切り替えられていることを実運用でも確認できました。
 
 ## 今は、ジョブがないと誰もいない
 
@@ -288,48 +255,31 @@ stateが覚えているのは、どのresourceを管理しているかです。
 
 最初に欲しかった状態には、ちゃんと辿り着きました。
 
-ただし、そこまでに覚えたことは「scale-to-zeroの作り方」だけではありませんでした。
+ただ、今回の移行で一番残ったのはscale-to-zeroの設定値ではありません。
 
-## 3つの穴から残ったルール
+## 移行で見るようになった2つの境界
 
-今回の移行で、今後のinfra作業に残したルールは3つです。
+1つ目は、**コードに書かれている構成と、実際に運用されているruntimeの境界**です。
 
-1. **新旧を並べるなら、resource名のnamespaceまで先に分ける**
-2. **移行前のマシンに後付けした運用設定を、コード以外も含めて棚卸しする**
-3. **未マージの複数infra branchから、それぞれ`apply`しない**
+instance typeが同じでも、swap、package、user-data、cache、filesystem、環境変数などが違えば、同じrunnerではありません。
 
-どれも、書いてしまえば当たり前です。
+2つ目は、**Git上のbranchと、Terraformが収束させるdesired stateの境界**です。
 
-名前がぶつかるなら変える。
-2GBで足りないなら増やす。
-別branchに別のdesired stateがあるなら、先に統合する。
+複数の未マージbranchは、Git上ではただの並行作業です。
+でも同じcloud環境へapplyした瞬間、それぞれが「自分こそ正解」として外部状態を書き換えます。
 
-でも、事故が起きるときは「知らなかったこと」より、「知っていたのに境界を越えるとき落としたこと」の方が多い気がします。
+この2つを意識するようになってから、infra移行の前に見るものが増えました。
 
-旧runnerにはswapがあった。
-one-time Spotが消えることも知っていた。
-Terraformがconfigurationへ収束することも知っていた。
-
-それでも全部踏みました。
-
-だから今は、applyの前に見るものが少し増えました。
-
-`plan`だけではなく、**どのbranchの、どのcommitの、どの運用前提をapplyしようとしているのか**を見るようになりました。
-
-## まとめ
+- 旧環境に後付けされたruntime設定は何か
+- 新環境でそれを再現する必要があるか
+- 同じstateへ影響する未マージ変更が他にないか
+- applyするcommitは、実際にProductionへ持っていきたい統合状態か
+- rollbackするとき、どのconfigurationへ戻すのか
 
 ジョブがないなら、EC2も寝ていてほしい。
 
 その小さな理由から始めたscale-to-zero移行でした。
 
-最初のapplyは名前で止まり、
-動き始めたrunnerはメモリで倒れ、
-直したswapは別branchのTerraformが消しました。
-
-そして最後には、旧runnerまでSpot回収で本当に消えました。
-
 今、ジョブがない時間のrunnerは0台です。
 
-静かになったのはAWSの請求だけではなくて、applyするときの自分の手順も少しだけ、です。
-
-次にinfraを触るときは、たぶんもう少し静かに進められると思います。
+そしてapplyするときは、以前より少しだけ「今どの正解をAWSへ渡そうとしているのか」を見るようになりました。
