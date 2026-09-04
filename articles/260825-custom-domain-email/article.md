@@ -1,3 +1,34 @@
+---
+title: "独自ドメイン取得後にメールを送受信できるようにするまで — 記事企画・検証メモ"
+status: draft
+published_at: null
+article_type: guide
+level: beginner
+topics:
+  - email
+  - dns
+  - aws
+  - amazon-ses
+  - cloudflare
+domains:
+  - infra
+  - web
+languages: []
+technologies:
+  - Amazon SES
+  - Cloudflare Email Routing
+  - DNS
+portfolio_signals:
+  - architecture
+  - infrastructure
+source_repositories:
+  - mizzz-ivr/ivmz-home
+published:
+  qiita: null
+  zenn: null
+  note: null
+---
+
 # 独自ドメイン取得後にメールを送受信できるようにするまで — 記事企画・検証メモ
 
 ## Article ID
