@@ -42,7 +42,7 @@
       {
         "slug": "repository-is-source-of-truth",
         "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
-        "path": "articles/repository-is-source-of-truth/article.md",
+        "path": "articles/published/repository-is-source-of-truth/article.md",
         "status": "needs_initial_verification",
         "verified_at": null,
         "days_since_verified": null,
@@ -51,7 +51,7 @@
       {
         "slug": "github-profile-daily-activity",
         "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
-        "path": "articles/github-profile-daily-activity/article.md",
+        "path": "articles/published/github-profile-daily-activity/article.md",
         "status": "needs_initial_verification",
         "verified_at": null,
         "days_since_verified": null,
@@ -60,7 +60,7 @@
       {
         "slug": "github-profile-live-dashboard",
         "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
-        "path": "articles/github-profile-live-dashboard/article.md",
+        "path": "articles/published/github-profile-live-dashboard/article.md",
         "status": "needs_initial_verification",
         "verified_at": null,
         "days_since_verified": null,
@@ -78,7 +78,7 @@
       {
         "slug": "profile-signal-github-action",
         "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
-        "path": "articles/profile-signal-github-action/article.md",
+        "path": "articles/published/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
         "days_since_verified": 7,
@@ -87,7 +87,7 @@
       {
         "slug": "260831-selfhosted-graviton-runner",
         "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
-        "path": "articles/260831-selfhosted-graviton-runner/article.md",
+        "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
         "status": "verified",
         "verified_at": "2026-09-04",
         "days_since_verified": 0,
@@ -634,15 +634,23 @@
   },
   "reactions": {
     "observed_numeric_totals": {
+      "zenn": {},
       "qiita": {
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1249
-      },
-      "zenn": {}
+        "page_views": 1278
+      }
     },
     "observations": [
+      {
+        "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+        "platform": "zenn",
+        "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
+        "metrics": {
+          "error": true
+        }
+      },
       {
         "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
         "platform": "qiita",
@@ -651,15 +659,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 117
-        }
-      },
-      {
-        "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
-        "platform": "zenn",
-        "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
-        "metrics": {
-          "error": true
+          "page_views": 143
         }
       },
       {
@@ -692,7 +692,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 307
+          "page_views": 310
         }
       },
       {
@@ -712,9 +712,9 @@
   "next_article_candidates": [
     {
       "slug": "260831-runner-scale-to-zero-design",
-      "title": "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ",
+      "title": "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった",
       "status": "draft",
-      "path": "articles/260831-runner-scale-to-zero-design/article.md",
+      "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
       "portfolio_gaps": [
         "cost-optimization"
       ],
@@ -732,7 +732,7 @@
       "slug": "260827-engineer-thinking-place",
       "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
       "status": "draft",
-      "path": "articles/260827-engineer-thinking-place/article.md",
+      "path": "articles/draft/260827-engineer-thinking-place/article.md",
       "portfolio_gaps": [
         "communication"
       ],
@@ -747,7 +747,7 @@
       "slug": "personal-dev-pr-ci",
       "title": "個人開発でもPRを切ってCIを通すようにしている理由",
       "status": "review",
-      "path": "articles/personal-dev-pr-ci/article.md",
+      "path": "articles/review/personal-dev-pr-ci/article.md",
       "portfolio_gaps": [],
       "coverage_gaps": [],
       "oldest_gap_age_days": 0,
@@ -769,8 +769,45 @@
   },
   "articles": [
     {
+      "slug": "ai-runtime-safety-boundary",
+      "path": "articles/ai-runtime-safety-boundary.md",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "status": "published",
+      "published_at": "2026-08-27",
+      "article_type": "tech",
+      "level": null,
+      "publication_platforms": [
+        "zenn"
+      ],
+      "classifications": {
+        "topics": [
+          "typescript",
+          "生成ai",
+          "openai",
+          "security",
+          "architecture"
+        ],
+        "domains": [
+          "ai"
+        ],
+        "languages": [
+          "TypeScript"
+        ],
+        "technologies": [
+          "OpenAI API"
+        ],
+        "portfolio_signals": [
+          "architecture"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 0,
+        "recorded": false
+      }
+    },
+    {
       "slug": "260827-engineer-thinking-place",
-      "path": "articles/260827-engineer-thinking-place/article.md",
+      "path": "articles/draft/260827-engineer-thinking-place/article.md",
       "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
       "status": "draft",
       "published_at": null,
@@ -802,8 +839,8 @@
     },
     {
       "slug": "260831-runner-scale-to-zero-design",
-      "path": "articles/260831-runner-scale-to-zero-design/article.md",
-      "title": "CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ",
+      "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
+      "title": "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった",
       "status": "draft",
       "published_at": null,
       "article_type": "case-study",
@@ -842,7 +879,7 @@
     },
     {
       "slug": "260831-selfhosted-graviton-runner",
-      "path": "articles/260831-selfhosted-graviton-runner/article.md",
+      "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
       "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
       "status": "published",
       "published_at": "2026-09-04",
@@ -883,45 +920,8 @@
       }
     },
     {
-      "slug": "ai-runtime-safety-boundary",
-      "path": "articles/ai-runtime-safety-boundary.md",
-      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
-      "status": "published",
-      "published_at": "2026-08-27",
-      "article_type": "tech",
-      "level": null,
-      "publication_platforms": [
-        "zenn"
-      ],
-      "classifications": {
-        "topics": [
-          "typescript",
-          "生成ai",
-          "openai",
-          "security",
-          "architecture"
-        ],
-        "domains": [
-          "ai"
-        ],
-        "languages": [
-          "TypeScript"
-        ],
-        "technologies": [
-          "OpenAI API"
-        ],
-        "portfolio_signals": [
-          "architecture"
-        ]
-      },
-      "source_evidence": {
-        "repository_count": 0,
-        "recorded": false
-      }
-    },
-    {
       "slug": "github-profile-daily-activity",
-      "path": "articles/github-profile-daily-activity/article.md",
+      "path": "articles/published/github-profile-daily-activity/article.md",
       "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
       "status": "published",
       "published_at": "2026-08-26",
@@ -962,7 +962,7 @@
     },
     {
       "slug": "github-profile-live-dashboard",
-      "path": "articles/github-profile-live-dashboard/article.md",
+      "path": "articles/published/github-profile-live-dashboard/article.md",
       "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
       "status": "published",
       "published_at": "2026-08-27",
@@ -1002,35 +1002,8 @@
       }
     },
     {
-      "slug": "personal-dev-pr-ci",
-      "path": "articles/personal-dev-pr-ci/article.md",
-      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
-      "status": "review",
-      "published_at": null,
-      "article_type": null,
-      "level": null,
-      "publication_platforms": [],
-      "classifications": {
-        "topics": [
-          "individual-development",
-          "github",
-          "github-actions",
-          "ci",
-          "ai-development"
-        ],
-        "domains": [],
-        "languages": [],
-        "technologies": [],
-        "portfolio_signals": []
-      },
-      "source_evidence": {
-        "repository_count": 0,
-        "recorded": false
-      }
-    },
-    {
       "slug": "profile-signal-github-action",
-      "path": "articles/profile-signal-github-action/article.md",
+      "path": "articles/published/profile-signal-github-action/article.md",
       "title": "自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた",
       "status": "published",
       "published_at": "2026-08-28",
@@ -1071,7 +1044,7 @@
     },
     {
       "slug": "repository-is-source-of-truth",
-      "path": "articles/repository-is-source-of-truth/article.md",
+      "path": "articles/published/repository-is-source-of-truth/article.md",
       "title": "AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話",
       "status": "published",
       "published_at": "2026-08-24",
@@ -1105,6 +1078,33 @@
       "source_evidence": {
         "repository_count": 1,
         "recorded": true
+      }
+    },
+    {
+      "slug": "personal-dev-pr-ci",
+      "path": "articles/review/personal-dev-pr-ci/article.md",
+      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
+      "status": "review",
+      "published_at": null,
+      "article_type": null,
+      "level": null,
+      "publication_platforms": [],
+      "classifications": {
+        "topics": [
+          "individual-development",
+          "github",
+          "github-actions",
+          "ci",
+          "ai-development"
+        ],
+        "domains": [],
+        "languages": [],
+        "technologies": [],
+        "portfolio_signals": []
+      },
+      "source_evidence": {
+        "repository_count": 0,
+        "recorded": false
       }
     }
   ],

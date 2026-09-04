@@ -1,7 +1,18 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-09-04T04:32:59+00:00",
+  "collected_at": "2026-09-04T11:23:03+00:00",
   "articles": [
+    {
+      "slug": "ai-runtime-safety-boundary",
+      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
+      "published_at": "2026-08-27",
+      "platforms": {
+        "zenn": {
+          "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
+          "error": "article was not returned by Zenn article list endpoint"
+        }
+      }
+    },
     {
       "slug": "260831-selfhosted-graviton-runner",
       "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",
@@ -12,18 +23,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 117
-        }
-      }
-    },
-    {
-      "slug": "ai-runtime-safety-boundary",
-      "title": "生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計",
-      "published_at": "2026-08-27",
-      "platforms": {
-        "zenn": {
-          "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
-          "error": "article was not returned by Zenn article list endpoint"
+          "page_views": 143
         }
       }
     },
@@ -65,7 +65,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 307
+          "page_views": 310
         }
       }
     },

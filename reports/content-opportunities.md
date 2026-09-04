@@ -103,7 +103,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 
 ## Next Article Candidates
 
-### 1. [CI runnerをscale-to-zeroにしたかっただけなのに、名前衝突・OOM・Terraformの巻き戻しを全部踏んだ](../articles/260831-runner-scale-to-zero-design/article.md)
+### 1. [CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった](../articles/draft/260831-runner-scale-to-zero-design/article.md)
 
 - Status: `draft`
 - Portfolio gap: `cost-optimization`
@@ -111,7 +111,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)
 - Related positive-reaction context: 2 published article(s)
 
-### 2. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/260827-engineer-thinking-place/article.md)
+### 2. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/draft/260827-engineer-thinking-place/article.md)
 
 - Status: `draft`
 - Portfolio gap: `communication`
@@ -119,7 +119,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 2 published article(s)
 
-### 3. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/personal-dev-pr-ci/article.md)
+### 3. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/review/personal-dev-pr-ci/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
