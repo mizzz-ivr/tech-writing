@@ -11,21 +11,31 @@ noteへの公開自体はWeb Editorで行い、noteの認証情報や非公開AP
 新規の共通原稿・note原稿は次の形式で作る。
 
 ```text
-articles/YYMMDD-<slug>/article.md
+articles/<lifecycle>/YYMMDD-<slug>/article.md
 ```
 
-`YYMMDD` はJSTの執筆開始日。フォルダ名全体を安定したArticle IDとして扱い、タイトル変更後も原則renameしない。既存の `articles/<slug>/article.md` は互換性のためそのまま維持する。
+通常は執筆開始時に `draft`、公開準備へ入ったら `review`、公開後は `published` へ移す。
 
-詳細は [Article ID / File Naming](./ARTICLE_NAMING.md) を参照する。
+例:
+
+```text
+articles/draft/260901-example/article.md
+articles/review/260901-example/article.md
+articles/published/260901-example/article.md
+```
+
+`YYMMDD` はJSTの執筆開始日。lifecycle directoryを除いたフォルダ名を安定したArticle IDとして扱い、タイトル変更後も原則renameしない。
+
+詳細は [Article ID / File Naming](./ARTICLE_NAMING.md) と [Article Lifecycle Directories](./ARTICLE_LIFECYCLE.md) を参照する。
 
 ## 基本フロー
 
 ```text
-articles/YYMMDD-<slug>/article.md を生成・編集
+articles/draft/YYMMDD-<slug>/article.md を生成・編集
   ↓
-Git / PRでレビュー・履歴管理
+reviewへ移動してGit / PRでレビュー・履歴管理
   ↓
-npm run note:publish -- articles/YYMMDD-<slug>/article.md
+npm run note:publish -- articles/review/YYMMDD-<slug>/article.md
   ↓
 Repository用YAML front matterを除外
   ↓
@@ -34,6 +44,8 @@ Markdown本文をクリップボードへコピー
 https://note.com/new を既定ブラウザで開く
   ↓
 note Editorへ貼り付け・最終調整・公開
+  ↓
+公開後にarticles/published/へ移動
 ```
 
 ## コマンド
@@ -41,10 +53,10 @@ note Editorへ貼り付け・最終調整・公開
 ### Markdown本文だけコピー
 
 ```bash
-npm run note:copy -- articles/YYMMDD-<slug>/article.md
+npm run note:copy -- articles/review/YYMMDD-<slug>/article.md
 ```
 
-`articles/YYMMDD-<slug>/article.md` の先頭にRepository管理用YAML front matterがある場合、そのfront matterだけを除外して本文をコピーする。
+指定した `article.md` の先頭にRepository管理用YAML front matterがある場合、そのfront matterだけを除外して本文をコピーする。
 
 見出し、箇条書き、リンク、引用、code blockなどのMarkdown本文は文字列として維持する。
 
@@ -65,7 +77,7 @@ https://note.com/new
 通常はこちらを使う。
 
 ```bash
-npm run note:publish -- articles/YYMMDD-<slug>/article.md
+npm run note:publish -- articles/review/YYMMDD-<slug>/article.md
 ```
 
 処理順:
@@ -76,6 +88,7 @@ npm run note:publish -- articles/YYMMDD-<slug>/article.md
 4. `https://note.com/new` を既定ブラウザで開く
 5. note Editorへ貼り付ける
 6. 見出し画像・装飾・ハッシュタグ・公開設定をnote側で最終確認する
+7. 公開後、Repository側のfront matterを `status: published` にして `articles/published/` へ移す
 
 ## OS対応
 
@@ -117,7 +130,7 @@ Repository内の記事にはWriting Analytics等のためのfront matterを持�
 ```yaml
 ---
 title: example
-status: draft
+status: review
 published:
   note: null
 ---
@@ -156,7 +169,7 @@ note側で最低限以下を確認する。
 - 無料 / 有料設定
 - 公開範囲
 
-noteはMarkdownファイルの直接importを前提とした投稿フローではないため、貼り付け後の見た目は必ずWeb Editorで確認する。
+noteはMarkdownファイルの直接importを前提にした投稿フローではないため、貼り付け後の見た目は必ずWeb Editorで確認する。
 
 ## Test
 
