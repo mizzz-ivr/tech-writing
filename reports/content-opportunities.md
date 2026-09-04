@@ -103,7 +103,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 
 ## Next Article Candidates
 
-### 1. [CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった](../articles/draft/260831-runner-scale-to-zero-design/article.md)
+### 1. [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md)
 
 - Status: `draft`
 - Portfolio gap: `cost-optimization`

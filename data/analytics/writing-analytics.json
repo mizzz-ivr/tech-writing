@@ -712,7 +712,7 @@
   "next_article_candidates": [
     {
       "slug": "260831-runner-scale-to-zero-design",
-      "title": "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった",
+      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
       "status": "draft",
       "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
       "portfolio_gaps": [
@@ -840,7 +840,7 @@
     {
       "slug": "260831-runner-scale-to-zero-design",
       "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
-      "title": "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった",
+      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
       "status": "draft",
       "published_at": null,
       "article_type": "case-study",

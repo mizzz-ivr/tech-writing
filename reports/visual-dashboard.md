@@ -14,7 +14,7 @@
 | Data Quality | **問題なし** |
 | Pipeline-only coverage gaps | **7** |
 | GitHub → Writing Funnel | Themes **223** / Events **304** |
-| 次の記事候補 | [CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった](../articles/draft/260831-runner-scale-to-zero-design/article.md) (`draft`) |
+| 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md) (`draft`) |
 
 ### 今の判断
 
