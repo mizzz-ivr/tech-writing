@@ -3,8 +3,10 @@
 
 This module normalizes the two article layouts currently used by the repository:
 
-- ``articles/<slug>/article.md`` for shared/note-oriented metadata
+- ``articles/{draft,review,published}/<slug>/article.md`` for shared/note-oriented metadata
 - ``articles/<slug>.md`` for platform-native articles (currently Zenn)
+
+``articles/old`` is intentionally outside the active analytics universe.
 
 Only platform-native files with a matching entry in ``ideas/published.md`` are
 added to the analytics universe. Publication state for those files is normalized
@@ -23,6 +25,7 @@ from typing import Any
 
 import yaml
 
+import article_layout
 import writing_analytics as analytics
 
 NATIVE_ANALYTICS_PATH = analytics.ROOT / "metadata" / "platform-native-analytics.yml"
@@ -128,7 +131,7 @@ def load_articles() -> list[analytics.Article]:
     """Return the complete tracked article universe with normalized publication metadata."""
 
     registry = analytics.read_published_registry()
-    articles = analytics.load_articles()
+    articles = article_layout.load_shared_articles(analytics)
     known_paths = {article.path.resolve() for article in articles}
     native_metadata = load_native_analytics_metadata()
     consumed_native_metadata: set[str] = set()
