@@ -15,6 +15,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 ARTICLES_DIR = ROOT / "articles"
+PUBLISHED_ARTICLES_DIR = ARTICLES_DIR / "published"
 
 CURATED: dict[str, dict[str, Any]] = {
     "github-profile-daily-activity": {
@@ -114,7 +115,7 @@ def render(meta: dict[str, Any], body: str) -> str:
 
 
 def normalize(slug: str, updates: dict[str, Any], check: bool) -> bool:
-    path = ARTICLES_DIR / slug / "article.md"
+    path = PUBLISHED_ARTICLES_DIR / slug / "article.md"
     text = path.read_text(encoding="utf-8")
     meta, body = split_frontmatter(text)
     next_meta = dict(meta)
