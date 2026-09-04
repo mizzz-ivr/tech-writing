@@ -1,5 +1,5 @@
 ---
-title: "CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった"
+title: "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった"
 status: draft
 published_at: null
 verified_at: 2026-09-04
@@ -38,43 +38,75 @@ published:
   note: null
 ---
 
-# CI runnerをscale-to-zeroに移したら、2GBの壁とTerraformのdesired stateにハマった
+# CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった
 
-最初に消したかったのは、月に千円ちょっとの待機コストでした。
+最初に消したかったのは、EC2の待機コストでした。
 
-ジョブがないなら、EC2も寝ていてほしい。
-ジョブが来たら起きて、1つ仕事をしたら消える。
+ところが、移行を始めて最初に消えたのはコストではなく、**runnerそのもの**でした。
 
-それだけの構成にしたかった。
+OpenNextのbuild途中。
+
+GitHub Actionsのstepは`null`のまま。
+
+きれいなOOMログもない。
+
+さっきまでジョブを処理していたrunnerが、途中でいなくなっている。
+
+「scale-to-zeroにして、使わない時間のEC2を0台にする」
+
+やりたかったことは、それだけでした。
+
+でも実際に移してみると、問題になったのはscale-to-zeroの仕組みそのものではありませんでした。
+
+見えていなかったのは、2つです。
+
+**旧runnerが運用の中で身につけていたruntime設定。**
+
+そして、**Terraformがapplyするときに見ている“正解”の範囲。**
+
+この記事は、その2つにぶつかった話です。
 
 前回、private repositoryのGitHub Actions無料枠が尽きたのをきっかけに、AWSへARM64のself-hosted runnerを立てました。
 
-その話は[GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9)にまとめています。
+そのときの話は、こちらにまとめています。
 
-最初のrunnerは、GravitonのSpotインスタンスを1台、24時間起動しておく構成でした。
+[GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9)
 
-CIは戻りました。
-でも、runnerは1台なのでジョブは直列です。複数のbranchをまとめてpushすると、後ろに待ち行列が伸びていく。
+今回は、そのrunnerを「24時間そこにいる1台」から、「必要なときだけ現れるrunner」へ変えた続きです。
 
-しかもone-timeのSpotなので、AWSに回収されればそのまま消えます。自動で次を立てる仕組みもありませんでした。
+## 月千円ちょっとを消すはずだった
 
-だったら、常時起動をやめればいい。
+最初のrunnerは、GravitonのSpotインスタンスを1台、常時起動していました。
 
-そうして始めたのが、webhook駆動のephemeral runnerへの移行でした。
+これでCIは戻りました。
 
-設計図の上では、かなりきれいでした。
+ただ、しばらく使うと気になるところも出てきます。
 
-ジョブが来たら起きる。
-ジョブが終わったら消える。
-アイドル時は0台。
+runnerは1台なので、ジョブは基本的に直列です。
 
-ところが実際に移してみると、問題になったのは「EC2を起動する仕組み」そのものより、**以前のrunnerが暗黙に持っていた運用条件**と、**Terraformがどのconfigurationを正解として見るか**でした。
+複数のbranchをまとめてpushすると、後ろに待ち行列が伸びる。
 
-この記事では、その2つに絞って書きます。
+そしてone-timeのSpotなので、AWSに回収されればそのrunnerは終わりです。
 
-## 作りたかったものは単純だった
+自動で次の1台を立てる仕組みもありません。
 
-目標はこれです。
+何より、ジョブが1件もない時間にもEC2は起きています。
+
+月額では大きな金額ではありません。
+
+でも、使っていないのに起きている。
+
+それが少し気持ち悪い。
+
+ジョブがないなら、EC2も寝ていてほしい。
+
+だったら、runnerを常駐させるのをやめればいい。
+
+そうして、webhook駆動のephemeral runnerへ移行することにしました。
+
+## 設計図は、かなりきれいだった
+
+欲しかった構成は単純です。
 
 ```text
 GitHub workflow_job=queued
@@ -92,46 +124,101 @@ runnerごと終了
 idle時: 0台
 ```
 
-自前で全部組むのではなく、Terraform moduleを使うことにしました。
+ジョブが来たら起きる。
 
-候補にしていた`philips-labs/terraform-aws-github-runner`を確認すると、repositoryはarchive済みでした。そこで、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えました。2026年9月4日時点で利用しているのはv7.11系です。
+1つ仕事をする。
 
-ネットワークは、個人開発のコストを考えてNAT Gatewayを置かない構成です。runnerにはpublic IPv4を付けますが、Security Groupはinboundを許可せず、外へ出る通信だけにしています。
+終わったら消える。
 
-GitHub Appの`workflow_job` webhookを入口に、API Gateway、Lambda、EventBridge、SQSを経てEC2 Spotを起動します。runnerはephemeralなので、仕事が終わればそのインスタンスごと消えます。
+誰も仕事をしていなければ、0台。
 
-ここまでは、想定どおりでした。
+かなり理想的です。
 
-## 1つ目の壁 — 2GBのrunnerは、きれいなエラーを残してくれない
+自前で全部を組むのではなく、Terraform moduleを使いました。
 
-新しいrunnerが起動し、GitHubへ登録され、ジョブも取り始めました。
+候補にしていた`philips-labs/terraform-aws-github-runner`はarchive済みだったため、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えています。2026年9月4日時点で利用しているのはv7.11系です。
 
-ところが、重いCIだけが途中で落ちます。
+ネットワークは、個人開発のコストを考えてNAT Gatewayを置かない構成です。
 
-あるジョブはOpenNextのbundle build付近でrunner自体が消え、GitHub Actions上ではstepが`null`のまま。十分なエラーログも残りませんでした。
+runnerにはpublic IPv4を付けますが、Security Groupはinboundを許可しません。
 
-別のDocker buildでは、`next build`が`Running TypeScript ...`あたりで`exit 255`。
+GitHub Appの`workflow_job` webhookを入口に、API Gateway、Lambda、EventBridge、SQSを経てEC2 Spotを起動する。
 
-一方で、Next.js buildを含まない軽いDocker検証は同じrunnerで通る。
+runnerはephemeralなので、ジョブが終わればインスタンスごと消える。
 
-共通点を並べていくと、原因はメモリに寄っていきました。
+Terraformのplanも通る。
 
-当時使っていた`t4g.small`は2GB RAMです。
+runnerもGitHubへ登録される。
 
-2GBでも、checkoutして軽いscriptを実行するだけなら十分です。
-でもNext.js、OpenNext、Docker buildのように複数のprocessがメモリを使うCIでは、突然厳しくなる。
+軽いジョブも動く。
 
-さらに移行前のrunnerには、実運用の中で追加された8GBのswapがありました。
+ここまでは、かなり順調でした。
 
-新しい構成ではprovisioningの仕組み自体をTerraform moduleへ置き換えたため、このような**後から足されたruntime tuningは、明示的に移さない限り新しいrunnerには存在しません。**
+そして重いCIを流しました。
 
-ここが一番大きなポイントでした。
+## 最初に消えたのは、待機コストではなくrunnerだった
 
-**IaCへ移行しても、既存環境の運用知識まで自動的にIaCへ変換されるわけではない。**
+OpenNextのbundle build付近で、runnerが消えました。
 
-machine imageやinstance typeだけを見て「同じようなEC2を作った」と考えると、以前の環境を実用に耐えさせていた設定が抜けることがあります。
+GitHub Actionsを見ると、途中のstepは`null`。
 
-対策として、user-dataで8GBのswapfileを用意しました。
+「OOM Killerが動きました」と親切に書かれているわけでもありません。
+
+別のDocker buildでは、`next build`が`Running TypeScript ...`付近で`exit 255`。
+
+一方で、Next.js buildを含まない軽いDocker検証は同じrunnerで通ります。
+
+軽いものは通る。
+
+重いものだけ落ちる。
+
+しかも落ち方が、あまり親切ではない。
+
+共通点を並べていくと、かなり怪しいものが1つありました。
+
+`t4g.small`。
+
+RAMは2GBです。
+
+checkoutしてscriptを動かす程度なら、2GBでも十分です。
+
+でもNext.js、OpenNext、Docker buildが重なると、一気に余裕がなくなります。
+
+「じゃあ2GBが犯人か」
+
+半分は正解でした。
+
+半分は、違いました。
+
+## 犯人は2GB。だけではなかった
+
+移行前のrunnerには、8GBのswapがありました。
+
+最初から設計書にきれいに書かれていた設定ではありません。
+
+実際に運用し、重いbuildに当たり、必要になって追加されたruntime tuningです。
+
+そして今回、runnerのprovisioning方法そのものをTerraform moduleへ置き換えました。
+
+そこで何が起きたか。
+
+**EC2は新しくなった。IaCも新しくなった。でも、以前のrunnerが運用の中で獲得した設定までは自動で引っ越してこなかった。**
+
+これが今回のOOMで一番大きかったポイントです。
+
+IaCへ移行したからといって、既存環境の運用知識まで勝手にIaCへ変換されるわけではありません。
+
+instance typeだけ見れば、同じようなARM64のEC2です。
+
+でも実際のrunnerは違いました。
+
+旧runnerにはswapがある。
+
+新runnerにはない。
+
+見た目のspec表だけでは、その差が見えません。
+
+対策として、user-dataで8GBのswapfileを作るようにしました。
 
 ```bash
 fallocate -l 8G /swapfile
@@ -140,40 +227,60 @@ mkswap /swapfile
 swapon /swapfile
 ```
 
-さらにinstanceのfloorを`t4g.medium`の4GBへ上げました。現在はSpot capacityの候補として`t4g.medium`と`t4g.large`を渡しています。
+さらにinstanceのfloorを`t4g.medium`の4GBへ上げました。
 
-ここは少し紛らわしいところです。
+現在はSpot capacityの候補として`t4g.medium`と`t4g.large`を渡しています。
 
-`t4g.large`は「OOMしたら大きなinstanceで自動retryする」ためではありません。jobの重さを見てinstance typeを選んでいるわけでもありません。
+ここは誤解しやすいので補足します。
 
-現在の構成では`instance_allocation_strategy`を明示しておらず、module既定の`lowest-price`です。`t4g.large`はSpot capacityの選択肢を広げるための候補で、swapはどちらでも8GB固定です。
+`t4g.large`は「OOMしたら自動的に大きいinstanceでretryする」ためのものではありません。
+
+jobの重さを見てinstance typeを選択しているわけでもありません。
+
+現在の構成では`instance_allocation_strategy`を明示しておらず、module既定の`lowest-price`です。
+
+`t4g.large`はSpot capacityの候補を広げるために含めていて、swapはどちらでも8GB固定です。
 
 修正後、重いCIも通るようになりました。
 
-ここで残ったのは、「2GBでは足りなかった」という話だけではありません。
+runnerは消えない。
 
-**移行前に確認すべきなのはinstance specだけではなく、そのmachineが本番運用の中で獲得した設定まで含めた“実際のruntime”である。**
+buildも終わる。
 
-## 2つ目の壁 — Terraformのstateがあっても、branchごとの「正解」は1つではない
+これで解決。
 
-OOM対策と並行して、infra側では複数の変更を進めていました。
+……と思いました。
 
-たとえば、こんな2つです。
+## 直った。と思った。
 
-- 新しいrunnerのruntime設定を改善する変更
+OOM対策と並行して、infra側では別の変更も進んでいました。
+
+例えば、こんな2つです。
+
+- runnerのruntime設定を改善する変更
 - 古いrunnerをTerraform管理から外す変更
 
-どちらも未マージのPRとして存在し、同じ`main`から分岐しているとします。
+どちらも同じ`main`から分岐した未マージのbranchだったとします。
 
-このとき注意が必要なのが、**それぞれのbranchから順番に`terraform apply`すること**です。
+Gitの上では、ただの並行作業です。
 
-1本目のbranchをapplyすると、そのbranchが持つconfigurationへAWSが収束します。
+PR AとPR B。
 
-次に2本目のbranchへ切り替えてapplyすると、Terraformは当然、今checkoutされている2本目のconfigurationをdesired stateとして扱います。
+それぞれ別々にreviewして、最後にmergeすればいい。
 
-もし2本目のbranchに1本目の変更が入っていなければ、Terraformから見ればそれは「存在すべき変更」ではありません。
+ところが、TerraformにはGitHubのPRという概念はありません。
 
-結果として、1本目で入れた変更が2本目のapplyで戻ることがあります。
+Terraformが見るのは、**今この瞬間にcheckoutされているconfiguration**です。
+
+PR Aのbranchからapplyする。
+
+AWSはAのdesired stateへ収束する。
+
+次にPR Bのbranchからapplyする。
+
+今度はBのconfigurationがdesired stateになる。
+
+もしBにAの変更が入っていなければ、Terraformから見るとAだけに存在する設定は「現在の正解」ではありません。
 
 ```text
 main
@@ -188,53 +295,84 @@ PR Bから apply
   ↓
 AWS = Bのdesired state
   ↓
-Aにしか無い変更は消える可能性がある
+Aにしか無い変更は戻る可能性がある
 ```
 
-これはTerraformが壊れたわけではありません。
+先に直した設定が、後のapplyで消える。
 
-むしろTerraformは、非常に正しく動いています。
+一瞬、「Terraformに戻された」という感覚になります。
 
-stateが覚えているのは、「どのresourceを管理しているか」です。
+でも、ここで大事なのは逆でした。
+
+## Terraformは、何も間違えていなかった
+
+Terraformは非常に忠実に動いていました。
+
+stateが覚えているのは、管理しているresourceです。
 
 **何を正しい状態とするかは、apply時点のconfigurationが決めます。**
 
-だから、同じstateを共有するinfraで複数の未マージbranchを個別にapplyすると、AWS上でbranch同士をmergeしてくれるわけではありません。
+PR AとPR BがGit上で兄弟branchだからといって、TerraformがAWS上でA+Bへmergeしてくれるわけではありません。
 
-別々のdesired stateを、順番に適用しているだけです。
+Aをapplyしたら、Aが正解。
 
-さらにdecommissionのような変更では、すでに実体が無くなったresourceのconfigurationが別branchに残っていると、「消えているから作る」という収束が起きることもあります。
+Bをapplyしたら、Bが正解。
 
-ここから、infraの適用ルールをシンプルにしました。
+ただそれだけです。
 
-**同じstateへ影響する関連変更は、reviewして`main`へ統合してから、統合済みのconfigurationをapplyする。**
+さらにdecommissionのような変更では、実体がすでに消えていても、別branchのconfigurationにresource定義が残っていれば「存在するべきresource」として再作成されることもあります。
 
-複数のbranchを、cloud上で合成しない。
+Terraformは過去の意図を読んではくれません。
 
-コードのmerge boundaryと、infraのapply boundaryをできるだけ揃える。
+GitHubのPR一覧も見ません。
 
-これはTerraformに限らず、「Git上のbranch」と「外部に存在するmutableな環境」を一緒に扱うときにかなり重要だと思います。
+人間が「この2つは最終的に両方入る予定」と思っていても、それはapply時点のconfigurationに入っていなければ存在しないのと同じです。
 
-## 移行中に、旧runnerは本当に消えた
+ここから、infraの適用ルールをかなり単純にしました。
 
-移行期間中は、旧runnerと新runnerをしばらく並べていました。
+**同じstateへ影響する関連変更は、reviewして`main`へ統合してから、統合済みconfigurationをapplyする。**
 
-新しい方には`enable_job_queued_check = true`を入れていたので、旧runnerが先にジョブを取った場合、新runner側は「もうqueuedではない」と判断して無駄なEC2を起動しません。
+複数branchをcloud上で合成しない。
 
-つまり、新旧を並行稼働させながら、新しい経路だけを少しずつ検証できる構成です。
+Gitのmerge boundaryと、infraのapply boundaryをできるだけ揃える。
 
-その最中、旧runnerのSpotインスタンスがAWSに回収されました。
+仕組みとしては地味です。
+
+でも、このルールを決めたことで「今AWSへ渡している正解はどのcommitなのか」がかなり分かりやすくなりました。
+
+## そして、旧runnerが本当に消えた
+
+移行期間中は、旧runnerと新runnerをしばらく並行稼働させていました。
+
+いきなり旧runnerを止めるのではなく、新しい経路が実際にCIを処理できることを確認してから切り替えるためです。
+
+新しい方には`enable_job_queued_check = true`を入れています。
+
+旧runnerが先にジョブを取った場合、新runner側は「もうqueuedではない」と判断し、無駄なEC2を起動しません。
+
+これで新旧を並べながら、少しずつ新しい経路を試せます。
+
+そして、その移行中。
+
+最後の確認は、こちらが用意したテストではなくAWS側から来ました。
+
+旧runnerのSpotインスタンスが回収されました。
 
 `Server.SpotInstanceTermination`。
 
 one-time Spotを常時runnerとして使う弱点が、そのまま現実になりました。
 
-ただ、その時点では新しいephemeral runnerがCIを処理できる状態になっていました。
+以前なら、そこでrunnerがいなくなります。
+
+次のrunnerは自動では立ちません。
+
+でも、その時点では新しいephemeral runnerがCIを処理できる状態になっていました。
 
 旧runnerは消えた。
-でもCIは止まらなかった。
 
-この出来事で、scale-to-zero側へ切り替えられていることを実運用でも確認できました。
+CIは止まらなかった。
+
+結果的に、かなり分かりやすいcutover確認になりました。
 
 ## 今は、ジョブがないと誰もいない
 
@@ -249,37 +387,50 @@ one-time Spotを常時runnerとして使う弱点が、そのまま現実にな�
 - 8GB swap固定
 - 1 jobで自己終了
 
-常時起動のrunnerを置いていた頃は、何もしていない時間にもEC2がそこにいました。
+常時起動runnerを置いていた頃は、何もしていない時間にもEC2が1台いました。
 
 今は、ジョブがなければ0台です。
 
 最初に欲しかった状態には、ちゃんと辿り着きました。
 
-ただ、今回の移行で一番残ったのはscale-to-zeroの設定値ではありません。
+ただ、終わってみると一番印象に残ったのは、scale-to-zeroの設定値ではありませんでした。
 
-## 移行で見るようになった2つの境界
+## 最後に残ったのは、2つの「見えない状態」だった
 
-1つ目は、**コードに書かれている構成と、実際に運用されているruntimeの境界**です。
+今回見落としかけたものは、どちらも画面上では見えにくいものでした。
 
-instance typeが同じでも、swap、package、user-data、cache、filesystem、環境変数などが違えば、同じrunnerではありません。
+1つ目は、**コードに書かれた構成と、実際に動いているruntimeの差**です。
 
-2つ目は、**Git上のbranchと、Terraformが収束させるdesired stateの境界**です。
+instance typeが同じでも、swap、package、user-data、cache、filesystem、環境変数が違えば、実際には同じmachineではありません。
 
-複数の未マージbranchは、Git上ではただの並行作業です。
-でも同じcloud環境へapplyした瞬間、それぞれが「自分こそ正解」として外部状態を書き換えます。
+長く動いている環境ほど、運用の中で後付けされた知識があります。
 
-この2つを意識するようになってから、infra移行の前に見るものが増えました。
+IaC移行では、その“見えない差分”まで棚卸しする必要があります。
+
+2つ目は、**Git上のbranchと、Terraformが収束させるdesired stateの差**です。
+
+GitではPR AとPR Bを並行して持てます。
+
+でも同じcloud環境へapplyした瞬間、それぞれのbranchは「自分が正解」として外部状態を書き換えます。
+
+だからinfra移行の前に、今はこのあたりを見るようになりました。
 
 - 旧環境に後付けされたruntime設定は何か
 - 新環境でそれを再現する必要があるか
 - 同じstateへ影響する未マージ変更が他にないか
-- applyするcommitは、実際にProductionへ持っていきたい統合状態か
+- applyするcommitは、本当にProductionへ持っていきたい統合状態か
 - rollbackするとき、どのconfigurationへ戻すのか
 
-ジョブがないなら、EC2も寝ていてほしい。
+最初に消したかったのは、月に千円ちょっとの待機コストでした。
 
-その小さな理由から始めたscale-to-zero移行でした。
+途中でrunnerが消えました。
+
+直したruntime設定も、別のdesired stateから見れば消える可能性がありました。
+
+そして最後には、常時起動していたrunnerそのものが本当にいなくなりました。
 
 今、ジョブがない時間のrunnerは0台です。
 
-そしてapplyするときは、以前より少しだけ「今どの正解をAWSへ渡そうとしているのか」を見るようになりました。
+EC2は寝ています。
+
+代わりに、applyする前の自分は以前より少しだけ起きています。
