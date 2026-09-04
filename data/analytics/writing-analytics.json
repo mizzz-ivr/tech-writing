@@ -730,7 +730,7 @@
     },
     {
       "slug": "260827-engineer-thinking-place",
-      "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
+      "title": "技術記事を書いていたら、「コードの外側」の方が気になってきた",
       "status": "draft",
       "path": "articles/draft/260827-engineer-thinking-place/article.md",
       "portfolio_gaps": [
@@ -745,7 +745,7 @@
     },
     {
       "slug": "personal-dev-pr-ci",
-      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
       "status": "review",
       "path": "articles/review/personal-dev-pr-ci/article.md",
       "portfolio_gaps": [],
@@ -808,7 +808,7 @@
     {
       "slug": "260827-engineer-thinking-place",
       "path": "articles/draft/260827-engineer-thinking-place/article.md",
-      "title": "技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした",
+      "title": "技術記事を書いていたら、「コードの外側」の方が気になってきた",
       "status": "draft",
       "published_at": null,
       "article_type": "essay",
@@ -1083,7 +1083,7 @@
     {
       "slug": "personal-dev-pr-ci",
       "path": "articles/review/personal-dev-pr-ci/article.md",
-      "title": "個人開発でもPRを切ってCIを通すようにしている理由",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
       "status": "review",
       "published_at": null,
       "article_type": null,

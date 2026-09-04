@@ -111,7 +111,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)
 - Related positive-reaction context: 2 published article(s)
 
-### 2. [技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした](../articles/draft/260827-engineer-thinking-place/article.md)
+### 2. [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md)
 
 - Status: `draft`
 - Portfolio gap: `communication`
@@ -119,7 +119,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 2 published article(s)
 
-### 3. [個人開発でもPRを切ってCIを通すようにしている理由](../articles/review/personal-dev-pr-ci/article.md)
+### 3. [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/review/personal-dev-pr-ci/article.md)
 
 - Status: `review`
 - Portfolio gap: no new published portfolio signal detected
@@ -132,8 +132,6 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 
 backlog自由文にはclassificationを自動付与せず、タイトル類似度が高い既存記事だけを重複候補として可視化します。
 
-- `個人開発でもPRを切ってCIを通すようにしている理由` → **review** `個人開発でもPRを切ってCIを通すようにしている理由` (title similarity 1.00, section: 次に着手)
-- `note #1: 技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした` → **draft** `技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした` (title similarity 1.00, section: 次に着手)
 - `Zenn: 生成AIを「APIを呼ぶだけ」で終わらせない — Secret・Quota・Kill Switchを分離したAI Runtime設計` → **published** `生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計` (title similarity 0.89, section: 次に着手)
 
 ### Evidence-backed backlog items not already tracked
@@ -142,8 +140,10 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 ### Backlog items intentionally left unscored
 
-- Count: **45**
+- Count: **47**
 - 理由: source repository / classificationが明示されていない自由文へ推測を入れないため。
+  - `個人開発でもPRを切ってCIを通すようにしている理由` (次に着手)
+  - `note #1: 技術記事とは別に、エンジニアとして考えていることを書く場所を作ることにした` (次に着手)
   - `AI Runtimeへ2つ目のProviderを追加したとき、どこまで共通化できたか` (Zenn候補 — Design / Deep Dive)
   - `Discord BotをPlugin Runtime中心の構成にしていった話` (Zenn候補 — Design / Deep Dive)
   - `個人開発のAI機能でRate Limitだけでは足りなかった — Quota / Cost / Concurrency設計` (Zenn候補 — Design / Deep Dive)
@@ -152,9 +152,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
   - `個人開発を「完成させること」より「続けること」を大事にしている` (エンジニアとしての考え方)
   - `AIにコードを書かせるようになって、エンジニアの仕事について考えた` (エンジニアとしての考え方)
   - `趣味の個人開発なのにIssue・PR・CIまで使う理由` (エンジニアとしての考え方)
-  - `技術者として「何を知っているか」より「どう判断するか」が大事になってきた` (エンジニアとしての考え方)
-  - `コードを書く時間が減ってもエンジニアと言えるのか` (エンジニアとしての考え方)
-  - … and 35 more
+  - … and 37 more
 
 ## Interpretation
 
