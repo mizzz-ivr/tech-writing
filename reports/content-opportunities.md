@@ -167,7 +167,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-09-04**
+- Snapshot: **2026-09-05**
 - Monitored repositories: **5**
 - Evidence rows: **304**
 - Untracked evidence: **304**
