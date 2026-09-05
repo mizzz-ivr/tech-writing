@@ -1,6 +1,6 @@
 # Writing Analytics — Decision Dashboard
 
-> Analytics as of: 2026-09-04 · Freshness as of: 2026-09-04 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-09-05 · Freshness as of: 2026-09-05 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
@@ -10,7 +10,7 @@
 | Pipeline | Draft **2** / Review **1** |
 | Last published | **2026-09-04** |
 | Source freshness | Initial verification **4** / Verified **2** |
-| Metric snapshots | **9** / observed span **8d** |
+| Metric snapshots | **10** / observed span **9d** |
 | Data Quality | **問題なし** |
 | Pipeline-only coverage gaps | **7** |
 | GitHub → Writing Funnel | Themes **223** / Events **304** |
@@ -63,7 +63,7 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 
 ## Source Freshness
 
-> Freshness as of: **2026-09-04**
+> Freshness as of: **2026-09-05**
 
 技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
 
@@ -73,8 +73,8 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/published/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/published/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 7d | 0 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 0d | 2 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 8d | 0 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 1d | 2 |
 
 ## Portfolio Coverage
 
@@ -101,7 +101,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | Article | Platform | Reactions / observed metrics |
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 143 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 153 |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 217 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 215 |
 | [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 310 |
@@ -109,10 +109,10 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 
 ## Trend Readiness
 
-- Snapshot count: **9**
+- Snapshot count: **10**
 - First snapshot: **2026-08-27**
-- Latest snapshot: **2026-09-04**
-- Observed span: **8 days**
+- Latest snapshot: **2026-09-05**
+- Observed span: **9 days**
 
 | Window | Status |
 | --- | --- |
