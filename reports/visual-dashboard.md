@@ -1,6 +1,6 @@
 # Writing Analytics — Decision Dashboard
 
-> Analytics as of: 2026-09-05 · Freshness as of: 2026-09-05 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-09-06 · Freshness as of: 2026-09-06 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
@@ -10,15 +10,15 @@
 | Pipeline | Draft **2** / Review **1** |
 | Last published | **2026-09-04** |
 | Source freshness | Initial verification **4** / Verified **2** |
-| Metric snapshots | **10** / observed span **9d** |
+| Metric snapshots | **11** / observed span **10d** |
 | Data Quality | **問題なし** |
 | Pipeline-only coverage gaps | **7** |
-| GitHub → Writing Funnel | Themes **223** / Events **304** |
+| GitHub → Writing Funnel | Themes **225** / Events **305** |
 | 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md) (`draft`) |
 
 ### 今の判断
 
-- GitHub実装の未記事化evidence **304件** を、明示scopeで **223 themes** に整理しています。先頭theme: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0（1 events、代表: Profile Signal v0.4.0）。
+- GitHub実装の未記事化evidence **305件** を、明示scopeで **225 themes** に整理しています。先頭theme: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0（1 events、代表: Profile Signal v0.4.0）。
 - Published記事 **4件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
 - Data Quality blockerはありません。
@@ -38,7 +38,7 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 
 ## GitHub → Writing Funnel
 
-> GitHub snapshot as of: **2026-09-05**
+> GitHub snapshot as of: **2026-09-06**
 
 最近のpublic Repository実装を、明示的なConventional Commit scopeだけでtheme groupingして表示します。scopeが無いeventは無理にまとめません。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。
 
@@ -47,23 +47,23 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 | `mizzz-ivr/profile-signal` | release | **1** | [Profile Signal v0.4.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0) | 2026-08-27 |
 | `mizzz-ivr/profile-signal` | release | **1** | [Profile Signal v0.3.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0) | 2026-08-27 |
 | `mizzz-ivr/roomate-voice` | release | **1** | [RooMate Voice v0.1.0 (Preview)](https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0) | 2026-08-26 |
-| `ivRooom/Herta` | scope `studio` | **19** | [feat(studio): AI Runtime Settingsをprovider-agnostic化する](https://github.com/ivRooom/Herta/pull/343) | 2026-08-27 |
+| `ivRooom/Herta` | scope `studio` | **18** | [feat(studio): AI Runtime Settingsをprovider-agnostic化する](https://github.com/ivRooom/Herta/pull/343) | 2026-08-27 |
 | `ivRooom/Herta` | scope `ai` | **15** | [feat(ai): Studio設定RoleメンションをAI triggerへ追加](https://github.com/ivRooom/Herta/pull/370) | 2026-09-02 |
 | `mizzz-ivr/mizzz-ivr` | scope `profile` | **12** | [fix(profile): make Profile Signal dashboard full width](https://github.com/mizzz-ivr/mizzz-ivr/pull/59) | 2026-08-29 |
+| `ivRooom/Herta` | scope `deps` | **9** | [chore(deps): bump the production-dependencies group with 3 updates](https://github.com/ivRooom/Herta/pull/360) | 2026-09-05 |
 | `ivRooom/Herta` | scope `birthday` | **9** | [fix(birthday): 未登録Guildメンバーの自己登録を許可](https://github.com/ivRooom/Herta/pull/301) | 2026-08-21 |
-| `ivRooom/Herta` | scope `deps` | **8** | [chore(deps): Next.js security patchとReact Query更新](https://github.com/ivRooom/Herta/pull/352) | 2026-08-29 |
 | `ivRooom/Herta` | scope `moderation` | **5** | [feat(moderation): 設定画面をNGワード・自動検知中心に再編](https://github.com/ivRooom/Herta/pull/274) | 2026-08-18 |
-| `ivRooom/Herta` | scope `deploy` | **4** | [fix(deploy): Runtime Secret Encryption master keyをproductionへ注入する](https://github.com/ivRooom/Herta/pull/357) | 2026-08-29 |
+| `ivRooom/Herta` | scope `deploy` | **3** | [fix(deploy): Runtime Secret Encryption master keyをproductionへ注入する](https://github.com/ivRooom/Herta/pull/357) | 2026-08-29 |
 | `ivRooom/Herta` | scope `suggestion` | **3** | [feat(suggestion): Staff向けSuggestion履歴を追加](https://github.com/ivRooom/Herta/pull/327) | 2026-08-25 |
 | `ivRooom/Herta` | scope `runtime` | **3** | [docs(runtime): Worker Runtime consumer要否を明文化](https://github.com/ivRooom/Herta/pull/317) | 2026-08-24 |
 
-Raw untracked evidence **304件** → deterministic theme **223件**。Compression: **1.36x**。
+Raw untracked evidence **305件** → deterministic theme **225件**。Compression: **1.36x**。
 
 Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repository内の明示scopeでgrouping、scope無しはsingleton。AI semantic clustering / significance scoreは使いません。
 
 ## Source Freshness
 
-> Freshness as of: **2026-09-05**
+> Freshness as of: **2026-09-06**
 
 技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
 
@@ -73,8 +73,8 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/published/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/published/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 8d | 0 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 1d | 2 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 9d | 0 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 2d | 2 |
 
 ## Portfolio Coverage
 
@@ -101,18 +101,18 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | Article | Platform | Reactions / observed metrics |
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 155 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 165 |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 218 |
-| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 216 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 311 |
-| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 393 |
+| [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 218 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 320 |
+| [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 394 |
 
 ## Trend Readiness
 
-- Snapshot count: **10**
+- Snapshot count: **11**
 - First snapshot: **2026-08-27**
-- Latest snapshot: **2026-09-05**
-- Observed span: **9 days**
+- Latest snapshot: **2026-09-06**
+- Observed span: **10 days**
 
 | Window | Status |
 | --- | --- |
