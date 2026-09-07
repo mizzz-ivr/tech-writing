@@ -2,8 +2,8 @@
   "schema_version": 1,
   "as_of": "2026-09-08",
   "summary": {
-    "published_articles": 6,
-    "last_published_at": "2026-09-04",
+    "published_articles": 8,
+    "last_published_at": "2026-09-08",
     "coverage_windows_days": [
       30,
       90,
@@ -318,6 +318,50 @@
     ]
   },
   "recent_articles": [
+    {
+      "slug": "personal-dev-pr-ci",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+      "published_at": "2026-09-08",
+      "article_type": "tech",
+      "level": null,
+      "topics": [
+        "github",
+        "githubactions",
+        "ci",
+        "個人開発",
+        "生成ai"
+      ],
+      "domains": [],
+      "languages": [],
+      "technologies": [],
+      "portfolio_signals": [],
+      "source_repositories": [],
+      "published": {
+        "zenn": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci"
+      }
+    },
+    {
+      "slug": "personal-dev-pr-ci",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+      "published_at": "2026-09-08",
+      "article_type": null,
+      "level": null,
+      "topics": [
+        "individual-development",
+        "github",
+        "github-actions",
+        "ci",
+        "ai-development"
+      ],
+      "domains": [],
+      "languages": [],
+      "technologies": [],
+      "portfolio_signals": [],
+      "source_repositories": [],
+      "published": {
+        "zenn": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci"
+      }
+    },
     {
       "slug": "260831-selfhosted-graviton-runner",
       "title": "GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた",

@@ -2,23 +2,23 @@
   "schema_version": 1,
   "as_of": "2026-09-08",
   "overview": {
-    "tracked_articles": 9,
-    "published_articles": 6,
+    "tracked_articles": 10,
+    "published_articles": 8,
     "draft_articles": 2,
-    "review_articles": 1,
-    "last_published_at": "2026-09-04",
-    "average_publish_interval_days": 2.2,
-    "data_quality_findings": 0,
+    "review_articles": 0,
+    "last_published_at": "2026-09-08",
+    "average_publish_interval_days": 2.1,
+    "data_quality_findings": 8,
     "pipeline_only_coverage_gaps": 7,
-    "freshness_needs_initial_verification": 4,
+    "freshness_needs_initial_verification": 6,
     "backlog_items": 48,
     "github_untracked_evidence": 303,
     "github_untracked_themes": 221
   },
   "pipeline": {
     "draft": 2,
-    "review": 1,
-    "published": 6,
+    "review": 0,
+    "published": 8,
     "archived": 0
   },
   "trend_readiness": {
@@ -34,9 +34,9 @@
   },
   "freshness": {
     "as_of": "2026-09-08",
-    "published_articles": 6,
+    "published_articles": 8,
     "verified_articles": 2,
-    "needs_initial_verification": 4,
+    "needs_initial_verification": 6,
     "oldest_verification_age_days": 11,
     "articles": [
       {
@@ -61,6 +61,24 @@
         "slug": "github-profile-live-dashboard",
         "title": "GitHubプロフィールをライブな開発ダッシュボードにしてみた",
         "path": "articles/published/github-profile-live-dashboard/article.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      },
+      {
+        "slug": "personal-dev-pr-ci",
+        "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+        "path": "articles/personal-dev-pr-ci.md",
+        "status": "needs_initial_verification",
+        "verified_at": null,
+        "days_since_verified": null,
+        "source_ref_count": 0
+      },
+      {
+        "slug": "personal-dev-pr-ci",
+        "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+        "path": "articles/review/personal-dev-pr-ci/article.md",
         "status": "needs_initial_verification",
         "verified_at": null,
         "days_since_verified": null,
@@ -99,6 +117,39 @@
     "topics": {
       "values": [
         {
+          "value": "個人開発",
+          "published_count": 4,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ci",
+          "published_count": 3,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "github",
+          "published_count": 3,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
@@ -121,6 +172,17 @@
           }
         },
         {
+          "value": "individual-development",
+          "published_count": 3,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
@@ -132,10 +194,21 @@
           }
         },
         {
-          "value": "個人開発",
-          "published_count": 3,
-          "last_published_at": "2026-08-28",
-          "days_since_last": 11,
+          "value": "ai-development",
+          "published_count": 2,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "github-actions",
+          "published_count": 2,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -154,21 +227,10 @@
           }
         },
         {
-          "value": "individual-development",
+          "value": "生成ai",
           "published_count": 2,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 4,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "ai-development",
-          "published_count": 1,
-          "last_published_at": "2026-08-24",
-          "days_since_last": 15,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -198,32 +260,10 @@
           }
         },
         {
-          "value": "ci",
+          "value": "githubactions",
           "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 4,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "github",
-          "published_count": 1,
-          "last_published_at": "2026-08-24",
-          "days_since_last": 15,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "github-actions",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 4,
+          "last_published_at": "2026-09-08",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -276,17 +316,6 @@
         },
         {
           "value": "typescript",
-          "published_count": 1,
-          "last_published_at": "2026-08-27",
-          "days_since_last": 12,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "生成ai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
           "days_since_last": 12,
@@ -351,7 +380,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 0,
+      "unclassified_published_articles": 2,
       "pipeline_only_values": []
     },
     "languages": {
@@ -379,7 +408,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 0,
+      "unclassified_published_articles": 2,
       "pipeline_only_values": []
     },
     "technologies": {
@@ -528,7 +557,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 0,
+      "unclassified_published_articles": 2,
       "pipeline_only_values": [
         "AWS Lambda",
         "github-aws-runners"
@@ -625,7 +654,7 @@
           }
         }
       ],
-      "unclassified_published_articles": 0,
+      "unclassified_published_articles": 2,
       "pipeline_only_values": [
         "communication",
         "cost-optimization"
@@ -634,7 +663,11 @@
   },
   "reactions": {
     "observed_numeric_totals": {
-      "zenn": {},
+      "zenn": {
+        "likes": 0,
+        "bookmarks": 0,
+        "comments": 0
+      },
       "qiita": {
         "likes": 1,
         "stocks": 3,
@@ -649,6 +682,17 @@
         "url": "https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary",
         "metrics": {
           "error": true
+        }
+      },
+      {
+        "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+        "platform": "zenn",
+        "url": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci",
+        "metrics": {
+          "likes": 0,
+          "bookmarks": 0,
+          "comments": 0,
+          "page_views": null
         }
       },
       {
@@ -705,6 +749,17 @@
           "comments": 0,
           "page_views": 400
         }
+      },
+      {
+        "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+        "platform": "zenn",
+        "url": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci",
+        "metrics": {
+          "likes": 0,
+          "bookmarks": 0,
+          "comments": 0,
+          "page_views": null
+        }
       }
     ],
     "notable_observation_count": 2
@@ -742,30 +797,20 @@
       "source_repository_count": 1,
       "related_positive_reaction_articles": 2,
       "missing_metadata": []
-    },
-    {
-      "slug": "personal-dev-pr-ci",
-      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
-      "status": "review",
-      "path": "articles/review/personal-dev-pr-ci/article.md",
-      "portfolio_gaps": [],
-      "coverage_gaps": [],
-      "oldest_gap_age_days": 0,
-      "source_evidence_recorded": false,
-      "source_repository_count": 0,
-      "related_positive_reaction_articles": 0,
-      "missing_metadata": [
-        "domains",
-        "languages",
-        "technologies",
-        "portfolio_signals",
-        "source_repositories"
-      ]
     }
   ],
   "data_quality": {
-    "finding_count": 0,
-    "findings": []
+    "finding_count": 8,
+    "findings": [
+      "`personal-dev-pr-ci`: `domains` が未分類",
+      "`personal-dev-pr-ci`: `languages` が未分類",
+      "`personal-dev-pr-ci`: `technologies` が未分類",
+      "`personal-dev-pr-ci`: published.mdでは公開済みだがfront matterは `status: review`",
+      "`personal-dev-pr-ci`: published.mdにzenn URLがあるがfront matterは空",
+      "`personal-dev-pr-ci`: `domains` が未分類",
+      "`personal-dev-pr-ci`: `languages` が未分類",
+      "`personal-dev-pr-ci`: `technologies` が未分類"
+    ]
   },
   "articles": [
     {
@@ -875,6 +920,35 @@
       "source_evidence": {
         "repository_count": 1,
         "recorded": true
+      }
+    },
+    {
+      "slug": "personal-dev-pr-ci",
+      "path": "articles/personal-dev-pr-ci.md",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+      "status": "published",
+      "published_at": "2026-09-08",
+      "article_type": "tech",
+      "level": null,
+      "publication_platforms": [
+        "zenn"
+      ],
+      "classifications": {
+        "topics": [
+          "github",
+          "githubactions",
+          "ci",
+          "個人開発",
+          "生成ai"
+        ],
+        "domains": [],
+        "languages": [],
+        "technologies": [],
+        "portfolio_signals": []
+      },
+      "source_evidence": {
+        "repository_count": 0,
+        "recorded": false
       }
     },
     {
@@ -1084,11 +1158,13 @@
       "slug": "personal-dev-pr-ci",
       "path": "articles/review/personal-dev-pr-ci/article.md",
       "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
-      "status": "review",
-      "published_at": null,
+      "status": "published",
+      "published_at": "2026-09-08",
       "article_type": null,
       "level": null,
-      "publication_platforms": [],
+      "publication_platforms": [
+        "zenn"
+      ],
       "classifications": {
         "topics": [
           "individual-development",

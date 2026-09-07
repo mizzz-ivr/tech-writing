@@ -18,33 +18,34 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 ## Current Portfolio Coverage
 
-- Tracked articles: **9**
-- Published articles: **6**
-- Draft / review candidates: **3**
+- Tracked articles: **10**
+- Published articles: **8**
+- Draft / review candidates: **2**
 - Unchecked backlog items: **48**
 
 ### topics
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
+| 個人開発 | 4 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| ci | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| github | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | GitHub | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
 | GitHubActions | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
+| individual-development | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | Python | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
-| 個人開発 | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
+| ai-development | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| github-actions | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | GitHubAPI | 2 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
-| individual-development | 2 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 15d | ✓ | ✓ | ✓ |
+| 生成ai | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | architecture | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 | aws | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
-| ci | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
-| github | 1 | 2026-08-24 | 15d | ✓ | ✓ | ✓ |
-| github-actions | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
+| githubactions | 1 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | openai | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 | OSS | 1 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
 | security | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 | self-hosted-runner | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
 | typescript | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
-| 生成ai | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 
 ### domains
 
@@ -118,15 +119,6 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Implementation evidence: `mizzz-ivr/tech-writing`
 - Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
 - Related positive-reaction context: 2 published article(s)
-
-### 3. [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/review/personal-dev-pr-ci/article.md)
-
-- Status: `review`
-- Portfolio gap: no new published portfolio signal detected
-- Implementation evidence: not recorded
-- Coverage gap / recency: no >30d or unpublished domain/language/technology gap detected
-- Related positive-reaction context: 0 published article(s)
-- Metadata needed before stronger scoring: `domains`, `languages`, `technologies`, `portfolio_signals`, `source_repositories`
 
 ## Backlog Hygiene / Overlap
 
