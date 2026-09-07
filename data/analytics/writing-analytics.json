@@ -639,7 +639,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1333
+        "page_views": 1342
       }
     },
     "observations": [
@@ -659,7 +659,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 173
+          "page_views": 176
         }
       },
       {
@@ -681,7 +681,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 218
+          "page_views": 219
         }
       },
       {
@@ -692,7 +692,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 325
+          "page_views": 329
         }
       },
       {
@@ -703,7 +703,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 397
+          "page_views": 398
         }
       }
     ],
