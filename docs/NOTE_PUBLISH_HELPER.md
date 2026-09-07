@@ -39,6 +39,8 @@ npm run note:publish -- articles/review/YYMMDD-<slug>/article.md
   ↓
 Repository用YAML front matterを除外
   ↓
+note互換性warningを確認
+  ↓
 Markdown本文をクリップボードへコピー
   ↓
 https://note.com/new を既定ブラウザで開く
@@ -84,11 +86,27 @@ npm run note:publish -- articles/review/YYMMDD-<slug>/article.md
 
 1. Markdownファイルを読む
 2. Repository用YAML front matterを除外する
-3. Markdown本文をクリップボードへコピーする
-4. `https://note.com/new` を既定ブラウザで開く
-5. note Editorへ貼り付ける
-6. 見出し画像・装飾・ハッシュタグ・公開設定をnote側で最終確認する
-7. 公開後、Repository側のfront matterを `status: published` にして `articles/published/` へ移す
+3. noteでそのまま表現できない既知のMarkdownを確認し、warningを表示する
+4. Markdown本文をクリップボードへコピーする
+5. `https://note.com/new` を既定ブラウザで開く
+6. note Editorへ貼り付ける
+7. 見出し画像・装飾・ハッシュタグ・公開設定をnote側で最終確認する
+8. 公開後、Repository側のfront matterを `status: published` にして `articles/published/` へ移す
+
+## note Markdown互換性
+
+noteのWeb EditorはMarkdownファイルを完全にrenderする用途のエディタではない。Repository上で正しく見えるMarkdownでも、貼り付け後に同じ表示になるとは限らない。
+
+特にGitHub-style Markdown tableはnoteの標準tableとして変換されないため、note向け本文では原則として次のいずれかへ置き換える。
+
+- 箇条書き
+- 小見出し + 本文
+- 画像化した表
+- 数式表現など、note側で明示的に対応する表現
+
+`note:copy` / `note:publish` はGFM Markdown tableを検知した場合にwarningを出す。既存原稿や意図的な記法を壊さないためcopy自体はblockしない。
+
+code fence内のtable例や`|`を含むコードはwarning対象外とする。
 
 ## OS対応
 
@@ -162,6 +180,7 @@ note側で最低限以下を確認する。
 
 - タイトル
 - 見出し・太字・箇条書き等の表示
+- Markdown tableが生テキストのまま残っていないか
 - code block
 - リンク
 - 画像
@@ -184,6 +203,8 @@ npm run note:test
 - front matter不正時のfail-safe
 - UTF-8 / 日本語本文
 - ファイル不存在
+- Markdown tableの互換性warning
+- code fence内table記法の誤検知防止
 - `https://note.com/new` の導線
 
 ## 参考

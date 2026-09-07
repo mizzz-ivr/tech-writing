@@ -51,6 +51,42 @@ export function readNoteMarkdown(filePath, cwd = process.cwd()) {
   return { resolvedPath, markdown: noteMarkdown };
 }
 
+export function findNoteCompatibilityWarnings(markdown) {
+  const lines = markdown.split(/\r?\n/);
+  const warnings = [];
+  let fenceMarker = null;
+
+  for (let index = 0; index < lines.length - 1; index += 1) {
+    const line = lines[index];
+    const fence = line.match(/^\s*(```+|~~~+)/);
+
+    if (fence) {
+      const marker = fence[1][0];
+      if (fenceMarker === null) {
+        fenceMarker = marker;
+      } else if (fenceMarker === marker) {
+        fenceMarker = null;
+      }
+      continue;
+    }
+
+    if (fenceMarker !== null) continue;
+
+    const header = line.trim();
+    const separator = lines[index + 1].trim();
+    const isTableSeparator =
+      /^\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?$/.test(separator);
+
+    if (header.includes("|") && isTableSeparator) {
+      warnings.push(
+        `Markdown table detected near line ${index + 1}. note does not support GitHub-style Markdown tables; convert it to bullets, headings, an image, or another note-compatible representation before publishing.`,
+      );
+    }
+  }
+
+  return warnings;
+}
+
 function runCommand(command, args, options = {}) {
   const result = spawnSync(command, args, {
     encoding: "utf8",
@@ -182,6 +218,11 @@ export function run(argv = process.argv.slice(2)) {
   }
 
   const { resolvedPath, markdown } = readNoteMarkdown(filePath);
+  const warnings = findNoteCompatibilityWarnings(markdown);
+  for (const warning of warnings) {
+    console.warn(`[note-publish] warning: ${warning}`);
+  }
+
   const clipboardProvider = copyMarkdownToClipboard(markdown);
   console.log(`Copied Markdown body: ${resolvedPath}`);
   console.log(`Clipboard provider: ${clipboardProvider}`);
