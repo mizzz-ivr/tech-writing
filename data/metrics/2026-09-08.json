@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-09-07T21:32:58+00:00",
+  "collected_at": "2026-09-07T21:35:52+00:00",
   "articles": [
     {
       "slug": "ai-runtime-safety-boundary",
@@ -94,20 +94,6 @@
           "stocks": 0,
           "comments": 0,
           "page_views": 400
-        }
-      }
-    },
-    {
-      "slug": "personal-dev-pr-ci",
-      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
-      "published_at": "2026-09-08",
-      "platforms": {
-        "zenn": {
-          "url": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci",
-          "likes": 0,
-          "bookmarks": 0,
-          "comments": 0,
-          "page_views": null
         }
       }
     }

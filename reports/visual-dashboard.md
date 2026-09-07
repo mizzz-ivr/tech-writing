@@ -6,12 +6,12 @@
 
 | 判断軸 | 現在 |
 | --- | --- |
-| Published | **8** |
+| Published | **7** |
 | Pipeline | Draft **2** / Review **0** |
 | Last published | **2026-09-08** |
-| Source freshness | Initial verification **6** / Verified **2** |
+| Source freshness | Initial verification **5** / Verified **2** |
 | Metric snapshots | **13** / observed span **12d** |
-| Data Quality | **8件 — 下のData Qualityを確認** |
+| Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **7** |
 | GitHub → Writing Funnel | Themes **221** / Events **303** |
 | 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md) (`draft`) |
@@ -19,9 +19,9 @@
 ### 今の判断
 
 - GitHub実装の未記事化evidence **303件** を、明示scopeで **221 themes** に整理しています。先頭theme: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0（1 events、代表: Profile Signal v0.4.0）。
-- Published記事 **6件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
+- Published記事 **5件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
-- Data Quality findingが **8件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
+- Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
 - 次記事候補の主な根拠: `cost-optimization`, `technologies:AWS Lambda (not yet published)`, `technologies:github-aws-runners (not yet published)`
 
 ## Editorial Pipeline
@@ -73,7 +73,6 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](../articles/published/github-profile-daily-activity/article.md) | Needs initial verification | - | - | 0 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/published/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/personal-dev-pr-ci.md) | Needs initial verification | - | - | 0 |
-| [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/review/personal-dev-pr-ci/article.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
 | [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 11d | 0 |
 | [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 4d | 2 |
@@ -109,7 +108,6 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 219 |
 | [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 329 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 400 |
-| [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) | zenn | likes 0 · bookmarks 0 · comments 0 · page_views unavailable |
 
 ## Trend Readiness
 
@@ -128,11 +126,6 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 
 ## Data Quality
 
-- `personal-dev-pr-ci`: `domains` が未分類
-- `personal-dev-pr-ci`: `languages` が未分類
-- `personal-dev-pr-ci`: `technologies` が未分類
-- `personal-dev-pr-ci`: published.mdでは公開済みだがfront matterは `status: review`
-- `personal-dev-pr-ci`: published.mdにzenn URLがあるがfront matterは空
 - `personal-dev-pr-ci`: `domains` が未分類
 - `personal-dev-pr-ci`: `languages` が未分類
 - `personal-dev-pr-ci`: `technologies` が未分類

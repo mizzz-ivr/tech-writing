@@ -2,7 +2,7 @@
   "schema_version": 1,
   "as_of": "2026-09-08",
   "summary": {
-    "published_articles": 8,
+    "published_articles": 7,
     "last_published_at": "2026-09-08",
     "coverage_windows_days": [
       30,
@@ -330,28 +330,6 @@
         "ci",
         "個人開発",
         "生成ai"
-      ],
-      "domains": [],
-      "languages": [],
-      "technologies": [],
-      "portfolio_signals": [],
-      "source_repositories": [],
-      "published": {
-        "zenn": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci"
-      }
-    },
-    {
-      "slug": "personal-dev-pr-ci",
-      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
-      "published_at": "2026-09-08",
-      "article_type": null,
-      "level": null,
-      "topics": [
-        "individual-development",
-        "github",
-        "github-actions",
-        "ci",
-        "ai-development"
       ],
       "domains": [],
       "languages": [],

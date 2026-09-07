@@ -65,17 +65,17 @@ Qiitaの既存記事同期、新規記事作成、Zenn本・スクラップな�
 <!-- WRITING_ANALYTICS:START -->
 ### Writing Profile
 
-**8 published** · Last post **2026-09-08** · Avg interval **2.1日**
+**7 published** · Last post **2026-09-08** · Avg interval **2.5日**
 
-- Topics: 個人開発 (4), github (3), ci (3), individual-development (3), GitHubActions (3)
-- Domains: devops (4), developer-productivity (4), Unclassified (2), ai (2), infra (1)
-- Languages: Python (3), Unclassified (2), TypeScript (1)
+- Topics: 個人開発 (4), GitHubActions (3), GitHub (3), Python (3), github (2)
+- Domains: devops (4), developer-productivity (4), ai (2), Unclassified (1), infra (1)
+- Languages: Python (3), Unclassified (1), TypeScript (1)
 
 #### Recent
 
 - 2026-09-08 — [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci)
-- 2026-09-08 — [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci)
 - 2026-09-04 — [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9)
+- 2026-08-28 — [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904)
 
 #### Notable
 

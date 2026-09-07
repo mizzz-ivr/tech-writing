@@ -18,8 +18,8 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 ## Current Portfolio Coverage
 
-- Tracked articles: **10**
-- Published articles: **8**
+- Tracked articles: **9**
+- Published articles: **7**
 - Draft / review candidates: **2**
 - Unchecked backlog items: **48**
 
@@ -28,18 +28,18 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
 | 個人開発 | 4 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
-| ci | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
-| github | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | GitHub | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
 | GitHubActions | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
-| individual-development | 3 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | Python | 3 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
-| ai-development | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
-| github-actions | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| ci | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| github | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | GitHubAPI | 2 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
+| individual-development | 2 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
 | 生成ai | 2 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 15d | ✓ | ✓ | ✓ |
 | architecture | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 | aws | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
+| github-actions | 1 | 2026-09-04 | 4d | ✓ | ✓ | ✓ |
 | githubactions | 1 | 2026-09-08 | 0d | ✓ | ✓ | ✓ |
 | openai | 1 | 2026-08-27 | 12d | ✓ | ✓ | ✓ |
 | OSS | 1 | 2026-08-28 | 11d | ✓ | ✓ | ✓ |
