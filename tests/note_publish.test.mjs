@@ -6,6 +6,7 @@ import test from "node:test";
 
 import {
   NOTE_NEW_URL,
+  findNoteCompatibilityWarnings,
   readNoteMarkdown,
   stripRepositoryFrontMatter,
   usage,
@@ -28,6 +29,21 @@ test("stripRepositoryFrontMatter rejects malformed front matter", () => {
     () => stripRepositoryFrontMatter("---\ntitle: broken\n# body\n"),
     /no standalone closing '---' delimiter/,
   );
+});
+
+test("findNoteCompatibilityWarnings detects GitHub-style Markdown tables", () => {
+  const markdown = `# Heading\n\n| Service | Role |\n| --- | --- |\n| Qiita | How |\n| note | Why |\n`;
+  const warnings = findNoteCompatibilityWarnings(markdown);
+
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /Markdown table detected/);
+  assert.match(warnings[0], /note does not support GitHub-style Markdown tables/);
+});
+
+test("findNoteCompatibilityWarnings ignores table-like text inside fenced code blocks", () => {
+  const markdown = `# Heading\n\n\`\`\`md\n| Service | Role |\n| --- | --- |\n| Qiita | How |\n\`\`\`\n`;
+
+  assert.deepEqual(findNoteCompatibilityWarnings(markdown), []);
 });
 
 test("readNoteMarkdown rejects missing files", () => {
