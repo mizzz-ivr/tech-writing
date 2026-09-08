@@ -121,9 +121,9 @@ Computer Useと聞くと、
 
 ---
 
-## 「答えを作るAI」から「仕事を終わらせるAI」へ
+## 「答えを作るAI」から「仕事を任せるAI」へ。ただしAstraだけの話ではない
 
-これまでAIに頼む仕事は、小さく切ることが多かったと思います。
+少し前まで、AIに頼む仕事は小さく切ることが多かったと思います。
 
 ```text
 この文章を要約して
@@ -132,31 +132,48 @@ Computer Useと聞くと、
 この表を分析して
 ```
 
-AstraについてOpenAIが使っている表現で重要なのが、
+そして人間が、その結果を次のアプリや次の作業へつないでいました。
 
-**hardest end-to-end work**
+ただし、**2026年現在、この構図はすでにAstra以前から変わり始めています。**
 
-です。
+例えばClaude Codeでは、Repositoryを調べ、コードを変更し、Testを実行し、失敗を見て修正するような複数ステップの作業を一つのAgentが進められます。
 
-例えば、本当に仕事で欲しい結果が「会議用の売上報告」だったとします。
+さらに2026年5〜6月に公開されたDynamic Workflowsでは、Claude Code自身がタスクに合わせたmulti-agent harnessを組み、複数Agentへ仕事を分け、結果を検証し、必要なら **stop conditionを満たすまで繰り返す** こともできるようになっています。
 
-従来のAIなら、
+Claude Fable 5.1もAnthropicから、long-horizon agentic work向けとして、長時間のAgentic Codingだけでなく、Multistep Research、Document、Spreadsheet、Slide作業まで強化されたモデルと説明されています。
+
+OpenAI側でもCodexを使った開発について、2026年2月に **Harness Engineering** という考え方を紹介しています。そこでは、人間の役割を細かいコードを書くことより、Agentが仕事を完了できる環境・制約・Feedback Loopを設計することへ移していく実験が報告されています。
+
+つまり、Astraの変化を
 
 ```text
-人間がデータを集める
-↓
-AIに分析してもらう
-↓
-人間がExcelへ反映
-↓
-AIに説明文を書いてもらう
-↓
-人間がPowerPointへ貼る
+今まで：人間が全部の工程をつなぐ
+Astra：AIが初めて全部つなぐ
 ```
 
-と、人間が間をつないでいました。
+と考えるのは正確ではありません。
 
-Astraが狙っているのは、もっと大きな単位です。
+すでにAI業界全体が、
+
+```text
+一問一答
+↓
+Toolを使うAgent
+↓
+複数ステップのWorkflow
+↓
+結果を確認してやり直すLoop
+↓
+長い仕事をGoal単位で任せる
+```
+
+という方向へ進んでいます。
+
+その中でAstraが面白いのは、Coding Agentだけでなく、Computer Use、Research、Document、Spreadsheet、Presentationなどをまたぐ **hardest end-to-end work** を、汎用モデルの中心能力としてさらに強く押し出してきたところです。
+
+例えば、本当に欲しい結果が「会議用の売上報告」だったとします。
+
+欲しいのは途中の文章ではなく、最終的な仕事の完了です。
 
 ```text
 データを確認
@@ -174,17 +191,29 @@ Spreadsheet更新
 要点を短くまとめる
 ```
 
-つまり、AIが生成するものの単位が
+重要なのは、**この一つ一つがAIにできるようになったことではなく、これらを一つのGoalとして任せる競争が本格化していること**だと思います。
+
+AIへ渡す仕事の単位が、
 
 ```text
 文章
 ↓
 成果物
 ↓
-仕事
+Workflow
+↓
+Goal
 ```
 
-へ広がっています。
+へ大きくなってきています。
+
+Anthropic:
+https://platform.claude.com/docs/en/models/fable-5-1/overview
+
+https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code
+
+OpenAI:
+https://openai.com/index/harness-engineering/
 
 ---
 
@@ -247,51 +276,120 @@ https://www.reuters.com/business/wall-st-futures-slip-oil-surge-puts-markets-edg
 
 ---
 
-## 普通の人には「プロンプト術」よりこっちの方が大きい
+## 「プロンプトが上手い人」より、「AIが回り続ける仕組み」を作る人へ
 
 ここ数年、AI活用では「良いプロンプトの書き方」がよく話題になりました。
 
-でもAstraでは、細かい手順を全部人間が指定する必要も減らそうとしています。
+もちろん、2026年になってPrompt Engineeringが不要になったわけではありません。
 
-OpenAIによるとAstraは、指示に足りない部分があっても、
+Claude Fable 5.1の公式Prompting Guideでも、長い仕事を最後まで進めるための指示や、Toolの呼び方を効率化するPromptingが紹介されています。
+
+ただ、最近はその一段上にある **Loop Engineering** や **Harness Engineering** という考え方が目立つようになっています。
+
+Loop Engineeringをかなり単純化すると、
+
+```text
+AIに指示する
+↓
+AIが行動する
+↓
+結果を見る
+↓
+うまくいかなければ修正する
+↓
+もう一度試す
+↓
+完了条件を満たしたら止まる
+```
+
+という仕組みそのものを設計することです。
+
+AnthropicのClaude Codeチームも、Loopを **stop conditionを満たすまでAgentが作業サイクルを繰り返すもの** と説明しています。
+
+IBMも2026年7月にLoop Engineeringを、Agentが最小限の人間介入で `act → observe → decide → iterate` を繰り返し、ユーザーが定義したGoalへ進むWorkflowを設計する考え方として整理しています。
+
+これはエンジニアだけの話に見えますが、考え方自体は普通の仕事にも当てはまります。
+
+例えば旅行計画なら、
+
+```text
+候補を探す
+↓
+予算・日程で比較する
+↓
+条件に合わなければ探し直す
+↓
+大事な条件だけ人間に確認する
+↓
+条件が揃ったら候補をまとめる
+```
+
+というLoopをAIが回せるか、という話です。
+
+開発なら、
+
+```text
+実装
+↓
+Test
+↓
+失敗
+↓
+原因調査
+↓
+修正
+↓
+もう一度Test
+```
+
+となります。
+
+つまり、Prompt Engineeringが消えるというより、
+
+```text
+1回のPromptをうまく書く
+```
+
+だけではなく、
+
+```text
+何をGoalにするか
+何を確認するか
+失敗したらどう戻るか
+どこで人間へ確認するか
+何をもって完了とするか
+```
+
+まで含めて設計する方向へ広がっています。
+
+AstraについてOpenAIが説明している、
 
 - 日常的な不足は文脈から補う
 - 結果が大きく変わることだけ質問する
 - 回答待ちと関係ない仕事は進める
 - 重要な判断は勝手に確定しない
 
-という動きが改善されています。
+という改善も、この長いLoopを止めずに進めるために重要です。
 
-例えば旅行を探してもらうとして、
-
-```text
-東京から週末に行ける温泉宿を探して。
-2人で6万円くらい。
-```
-
-と言ったとき、調べられるところまでは先に調べる。
-
-一方で、
+AIを使う技術は、
 
 ```text
-キャンセル不可でも予約する？
+うまいPromptを書く
 ```
 
-のように結果を大きく左右するところでは確認する。
-
-これが安定するなら、AIを使う技術は
+だけから、
 
 ```text
-AI向けの細かい指示を書く
+目的・境界・確認ポイント・完了条件を設計する
 ```
 
-から、
+ところまで広がってきているのだと思います。
 
-```text
-目的と、やっていい境界を伝える
-```
+Anthropic:
+https://claude.com/blog/getting-started-with-loops
 
-へ変わっていきそうです。
+IBM:
+https://www.ibm.com/think/topics/loop-engineering
 
 ---
 
@@ -361,7 +459,15 @@ Terminal-Bench 4.0はこうなっています。
 
 かなり伸びています。
 
-ただ、実際の開発はコードを書いて終わりではありません。
+ただ、この表だけで「AstraがAgent開発を初めて可能にした」と見るのは違います。
+
+Claude Fable 5.1は公式に **long-horizon agentic work** 向けのモデルとして位置付けられていますし、Claude CodeのDynamic Workflowsでは、複数Agentを並列に動かし、別Agentに検証させたり、エラーがなくなるまで `loop until done` を回したりできます。
+
+OpenAIのCodexも、コードを生成するだけではなく、Repository内でAgentが作業し続けられるHarnessやFeedback Loopの設計を重視しています。
+
+つまり現在の競争は、単純な「コード生成スコア」だけではなく、**どれだけ長い開発Workflowを人間の介入を減らして完了できるか**にも移っています。
+
+実際の開発はコードを書いて終わりではありません。
 
 ```text
 Issueを読む
@@ -397,7 +503,7 @@ Review対応
 
 へ変わることです。
 
-AstraのSoftware Engineeringだけでなく、Computer Useや長いタスクへの追従が一緒に伸びているのは、この使い方とかなり相性が良さそうです。
+AstraのSoftware Engineeringだけでなく、Computer Useや長いタスクへの追従が一緒に伸びているのは、この競争をさらに広い仕事へ持ち込む意味で面白いところです。
 
 ---
 
@@ -619,6 +725,8 @@ Toolを使うAI
 ↓
 複数ステップを進めるAI
 ↓
+結果を見てやり直すAI
+↓
 PCを操作するAI
 ↓
 成果物まで作るAI
@@ -626,11 +734,17 @@ PCを操作するAI
 仕事を終わらせるAI
 ```
 
+この流れはAstraだけで突然始まったものではありません。
+
+Claude Code / FableやCodexなど、すでに複数のAgent環境が **Prompt単位からWorkflow・Loop・Goal単位へ** と競争軸を広げています。
+
+その中でAstraは、Computer UseやProfessional Workまで含めて、より多くの仕事を一つのend-to-end taskとして扱う方向を強く押し出しました。
+
 そしてAIが仕事を丸ごと進め始めると、変わるのはAIだけではありません。
 
 - 人がアプリを操作するという前提
 - SaaSの価値
-- プロンプトの書き方
+- PromptだけでなくLoop / Harnessの設計
 - エンジニアへの仕事の渡し方
 - AIへ与える権限
 - Safetyの設計
@@ -659,5 +773,15 @@ PCを操作するAI
   https://openai.com/ja-JP/products/release-notes/
 - OpenAI API, GPT-6 Astra Model  
   https://developers.openai.com/api/docs/models/gpt-6-astra
+- OpenAI, Harness engineering: leveraging Codex in an agent-first world  
+  https://openai.com/index/harness-engineering/
+- Anthropic, Claude Fable 5.1  
+  https://platform.claude.com/docs/en/models/fable-5-1/overview
+- Anthropic, A harness for every task: dynamic workflows in Claude Code  
+  https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code
+- Anthropic, Loop engineering: Getting started with loops  
+  https://claude.com/blog/getting-started-with-loops
+- IBM, What Is Loop Engineering?  
+  https://www.ibm.com/think/topics/loop-engineering
 - Reuters, S&P 500 falls as AI worries hit software makers, 2026-09-08  
   https://www.reuters.com/business/wall-st-futures-slip-oil-surge-puts-markets-edge-2026-09-08/
