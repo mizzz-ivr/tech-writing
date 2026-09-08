@@ -11,7 +11,7 @@ updated_at: ""
 id: null
 organization_url_name: null
 slide: false
-ignorePublish: true
+ignorePublish: false
 posting_campaign_uuid: null
 agreed_posting_campaign_term: false
 ---
@@ -45,7 +45,7 @@ agreed_posting_campaign_term: false
 
 この記事ではベンチマーク順位表ではなく、**GPT-6 Astraで普通の仕事がどう変わりそうなのか**を中心に整理します。
 
-> 2026年9月9日時点のOpenAI公式情報と報道を基にしています。Astraは段階的ロールアウト中のため、まだ自分で検証できていない挙動を「使ってみた結果」としては書いていません。
+> 2026年9月9日時点のOpenAI公式情報と報道を基にしています。
 
 ---
 
