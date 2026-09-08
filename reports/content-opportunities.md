@@ -110,7 +110,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Portfolio gap: `cost-optimization`
 - Implementation evidence: `ivRooom/ivrm-web`
 - Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)
-- Related positive-reaction context: 2 published article(s)
+- Related positive-reaction context: 3 published article(s)
 
 ### 2. [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md)
 

@@ -22,5 +22,6 @@
 <text x="854" y="266" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
 <text x="234" y="307" text-anchor="end" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="14">zenn likes</text>
 <rect x="250" y="293" width="590" height="20" rx="5" fill="#21262d"/>
-<text x="854" y="308" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">0</text>
+<rect x="250" y="293" width="196" height="20" rx="5" fill="#58a6ff"/>
+<text x="854" y="308" fill="#f0f6fc" font-family="ui-monospace,monospace" font-size="14">1</text>
 </svg>

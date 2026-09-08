@@ -550,6 +550,18 @@
   ],
   "notable_articles": [
     {
+      "slug": "personal-dev-pr-ci",
+      "title": "完成したと思ったコードが、PRを開いたら完成じゃなくなった",
+      "published_at": "2026-09-08",
+      "platform": "zenn",
+      "url": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci",
+      "reactions": {
+        "likes": 1,
+        "bookmarks": 0,
+        "comments": 0
+      }
+    },
+    {
       "slug": "github-profile-daily-activity",
       "title": "GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた",
       "published_at": "2026-08-26",

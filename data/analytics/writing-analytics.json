@@ -655,7 +655,7 @@
   "reactions": {
     "observed_numeric_totals": {
       "zenn": {
-        "likes": 0,
+        "likes": 1,
         "bookmarks": 0,
         "comments": 0
       },
@@ -663,7 +663,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1349
+        "page_views": 1354
       }
     },
     "observations": [
@@ -680,7 +680,7 @@
         "platform": "zenn",
         "url": "https://zenn.dev/mizzz/articles/personal-dev-pr-ci",
         "metrics": {
-          "likes": 0,
+          "likes": 1,
           "bookmarks": 0,
           "comments": 0,
           "page_views": null
@@ -694,7 +694,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 180
+          "page_views": 183
         }
       },
       {
@@ -705,7 +705,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 221
+          "page_views": 222
         }
       },
       {
@@ -716,7 +716,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 219
+          "page_views": 220
         }
       },
       {
@@ -742,7 +742,7 @@
         }
       }
     ],
-    "notable_observation_count": 2
+    "notable_observation_count": 3
   },
   "next_article_candidates": [
     {
@@ -760,7 +760,7 @@
       "oldest_gap_age_days": 366,
       "source_evidence_recorded": true,
       "source_repository_count": 1,
-      "related_positive_reaction_articles": 2,
+      "related_positive_reaction_articles": 3,
       "missing_metadata": []
     },
     {
