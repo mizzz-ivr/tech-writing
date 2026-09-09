@@ -1,5 +1,5 @@
 ---
-title: GPT-6 Astra、PC操作が47%高速化。なぜソフトウェア株まで警戒されたのか
+title: GPT-6 Astra、PC操作の完了時間を約47%短縮。なぜソフトウェア株まで警戒されたのか
 tags:
   - OpenAI
   - ChatGPT
@@ -15,7 +15,7 @@ ignorePublish: false
 posting_campaign_uuid: null
 agreed_posting_campaign_term: false
 ---
-# GPT-6 Astra、PC操作が47%高速化。なぜソフトウェア株まで警戒されたのか
+# GPT-6 Astra、PC操作の完了時間を約47%短縮。なぜソフトウェア株まで警戒されたのか
 
 9月3日、OpenAIが **GPT-6 Astra** を発表しました。
 
@@ -49,7 +49,7 @@ agreed_posting_campaign_term: false
 
 ---
 
-## まず、47%速くなった
+## まず、完了時間が約47%短縮された
 
 AstraでOpenAIがかなり強く押しているのが **Computer Use** です。
 
