@@ -1,6 +1,6 @@
 # Content Gap / Next Article Opportunities
 
-> As of: 2026-09-13
+> As of: 2026-09-14
 
 Repository metadataから再生成するderived reportです。本文やbacklog自由文から技術分類を推測せず、明示されたmetadataだけを使います。
 
@@ -27,72 +27,72 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| 個人開発 | 4 | 2026-09-08 | 5d | ✓ | ✓ | ✓ |
-| GitHub | 3 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| GitHubActions | 3 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| Python | 3 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| ci | 2 | 2026-09-08 | 5d | ✓ | ✓ | ✓ |
-| github | 2 | 2026-09-08 | 5d | ✓ | ✓ | ✓ |
-| GitHubAPI | 2 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| individual-development | 2 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| 生成ai | 2 | 2026-09-08 | 5d | ✓ | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| architecture | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| aws | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| github-actions | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| githubactions | 1 | 2026-09-08 | 5d | ✓ | ✓ | ✓ |
-| openai | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| OSS | 1 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| security | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| self-hosted-runner | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| typescript | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
+| 個人開発 | 4 | 2026-09-08 | 6d | ✓ | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| ci | 2 | 2026-09-08 | 6d | ✓ | ✓ | ✓ |
+| github | 2 | 2026-09-08 | 6d | ✓ | ✓ | ✓ |
+| GitHubAPI | 2 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| individual-development | 2 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| 生成ai | 2 | 2026-09-08 | 6d | ✓ | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| architecture | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| aws | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| github-actions | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| githubactions | 1 | 2026-09-08 | 6d | ✓ | ✓ | ✓ |
+| openai | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| security | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| self-hosted-runner | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| typescript | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| developer-productivity | 4 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| devops | 4 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| ai | 2 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| infra | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| devops | 4 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| infra | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 3 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| TypeScript | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 5 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| GitHub API | 2 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| Amazon Linux 2023 | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| AWS EC2 | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| AWS Graviton | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| GitHub | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| GitHub Events API | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| GitHub Issues | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| GitHub Pull Requests | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| GitHub Releases | 1 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| GitHub Search API | 1 | 2026-08-26 | 18d | ✓ | ✓ | ✓ |
-| OpenAI API | 1 | 2026-08-27 | 17d | ✓ | ✓ | ✓ |
-| Terraform | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
+| GitHub Actions | 5 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| GitHub API | 2 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| Amazon Linux 2023 | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| AWS EC2 | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| AWS Graviton | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| GitHub | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| GitHub Events API | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| GitHub Issues | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| GitHub Pull Requests | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| GitHub Search API | 1 | 2026-08-26 | 19d | ✓ | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 18d | ✓ | ✓ | ✓ |
+| Terraform | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| automation | 4 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| architecture | 3 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
-| ai-assisted-development | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| ci | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| ci-cd | 1 | 2026-08-26 | 18d | ✓ | ✓ | ✓ |
-| development-process | 1 | 2026-08-24 | 20d | ✓ | ✓ | ✓ |
-| infrastructure | 1 | 2026-09-04 | 9d | ✓ | ✓ | ✓ |
-| oss | 1 | 2026-08-28 | 16d | ✓ | ✓ | ✓ |
+| automation | 4 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| architecture | 3 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
+| ai-assisted-development | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| ci | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| ci-cd | 1 | 2026-08-26 | 19d | ✓ | ✓ | ✓ |
+| development-process | 1 | 2026-08-24 | 21d | ✓ | ✓ | ✓ |
+| infrastructure | 1 | 2026-09-04 | 10d | ✓ | ✓ | ✓ |
+| oss | 1 | 2026-08-28 | 17d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
@@ -159,10 +159,10 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-09-13**
+- Snapshot: **2026-09-14**
 - Monitored repositories: **5**
-- Evidence rows: **279**
-- Untracked evidence: **279**
+- Evidence rows: **277**
+- Untracked evidence: **277**
 - Tracked by explicit title overlap: **0**
 
 | Repository | Kind | Evidence | Date | Tracking |
