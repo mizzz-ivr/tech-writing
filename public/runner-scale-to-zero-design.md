@@ -1,41 +1,19 @@
 ---
-title: "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった"
-status: draft
-published_at: null
-verified_at: 2026-09-04
-article_type: case-study
-level: intermediate
-topics:
-  - github-actions
-  - aws
-  - terraform
-  - ci
-  - self-hosted-runner
-domains:
-  - devops
-  - infra
-languages: []
-technologies:
-  - GitHub Actions
-  - AWS EC2
-  - AWS Lambda
+title: CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった
+tags:
+  - GitHubActions
+  - AWS
   - Terraform
-  - github-aws-runners
-portfolio_signals:
-  - architecture
-  - infrastructure
-  - cost-optimization
-source_repositories:
-  - ivRooom/ivrm-web
-source_refs:
-  - repository: ivRooom/ivrm-web
-    commit: 1b3c2d9bcc9a3a089ebd534278e8d0939b8776ab
-  - repository: ivRooom/ivrm-web
-    commit: 1a6f2e5e67dd67ca41f3e7951dd53e5f22307b46
-published:
-  qiita: null
-  zenn: null
-  note: null
+  - CI
+  - 個人開発
+private: false
+updated_at: ""
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: false
+posting_campaign_uuid: null
+agreed_posting_campaign_term: false
 ---
 
 # CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった
@@ -136,7 +114,7 @@ idle時: 0台
 
 自前で全部を組むのではなく、Terraform moduleを使いました。
 
-候補にしていた`philips-labs/terraform-aws-github-runner`はarchive済みだったため、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えています。2026年9月4日時点で利用しているのはv7.11系です。
+候補にしていた`philips-labs/terraform-aws-github-runner`はarchive済みだったため、現在メンテされている後継の`github-aws-runners/terraform-aws-github-runner`へ切り替えています。2026年9月15日時点で利用しているのはv7.11系です。
 
 ネットワークは、個人開発のコストを考えてNAT Gatewayを置かない構成です。
 
