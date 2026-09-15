@@ -4,6 +4,14 @@
 
 ## 次に着手
 
+- [ ] Qiita: 独自ドメインを取得したあと、メールを送受信できるようにするまで — Cloudflareで構築してみた
+  - Article ID: `260825-custom-domain-email`
+  - Qiita canonical: `public/custom-domain-email-cloudflare.md`
+  - 企画・検証メモ: `articles/260825-custom-domain-email/article.md`
+  - 本文状態: draft / `ignorePublish: true`
+  - 主題: 「無料で使える」ではなく、独自ドメイン取得後に受信・送信・認証をどう成立させるか
+  - 実例: Cloudflare DNS + Email Routing + Email Sending SMTP / `ivrm.jp`
+  - 次: 受信実測 → SES / Resend現利用確認 → 送信基盤判断 → SMTP / SPF / DKIM / DMARC実測
 - [ ] Zenn: 生成AIを「APIを呼ぶだけ」で終わらせない — Secret・Quota・Kill Switchを分離したAI Runtime設計
   - 媒体: Zenn
   - 目標: 2026-08-30までに初回投稿
