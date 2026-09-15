@@ -6,15 +6,15 @@
 
 | 判断軸 | 現在 |
 | --- | --- |
-| Published | **7** |
-| Pipeline | Draft **1** / Review **1** |
-| Last published | **2026-09-08** |
-| Source freshness | Initial verification **5** / Verified **2** |
+| Published | **8** |
+| Pipeline | Draft **1** / Review **0** |
+| Last published | **2026-09-15** |
+| Source freshness | Initial verification **5** / Verified **3** |
 | Metric snapshots | **20** / observed span **19d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
-| Pipeline-only coverage gaps | **7** |
+| Pipeline-only coverage gaps | **3** |
 | GitHub → Writing Funnel | Themes **206** / Events **277** |
-| 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/review/260831-runner-scale-to-zero-design/article.md) (`review`) |
+| 次の記事候補 | [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md) (`draft`) |
 
 ### 今の判断
 
@@ -22,7 +22,7 @@
 - Published記事 **5件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
 - Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
-- 次記事候補の主な根拠: `cost-optimization`, `technologies:AWS Lambda (not yet published)`, `technologies:github-aws-runners (not yet published)`
+- 次記事候補の主な根拠: `communication`
 
 ## Editorial Pipeline
 
@@ -32,9 +32,8 @@
 
 draft / reviewにはあるが、公開済みPortfolioではまだ示せていないclassificationです。
 
-- **topics:** `engineering`, `terraform`, `writing`
-- **technologies:** `AWS Lambda`, `github-aws-runners`
-- **portfolio_signals:** `communication`, `cost-optimization`
+- **topics:** `engineering`, `writing`
+- **portfolio_signals:** `communication`
 
 ## GitHub → Writing Funnel
 
@@ -76,6 +75,7 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
 | [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 18d | 0 |
 | [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 11d | 2 |
+| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/published/260831-runner-scale-to-zero-design/article.md) | Verified | 2026-09-15 | 0d | 3 |
 
 ## Portfolio Coverage
 
@@ -103,6 +103,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
+| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) | qiita | likes 0 · stocks 0 · comments 0 · page_views 24 |
 | [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 217 |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 233 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 226 |

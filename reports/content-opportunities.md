@@ -19,8 +19,8 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 ## Current Portfolio Coverage
 
 - Tracked articles: **9**
-- Published articles: **7**
-- Draft / review candidates: **2**
+- Published articles: **8**
+- Draft / review candidates: **1**
 - Unchecked backlog items: **48**
 
 ### topics
@@ -28,33 +28,34 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
 | 個人開発 | 4 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
+| ci | 3 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | GitHub | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
 | GitHubActions | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
 | Python | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| ci | 2 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
+| aws | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | github | 2 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
+| github-actions | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | GitHubAPI | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
 | individual-development | 2 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
+| self-hosted-runner | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | 生成ai | 2 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
 | ai-development | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
 | architecture | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| aws | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| github-actions | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 | githubactions | 1 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
 | openai | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
 | OSS | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
 | security | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| self-hosted-runner | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
+| terraform | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | typescript | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
+| devops | 5 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | developer-productivity | 4 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| devops | 4 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 | ai | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| infra | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
+| infra | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 
 ### languages
 
@@ -67,52 +68,46 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 5 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
+| GitHub Actions | 6 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
+| AWS EC2 | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | GitHub API | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
+| Terraform | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | Amazon Linux 2023 | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| AWS EC2 | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 | AWS Graviton | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
+| AWS Lambda | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | GitHub | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
 | GitHub Events API | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
 | GitHub Issues | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
 | GitHub Pull Requests | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
 | GitHub Releases | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
 | GitHub Search API | 1 | 2026-08-26 | 20d | ✓ | ✓ | ✓ |
+| github-aws-runners | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | OpenAI API | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| Terraform | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
+| architecture | 4 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | automation | 4 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| architecture | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
+| infrastructure | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | ai-assisted-development | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
 | ci | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 | ci-cd | 1 | 2026-08-26 | 20d | ✓ | ✓ | ✓ |
+| cost-optimization | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
 | development-process | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| infrastructure | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
 | oss | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
 draft / reviewには存在するが、公開済み記事ではまだ示せていないclassificationです。
 
-- **topics:** `engineering`, `terraform`, `writing`
-- **technologies:** `AWS Lambda`, `github-aws-runners`
-- **portfolio_signals:** `communication`, `cost-optimization`
+- **topics:** `engineering`, `writing`
+- **portfolio_signals:** `communication`
 
 ## Next Article Candidates
 
-### 1. [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/review/260831-runner-scale-to-zero-design/article.md)
-
-- Status: `review`
-- Portfolio gap: `cost-optimization`
-- Implementation evidence: `ivRooom/ivrm-web`
-- Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)
-- Related positive-reaction context: 3 published article(s)
-
-### 2. [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md)
+### 1. [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md)
 
 - Status: `draft`
 - Portfolio gap: `communication`

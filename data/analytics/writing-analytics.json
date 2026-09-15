@@ -3,13 +3,13 @@
   "as_of": "2026-09-15",
   "overview": {
     "tracked_articles": 9,
-    "published_articles": 7,
+    "published_articles": 8,
     "draft_articles": 1,
-    "review_articles": 1,
-    "last_published_at": "2026-09-08",
-    "average_publish_interval_days": 2.5,
+    "review_articles": 0,
+    "last_published_at": "2026-09-15",
+    "average_publish_interval_days": 3.1,
     "data_quality_findings": 3,
-    "pipeline_only_coverage_gaps": 7,
+    "pipeline_only_coverage_gaps": 3,
     "freshness_needs_initial_verification": 5,
     "backlog_items": 48,
     "github_untracked_evidence": 277,
@@ -17,8 +17,8 @@
   },
   "pipeline": {
     "draft": 1,
-    "review": 1,
-    "published": 7,
+    "review": 0,
+    "published": 8,
     "archived": 0
   },
   "trend_readiness": {
@@ -34,8 +34,8 @@
   },
   "freshness": {
     "as_of": "2026-09-15",
-    "published_articles": 7,
-    "verified_articles": 2,
+    "published_articles": 8,
+    "verified_articles": 3,
     "needs_initial_verification": 5,
     "oldest_verification_age_days": 18,
     "articles": [
@@ -101,6 +101,15 @@
         "verified_at": "2026-09-04",
         "days_since_verified": 11,
         "source_ref_count": 2
+      },
+      {
+        "slug": "260831-runner-scale-to-zero-design",
+        "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
+        "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
+        "status": "verified",
+        "verified_at": "2026-09-15",
+        "days_since_verified": 0,
+        "source_ref_count": 3
       }
     ]
   },
@@ -112,6 +121,17 @@
           "published_count": 4,
           "last_published_at": "2026-09-08",
           "days_since_last": 7,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "ci",
+          "published_count": 3,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -152,10 +172,10 @@
           }
         },
         {
-          "value": "ci",
+          "value": "aws",
           "published_count": 2,
-          "last_published_at": "2026-09-08",
-          "days_since_last": 7,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -167,6 +187,17 @@
           "published_count": 2,
           "last_published_at": "2026-09-08",
           "days_since_last": 7,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "github-actions",
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -189,6 +220,17 @@
           "published_count": 2,
           "last_published_at": "2026-09-04",
           "days_since_last": 11,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "self-hosted-runner",
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -222,28 +264,6 @@
           "published_count": 1,
           "last_published_at": "2026-08-27",
           "days_since_last": 19,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "aws",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
-          "windows": {
-            "30": true,
-            "90": true,
-            "365": true
-          }
-        },
-        {
-          "value": "github-actions",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
           "windows": {
             "30": true,
             "90": true,
@@ -295,10 +315,10 @@
           }
         },
         {
-          "value": "self-hosted-runner",
+          "value": "terraform",
           "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -320,17 +340,16 @@
       "unclassified_published_articles": 0,
       "pipeline_only_values": [
         "engineering",
-        "terraform",
         "writing"
       ]
     },
     "domains": {
       "values": [
         {
-          "value": "developer-productivity",
-          "published_count": 4,
-          "last_published_at": "2026-08-28",
-          "days_since_last": 18,
+          "value": "devops",
+          "published_count": 5,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -338,10 +357,10 @@
           }
         },
         {
-          "value": "devops",
+          "value": "developer-productivity",
           "published_count": 4,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "last_published_at": "2026-08-28",
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -361,9 +380,9 @@
         },
         {
           "value": "infra",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -406,9 +425,20 @@
       "values": [
         {
           "value": "GitHub Actions",
-          "published_count": 5,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "published_count": 6,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "AWS EC2",
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -427,10 +457,10 @@
           }
         },
         {
-          "value": "Amazon Linux 2023",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "value": "Terraform",
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -438,7 +468,7 @@
           }
         },
         {
-          "value": "AWS EC2",
+          "value": "Amazon Linux 2023",
           "published_count": 1,
           "last_published_at": "2026-09-04",
           "days_since_last": 11,
@@ -453,6 +483,17 @@
           "published_count": 1,
           "last_published_at": "2026-09-04",
           "days_since_last": 11,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
+          "value": "AWS Lambda",
+          "published_count": 1,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -526,6 +567,17 @@
           }
         },
         {
+          "value": "github-aws-runners",
+          "published_count": 1,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
+          "windows": {
+            "30": true,
+            "90": true,
+            "365": true
+          }
+        },
+        {
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
@@ -535,27 +587,24 @@
             "90": true,
             "365": true
           }
-        },
+        }
+      ],
+      "unclassified_published_articles": 1,
+      "pipeline_only_values": []
+    },
+    "portfolio_signals": {
+      "values": [
         {
-          "value": "Terraform",
-          "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "value": "architecture",
+          "published_count": 4,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
             "365": true
           }
-        }
-      ],
-      "unclassified_published_articles": 1,
-      "pipeline_only_values": [
-        "AWS Lambda",
-        "github-aws-runners"
-      ]
-    },
-    "portfolio_signals": {
-      "values": [
+        },
         {
           "value": "automation",
           "published_count": 4,
@@ -568,10 +617,10 @@
           }
         },
         {
-          "value": "architecture",
-          "published_count": 3,
-          "last_published_at": "2026-08-28",
-          "days_since_last": 18,
+          "value": "infrastructure",
+          "published_count": 2,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -612,10 +661,10 @@
           }
         },
         {
-          "value": "development-process",
+          "value": "cost-optimization",
           "published_count": 1,
-          "last_published_at": "2026-08-24",
-          "days_since_last": 22,
+          "last_published_at": "2026-09-15",
+          "days_since_last": 0,
           "windows": {
             "30": true,
             "90": true,
@@ -623,10 +672,10 @@
           }
         },
         {
-          "value": "infrastructure",
+          "value": "development-process",
           "published_count": 1,
-          "last_published_at": "2026-09-04",
-          "days_since_last": 11,
+          "last_published_at": "2026-08-24",
+          "days_since_last": 22,
           "windows": {
             "30": true,
             "90": true,
@@ -647,8 +696,7 @@
       ],
       "unclassified_published_articles": 1,
       "pipeline_only_values": [
-        "communication",
-        "cost-optimization"
+        "communication"
       ]
     }
   },
@@ -663,7 +711,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1418
+        "page_views": 1442
       }
     },
     "observations": [
@@ -684,6 +732,17 @@
           "bookmarks": 0,
           "comments": 0,
           "page_views": null
+        }
+      },
+      {
+        "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
+        "platform": "qiita",
+        "url": "https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c",
+        "metrics": {
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 24
         }
       },
       {
@@ -745,24 +804,6 @@
     "notable_observation_count": 3
   },
   "next_article_candidates": [
-    {
-      "slug": "260831-runner-scale-to-zero-design",
-      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
-      "status": "review",
-      "path": "articles/review/260831-runner-scale-to-zero-design/article.md",
-      "portfolio_gaps": [
-        "cost-optimization"
-      ],
-      "coverage_gaps": [
-        "technologies:AWS Lambda (not yet published)",
-        "technologies:github-aws-runners (not yet published)"
-      ],
-      "oldest_gap_age_days": 366,
-      "source_evidence_recorded": true,
-      "source_repository_count": 1,
-      "related_positive_reaction_articles": 3,
-      "missing_metadata": []
-    },
     {
       "slug": "260827-engineer-thinking-place",
       "title": "技術記事を書いていたら、「コードの外側」の方が気になってきた",
@@ -884,6 +925,48 @@
       "source_evidence": {
         "repository_count": 0,
         "recorded": false
+      }
+    },
+    {
+      "slug": "260831-runner-scale-to-zero-design",
+      "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
+      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
+      "status": "published",
+      "published_at": "2026-09-15",
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [
+        "qiita"
+      ],
+      "classifications": {
+        "topics": [
+          "github-actions",
+          "aws",
+          "terraform",
+          "ci",
+          "self-hosted-runner"
+        ],
+        "domains": [
+          "devops",
+          "infra"
+        ],
+        "languages": [],
+        "technologies": [
+          "GitHub Actions",
+          "AWS EC2",
+          "AWS Lambda",
+          "Terraform",
+          "github-aws-runners"
+        ],
+        "portfolio_signals": [
+          "architecture",
+          "infrastructure",
+          "cost-optimization"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
       }
     },
     {
@@ -1082,46 +1165,6 @@
         "portfolio_signals": [
           "development-process",
           "ai-assisted-development"
-        ]
-      },
-      "source_evidence": {
-        "repository_count": 1,
-        "recorded": true
-      }
-    },
-    {
-      "slug": "260831-runner-scale-to-zero-design",
-      "path": "articles/review/260831-runner-scale-to-zero-design/article.md",
-      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
-      "status": "review",
-      "published_at": null,
-      "article_type": "case-study",
-      "level": "intermediate",
-      "publication_platforms": [],
-      "classifications": {
-        "topics": [
-          "github-actions",
-          "aws",
-          "terraform",
-          "ci",
-          "self-hosted-runner"
-        ],
-        "domains": [
-          "devops",
-          "infra"
-        ],
-        "languages": [],
-        "technologies": [
-          "GitHub Actions",
-          "AWS EC2",
-          "AWS Lambda",
-          "Terraform",
-          "github-aws-runners"
-        ],
-        "portfolio_signals": [
-          "architecture",
-          "infrastructure",
-          "cost-optimization"
         ]
       },
       "source_evidence": {

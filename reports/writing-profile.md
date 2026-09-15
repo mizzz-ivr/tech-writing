@@ -1,29 +1,29 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-09-15 09:06 JST
+> Generated: 2026-09-15 09:12 JST
 
 ## Overview
 
-- Published articles: **7**
-- Last published: **2026-09-08**
-- Average publish interval: **2.5日**
+- Published articles: **8**
+- Last published: **2026-09-15**
+- Average publish interval: **3.1日**
 - Tracked article drafts/reviews/published: **9**
 
 ## Technology Mix
 
-- Topics: 個人開発 (4), GitHubActions (3), GitHub (3), Python (3), github (2), ci (2), 生成ai (2), individual-development (2), GitHubAPI (2), githubactions (1)
-- Domains: devops (4), developer-productivity (4), ai (2), Unclassified (1), infra (1)
+- Topics: 個人開発 (4), ci (3), GitHubActions (3), GitHub (3), Python (3), github-actions (2), aws (2), self-hosted-runner (2), github (2), 生成ai (2)
+- Domains: devops (5), developer-productivity (4), infra (2), ai (2), Unclassified (1)
 - Languages: Python (3), Unclassified (1), TypeScript (1)
-- Technologies: GitHub Actions (5), GitHub API (2), Unclassified (1), AWS EC2 (1), AWS Graviton (1), Amazon Linux 2023 (1), Terraform (1), GitHub Releases (1), OpenAI API (1), GitHub Events API (1)
-- Portfolio signals: automation (4), architecture (3), Unclassified (1), infrastructure (1), ci (1), oss (1), ci-cd (1), development-process (1), ai-assisted-development (1)
+- Technologies: GitHub Actions (6), AWS EC2 (2), Terraform (2), GitHub API (2), AWS Lambda (1), github-aws-runners (1), Unclassified (1), AWS Graviton (1), Amazon Linux 2023 (1), GitHub Releases (1)
+- Portfolio signals: architecture (4), automation (4), infrastructure (2), cost-optimization (1), Unclassified (1), ci (1), oss (1), ci-cd (1), development-process (1), ai-assisted-development (1)
 
 ## Recent Articles
 
+- 2026-09-15 — [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c)
 - 2026-09-08 — [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci)
 - 2026-09-04 — [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9)
 - 2026-08-28 — [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904)
 - 2026-08-27 — [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary)
-- 2026-08-27 — [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630)
 
 ## Reactions
 
@@ -31,6 +31,7 @@ Latest snapshot. Metrics stay platform-specific; no combined popularity score is
 
 - [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) — zenn: likes not collected · bookmarks not collected · comments not collected · page views not collected · metrics error
 - [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) — zenn: likes 1 · bookmarks 0 · comments 0 · page views unavailable
+- [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) — qiita: likes 0 · stocks 0 · comments 0 · page views 24
 - [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) — qiita: likes 0 · stocks 0 · comments 0 · page views 217
 - [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 233
 - [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 226

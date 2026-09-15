@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "collected_at": "2026-09-15T00:06:20+00:00",
+  "collected_at": "2026-09-15T00:11:47+00:00",
   "articles": [
     {
       "slug": "ai-runtime-safety-boundary",
@@ -24,6 +24,20 @@
           "bookmarks": 0,
           "comments": 0,
           "page_views": null
+        }
+      }
+    },
+    {
+      "slug": "260831-runner-scale-to-zero-design",
+      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
+      "published_at": "2026-09-15",
+      "platforms": {
+        "qiita": {
+          "url": "https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c",
+          "likes": 0,
+          "stocks": 0,
+          "comments": 0,
+          "page_views": 24
         }
       }
     },
