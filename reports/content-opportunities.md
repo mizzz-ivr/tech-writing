@@ -104,9 +104,9 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 
 ## Next Article Candidates
 
-### 1. [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md)
+### 1. [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/review/260831-runner-scale-to-zero-design/article.md)
 
-- Status: `draft`
+- Status: `review`
 - Portfolio gap: `cost-optimization`
 - Implementation evidence: `ivRooom/ivrm-web`
 - Coverage gap / recency: technologies:AWS Lambda (not yet published); technologies:github-aws-runners (not yet published)

@@ -4,8 +4,8 @@
   "overview": {
     "tracked_articles": 9,
     "published_articles": 7,
-    "draft_articles": 2,
-    "review_articles": 0,
+    "draft_articles": 1,
+    "review_articles": 1,
     "last_published_at": "2026-09-08",
     "average_publish_interval_days": 2.5,
     "data_quality_findings": 3,
@@ -16,8 +16,8 @@
     "github_untracked_themes": 206
   },
   "pipeline": {
-    "draft": 2,
-    "review": 0,
+    "draft": 1,
+    "review": 1,
     "published": 7,
     "archived": 0
   },
@@ -748,8 +748,8 @@
     {
       "slug": "260831-runner-scale-to-zero-design",
       "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
-      "status": "draft",
-      "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
+      "status": "review",
+      "path": "articles/review/260831-runner-scale-to-zero-design/article.md",
       "portfolio_gaps": [
         "cost-optimization"
       ],
@@ -850,46 +850,6 @@
         "portfolio_signals": [
           "communication",
           "development-process"
-        ]
-      },
-      "source_evidence": {
-        "repository_count": 1,
-        "recorded": true
-      }
-    },
-    {
-      "slug": "260831-runner-scale-to-zero-design",
-      "path": "articles/draft/260831-runner-scale-to-zero-design/article.md",
-      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
-      "status": "draft",
-      "published_at": null,
-      "article_type": "case-study",
-      "level": "intermediate",
-      "publication_platforms": [],
-      "classifications": {
-        "topics": [
-          "github-actions",
-          "aws",
-          "terraform",
-          "ci",
-          "self-hosted-runner"
-        ],
-        "domains": [
-          "devops",
-          "infra"
-        ],
-        "languages": [],
-        "technologies": [
-          "GitHub Actions",
-          "AWS EC2",
-          "AWS Lambda",
-          "Terraform",
-          "github-aws-runners"
-        ],
-        "portfolio_signals": [
-          "architecture",
-          "infrastructure",
-          "cost-optimization"
         ]
       },
       "source_evidence": {
@@ -1122,6 +1082,46 @@
         "portfolio_signals": [
           "development-process",
           "ai-assisted-development"
+        ]
+      },
+      "source_evidence": {
+        "repository_count": 1,
+        "recorded": true
+      }
+    },
+    {
+      "slug": "260831-runner-scale-to-zero-design",
+      "path": "articles/review/260831-runner-scale-to-zero-design/article.md",
+      "title": "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった",
+      "status": "review",
+      "published_at": null,
+      "article_type": "case-study",
+      "level": "intermediate",
+      "publication_platforms": [],
+      "classifications": {
+        "topics": [
+          "github-actions",
+          "aws",
+          "terraform",
+          "ci",
+          "self-hosted-runner"
+        ],
+        "domains": [
+          "devops",
+          "infra"
+        ],
+        "languages": [],
+        "technologies": [
+          "GitHub Actions",
+          "AWS EC2",
+          "AWS Lambda",
+          "Terraform",
+          "github-aws-runners"
+        ],
+        "portfolio_signals": [
+          "architecture",
+          "infrastructure",
+          "cost-optimization"
         ]
       },
       "source_evidence": {

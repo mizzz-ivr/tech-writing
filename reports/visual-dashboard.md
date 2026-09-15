@@ -7,14 +7,14 @@
 | 判断軸 | 現在 |
 | --- | --- |
 | Published | **7** |
-| Pipeline | Draft **2** / Review **0** |
+| Pipeline | Draft **1** / Review **1** |
 | Last published | **2026-09-08** |
 | Source freshness | Initial verification **5** / Verified **2** |
 | Metric snapshots | **20** / observed span **19d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **7** |
 | GitHub → Writing Funnel | Themes **206** / Events **277** |
-| 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/draft/260831-runner-scale-to-zero-design/article.md) (`draft`) |
+| 次の記事候補 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/review/260831-runner-scale-to-zero-design/article.md) (`review`) |
 
 ### 今の判断
 
