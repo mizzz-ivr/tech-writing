@@ -7,7 +7,7 @@ tags:
   - Terraform
   - 個人開発
 private: false
-updated_at: '2026-09-04T07:47:06+09:00'
+updated_at: '2026-09-04T08:03:23+09:00'
 id: e4c663c7f5d3f82fd0a9
 organization_url_name: null
 slide: false
@@ -155,6 +155,4 @@ runnerは最初、CIを早く復旧させたくてAWSのAPIから手で作りま
 
 追記: その後、上で触れたscale-to-zero構成への移行を完了させました。今はジョブが来たときだけEC2が起動し、1ジョブ実行したら自己終了するので、常時起動はしていません（アイドル時は0台）。インスタンスタイプは `t4g.medium` と `t4g.large` をspotの在庫確保のために併記していますが、タスクの大きさで動的に選んでいるわけではなく、Swapも常に8GB固定です。
 
-この移行で決めたことと踏んだ穴（2GBマシンでのOOM、runtime tuningの移行漏れ、Terraformのdesired stateの境界）は、続編にまとめました。
-
-[CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c)
+この移行で決めたことと踏んだ穴（instance profile の名前衝突、2GB マシンでの OOM、未マージの infra ブランチを個別に apply して壊した話）は、今度別記事にまとめる予定です。投稿したらここにもリンクを置くことにします。
