@@ -1,7 +1,7 @@
 ---
 title: "CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった"
-status: review
-published_at: null
+status: published
+published_at: 2026-09-15
 verified_at: 2026-09-15
 article_type: case-study
 level: intermediate
@@ -35,7 +35,7 @@ source_refs:
   - repository: ivRooom/ivrm-web
     commit: a52f017e5f44e0a69a795776b0e435796a065539
 published:
-  qiita: null
+  qiita: https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c
   zenn: null
   note: null
 ---
