@@ -78,11 +78,31 @@ Cloudflare の公式 Wrangler を使います。
 ```bash
 npm install
 npx wrangler login
-npx wrangler secret put NOTION_TOKEN
-npx wrangler secret put NOTION_DATA_SOURCE_ID
-npx wrangler secret put INGEST_SECRET
-npm run deploy
 ```
+
+このWorkerは `wrangler.jsonc` の `secrets.required` で3つのSecretを必須にしています。
+
+初回deployでは、3つをまとめたローカル専用ファイルを作り、コードと同時にuploadする方法が分かりやすいです。`.env*` は `.gitignore` 済みです。
+
+```bash
+cat > .env.production.local <<'EOF'
+NOTION_TOKEN="secret_xxx"
+NOTION_DATA_SOURCE_ID="YOUR_NOTION_DATA_SOURCE_ID"
+INGEST_SECRET="GENERATE_A_LONG_RANDOM_SECRET"
+EOF
+
+npx wrangler deploy --secrets-file .env.production.local
+```
+
+`--secrets-file` を使うと、必要なSecretをコードと同じdeployで設定できます。
+
+初回deploy後のSecret更新では、個別の `wrangler secret put` も利用できます。
+
+```bash
+npx wrangler secret put INGEST_SECRET
+```
+
+> `.env.production.local` や `.dev.vars` はGitへcommitしないでください。
 
 デプロイ後、`https://<worker>.workers.dev/health` で `{"ok":true}` が返ることを確認します。
 
@@ -125,6 +145,7 @@ Payload:
 - Worker は Bearer Secret・Content-Type・payload size・型を検証する。
 - Reminder は必要なタイトルだけ送り、Notes などの本文を不要に送らない。
 - Worker の Secret は `vars` ではなく Cloudflare Secret に保存する。
+- `.dev.vars*` / `.env*` はGitへcommitしない。
 - Notion API の raw error response は iPhone へ返さない。
 
 ## API
