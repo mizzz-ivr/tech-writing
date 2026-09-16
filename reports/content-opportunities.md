@@ -1,6 +1,6 @@
 # Content Gap / Next Article Opportunities
 
-> As of: 2026-09-15
+> As of: 2026-09-16
 
 Repository metadataから再生成するderived reportです。本文やbacklog自由文から技術分類を推測せず、明示されたmetadataだけを使います。
 
@@ -27,76 +27,76 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| 個人開発 | 4 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
-| ci | 3 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| GitHub | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| GitHubActions | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| Python | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| aws | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| github | 2 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
-| github-actions | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| GitHubAPI | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| individual-development | 2 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| self-hosted-runner | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| 生成ai | 2 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| architecture | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| githubactions | 1 | 2026-09-08 | 7d | ✓ | ✓ | ✓ |
-| openai | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| OSS | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| security | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| terraform | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| typescript | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
+| 個人開発 | 4 | 2026-09-08 | 8d | ✓ | ✓ | ✓ |
+| ci | 3 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| aws | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| github | 2 | 2026-09-08 | 8d | ✓ | ✓ | ✓ |
+| github-actions | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| GitHubAPI | 2 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| individual-development | 2 | 2026-09-04 | 12d | ✓ | ✓ | ✓ |
+| self-hosted-runner | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| 生成ai | 2 | 2026-09-08 | 8d | ✓ | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| architecture | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| githubactions | 1 | 2026-09-08 | 8d | ✓ | ✓ | ✓ |
+| openai | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| security | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| terraform | 1 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| typescript | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| devops | 5 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| developer-productivity | 4 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| ai | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| infra | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
+| devops | 5 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| infra | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 3 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| TypeScript | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 6 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| AWS EC2 | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| GitHub API | 2 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| Terraform | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| Amazon Linux 2023 | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| AWS Graviton | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| AWS Lambda | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| GitHub | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| GitHub Events API | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
-| GitHub Issues | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| GitHub Pull Requests | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| GitHub Releases | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
-| GitHub Search API | 1 | 2026-08-26 | 20d | ✓ | ✓ | ✓ |
-| github-aws-runners | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| OpenAI API | 1 | 2026-08-27 | 19d | ✓ | ✓ | ✓ |
+| GitHub Actions | 6 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| AWS EC2 | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| GitHub API | 2 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| Terraform | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| Amazon Linux 2023 | 1 | 2026-09-04 | 12d | ✓ | ✓ | ✓ |
+| AWS Graviton | 1 | 2026-09-04 | 12d | ✓ | ✓ | ✓ |
+| AWS Lambda | 1 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| GitHub | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| GitHub Events API | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
+| GitHub Issues | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| GitHub Pull Requests | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
+| GitHub Search API | 1 | 2026-08-26 | 21d | ✓ | ✓ | ✓ |
+| github-aws-runners | 1 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 20d | ✓ | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| architecture | 4 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| automation | 4 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| infrastructure | 2 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| ai-assisted-development | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| ci | 1 | 2026-09-04 | 11d | ✓ | ✓ | ✓ |
-| ci-cd | 1 | 2026-08-26 | 20d | ✓ | ✓ | ✓ |
-| cost-optimization | 1 | 2026-09-15 | 0d | ✓ | ✓ | ✓ |
-| development-process | 1 | 2026-08-24 | 22d | ✓ | ✓ | ✓ |
-| oss | 1 | 2026-08-28 | 18d | ✓ | ✓ | ✓ |
+| architecture | 4 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| automation | 4 | 2026-09-04 | 12d | ✓ | ✓ | ✓ |
+| infrastructure | 2 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| ai-assisted-development | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| ci | 1 | 2026-09-04 | 12d | ✓ | ✓ | ✓ |
+| ci-cd | 1 | 2026-08-26 | 21d | ✓ | ✓ | ✓ |
+| cost-optimization | 1 | 2026-09-15 | 1d | ✓ | ✓ | ✓ |
+| development-process | 1 | 2026-08-24 | 23d | ✓ | ✓ | ✓ |
+| oss | 1 | 2026-08-28 | 19d | ✓ | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
@@ -154,7 +154,7 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-09-15**
+- Snapshot: **2026-09-16**
 - Monitored repositories: **5**
 - Evidence rows: **277**
 - Untracked evidence: **277**
