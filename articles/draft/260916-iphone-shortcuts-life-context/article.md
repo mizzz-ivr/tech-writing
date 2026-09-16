@@ -173,7 +173,7 @@ Cloudflare WorkersではSecretをWorkerの `env` から参照できます。ま�
 }
 ```
 
-ローカル開発では `.dev.vars`、デプロイ先では `wrangler secret put` を使います。
+ローカル開発では `.dev.vars` を使い、初回deployでは `--secrets-file` で必要なSecretをコードと一緒に設定する構成にしました。deploy後に個別Secretを更新したい場合は `wrangler secret put` も使えます。
 
 Cloudflare公式:
 
@@ -303,21 +303,29 @@ Cloudflareへログインします。
 npx wrangler login
 ```
 
-Secretを設定します。
+今回の `wrangler.jsonc` では、3つのSecretを `secrets.required` にしています。
+
+初回deployでは、Secretを1個ずつ入れるより、3つをまとめたローカル専用ファイルを作り、コードと同じdeployで設定する方が分かりやすいです。
 
 ```bash
-npx wrangler secret put NOTION_TOKEN
-npx wrangler secret put NOTION_DATA_SOURCE_ID
+cat > .env.production.local <<'EOF'
+NOTION_TOKEN="secret_xxx"
+NOTION_DATA_SOURCE_ID="YOUR_NOTION_DATA_SOURCE_ID"
+INGEST_SECRET="GENERATE_A_LONG_RANDOM_SECRET"
+EOF
+
+npx wrangler deploy --secrets-file .env.production.local
+```
+
+`.env*` は `.gitignore` へ入れています。
+
+初回deploy後、たとえば `INGEST_SECRET` だけローテーションしたい場合は個別更新できます。
+
+```bash
 npx wrangler secret put INGEST_SECRET
 ```
 
-そのあとデプロイします。
-
-```bash
-npm run deploy
-```
-
-`wrangler.jsonc` には `secrets.required` を書いているため、必要なSecretが欠けた状態を検出しやすくしています。
+Secret値は記事やRepositoryへcommitしません。
 
 Worker URLが決まったら、まず `/health` を確認します。
 
@@ -416,6 +424,8 @@ Shortcutを07:00、ChatGPT側のブリーフも07:00にすると、どちらが�
 ```
 
 life側では、最新Contextが十分新しい場合だけ読みます。
+
+今回の運用では、**実行時刻から2時間以内の最新1件だけ有効**にしました。
 
 たとえば07:00実行なら、06:55のContextは使う。
 
