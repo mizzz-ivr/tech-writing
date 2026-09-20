@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-09-19",
+  "as_of": "2026-09-20",
   "overview": {
     "tracked_articles": 9,
     "published_articles": 8,
@@ -12,7 +12,7 @@
     "pipeline_only_coverage_gaps": 3,
     "freshness_needs_initial_verification": 5,
     "backlog_items": 48,
-    "github_untracked_evidence": 281,
+    "github_untracked_evidence": 285,
     "github_untracked_themes": 208
   },
   "pipeline": {
@@ -22,10 +22,10 @@
     "archived": 0
   },
   "trend_readiness": {
-    "snapshot_count": 24,
+    "snapshot_count": 25,
     "first_snapshot_at": "2026-08-27",
-    "last_snapshot_at": "2026-09-19",
-    "observed_span_days": 23,
+    "last_snapshot_at": "2026-09-20",
+    "observed_span_days": 24,
     "windows": {
       "7": true,
       "30": false,
@@ -33,11 +33,11 @@
     }
   },
   "freshness": {
-    "as_of": "2026-09-19",
+    "as_of": "2026-09-20",
     "published_articles": 8,
     "verified_articles": 3,
     "needs_initial_verification": 5,
-    "oldest_verification_age_days": 22,
+    "oldest_verification_age_days": 23,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -90,7 +90,7 @@
         "path": "articles/published/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
-        "days_since_verified": 22,
+        "days_since_verified": 23,
         "source_ref_count": 0
       },
       {
@@ -99,7 +99,7 @@
         "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
         "status": "verified",
         "verified_at": "2026-09-04",
-        "days_since_verified": 15,
+        "days_since_verified": 16,
         "source_ref_count": 2
       },
       {
@@ -108,7 +108,7 @@
         "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
         "status": "verified",
         "verified_at": "2026-09-15",
-        "days_since_verified": 4,
+        "days_since_verified": 5,
         "source_ref_count": 3
       }
     ]
@@ -120,7 +120,7 @@
           "value": "個人開発",
           "published_count": 4,
           "last_published_at": "2026-09-08",
-          "days_since_last": 11,
+          "days_since_last": 12,
           "windows": {
             "30": true,
             "90": true,
@@ -131,7 +131,7 @@
           "value": "ci",
           "published_count": 3,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -142,7 +142,7 @@
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -153,7 +153,7 @@
           "value": "GitHubActions",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -164,7 +164,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -175,7 +175,7 @@
           "value": "aws",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -186,7 +186,7 @@
           "value": "github",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 11,
+          "days_since_last": 12,
           "windows": {
             "30": true,
             "90": true,
@@ -197,7 +197,7 @@
           "value": "github-actions",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -208,7 +208,7 @@
           "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -219,7 +219,7 @@
           "value": "individual-development",
           "published_count": 2,
           "last_published_at": "2026-09-04",
-          "days_since_last": 15,
+          "days_since_last": 16,
           "windows": {
             "30": true,
             "90": true,
@@ -230,7 +230,7 @@
           "value": "self-hosted-runner",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -241,7 +241,7 @@
           "value": "生成ai",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 11,
+          "days_since_last": 12,
           "windows": {
             "30": true,
             "90": true,
@@ -252,7 +252,7 @@
           "value": "ai-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -263,7 +263,7 @@
           "value": "architecture",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -274,7 +274,7 @@
           "value": "githubactions",
           "published_count": 1,
           "last_published_at": "2026-09-08",
-          "days_since_last": 11,
+          "days_since_last": 12,
           "windows": {
             "30": true,
             "90": true,
@@ -285,7 +285,7 @@
           "value": "openai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -296,7 +296,7 @@
           "value": "OSS",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -307,7 +307,7 @@
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -318,7 +318,7 @@
           "value": "terraform",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -329,7 +329,7 @@
           "value": "typescript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -349,7 +349,7 @@
           "value": "devops",
           "published_count": 5,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -360,7 +360,7 @@
           "value": "developer-productivity",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -371,7 +371,7 @@
           "value": "ai",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -382,7 +382,7 @@
           "value": "infra",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -399,7 +399,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -410,7 +410,7 @@
           "value": "TypeScript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -427,7 +427,7 @@
           "value": "GitHub Actions",
           "published_count": 6,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -438,7 +438,7 @@
           "value": "AWS EC2",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -449,7 +449,7 @@
           "value": "GitHub API",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -460,7 +460,7 @@
           "value": "Terraform",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -471,7 +471,7 @@
           "value": "Amazon Linux 2023",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 15,
+          "days_since_last": 16,
           "windows": {
             "30": true,
             "90": true,
@@ -482,7 +482,7 @@
           "value": "AWS Graviton",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 15,
+          "days_since_last": 16,
           "windows": {
             "30": true,
             "90": true,
@@ -493,7 +493,7 @@
           "value": "AWS Lambda",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -504,7 +504,7 @@
           "value": "GitHub",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -515,7 +515,7 @@
           "value": "GitHub Events API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -526,7 +526,7 @@
           "value": "GitHub Issues",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -537,7 +537,7 @@
           "value": "GitHub Pull Requests",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -548,7 +548,7 @@
           "value": "GitHub Releases",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -559,7 +559,7 @@
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -570,7 +570,7 @@
           "value": "github-aws-runners",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -581,7 +581,7 @@
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 23,
+          "days_since_last": 24,
           "windows": {
             "30": true,
             "90": true,
@@ -598,7 +598,7 @@
           "value": "architecture",
           "published_count": 4,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -609,7 +609,7 @@
           "value": "automation",
           "published_count": 4,
           "last_published_at": "2026-09-04",
-          "days_since_last": 15,
+          "days_since_last": 16,
           "windows": {
             "30": true,
             "90": true,
@@ -620,7 +620,7 @@
           "value": "infrastructure",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -631,7 +631,7 @@
           "value": "ai-assisted-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -642,7 +642,7 @@
           "value": "ci",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 15,
+          "days_since_last": 16,
           "windows": {
             "30": true,
             "90": true,
@@ -653,7 +653,7 @@
           "value": "ci-cd",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -664,7 +664,7 @@
           "value": "cost-optimization",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 4,
+          "days_since_last": 5,
           "windows": {
             "30": true,
             "90": true,
@@ -675,7 +675,7 @@
           "value": "development-process",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -686,7 +686,7 @@
           "value": "oss",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 22,
+          "days_since_last": 23,
           "windows": {
             "30": true,
             "90": true,
@@ -711,7 +711,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1707
+        "page_views": 1713
       }
     },
     "observations": [
@@ -742,7 +742,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 249
+          "page_views": 255
         }
       },
       {
@@ -1174,7 +1174,7 @@
     }
   ],
   "github_writing_funnel": {
-    "as_of": "2026-09-19",
+    "as_of": "2026-09-20",
     "snapshot_available": true,
     "monitored_repositories": [
       "ivRooom/Herta",
@@ -1183,8 +1183,8 @@
       "mizzz-ivr/ivmz-home",
       "mizzz-ivr/mizzz-ivr"
     ],
-    "evidence_count": 281,
-    "untracked_count": 281,
+    "evidence_count": 285,
+    "untracked_count": 285,
     "tracked_count": 0,
     "candidates": [
       {
@@ -1222,6 +1222,54 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.217
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#395",
+        "title": "fix(ai): 天気の「明日」「明後日」リクエストで正しい日付の予報を返す",
+        "url": "https://github.com/ivRooom/Herta/pull/395",
+        "occurred_at": "2026-09-19T14:23:18Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.195
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#394",
+        "title": "feat(ai): 気象庁(JMA)公開データを実況・予報のgrounding sourceとして追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/394",
+        "occurred_at": "2026-09-19T13:37:40Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.289
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#392",
+        "title": "fix(ai): timezone追加前に保存されたAI Runtime Settingsを読み込めるようにする",
+        "url": "https://github.com/ivRooom/Herta/pull/392",
+        "occurred_at": "2026-09-19T12:13:05Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.272
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#389",
+        "title": "fix(ai): 現在日付をLLMへ渡し非対応形式の黙示的差し替えを禁止する",
+        "url": "https://github.com/ivRooom/Herta/pull/389",
+        "occurred_at": "2026-09-19T11:24:44Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.14
       },
       {
         "repository": "ivRooom/Herta",
@@ -1282,54 +1330,6 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.314
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#374",
-        "title": "fix(studio): mobile Config Studio pickerのoverlay被りを修正",
-        "url": "https://github.com/ivRooom/Herta/pull/374",
-        "occurred_at": "2026-09-06T12:58:16Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.265
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#377",
-        "title": "fix(security): High CVE gateを復旧する",
-        "url": "https://github.com/ivRooom/Herta/pull/377",
-        "occurred_at": "2026-09-05T09:22:20Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.273
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#360",
-        "title": "chore(deps): bump the production-dependencies group with 3 updates",
-        "url": "https://github.com/ivRooom/Herta/pull/360",
-        "occurred_at": "2026-09-05T01:45:45Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.348
-      },
-      {
-        "repository": "mizzz-ivr/ivmz-home",
-        "kind": "pull_request",
-        "source_id": "#41",
-        "title": "ops(netlify): move Profile Signal scheduling to GitHub Actions",
-        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/41",
-        "occurred_at": "2026-09-02T23:41:28Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.28
       }
     ],
     "untracked_candidates": [
@@ -1372,6 +1372,54 @@
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
+        "source_id": "#395",
+        "title": "fix(ai): 天気の「明日」「明後日」リクエストで正しい日付の予報を返す",
+        "url": "https://github.com/ivRooom/Herta/pull/395",
+        "occurred_at": "2026-09-19T14:23:18Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.195
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#394",
+        "title": "feat(ai): 気象庁(JMA)公開データを実況・予報のgrounding sourceとして追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/394",
+        "occurred_at": "2026-09-19T13:37:40Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.289
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#392",
+        "title": "fix(ai): timezone追加前に保存されたAI Runtime Settingsを読み込めるようにする",
+        "url": "https://github.com/ivRooom/Herta/pull/392",
+        "occurred_at": "2026-09-19T12:13:05Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.272
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#389",
+        "title": "fix(ai): 現在日付をLLMへ渡し非対応形式の黙示的差し替えを禁止する",
+        "url": "https://github.com/ivRooom/Herta/pull/389",
+        "occurred_at": "2026-09-19T11:24:44Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.14
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
         "source_id": "#391",
         "title": "security(deps): zlib CVE-2026-85091を期限付きgrype allowlistへ登録する",
         "url": "https://github.com/ivRooom/Herta/pull/391",
@@ -1428,58 +1476,10 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.314
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#374",
-        "title": "fix(studio): mobile Config Studio pickerのoverlay被りを修正",
-        "url": "https://github.com/ivRooom/Herta/pull/374",
-        "occurred_at": "2026-09-06T12:58:16Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.265
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#377",
-        "title": "fix(security): High CVE gateを復旧する",
-        "url": "https://github.com/ivRooom/Herta/pull/377",
-        "occurred_at": "2026-09-05T09:22:20Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.273
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#360",
-        "title": "chore(deps): bump the production-dependencies group with 3 updates",
-        "url": "https://github.com/ivRooom/Herta/pull/360",
-        "occurred_at": "2026-09-05T01:45:45Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.348
-      },
-      {
-        "repository": "mizzz-ivr/ivmz-home",
-        "kind": "pull_request",
-        "source_id": "#41",
-        "title": "ops(netlify): move Profile Signal scheduling to GitHub Actions",
-        "url": "https://github.com/mizzz-ivr/ivmz-home/pull/41",
-        "occurred_at": "2026-09-02T23:41:28Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.28
       }
     ],
     "untracked_theme_count": 208,
-    "compression_ratio": 1.35,
+    "compression_ratio": 1.37,
     "theme_groups": [
       {
         "repository": "mizzz-ivr/profile-signal",
@@ -1568,6 +1568,48 @@
       {
         "repository": "ivRooom/Herta",
         "grouping": "explicit_scope",
+        "scope": "ai",
+        "label": "ai",
+        "event_count": 21,
+        "latest_at": "2026-09-19T14:23:18Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#395",
+          "title": "fix(ai): 天気の「明日」「明後日」リクエストで正しい日付の予報を返す",
+          "url": "https://github.com/ivRooom/Herta/pull/395",
+          "occurred_at": "2026-09-19T14:23:18Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#395",
+            "title": "fix(ai): 天気の「明日」「明後日」リクエストで正しい日付の予報を返す",
+            "url": "https://github.com/ivRooom/Herta/pull/395",
+            "occurred_at": "2026-09-19T14:23:18Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#394",
+            "title": "feat(ai): 気象庁(JMA)公開データを実況・予報のgrounding sourceとして追加する",
+            "url": "https://github.com/ivRooom/Herta/pull/394",
+            "occurred_at": "2026-09-19T13:37:40Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#392",
+            "title": "fix(ai): timezone追加前に保存されたAI Runtime Settingsを読み込めるようにする",
+            "url": "https://github.com/ivRooom/Herta/pull/392",
+            "occurred_at": "2026-09-19T12:13:05Z"
+          }
+        ],
+        "identity": "ai"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
         "scope": "studio",
         "label": "studio",
         "event_count": 19,
@@ -1606,48 +1648,6 @@
           }
         ],
         "identity": "studio"
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "grouping": "explicit_scope",
-        "scope": "ai",
-        "label": "ai",
-        "event_count": 17,
-        "latest_at": "2026-09-17T22:35:08Z",
-        "kinds": [
-          "pull_request"
-        ],
-        "representative": {
-          "kind": "pull_request",
-          "source_id": "#384",
-          "title": "test(ai): typing indicator lifecycleをaiPlugin統合レベルで固定する",
-          "url": "https://github.com/ivRooom/Herta/pull/384",
-          "occurred_at": "2026-09-17T22:35:08Z"
-        },
-        "evidence": [
-          {
-            "kind": "pull_request",
-            "source_id": "#384",
-            "title": "test(ai): typing indicator lifecycleをaiPlugin統合レベルで固定する",
-            "url": "https://github.com/ivRooom/Herta/pull/384",
-            "occurred_at": "2026-09-17T22:35:08Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#375",
-            "title": "fix(ai): detailed会話へrequest-scoped output budgetを追加",
-            "url": "https://github.com/ivRooom/Herta/pull/375",
-            "occurred_at": "2026-09-07T03:55:53Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#370",
-            "title": "feat(ai): Studio設定RoleメンションをAI triggerへ追加",
-            "url": "https://github.com/ivRooom/Herta/pull/370",
-            "occurred_at": "2026-09-02T04:53:32Z"
-          }
-        ],
-        "identity": "ai"
       },
       {
         "repository": "mizzz-ivr/mizzz-ivr",
