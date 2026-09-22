@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-09-21",
+  "as_of": "2026-09-22",
   "overview": {
     "tracked_articles": 9,
     "published_articles": 8,
@@ -12,8 +12,8 @@
     "pipeline_only_coverage_gaps": 3,
     "freshness_needs_initial_verification": 5,
     "backlog_items": 48,
-    "github_untracked_evidence": 279,
-    "github_untracked_themes": 203
+    "github_untracked_evidence": 272,
+    "github_untracked_themes": 196
   },
   "pipeline": {
     "draft": 1,
@@ -22,10 +22,10 @@
     "archived": 0
   },
   "trend_readiness": {
-    "snapshot_count": 26,
+    "snapshot_count": 27,
     "first_snapshot_at": "2026-08-27",
-    "last_snapshot_at": "2026-09-21",
-    "observed_span_days": 25,
+    "last_snapshot_at": "2026-09-22",
+    "observed_span_days": 26,
     "windows": {
       "7": true,
       "30": false,
@@ -33,11 +33,11 @@
     }
   },
   "freshness": {
-    "as_of": "2026-09-21",
+    "as_of": "2026-09-22",
     "published_articles": 8,
     "verified_articles": 3,
     "needs_initial_verification": 5,
-    "oldest_verification_age_days": 24,
+    "oldest_verification_age_days": 25,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -90,7 +90,7 @@
         "path": "articles/published/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
-        "days_since_verified": 24,
+        "days_since_verified": 25,
         "source_ref_count": 0
       },
       {
@@ -99,7 +99,7 @@
         "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
         "status": "verified",
         "verified_at": "2026-09-04",
-        "days_since_verified": 17,
+        "days_since_verified": 18,
         "source_ref_count": 2
       },
       {
@@ -108,7 +108,7 @@
         "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
         "status": "verified",
         "verified_at": "2026-09-15",
-        "days_since_verified": 6,
+        "days_since_verified": 7,
         "source_ref_count": 3
       }
     ]
@@ -120,7 +120,7 @@
           "value": "個人開発",
           "published_count": 4,
           "last_published_at": "2026-09-08",
-          "days_since_last": 13,
+          "days_since_last": 14,
           "windows": {
             "30": true,
             "90": true,
@@ -131,7 +131,7 @@
           "value": "ci",
           "published_count": 3,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -142,7 +142,7 @@
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -153,7 +153,7 @@
           "value": "GitHubActions",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -164,7 +164,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -175,7 +175,7 @@
           "value": "aws",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -186,7 +186,7 @@
           "value": "github",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 13,
+          "days_since_last": 14,
           "windows": {
             "30": true,
             "90": true,
@@ -197,7 +197,7 @@
           "value": "github-actions",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -208,7 +208,7 @@
           "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -219,7 +219,7 @@
           "value": "individual-development",
           "published_count": 2,
           "last_published_at": "2026-09-04",
-          "days_since_last": 17,
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -230,7 +230,7 @@
           "value": "self-hosted-runner",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -241,7 +241,7 @@
           "value": "生成ai",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 13,
+          "days_since_last": 14,
           "windows": {
             "30": true,
             "90": true,
@@ -252,7 +252,7 @@
           "value": "ai-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -263,7 +263,7 @@
           "value": "architecture",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -274,7 +274,7 @@
           "value": "githubactions",
           "published_count": 1,
           "last_published_at": "2026-09-08",
-          "days_since_last": 13,
+          "days_since_last": 14,
           "windows": {
             "30": true,
             "90": true,
@@ -285,7 +285,7 @@
           "value": "openai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -296,7 +296,7 @@
           "value": "OSS",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -307,7 +307,7 @@
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -318,7 +318,7 @@
           "value": "terraform",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -329,7 +329,7 @@
           "value": "typescript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -349,7 +349,7 @@
           "value": "devops",
           "published_count": 5,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -360,7 +360,7 @@
           "value": "developer-productivity",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -371,7 +371,7 @@
           "value": "ai",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -382,7 +382,7 @@
           "value": "infra",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -399,7 +399,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -410,7 +410,7 @@
           "value": "TypeScript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -427,7 +427,7 @@
           "value": "GitHub Actions",
           "published_count": 6,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -438,7 +438,7 @@
           "value": "AWS EC2",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -449,7 +449,7 @@
           "value": "GitHub API",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -460,7 +460,7 @@
           "value": "Terraform",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -471,7 +471,7 @@
           "value": "Amazon Linux 2023",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 17,
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -482,7 +482,7 @@
           "value": "AWS Graviton",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 17,
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -493,7 +493,7 @@
           "value": "AWS Lambda",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -504,7 +504,7 @@
           "value": "GitHub",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -515,7 +515,7 @@
           "value": "GitHub Events API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -526,7 +526,7 @@
           "value": "GitHub Issues",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -537,7 +537,7 @@
           "value": "GitHub Pull Requests",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -548,7 +548,7 @@
           "value": "GitHub Releases",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -559,7 +559,7 @@
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -570,7 +570,7 @@
           "value": "github-aws-runners",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -581,7 +581,7 @@
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 25,
+          "days_since_last": 26,
           "windows": {
             "30": true,
             "90": true,
@@ -598,7 +598,7 @@
           "value": "architecture",
           "published_count": 4,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -609,7 +609,7 @@
           "value": "automation",
           "published_count": 4,
           "last_published_at": "2026-09-04",
-          "days_since_last": 17,
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -620,7 +620,7 @@
           "value": "infrastructure",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -631,7 +631,7 @@
           "value": "ai-assisted-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -642,7 +642,7 @@
           "value": "ci",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 17,
+          "days_since_last": 18,
           "windows": {
             "30": true,
             "90": true,
@@ -653,7 +653,7 @@
           "value": "ci-cd",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 26,
+          "days_since_last": 27,
           "windows": {
             "30": true,
             "90": true,
@@ -664,7 +664,7 @@
           "value": "cost-optimization",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 6,
+          "days_since_last": 7,
           "windows": {
             "30": true,
             "90": true,
@@ -675,7 +675,7 @@
           "value": "development-process",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -686,7 +686,7 @@
           "value": "oss",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 24,
+          "days_since_last": 25,
           "windows": {
             "30": true,
             "90": true,
@@ -711,7 +711,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1732
+        "page_views": 1742
       }
     },
     "observations": [
@@ -742,7 +742,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 263
+          "page_views": 267
         }
       },
       {
@@ -764,7 +764,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 243
+          "page_views": 249
         }
       },
       {
@@ -1174,7 +1174,7 @@
     }
   ],
   "github_writing_funnel": {
-    "as_of": "2026-09-21",
+    "as_of": "2026-09-22",
     "snapshot_available": true,
     "monitored_repositories": [
       "ivRooom/Herta",
@@ -1183,8 +1183,8 @@
       "mizzz-ivr/ivmz-home",
       "mizzz-ivr/mizzz-ivr"
     ],
-    "evidence_count": 279,
-    "untracked_count": 279,
+    "evidence_count": 272,
+    "untracked_count": 272,
     "tracked_count": 0,
     "candidates": [
       {
@@ -1222,6 +1222,18 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.217
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#400",
+        "title": "AI Foundationに第3 providerとしてGoogle Gemini(provider id: google)を追加する (#341)",
+        "url": "https://github.com/ivRooom/Herta/pull/400",
+        "occurred_at": "2026-09-22T04:44:19Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.327
       },
       {
         "repository": "ivRooom/Herta",
@@ -1318,18 +1330,6 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.29
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#385",
-        "title": "fix: Grype Highゲートで検出された推移依存3件のCVEをoverridesで解消",
-        "url": "https://github.com/ivRooom/Herta/pull/385",
-        "occurred_at": "2026-09-17T15:01:08Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.222
       }
     ],
     "untracked_candidates": [
@@ -1372,6 +1372,18 @@
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
+        "source_id": "#400",
+        "title": "AI Foundationに第3 providerとしてGoogle Gemini(provider id: google)を追加する (#341)",
+        "url": "https://github.com/ivRooom/Herta/pull/400",
+        "occurred_at": "2026-09-22T04:44:19Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.327
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
         "source_id": "#399",
         "title": "AI Foundationに第2 providerとしてAnthropic Claudeを追加する (#340)",
         "url": "https://github.com/ivRooom/Herta/pull/399",
@@ -1464,22 +1476,10 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.29
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#385",
-        "title": "fix: Grype Highゲートで検出された推移依存3件のCVEをoverridesで解消",
-        "url": "https://github.com/ivRooom/Herta/pull/385",
-        "occurred_at": "2026-09-17T15:01:08Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.222
       }
     ],
-    "untracked_theme_count": 203,
-    "compression_ratio": 1.37,
+    "untracked_theme_count": 196,
+    "compression_ratio": 1.39,
     "theme_groups": [
       {
         "repository": "mizzz-ivr/profile-signal",
