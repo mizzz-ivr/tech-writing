@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-09-24",
+  "as_of": "2026-09-25",
   "overview": {
     "tracked_articles": 9,
     "published_articles": 8,
@@ -12,8 +12,8 @@
     "pipeline_only_coverage_gaps": 3,
     "freshness_needs_initial_verification": 5,
     "backlog_items": 48,
-    "github_untracked_evidence": 257,
-    "github_untracked_themes": 176
+    "github_untracked_evidence": 250,
+    "github_untracked_themes": 167
   },
   "pipeline": {
     "draft": 1,
@@ -22,10 +22,10 @@
     "archived": 0
   },
   "trend_readiness": {
-    "snapshot_count": 29,
+    "snapshot_count": 30,
     "first_snapshot_at": "2026-08-27",
-    "last_snapshot_at": "2026-09-24",
-    "observed_span_days": 28,
+    "last_snapshot_at": "2026-09-25",
+    "observed_span_days": 29,
     "windows": {
       "7": true,
       "30": false,
@@ -33,11 +33,11 @@
     }
   },
   "freshness": {
-    "as_of": "2026-09-24",
+    "as_of": "2026-09-25",
     "published_articles": 8,
     "verified_articles": 3,
     "needs_initial_verification": 5,
-    "oldest_verification_age_days": 27,
+    "oldest_verification_age_days": 28,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -90,7 +90,7 @@
         "path": "articles/published/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
-        "days_since_verified": 27,
+        "days_since_verified": 28,
         "source_ref_count": 0
       },
       {
@@ -99,7 +99,7 @@
         "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
         "status": "verified",
         "verified_at": "2026-09-04",
-        "days_since_verified": 20,
+        "days_since_verified": 21,
         "source_ref_count": 2
       },
       {
@@ -108,7 +108,7 @@
         "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
         "status": "verified",
         "verified_at": "2026-09-15",
-        "days_since_verified": 9,
+        "days_since_verified": 10,
         "source_ref_count": 3
       }
     ]
@@ -120,7 +120,7 @@
           "value": "個人開発",
           "published_count": 4,
           "last_published_at": "2026-09-08",
-          "days_since_last": 16,
+          "days_since_last": 17,
           "windows": {
             "30": true,
             "90": true,
@@ -131,7 +131,7 @@
           "value": "ci",
           "published_count": 3,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -142,7 +142,7 @@
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -153,7 +153,7 @@
           "value": "GitHubActions",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -164,7 +164,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -175,7 +175,7 @@
           "value": "aws",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -186,7 +186,7 @@
           "value": "github",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 16,
+          "days_since_last": 17,
           "windows": {
             "30": true,
             "90": true,
@@ -197,7 +197,7 @@
           "value": "github-actions",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -208,7 +208,7 @@
           "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -219,7 +219,7 @@
           "value": "individual-development",
           "published_count": 2,
           "last_published_at": "2026-09-04",
-          "days_since_last": 20,
+          "days_since_last": 21,
           "windows": {
             "30": true,
             "90": true,
@@ -230,7 +230,7 @@
           "value": "self-hosted-runner",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -241,7 +241,7 @@
           "value": "生成ai",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 16,
+          "days_since_last": 17,
           "windows": {
             "30": true,
             "90": true,
@@ -252,7 +252,7 @@
           "value": "ai-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -263,7 +263,7 @@
           "value": "architecture",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -274,7 +274,7 @@
           "value": "githubactions",
           "published_count": 1,
           "last_published_at": "2026-09-08",
-          "days_since_last": 16,
+          "days_since_last": 17,
           "windows": {
             "30": true,
             "90": true,
@@ -285,7 +285,7 @@
           "value": "openai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -296,7 +296,7 @@
           "value": "OSS",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -307,7 +307,7 @@
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -318,7 +318,7 @@
           "value": "terraform",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -329,7 +329,7 @@
           "value": "typescript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -349,7 +349,7 @@
           "value": "devops",
           "published_count": 5,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -360,7 +360,7 @@
           "value": "developer-productivity",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -371,7 +371,7 @@
           "value": "ai",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -382,7 +382,7 @@
           "value": "infra",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -399,7 +399,7 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -410,7 +410,7 @@
           "value": "TypeScript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -427,7 +427,7 @@
           "value": "GitHub Actions",
           "published_count": 6,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -438,7 +438,7 @@
           "value": "AWS EC2",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -449,7 +449,7 @@
           "value": "GitHub API",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -460,7 +460,7 @@
           "value": "Terraform",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -471,7 +471,7 @@
           "value": "Amazon Linux 2023",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 20,
+          "days_since_last": 21,
           "windows": {
             "30": true,
             "90": true,
@@ -482,7 +482,7 @@
           "value": "AWS Graviton",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 20,
+          "days_since_last": 21,
           "windows": {
             "30": true,
             "90": true,
@@ -493,7 +493,7 @@
           "value": "AWS Lambda",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -504,7 +504,7 @@
           "value": "GitHub",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -515,7 +515,7 @@
           "value": "GitHub Events API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -526,7 +526,7 @@
           "value": "GitHub Issues",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -537,7 +537,7 @@
           "value": "GitHub Pull Requests",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -548,7 +548,7 @@
           "value": "GitHub Releases",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -559,7 +559,7 @@
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 29,
+          "days_since_last": 30,
           "windows": {
             "30": true,
             "90": true,
@@ -570,7 +570,7 @@
           "value": "github-aws-runners",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -581,7 +581,7 @@
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 28,
+          "days_since_last": 29,
           "windows": {
             "30": true,
             "90": true,
@@ -598,7 +598,7 @@
           "value": "architecture",
           "published_count": 4,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -609,7 +609,7 @@
           "value": "automation",
           "published_count": 4,
           "last_published_at": "2026-09-04",
-          "days_since_last": 20,
+          "days_since_last": 21,
           "windows": {
             "30": true,
             "90": true,
@@ -620,7 +620,7 @@
           "value": "infrastructure",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -631,7 +631,7 @@
           "value": "ai-assisted-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -642,7 +642,7 @@
           "value": "ci",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 20,
+          "days_since_last": 21,
           "windows": {
             "30": true,
             "90": true,
@@ -653,7 +653,7 @@
           "value": "ci-cd",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 29,
+          "days_since_last": 30,
           "windows": {
             "30": true,
             "90": true,
@@ -664,7 +664,7 @@
           "value": "cost-optimization",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 9,
+          "days_since_last": 10,
           "windows": {
             "30": true,
             "90": true,
@@ -675,7 +675,7 @@
           "value": "development-process",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 31,
+          "days_since_last": 32,
           "windows": {
             "30": false,
             "90": true,
@@ -686,7 +686,7 @@
           "value": "oss",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 27,
+          "days_since_last": 28,
           "windows": {
             "30": true,
             "90": true,
@@ -711,7 +711,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 1763
+        "page_views": 1774
       }
     },
     "observations": [
@@ -742,7 +742,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 277
+          "page_views": 280
         }
       },
       {
@@ -753,7 +753,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 239
+          "page_views": 241
         }
       },
       {
@@ -764,7 +764,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 253
+          "page_views": 255
         }
       },
       {
@@ -775,7 +775,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 235
+          "page_views": 236
         }
       },
       {
@@ -786,7 +786,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 343
+          "page_views": 346
         }
       },
       {
@@ -813,9 +813,9 @@
         "communication"
       ],
       "coverage_gaps": [
-        "technologies:GitHub (31d since last post)"
+        "technologies:GitHub (32d since last post)"
       ],
-      "oldest_gap_age_days": 31,
+      "oldest_gap_age_days": 32,
       "source_evidence_recorded": true,
       "source_repository_count": 1,
       "related_positive_reaction_articles": 2,
@@ -1176,7 +1176,7 @@
     }
   ],
   "github_writing_funnel": {
-    "as_of": "2026-09-24",
+    "as_of": "2026-09-25",
     "snapshot_available": true,
     "monitored_repositories": [
       "ivRooom/Herta",
@@ -1185,8 +1185,8 @@
       "mizzz-ivr/ivmz-home",
       "mizzz-ivr/mizzz-ivr"
     ],
-    "evidence_count": 257,
-    "untracked_count": 257,
+    "evidence_count": 250,
+    "untracked_count": 250,
     "tracked_count": 0,
     "candidates": [
       {
@@ -1224,6 +1224,42 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.217
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#414",
+        "title": "feat(mini-games): MBTI診断を50問5段階Likert化しRole自動付与を追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/414",
+        "occurred_at": "2026-09-24T22:30:55Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.258
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#413",
+        "title": "feat(ai): AI Foundationを使ったアキネーター風キャラ当てゲーム/akinatorを追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/413",
+        "occurred_at": "2026-09-24T22:09:40Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.282
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#412",
+        "title": "feat(mini-games): MBTI風性格診断コマンド/mbtiを追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/412",
+        "occurred_at": "2026-09-24T09:32:53Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.24
       },
       {
         "repository": "ivRooom/Herta",
@@ -1296,42 +1332,6 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.298
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#403",
-        "title": "ops(security): SSM hybrid activation登録workflowを追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/403",
-        "occurred_at": "2026-09-23T02:43:46Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.352
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#402",
-        "title": "ops(security): Lightsail hardening設計とRunbookを追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/402",
-        "occurred_at": "2026-09-23T01:54:18Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.319
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#401",
-        "title": "feat(ai): AI Foundationに第4 providerとしてMoonshot Kimi(provider id: moonshot)を追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/401",
-        "occurred_at": "2026-09-22T06:54:09Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.333
       }
     ],
     "untracked_candidates": [
@@ -1374,6 +1374,42 @@
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
+        "source_id": "#414",
+        "title": "feat(mini-games): MBTI診断を50問5段階Likert化しRole自動付与を追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/414",
+        "occurred_at": "2026-09-24T22:30:55Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.258
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#413",
+        "title": "feat(ai): AI Foundationを使ったアキネーター風キャラ当てゲーム/akinatorを追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/413",
+        "occurred_at": "2026-09-24T22:09:40Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.282
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
+        "source_id": "#412",
+        "title": "feat(mini-games): MBTI風性格診断コマンド/mbtiを追加する",
+        "url": "https://github.com/ivRooom/Herta/pull/412",
+        "occurred_at": "2026-09-24T09:32:53Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.24
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "pull_request",
         "source_id": "#411",
         "title": "feat(studio): AI Foundation利用状況をanalyticsダッシュボードへ追加する",
         "url": "https://github.com/ivRooom/Herta/pull/411",
@@ -1442,46 +1478,10 @@
         "matched_source": null,
         "matched_title": null,
         "title_similarity": 0.298
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#403",
-        "title": "ops(security): SSM hybrid activation登録workflowを追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/403",
-        "occurred_at": "2026-09-23T02:43:46Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.352
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#402",
-        "title": "ops(security): Lightsail hardening設計とRunbookを追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/402",
-        "occurred_at": "2026-09-23T01:54:18Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.319
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#401",
-        "title": "feat(ai): AI Foundationに第4 providerとしてMoonshot Kimi(provider id: moonshot)を追加する",
-        "url": "https://github.com/ivRooom/Herta/pull/401",
-        "occurred_at": "2026-09-22T06:54:09Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.333
       }
     ],
-    "untracked_theme_count": 176,
-    "compression_ratio": 1.46,
+    "untracked_theme_count": 167,
+    "compression_ratio": 1.5,
     "theme_groups": [
       {
         "repository": "mizzz-ivr/profile-signal",
@@ -1572,19 +1572,26 @@
         "grouping": "explicit_scope",
         "scope": "ai",
         "label": "ai",
-        "event_count": 22,
-        "latest_at": "2026-09-22T06:54:09Z",
+        "event_count": 23,
+        "latest_at": "2026-09-24T22:09:40Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#401",
-          "title": "feat(ai): AI Foundationに第4 providerとしてMoonshot Kimi(provider id: moonshot)を追加する",
-          "url": "https://github.com/ivRooom/Herta/pull/401",
-          "occurred_at": "2026-09-22T06:54:09Z"
+          "source_id": "#413",
+          "title": "feat(ai): AI Foundationを使ったアキネーター風キャラ当てゲーム/akinatorを追加する",
+          "url": "https://github.com/ivRooom/Herta/pull/413",
+          "occurred_at": "2026-09-24T22:09:40Z"
         },
         "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#413",
+            "title": "feat(ai): AI Foundationを使ったアキネーター風キャラ当てゲーム/akinatorを追加する",
+            "url": "https://github.com/ivRooom/Herta/pull/413",
+            "occurred_at": "2026-09-24T22:09:40Z"
+          },
           {
             "kind": "pull_request",
             "source_id": "#401",
@@ -1598,13 +1605,6 @@
             "title": "fix(ai): 天気の「明日」「明後日」リクエストで正しい日付の予報を返す",
             "url": "https://github.com/ivRooom/Herta/pull/395",
             "occurred_at": "2026-09-19T14:23:18Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#394",
-            "title": "feat(ai): 気象庁(JMA)公開データを実況・予報のgrounding sourceとして追加する",
-            "url": "https://github.com/ivRooom/Herta/pull/394",
-            "occurred_at": "2026-09-19T13:37:40Z"
           }
         ],
         "identity": "ai"
