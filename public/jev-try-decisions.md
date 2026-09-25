@@ -1,13 +1,13 @@
 ---
-title: "判断特化AI『Jev』、普通のLLMと何が違う？個人開発での使い道を考えてみた"
+title: 判断特化AI『Jev』、普通のLLMと何が違う？個人開発での使い道を考えてみた
 tags:
   - AI
   - Jev
   - TypeScript
   - 個人開発
 private: false
-updated_at: ""
-id: null
+updated_at: '2026-09-25T11:31:21+09:00'
+id: b58b7b08373b229ea47b
 organization_url_name: null
 slide: false
 ignorePublish: false
