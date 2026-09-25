@@ -5,12 +5,14 @@ tags:
   - Jev
   - TypeScript
   - 個人開発
-private: true
+private: false
 updated_at: ""
 id: null
 organization_url_name: null
 slide: false
-ignorePublish: true
+ignorePublish: false
+posting_campaign_uuid: dc6e42e0897543216e34
+agreed_posting_campaign_term: true
 ---
 
 ## 結論
