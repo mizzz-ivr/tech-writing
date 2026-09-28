@@ -439,14 +439,8 @@ Autopilot
 - Microsoft: Introducing the new Copilot with Home, Code and Autopilot  
   https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/
 
-- Microsoft Japan: Home、Code、Autopilot を備えた新しい Copilot を発表  
-  https://news.microsoft.com/source/asia/features/introducing-the-new-copilot-with-home-code-and-autopilot/?lang=ja
-
 - Microsoft: Copilot Managed Runtime  
   https://www.microsoft.com/en-us/copilot/blog/copilot-studio/build-where-you-want-run-with-confidence-now-microsoft-hosts-and-manages-the-code-created-by-copilot/
-
-- Microsoft: 2025 Release Notes for Microsoft 365 Copilot  
-  https://learn.microsoft.com/en-us/microsoft-365/copilot/previous-year-release-notes
 
 - Microsoft Support: How Copilot Chat works in Microsoft 365 apps  
   https://support.microsoft.com/en-us/microsoft-365-copilot/how-copilot-chat-works-in-microsoft-365-apps
@@ -454,11 +448,5 @@ Autopilot
 - OpenAI: Using cloud browser in ChatGPT  
   https://help.openai.com/en/articles/20001280-using-cloud-browser-in-chatgpt
 
-- OpenAI: Connected apps in ChatGPT  
-  https://help.openai.com/en/articles/11487775-connected-apps-in-chatgpt
-
 - Anthropic: Cowork Workshop: Foundations  
   https://www.anthropic.com/webinars/cowork-workshop-foundations
-
-- Anthropic: How we contain Claude across products  
-  https://www.anthropic.com/engineering/how-we-contain-claude
