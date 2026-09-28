@@ -383,7 +383,7 @@ Microsoft自身も今回の発表で、Copilotを「new OS for work」と表現�
 
 - Home / Code：Frontierプログラムへ順次展開
 - Autopilot：9月末にPrivate Previewを拡大
-- Code：Microsoft 365 Premium / Pro向けPreviewは今年後半予定
+- Code：Microsoft 365 Premium / Copilot Pro向けPreviewは今年後半予定
 - Copilot Managed Runtime：Preview
 
 という段階です。
