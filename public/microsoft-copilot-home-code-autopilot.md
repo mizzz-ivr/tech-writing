@@ -284,6 +284,59 @@ MicrosoftがAutopilotの例として挙げているサプライヤーレビュ�
 
 ---
 
+## じゃあ、ChatGPTやClaudeと何が違う？
+
+ここまで読むと、
+
+> でもChatGPTやClaudeも、もう似たことできるのでは？
+
+と思います。
+
+これはその通りです。
+
+2026年9月時点では、**「複数ステップの仕事を丸ごと任せる」こと自体はCopilotだけの特徴ではありません。**
+
+ChatGPTには **Work** があり、接続したアプリやクラウドブラウザを使って複数ステップのWeb作業を進められます。タスクによっては、PCを閉じたあともクラウド側で処理を続けられます。
+
+Claudeにも **Cowork** があり、ローカルファイル・ブラウザ・接続サービスをまたいで、成果物が完成するまでの仕事をまとめて委任できます。開発寄りの仕事にはClaude Codeもあります。
+
+ざっくり並べると、こんな違いに見えます。
+
+| | 得意としている方向 |
+| --- | --- |
+| ChatGPT Work | Web・外部サービス・各種アプリを横断して仕事を実行する |
+| Claude Cowork / Code | ローカルファイルやツールを使った長い作業、知識労働・開発を進める |
+| 新しいMicrosoft Copilot | Microsoft 365の中で、仕事・アプリ作成・継続エージェントを一体化する |
+
+なので、今回のCopilotを
+
+**「ChatGPTやClaudeではできなかったことが突然できるようになった」**
+
+と見るのは少し違います。
+
+むしろ面白いのは、Microsoftがこれを **Teams / Outlook / Word / Excel / PowerPointと同じ仕事環境の中に入れようとしていること** です。
+
+AutopilotはMicrosoft 365のテナント内に独自のID・メモリ・コンピューター・ワークスペースを持ち、TeamsやOutlookなど既存の仕事場に現れる設計になっています。
+
+つまり競争軸は、
+
+```text
+AIがどれだけ賢いか
+        ↓
+AIにどこまで仕事を任せられるか
+        ↓
+会社の仕事環境そのものを
+どのAIが握るか
+```
+
+へ移ってきているように見えます。
+
+ChatGPTは幅広いサービスを横断する方向、ClaudeはCoworkやCodeで実作業を深く任せる方向、MicrosoftはMicrosoft 365そのものをAI中心の仕事環境へ組み替える方向。
+
+今回のアップデートで、Copilotもこの競争にかなり本格的に入ってきた印象です。
+
+---
+
 ## 3つを並べると狙いが見える
 
 今回の発表を機能ごとに見ると、こんな感じです。
@@ -397,3 +450,15 @@ Autopilot
 
 - Microsoft Support: How Copilot Chat works in Microsoft 365 apps  
   https://support.microsoft.com/en-us/microsoft-365-copilot/how-copilot-chat-works-in-microsoft-365-apps
+
+- OpenAI: Using cloud browser in ChatGPT  
+  https://help.openai.com/en/articles/20001280-using-cloud-browser-in-chatgpt
+
+- OpenAI: Connected apps in ChatGPT  
+  https://help.openai.com/en/articles/11487775-connected-apps-in-chatgpt
+
+- Anthropic: Cowork Workshop: Foundations  
+  https://www.anthropic.com/webinars/cowork-workshop-foundations
+
+- Anthropic: How we contain Claude across products  
+  https://www.anthropic.com/engineering/how-we-contain-claude
