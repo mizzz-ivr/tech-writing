@@ -164,7 +164,7 @@ Microsoftの説明では、Codeは自然言語からアプリや自動化を作�
 
 といったものを、Copilot上で作っていくイメージです。
 
-基盤にはGitHub Copilotと同じ技術が使われていますが、Microsoftはソフトウェア開発者の日常的な開発では引き続きGitHub Copilotを使うと説明しています。
+Microsoftによると、CodeはGitHub Copilotと同じ基盤技術（underlying technology）を利用しています。ただし、ソフトウェア開発者の日常的な開発では引き続きGitHub Copilotを使うと説明しています。
 
 つまり、
 
