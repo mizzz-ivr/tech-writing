@@ -50,7 +50,7 @@ Kimiもいる。
 
 xAIもいる。
 
-Amazon Bedrockの公式ドキュメントでは、現在100を超えるFoundation Modelを扱っている。
+Amazon Bedrockでは、かなり多くのFoundation Modelを選べるようになっている。
 
 自分は少し前まで、
 
@@ -295,19 +295,13 @@ Messages
 
 など。
 
-2026年6月にはBedrock Consoleも刷新され、`bedrock-mantle` endpointを中心に、
-
-- OpenAI Responses API
-- OpenAI Chat Completions API
-- Anthropic Messages API
-
-との互換APIを扱える構成になった。
+BedrockにはConverse APIだけでなく、OpenAIやAnthropicのAPIと互換性のある入口も用意されている。
 
 ここを見たとき、ちょっと面白かった。
 
 **AWSのサービスなのに、OpenAIやAnthropicのAPIの顔でも呼べる。**
 
-ProviderをBedrockへ寄せるために、アプリ側を全部「AWS独自API」へ書き換えなくてもいい方向へ進んでいる。
+ProviderをBedrockへ寄せるために、アプリ側を全部「AWS独自API」へ書き換えなくてもいい。
 
 一方、自分が新しくBedrock向けのコードを書くなら、まず気になるのは `Converse API`。
 
@@ -623,8 +617,6 @@ Answer
 
 Agentを動かすRuntime、Gateway、Memory、Identity、Observabilityなどを扱う。
 
-2026年9月にはAgentCore Memoryで、短期Memory Eventを経由せず長期Memoryへ直接投入するAPIも追加されている。
-
 ここまで来ると、
 
 > Bedrock = モデルAPI
@@ -797,8 +789,4 @@ GPT-6がBedrockへ来たニュースを見て、
 - [OpenAI GPT-6 Sol and GPT-6 Luna are now generally available on Amazon Bedrock](https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-sol-luna-on-amazon-bedrock/)
 - [Claude Sonnet 5.5 now available on AWS](https://aws.amazon.com/about-aws/whats-new/2026/09/claude-sonnet-5-5-aws/)
 - [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/)
-- [Models at a glance - Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html)
-- [API compatibility - Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-api-compatibility.html)
 - [Inference using Converse API](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html)
-- [Amazon Bedrock redesigned console / OpenAI- and Anthropic-compatible APIs](https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-bedrock-redesigned-console-optimized-openai-anthropic-compatible-apis/)
-- [Amazon Bedrock AgentCore Memory direct ingestion](https://aws.amazon.com/about-aws/whats-new/2026/09/agentcore-memory-direct-ingest/)
