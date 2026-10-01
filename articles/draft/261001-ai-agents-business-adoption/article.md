@@ -1,5 +1,5 @@
 ---
-title: 「PR作ってNotionも更新して」で気づいた。AI Agentって結局何者？業務導入の始め方を考える
+title: AI Agentが主流になる今、結局何者？「仕事を任せるAI」を業務に入れるまで
 status: draft
 published_at: null
 article_type: essay
@@ -7,6 +7,7 @@ level: null
 topics:
   - ai
   - ai-agent
+  - agentic-ai
   - automation
   - business
 domains:
@@ -16,7 +17,9 @@ languages: []
 technologies:
   - OpenAI Agents SDK
   - Microsoft Agent Framework
+  - Amazon Bedrock AgentCore
   - Model Context Protocol
+  - Agent2Agent
 portfolio_signals:
   - architecture
   - security
@@ -28,483 +31,746 @@ published:
   zenn: null
 ---
 
-# 「PR作ってNotionも更新して」で気づいた。AI Agentって結局何者？業務導入の始め方を考える
+# AI Agentが主流になる今、結局何者？「仕事を任せるAI」を業務に入れるまで
 
-最近、AIへの頼み方が少し変わってきました。
+最近、AI関連の発表を追っていると、やたらと **Agent** という言葉が出てきます。
 
-以前なら、
+OpenAIにはAgents SDKやAgents APIがある。
 
-> 次のQiita記事の構成を考えて
+MicrosoftにはAgent Frameworkがある。
 
-くらいで終わっていたところを、今は、
+AWSにはAmazon Bedrock AgentCoreがある。
 
-> Repositoryを見て既存記事と被っていないか確認して、必要なことを調べて、原稿を書いて、GitHubにPRを作って、Notionにも進捗を残して
+GoogleはAgent同士をつなぐA2Aを進めている。
 
-みたいに頼むことがあります。
+MCPも、Agentが外部のToolやDataへ接続するための共通レイヤーとして広がっています。
 
-文章を書くだけではありません。
+ここまで来ると、
 
-Repositoryを読む。
+> AI Agentって、結局何者なんだ？
 
-既存記事を確認する。
+という疑問が出てきます。
 
-Webで調べる。
+Modelの名前ではない。
 
-原稿を書く。
+特定の製品名でもない。
 
-GitHubを操作する。
+単なる自動化とも少し違う。
 
-Notionを更新する。
+自分なりに調べていくと、AI Agentはかなりシンプルに捉えた方が分かりやすそうでした。
 
-必要なら結果をもう一度確認する。
+**Goalを渡すと、自分で次の行動を選び、Toolを使い、結果を確認しながら、完了まで仕事を進めるSystem。**
 
-こうして並べると、もう「質問に答えるAI」ではありません。
+これが、今「AI Agent」と呼ばれているものの中心にあります。
 
-**ひとつのGoalに向かって、複数のToolを使いながら仕事を進めるAI**です。
+今回はAI Agentそのものを分解しながら、
 
-そこで改めて気になりました。
+**なぜ2026年にAgentが主流になりつつあるのか。**
 
-**AI Agentって、結局何者なんだろう。**
+そして、
 
-2026年に入ってから、OpenAI Agents、Microsoft Agent Framework、Amazon Bedrock AgentCore、GoogleのA2A、MCPなど、周辺の仕組みまで一気に揃ってきました。
+**実際の業務へ入れるなら、どこから始めればいいのか。**
 
-ただ、業務へ入れることを考えると、
+まで考えてみます。
 
-> Agentを導入しよう
-
-だけではかなり危ない気がします。
-
-今回は、AI Agentを「すごいAI社員」のようなイメージではなく、**業務システムとしてどう捉えると分かりやすいか**を、自分なりに整理してみます。
-
-> 2026年10月1日時点の公式情報をもとにしています。
+> 2026年10月2日時点の公式情報をもとにしています。
 
 ---
 
-## ChatbotとAgent、何が違う？
+## まず、AI Agentの中身を分解してみる
 
-普通のLLM呼び出しをかなり単純化すると、こうです。
+OpenAIのAgents SDKでは、AgentはModelだけではありません。
 
-```text
-User
-  ↓
-Prompt
-  ↓
-Model
-  ↓
-Answer
-```
+Instructions、Tools、Guardrails、Handoffsなどを組み合わせ、そのAgentが何をする存在なのかを定義します。
 
-質問を渡して、答えを受け取る。
+そしてRuntime側では、Agent Loopが動きます。
 
-Tool Callingが入る場合でも、アプリ側が「この関数を呼ばせる」とかなり固定的に組めます。
-
-一方、Agentはもう少しLoopに近い。
+かなり単純化するとこうです。
 
 ```text
 Goal
-  ↓
-Modelが次の行動を判断
-  ↓
+ ↓
+考える
+ ↓
+次のActionを決める
+ ↓
 Toolを使う
-  ↓
-結果を観測
-  ↓
-次の行動を判断
-  ↓
-必要ならまたToolを使う
-  ↓
-完了 / Human Approval / Stop
+ ↓
+結果を確認する
+ ↓
+まだ終わっていなければ次へ
+ ↓
+Done
 ```
 
-OpenAIのAgents SDKでも、AgentはModel、Instructions、Tools、Guardrails、Handoffsなどをまとめた単位として扱われています。
+例えば、
 
-そしてRunnerは、
+> 来週の会議に向けて競合3社の最新情報を調べて、比較表を作って、Notionにまとめて
+
+という仕事を渡したとします。
+
+Agentは、ただ文章を生成するだけではありません。
 
 ```text
-Modelを呼ぶ
+何を調べるか決める
 ↓
-Tool Callがあれば実行
+Web Search
 ↓
-結果をModelへ戻す
+情報を読む
 ↓
-必要なら繰り返す
+不足を判断
 ↓
-Final Answerで終了
+追加で検索
+↓
+比較する
+↓
+表を作る
+↓
+Notionへ保存
+↓
+保存結果を確認
+↓
+Done
 ```
 
-というAgent Loopを回します。
+途中で情報が足りなければ、また調べる。
 
-Anthropicも、Agentを
+Toolが失敗したら、別の方法を試す。
 
-> 自分でProcessとTool Useを決めながらTaskを進めるAI
+重要な操作なら、人間へ確認する。
 
-として説明していて、実際の動きは
+つまりAI Agentの本体は、Model単体ではなく、
 
 ```text
-plan
-→ act
-→ observe
-→ adjust
-→ repeat
+Model
++
+Goal
++
+Tools
++
+State
++
+Agent Loop
++
+Permissions
++
+Guardrails
++
+Observability
 ```
 
-に近いです。
+の組み合わせです。
 
-ここまで見ると、自分の中ではかなり整理しやすくなりました。
-
-**Agentは「すごく賢いChatbot」というより、LLMを判断部分に使った実行Loopです。**
-
-Modelの賢さだけで決まるものではありません。
-
-どんなToolを渡すか。
-
-何を許可するか。
-
-どこで止めるか。
-
-何をもって完了とするか。
-
-その外側の設計まで含めてAgentです。
+**LLMが頭脳なら、Agentは「頭脳が実際に仕事できるようにした実行System」**くらいに考えると分かりやすいと思います。
 
 ---
 
-## WorkflowとAgentも、同じではなかった
+## 一番重要なのは「自分で次の一手を選ぶ」こと
 
-ここも最初はかなり混同していました。
+AI Agentらしさが出るのは、ここです。
 
-例えば請求書処理が、
+例えば請求書処理。
+
+普通の自動化なら、
 
 ```text
 PDFを読む
 ↓
-項目を抽出
+金額を抽出
 ↓
-金額を検証
-↓
-会計システムへ登録
+DBへ登録
 ```
 
-と毎回同じ順番なら、普通のWorkflowで十分です。
+のように、あらかじめ手順を決められます。
 
-コードで順番を決めればいい。
-
-でも実際には、
+でも現実の仕事は、こんなに綺麗ではありません。
 
 ```text
-PDFの内容が足りない
+請求書を読む
+↓
+発注番号がない
 ↓
 関連メールを探す
 ↓
-発注情報と照合する
+発注書を見つける
 ↓
-まだ足りなければ人間へ確認
+金額が一致しない
 ↓
-揃ったら登録
+担当者へ確認する
+↓
+回答を受け取る
+↓
+登録する
 ```
 
-のように、状況によって次の行動が変わることがあります。
+最初から最後まで一本道ではない。
 
-この「次に何をするか」をModel側へある程度任せると、Agentらしくなってきます。
+**途中の結果によって、次にやることが変わる。**
 
-Anthropicはこの違いをかなり明確にしていて、
+この部分をModelに任せられるようになったことで、従来のAutomationでは扱いづらかった仕事まで対象に入り始めています。
 
-- Workflow: あらかじめ定義したCode PathでLLMとToolを動かす
-- Agent: LLM自身がProcessとTool Useを動的に決める
+Agentは「すべて自由に動くAI」というより、
 
-と整理しています。
+**決められたGoalと権限の中で、次のActionを自分で選べるSystem**
 
-Microsoft Agent FrameworkのDocumentationにも、かなり分かりやすい一文があります。
-
-> If you can write a function to handle the task, do that instead of using an AI agent.
-
-これ、かなり重要だと思いました。
-
-**AgentにできるからAgentにする、ではない。**
-
-普通のFunctionやWorkflowで書けるものを、わざわざ確率的なModel判断へ渡す必要はありません。
+と捉えた方が近いです。
 
 ---
 
-## それでも、なぜ今こんなにAgentなのか
+## Agentを構成する7つの部品
 
-Agentという考え方自体は急に生まれたわけではありません。
+実装を見ると製品ごとに名前は違いますが、業務Agentを考えると大体この7つに分けられます。
 
-ただ、2026年現在は「試作品を作るための部品」だけではなく、Productionへ持っていく周辺機能がかなり増えています。
+### 1. Goal / Instructions
 
-OpenAIにはAgents SDKがあり、Tool、Handoff、Guardrail、Tracing、Human Reviewを組めます。
+何を達成するAgentなのか。
 
-Microsoft Agent Frameworkには、Agent、Workflow、Memory、Middleware、MCP、Human-in-the-loop、長いTask向けのAgent Harnessがあります。
+例えば、
 
-AWSにはAmazon Bedrock AgentCoreがあり、RuntimeだけでなくMemory、Gateway、Identity、ObservabilityまでAgent向けに分けて扱えるようになっています。
+```text
+問い合わせ内容を調査し、
+返信案を作成する。
+返金・契約変更は実行しない。
+```
 
-Googleは異なるAgent同士をつなぐA2Aを公開しました。
+のように役割と境界を決めます。
 
-MCPも、Modelへ外部ToolやDataをつなぐ共通層として広がり、2026年7月のSpecificationではStateless Core、Tasks、Authorization強化などが追加されています。
+### 2. Model
 
-少し前なら、
+判断する部分。
+
+どのModelを使うかだけでなく、Reasoning量、Latency、Costもここに関係します。
+
+### 3. Tools
+
+Agentが現実世界へ触る手段です。
+
+```text
+searchCustomer()
+searchDocuments()
+readEmail()
+createDraft()
+updateTicket()
+```
+
+Toolがなければ、Agentは考えるだけで終わります。
+
+### 4. State / Memory
+
+今どこまで進んだか。
+
+過去に何を確認したか。
+
+Userや案件に関する長期情報を何まで持つか。
+
+長いTaskほど、State管理が重要になります。
+
+### 5. Agent Loop / Harness
+
+Agentを何度も動かす実行部分です。
+
+OpenAIのAgents SDKでも、Model出力にTool Callがあれば実行し、その結果を返して再度Modelを呼び、停止条件までLoopします。
+
+2026年にはOpenAIやAWSが、このHarness自体をかなり明示的な製品機能として扱うようになっています。
+
+### 6. Permission / Guardrails
+
+何をしてよいのか。
+
+```text
+読む → OK
+Draftを作る → OK
+顧客情報を更新 → Approval
+返金 → Approval
+User削除 → NG
+```
+
+みたいな境界です。
+
+### 7. Observability / Evals
+
+何をしたのか。
+
+なぜ失敗したのか。
+
+どのToolを呼んだのか。
+
+そのAgentは本当に業務で使える精度なのか。
+
+Agentは複数Stepを進むので、最終出力だけ見ても原因が追えません。
+
+TracingとEvaluationまで含めて初めて運用しやすくなります。
+
+---
+
+## Single Agentだけでは終わらない
+
+Agentを見ていると、次に出てくるのが **Multi-Agent** です。
+
+例えば1つのAgentへ、
+
+```text
+市場調査
+契約書確認
+売上分析
+資料作成
+```
+
+を全部任せることもできます。
+
+でも仕事が大きくなると、それぞれ専門Agentへ分ける設計が出てきます。
+
+```text
+Orchestrator Agent
+ ├─ Research Agent
+ ├─ Data Analysis Agent
+ ├─ Legal Review Agent
+ └─ Report Agent
+```
+
+OpenAI Agents SDKにはHandoffがあります。
+
+Microsoft Agent FrameworkもAgentとWorkflow、Harnessを組み合わせられる設計になっています。
+
+GoogleのA2Aは、異なるAgent同士がTaskを受け渡し、協調するためのProtocolとして進められています。
+
+ここで面白いのは、
+
+**AgentがSoftwareの一機能ではなく、System内の「仕事をする主体」になり始めていること**です。
+
+ただし、最初からMulti-Agentにすればいいわけではありません。
+
+Agentが増えるほど、
+
+```text
+誰が責任を持つか
+Contextをどう渡すか
+同じToolを二重実行しないか
+Costがどこまで増えるか
+どこで止めるか
+```
+
+も難しくなります。
+
+まずSingle Agentで成立するなら、その方がシンプルです。
+
+---
+
+## MCPとA2Aは何をしている？
+
+Agent周辺でよく出てくるのがMCPとA2Aです。
+
+ざっくり整理すると、
+
+```text
+Agent
+ ↓
+MCP
+ ↓
+Tool / Data / Service
+```
+
+と、
+
+```text
+Agent A
+ ↓
+A2A
+ ↓
+Agent B
+```
+
+です。
+
+MCPは、Agentic Workflowが外部のToolやDataへ接続するための共通基盤として進化しています。
+
+2026年7月のSpecificationではStateless Core、Tasks、Authorization強化などが入り、よりProduction向けの構成へ進んでいます。
+
+A2Aは、異なるAgent同士が連携するためのProtocolです。
+
+例えば購買Agentが、
+
+```text
+在庫Agentへ確認
+↓
+Supplier Agentへ見積依頼
+↓
+Finance Agentへ予算確認
+```
+
+のように、別のAgentへ仕事を渡す世界です。
+
+これまでは、
+
+```text
+AIごとに専用Integrationを作る
+```
+
+必要がありました。
+
+今はAgent Ecosystem側にも共通Protocolが生まれ始めています。
+
+ここも、Agentが一時的な流行ではなく **ひとつのSoftware Architectureになりつつある** と感じる部分です。
+
+---
+
+## なぜ今、AI Agentが主流になり始めたのか
+
+単純にModelが賢くなったから、だけではなさそうです。
+
+少し前のAgentは、
 
 ```text
 LLM
 +
 Function Calling
 +
-自前のLoop
+自前Loop
 ```
 
 をかなり自分で組む必要がありました。
 
-今は、
+2026年現在は、
 
 ```text
-Model
-Tool
+Agent Runtime
+Sandbox
 Memory
 Identity
-Approval
+MCP
+A2A
 Tracing
-Evaluation
-Protocol
-Runtime
+Evals
+Human Approval
+Long-running Task
 ```
 
-のように、Agentを運用するための部品自体がひとつのSoftware Stackになっています。
+まで周辺Infrastructureが揃い始めています。
 
-だから「AI Agentが急に賢くなった」だけではなく、**Agentを業務システムとして扱うためのInfrastructureが揃ってきた**ことも大きいのだと思います。
+OpenAIはAgents SDKを、長時間TaskやSandboxを扱える方向へ進化させています。
+
+AWS AgentCoreにもManaged Harnessが入り、Reasoning、Tool Selection、Action Execution、StreamingまでHarness側が扱えるようになっています。
+
+Microsoft Agent Frameworkも、Tool、Session、Memory、Workflow、Harness、Hostingまで段階的に構築できる構成です。
+
+つまり今起きているのは、
+
+**「Agentが作れるようになった」から「Agentを運用できるようになってきた」への変化**
+
+なのだと思います。
 
 ---
 
-## では、会社で何からAgent化する？
+## じゃあ、会社のどの仕事をAgentにする？
 
-ここで一番やりたくなるのが、
+ここが一番重要です。
 
-> 面倒な業務を丸ごとAgentに任せよう
+「AI Agentを導入する」と決めてから業務を探すと、かなり危ない。
 
-です。
+先に見るべきなのは、日々の業務です。
 
-でも、自分なら最初からそこには行きません。
+Agentと相性が良さそうなのは、例えばこんな仕事です。
 
-例えばカスタマーサポートを考えます。
+| 業務 | Agentが向いている理由 |
+| --- | --- |
+| 問い合わせ一次対応 | 内容ごとに調べる情報と判断が変わる |
+| 営業リサーチ | Web / CRM / Mailなど複数Sourceをまたぐ |
+| 社内ITサポート | 状況確認 → Runbook検索 → 対処の分岐が多い |
+| 開発 | Repository調査 → 実装 → Test → ReviewまでLoopできる |
+| 障害調査 | LogやMetricを見ながら仮説を更新する |
+| 契約・申請確認 | Documentを読み、条件不足なら追加確認できる |
+| 採用一次整理 | 複数資料を読み、決められた基準で整理する |
 
-いきなり、
+共通しているのは、
+
+```text
+入力が毎回少し違う
+↓
+複数の情報源を見る
+↓
+途中で判断する
+↓
+次のActionが変わる
+```
+
+という仕事です。
+
+逆に、
+
+```text
+Input
+↓
+決まった処理
+↓
+Output
+```
+
+で済むなら、普通のProgramやWorkflowの方が良いことも多いです。
+
+---
+
+## 業務導入は「AIに何をさせるか」より「どこまで任せるか」
+
+例えば、問い合わせ対応Agentを作るとします。
+
+最終形だけ考えると、
 
 ```text
 問い合わせ受信
 ↓
-Agentが判断
+調査
+↓
+判断
+↓
+返信
 ↓
 返金
-↓
-メール送信
 ↓
 Ticket Close
 ```
 
-まで自動化するのは怖い。
+まで全部やらせたくなります。
 
-返金条件を誤認したら実害が出ます。
+でも最初からここへ行く必要はありません。
 
-送ったメールは取り消せないかもしれません。
+自分なら、4段階に分けます。
 
-そこで、最初はこうします。
+### Phase 1 — Read
 
 ```text
-問い合わせ受信
-↓
-関連情報を検索
-↓
+Mailを読む
+Knowledge Baseを検索
+顧客情報を確認
+過去Ticketを読む
+```
+
+まだ何も変更しない。
+
+### Phase 2 — Draft
+
+```text
 返信案を作る
-↓
-根拠を添える
-↓
-Human Review
-↓
-人間が送信
+対応案を作る
+更新内容を提案する
 ```
 
-この状態でも、十分にAgentです。
+人間が確認して実行します。
 
-Agentが自分でKnowledge Baseや顧客情報を調べ、必要なToolを選び、返信案まで作る。
+### Phase 3 — Approval付きAction
 
-ただし、**Side Effectの最後だけ人間が持つ。**
+```text
+AgentがActionを準備
+↓
+Human Approval
+↓
+実行
+```
 
-これなら、Agentの価値を試しながらBlast Radiusをかなり小さくできます。
+ここで初めて実Systemへ書き込みます。
 
----
+### Phase 4 — Bounded Autonomy
 
-## 自分なら、4段階で権限を広げる
-
-業務導入を考えるとき、機能より先に「どこまで行動してよいか」で段階を分けると分かりやすそうです。
-
-| 段階 | Agentに任せること | 例 |
-| --- | --- | --- |
-| 1. Read-only | 読む・検索する・整理する | Mail / Docs / DBを調べて要約 |
-| 2. Draft | 変更案を作る | 返信案、PR案、Ticket案を作成 |
-| 3. Approval付きWrite | 実行直前で人間が承認 | PR作成、Calendar変更、CRM更新 |
-| 4. Bounded Autonomy | 明確な範囲内だけ自律実行 | 特定条件のTicket分類、限定された自動更新 |
-
-いきなりLevel 4から始めなくてもいい。
-
-むしろ最初は、
-
-**Agentがどれだけ正しく判断できるかを見るより、間違えたときにどこまで被害を限定できるかを見る。**
-
-この方が業務システムとして考えやすいです。
-
----
-
-## Promptより先にPermissionを設計したい
-
-Agent導入で一番怖いのは、Modelが間違った答えを返すことだけではありません。
-
-**間違った判断のままToolを実行できること**です。
+十分に安定した一部だけ自律化します。
 
 例えば、
 
 ```text
-「不要なUserを整理して」
+低RiskなTicket分類
+定型的なStatus更新
+決められた条件のReminder送信
 ```
 
-という依頼を受けたAgentが、
+など。
+
+**Agentの導入成熟度は、賢さではなく「安全に渡せる権限の範囲」で考えた方が分かりやすい。**
+
+---
+
+## Agent用の「業務設計図」を先に作る
+
+Platformを選ぶ前に、業務を1枚に分解した方がよさそうです。
+
+例えば、
 
 ```text
-listUsers()
-↓
+Goal
+問い合わせを解決できる状態へ持っていく
+
+Input
+問い合わせ本文
+
+Data
+CRM
+Knowledge Base
+過去Ticket
+契約情報
+
+Tools
+searchCustomer
+searchKnowledge
+createDraft
+updateTicket
+
 判断
-↓
-deleteUser()
+どの情報を調べるか
+回答できるか
+Escalationが必要か
+
+Approval
+返金
+契約変更
+顧客への最終送信
+
+Done
+返信案完成
+根拠確認済み
+必要なEscalation先を設定済み
 ```
 
-までできるとします。
+ここまで書くと、
 
-Promptをどれだけ丁寧に書いても、ここに絶対はありません。
+> Agentに何を実装する？
 
-自分ならTool側で分けます。
+より、
 
-```text
-listUsers
-getUser
-getLastLogin
-proposeUserDeletion
+> どこをAgentへ渡して、どこをSystemや人間に残す？
 
-ここまではAgent
--------------------------
-deleteUser
+が見えてきます。
 
-ここからはApproval必須
-```
-
-OpenAIのAgents SDKでも、Side Effectを伴う操作ではHuman ReviewでRunをPauseし、Approve / Rejectしてから同じStateをResumeできるようになっています。
-
-重要なのは、Human-in-the-loopを
-
-> AIが不安だから最後に人が見る
-
-という曖昧な仕組みにしないことです。
-
-**どのTool Callで止めるかをSystemとして決める。**
-
-ここまでやって初めて、業務へ入れやすくなります。
+AI Agent導入は、AI機能追加というより **業務Processの再設計** に近いと思います。
 
 ---
 
-## Agentに「管理者権限」は渡したくない
+## Tool設計がAgentの能力を決める
 
-人間のAccountで考えると普通なのに、AIになると忘れそうになるのがLeast Privilegeです。
-
-例えばGitHubを操作するAgentなら、
-
-```text
-Repository Read
-Issue Write
-Pull Request Write
-```
-
-は必要かもしれません。
-
-でも、
-
-```text
-Organization Admin
-Secret Read
-Repository Delete
-```
-
-まで渡す理由はありません。
-
-Agent専用Identityを作り、Roleを分け、ToolごとにScopeを限定する。
-
-これはAI特有の話というより、普通のSecurity設計です。
-
-AWSがAgentCoreでIdentityを独立したResourceとして扱っているのも、Agentが外部SystemへアクセスするほどIdentity設計が重要になるからだと理解しています。
-
-**AIだから特別な権限モデルが必要というより、AIも普通のWorkloadとして扱う。**
-
-この考え方が一番安全そうです。
-
----
-
-## 「終わった」を誰が決める？
-
-もう一つ、Agentを作ると意外と難しいのがCompletion Criteriaです。
-
-人間へ、
-
-> このIssue直しておいて
-
-と言えば、
-
-- Codeを直す
-- Testする
-- Lintする
-- PRを書く
-- Review指摘を直す
-
-あたりまで暗黙に想像できます。
-
-Agentは、どこを「完了」とするかをSystem側でかなり明示した方がいい。
+強いModelを使っても、Toolが雑だと業務Agentは扱いづらい。
 
 例えば、
+
+```text
+adminExecute(command)
+```
+
+みたいな万能Toolを渡すより、
+
+```text
+findCustomer()
+readContract()
+createRefundProposal()
+requestRefundApproval()
+executeApprovedRefund()
+```
+
+のように分けた方が、何をしてよいか管理できます。
+
+ここで重要なのは、
+
+**Toolを便利にすることと、Agentへ権限を渡しすぎないことを両立すること。**
+
+特に書き込み系Actionは、
+
+```text
+Read
+Draft
+Propose
+Approve
+Execute
+```
+
+を分けると扱いやすい。
+
+AgentのPermission設計は、PromptではなくToolとIdentity側でも止める必要があります。
+
+---
+
+## Human-in-the-loopは「保険」ではなくArchitecture
+
+Agent導入でよく聞くHuman-in-the-loop。
+
+単に、
+
+> AIが不安だから人間が最後に確認する
+
+だけだと、運用が曖昧です。
+
+重要なのは、
+
+**どのActionで必ず止めるかを定義すること。**
+
+例えば、
+
+```text
+検索 → 自動
+要約 → 自動
+Draft作成 → 自動
+Ticket更新 → 条件付き自動
+顧客への送信 → Approval
+返金 → Approval
+契約変更 → Approval
+User削除 → 禁止
+```
+
+のようにします。
+
+OpenAIのAgents SDKでも、Tool ApprovalによってRunをPauseし、Approve / Reject後に再開する仕組みがあります。
+
+Agentが強くなるほど、人間をLoopから消すのではなく、
+
+**人間をどこに残すかを明確にする**
+
+設計が重要になります。
+
+---
+
+## 「完了条件」がないAgentはずっと働けてしまう
+
+AgentにはGoalを与えます。
+
+でもGoalだけでは少し足りない。
+
+例えば、
+
+> 障害を調査して
+
+だけだと、どこまでやれば終わりなのか曖昧です。
+
+そこでDoneを決めます。
 
 ```text
 Goal:
-Issue #123を修正する
+障害原因を調査する
 
 Done:
-- Unit Test PASS
-- Type Check PASS
-- Security Scan PASS
-- DiffにSecretなし
-- PRをDraftで作成
-- 本番Deployはしない
+- 関連Logを確認
+- Metricを確認
+- 原因候補を3つ以内に絞る
+- 根拠を添える
+- Production変更はしない
+- 不明ならEscalationする
 ```
 
-くらいまで決める。
+開発Agentなら、
 
-Agentの能力が上がるほど、Promptを細かくする必要がなくなる部分もあります。
+```text
+Done:
+- Test PASS
+- Type Check PASS
+- Secretなし
+- Draft PR作成
+- Production Deployしない
+```
 
-一方で、**Goal / Constraint / Completion Criteriaはむしろ重要になる**と思っています。
+のようにできます。
 
-「どうやるか」はAgentに任せても、
+**Agentに「どうやるか」を任せるほど、「何をもって終わりか」は人間が明確にする。**
 
-「何をもって成功とするか」は人間側に残る。
-
-ここはかなり大きな境界です。
+ここがかなり重要です。
 
 ---
 
-## Agentは、動いたかではなくTraceを見たい
+## Agentを本番へ入れるならTraceが必要になる
 
-普通のAPIなら、
-
-```text
-Request
-↓
-Response
-```
-
-を見ればかなり追えます。
-
-Agentは違います。
+Agentは1回Modelを呼んで終わりではありません。
 
 ```text
 Model
@@ -521,340 +787,349 @@ Tool C
 ↓
 Model
 ↓
-Human Approval
+Approval
 ↓
 Tool D
 ↓
-完了
+Done
 ```
 
-と途中経路が長い。
+と進みます。
 
-最終結果だけ見ると、
+最終結果だけ見ても、
 
-> なぜこんな操作をした？
+> なんでこのActionをした？
 
-が分からなくなります。
+が分かりません。
 
-OpenAIはAgents SDKでTracingを提供しています。
+だからAgentにはTracingが必要です。
 
-AWS AgentCore Observabilityも、Session、Latency、Token Usage、Error、Traceなどを確認できるようにしています。
-
-Agentを業務へ入れるなら、最低でも、
+最低でも、
 
 ```text
 誰の依頼か
 どのAgentか
 どのModelか
 どのToolを呼んだか
-引数は何だったか
-結果はどうだったか
-Human Approvalはあったか
-最終的に成功したか
+Tool引数
+Tool結果
+Approval履歴
+Error
+Token / Cost
+最終結果
 ```
 
-は追えるようにしたい。
+を追えるようにしたい。
 
-**AgentのLogはDebug用ではなく、Audit Logに近くなっていく。**
+OpenAI Agents SDKはTracingを提供しています。
 
-そう考えると、Production AgentでObservabilityが大きな機能になっているのも納得できます。
+AWS AgentCoreもObservabilityをAgent Runtimeの主要機能として扱っています。
+
+AgentのLogは、普通のDebug Logより **Audit Logに近い役割**を持ち始めます。
 
 ---
 
-## 「便利そう」ではなく、成功条件を数字にする
+## Evalsなしで「使えそう」は危ない
 
-AI AgentのDemoはかなり面白いです。
+AgentはDemoだとかなり強く見えます。
 
-ブラウザを操作する。
+でも業務で重要なのは、
 
-資料を作る。
-
-Codeを直す。
-
-複数Agentが相談する。
-
-見ているだけで、何でもできそうに感じます。
-
-でも業務導入で知りたいのは、
-
-> Demoで成功したか
+> 一度成功した
 
 ではありません。
 
-例えば問い合わせ返信Agentなら、
+例えばSupport Agentなら、
 
 ```text
-自動生成率
+Task成功率
 人間の修正率
-承認Reject率
-誤ったTool Call率
+Approval Reject率
+Escalation率
+誤Tool Call率
 平均処理時間
 1件あたりCost
-Escalation率
 ```
 
-を見たい。
+を見る。
 
-Code Agentなら、
+Coding Agentなら、
 
 ```text
 Test PASS率
-Reviewでの修正量
+Review修正量
 Rollback率
-Issue完了までのLead Time
-人間が途中介入した回数
+Issue完了率
+人間介入回数
 ```
 
-が見たい。
+を見る。
 
-Agentは非決定的なので、
+Anthropicも2026年のAgent Evalsに関する解説で、Agentは複数TurnでToolを使い、Stateを変えながら適応するため、通常のLLM Outputより評価が難しくなると整理しています。
 
-> 一回うまくいった
+Agentを本番に入れるなら、
 
-では弱い。
-
-**繰り返しTaskを流して、どの失敗がどれくらい起きるかを見る。**
-
-このEvaluationまで含めて導入だと思います。
-
----
-
-## 実は「Agentを使わない判断」もかなり重要
-
-ここまでAgentの話を書いてきましたが、何でもAgent化するのは違うと思っています。
-
-例えば、
-
-```text
-CSVを受け取る
-↓
-ColumnをValidation
-↓
-DBへINSERT
-```
-
-のように処理が完全に決まっているなら、普通のProgramの方が速くて安くて予測しやすい。
-
-Agentを入れる価値が出やすいのは、
-
-```text
-入力が毎回少し違う
-必要な情報源が変わる
-途中結果を見て次の行動を変える
-例外が多い
-人間が今まで判断していた
-```
-
-ようなところです。
-
-逆に、
-
-```text
-同じInputなら必ず同じOutputが必要
-1ms単位のLatencyが重要
-失敗が許されない
-実行手順を完全にCodeで書ける
-```
-
-なら、Agentにしない方が自然です。
-
-AI Agentの導入判断は、
-
-> どこをAIに置き換えるか
+**Promptを書く → 動かす**
 
 ではなく、
 
-> **どの判断をModelに渡すと、System全体がシンプルになるか**
+**Task Setを作る → Traceを見る → Evalsする → 改善する**
 
-で考えた方が良さそうです。
-
----
-
-## GitHubとNotionをまたぐ作業で、ちょうど腑に落ちた
-
-最初の話に戻ります。
-
-記事を書くとき、
-
-```text
-Repositoryを読む
-↓
-既存記事との重複を見る
-↓
-公式Sourceを調べる
-↓
-原稿を書く
-↓
-Branchを切る
-↓
-PRを作る
-↓
-Notionへ進捗を記録
-```
-
-という作業をひとつのGoalとしてAIへ渡せるようになってきました。
-
-ここで価値があるのは、文章生成だけではありません。
-
-途中で、
-
-> このRepositoryではDraftをどこへ置く？
-
-を確認し、
-
-> 既存記事と主題が被っていない？
-
-を判断し、
-
-> PRはDraftにする？
-
-まで状況に合わせて次のActionを変えられることです。
-
-一方、公開ボタンや本番Deployまで勝手に進めてほしいわけではありません。
-
-自分にとって欲しいのは、
-
-**何でもできるAgentではなく、任せた範囲の中では自分で進み、境界に来たら止まれるAgent**です。
-
-この感覚が、業務導入でもかなり近い気がします。
+までが開発Loopになります。
 
 ---
 
-## 自分なら、業務Agentはこう始める
+## 最初からMulti-Agentにしない
 
-最初にやるのは、Agent Platformを選ぶことではありません。
+Agentという言葉を追っていると、
 
-まず1つ、繰り返している業務を選びます。
+> 複数Agentが自律的に協力する
 
-そして、その業務を
+世界にすぐ行きたくなります。
+
+確かに面白い。
+
+でもSingle Agentで済むなら、まずそれでいいと思っています。
 
 ```text
-Input
-↓
-判断
-↓
-参照するData
-↓
-使うTool
-↓
-Side Effect
-↓
-Approval
-↓
-Done
+1 Agent
++
+5 Tools
 ```
 
-に分けます。
+で済む仕事を、
 
-次に、Side Effectを外してRead-onlyで動かします。
+```text
+Planner Agent
+Research Agent
+Reviewer Agent
+Executor Agent
+```
 
-安定してきたらDraftを作らせる。
+に分けると、途端に、
 
-その次にApproval付きでWriteを許可する。
+```text
+Context共有
+Agent間通信
+責任境界
+再試行
+重複実行
+Cost
+Trace
+```
 
-それでも安定している一部だけ、自律実行へ広げる。
+まで考える必要があります。
+
+Multi-Agentは「Agentの上位版」というより、
+
+**1つのAgentでは役割分離した方がSystem全体を理解しやすいときのArchitecture**
+
+として使う方が自然そうです。
+
+---
+
+## 自分なら、業務導入をこの順番で進める
+
+AI Agentを仕事へ入れるなら、今のところ自分はこの順番が一番しっくりきます。
+
+### Step 1 — Agent化したい「業務」を1つ選ぶ
+
+製品を選ばない。
+
+まず仕事を選ぶ。
+
+### Step 2 — Goal / Input / Data / Tools / Doneを書く
+
+今、人間が何を見て、何を判断しているかを分解します。
+
+### Step 3 — ToolをRead-onlyでつなぐ
+
+最初は検索と参照だけ。
+
+### Step 4 — TraceとEvalsを作る
+
+本番Actionを許す前に、判断の癖と失敗パターンを見る。
+
+### Step 5 — Draftまで任せる
+
+返信案、更新案、PR案などを作らせます。
+
+### Step 6 — Approval付きActionを許す
+
+Side Effectのある処理を限定して開放します。
+
+### Step 7 — 安定した部分だけAutonomousにする
+
+Riskが小さく、成功条件が明確な処理だけ。
+
+### Step 8 — 必要になって初めてMulti-Agent化する
+
+Role分割が本当に必要な部分だけ分けます。
 
 この順番なら、
 
 ```text
-AIを導入する
+会社にAI Agentを導入する
 ```
 
-という大きなProjectではなく、
+という大きすぎる話ではなく、
 
 ```text
-この1業務の、この判断だけをAgentへ渡す
+この業務の、この判断とActionをAgentに渡す
 ```
 
 という小さい変更から始められます。
 
-個人的には、こっちの方が現実的です。
+---
+
+## AI Agentは「AI社員」より「新しい実行主体」と考えたい
+
+AI Agentを説明するとき、
+
+> AI社員
+
+という言葉はかなり分かりやすいです。
+
+ただ、System設計として考えると少し危ない気もします。
+
+人間の社員なら、
+
+```text
+空気を読む
+暗黙知を理解する
+責任を取る
+例外に気づく
+倫理的判断をする
+```
+
+ことまで期待します。
+
+Agentに同じものを期待すると、境界が曖昧になります。
+
+自分はむしろ、
+
+**APIでもCronでも人間でもない、新しい実行主体**
+
+くらいに考えています。
+
+```text
+人間
+ ├─ 判断
+ ├─ 承認
+ └─ 責任
+
+Agent
+ ├─ 調査
+ ├─ 推論
+ ├─ Tool Use
+ ├─ Loop
+ └─ 限定されたAction
+
+System
+ ├─ Permission
+ ├─ Validation
+ ├─ Audit
+ └─ Hard Guardrail
+```
+
+この3つをどう分けるか。
+
+そこがAgent時代のSystem Designになっていくのかもしれません。
 
 ---
 
-## まとめ：Agentの正体は「自律性を持ったLoop」
+## まとめ：AI Agentの主役は「自律性」ではなく「任せられる仕事」
 
-AI Agentについて調べる前は、
-
-> LLMがもっと賢くなったもの
-
-くらいの感覚がありました。
-
-でも今は少し違います。
+AI Agentを追い始めると、
 
 ```text
-Model
-+
-Instructions
-+
-Tools
-+
-State
-+
-Loop
-+
-Permissions
-+
-Approval
-+
-Observability
-+
-Evaluation
+自律型
+Multi-Agent
+Computer Use
+MCP
+A2A
+Memory
+Planning
+Reasoning
 ```
 
-これ全体がAgentです。
+と新しい言葉が大量に出てきます。
 
-そして業務で一番難しいのは、Modelを選ぶことではなく、
+でも中心にあるものは、そこまで複雑ではありません。
 
-**どこまで自律させるかを決めること**だと思っています。
+```text
+Goalを受け取る
+↓
+状況を見る
+↓
+次のActionを決める
+↓
+Toolを使う
+↓
+結果を見る
+↓
+必要ならやり直す
+↓
+Doneまで進む
+```
 
-AI Agentが主流になっていくほど、
+これがAgentです。
 
-> 何ができる？
+そしてAI Agentが主流になるほど、Modelの性能だけでなく、
+
+```text
+何を任せるか
+何を見せるか
+どのToolを渡すか
+何を許可するか
+どこで人間へ戻すか
+何をもって完了とするか
+どう評価するか
+```
+
+が重要になります。
+
+2026年は、Agentを作るためのRuntime、Protocol、Sandbox、Memory、Observabilityまで揃い始めました。
+
+だから次に考えるべきなのは、
+
+> AI Agentを使うかどうか
 
 より、
 
-> 何をしていい？
-> どこで止まる？
-> 失敗したらどう戻す？
-> 何をもって完了？
-> あとから追跡できる？
+**自分たちの仕事の中で、どの仕事をAgentへ渡せる形に設計し直すか**
 
-の方が重要になる。
+なのだと思います。
 
-だから最初から「AI社員」を作ろうとしなくていい。
+AI Agentは、単にAIが賢くなった話ではない。
 
-まずは、
+**Softwareの中に「自分で仕事を進める主体」が増える話です。**
 
-**読める。調べられる。案を作れる。でも勝手には確定しない。**
-
-くらいから始める。
-
-その境界を少しずつ広げていく方が、Agentを業務へ自然に入れられる気がしています。
-
-そして数年後、Agentが本当に当たり前になったとしても、最後まで残る設計はたぶん同じです。
-
-**自律性には、必ず境界が必要です。**
+そこまで考えると、Agentが主流になっていくという言葉の意味が、少し見えやすくなりました。
 
 ---
 
 ## 参考資料
 
+- OpenAI, Agents  
+  https://developers.openai.com/api/docs/guides/agents
 - OpenAI, Agents SDK  
   https://developers.openai.com/api/docs/guides/agents/sdk
 - OpenAI, Running agents  
   https://developers.openai.com/api/docs/guides/agents/running-agents
-- OpenAI, Guardrails and human review  
-  https://developers.openai.com/api/docs/guides/agents/guardrails-approvals
-- Anthropic, Trustworthy agents in practice  
-  https://www.anthropic.com/research/trustworthy-agents
-- Anthropic, Building effective agents  
-  https://www.anthropic.com/engineering/building-effective-agents
-- Microsoft, Agent Framework Overview  
-  https://learn.microsoft.com/en-us/agent-framework/overview/
-- Google Developers Blog, Announcing the Agent2Agent Protocol (A2A)  
-  https://developers.googleblog.com/a2a-a-new-era-of-agent-interoperability/
+- OpenAI, The next evolution of the Agents SDK  
+  https://openai.com/index/the-next-evolution-of-the-agents-sdk/
+- Anthropic, Building Effective AI Agents  
+  https://resources.anthropic.com/building-effective-ai-agents
+- Anthropic, Demystifying evals for AI agents  
+  https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+- Microsoft, Agent Framework  
+  https://learn.microsoft.com/en-us/agent-framework/get-started/
+- Google Developers Blog, How A2A is Building a World of Collaborative Agents  
+  https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/
+- Google Developers Blog, Developer’s Guide to AI Agent Protocols  
+  https://developers.googleblog.com/en/developers-guide-to-ai-agent-protocols/
 - Model Context Protocol, The 2026-07-28 Specification  
   https://blog.modelcontextprotocol.io/posts/2026-07-28/
-- AWS, Amazon Bedrock AgentCore Observability  
-  https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability.html
+- AWS, Amazon Bedrock AgentCore adds new features to help developers build agents faster  
+  https://aws.amazon.com/about-aws/whats-new/2026/04/agentcore-new-features-to-build-agents-faster/
