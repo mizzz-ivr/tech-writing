@@ -1,6 +1,6 @@
 # Writing Analytics — Decision Dashboard
 
-> Analytics as of: 2026-09-30 · Freshness as of: 2026-09-30 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-10-01 · Freshness as of: 2026-10-01 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
@@ -10,19 +10,19 @@
 | Pipeline | Draft **1** / Review **0** |
 | Last published | **2026-09-15** |
 | Source freshness | Initial verification **5** / Verified **3** |
-| Metric snapshots | **35** / observed span **34d** |
+| Metric snapshots | **36** / observed span **35d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **3** |
-| GitHub → Writing Funnel | Themes **120** / Events **215** |
+| GitHub → Writing Funnel | Themes **110** / Events **207** |
 | 次の記事候補 | [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md) (`draft`) |
 
 ### 今の判断
 
-- GitHub実装の未記事化evidence **215件** を、明示scopeで **120 themes** に整理しています。先頭theme: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0（1 events、代表: Profile Signal v0.4.0）。
+- GitHub実装の未記事化evidence **207件** を、明示scopeで **110 themes** に整理しています。先頭theme: `mizzz-ivr/profile-signal` / Profile Signal v0.4.0（1 events、代表: Profile Signal v0.4.0）。
 - Published記事 **5件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
 - Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
-- 次記事候補の主な根拠: `communication`, `domains:developer-productivity (33d since last post)`, `technologies:GitHub (37d since last post)`
+- 次記事候補の主な根拠: `communication`, `domains:developer-productivity (34d since last post)`, `technologies:GitHub (38d since last post)`
 
 ## Editorial Pipeline
 
@@ -37,7 +37,7 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 
 ## GitHub → Writing Funnel
 
-> GitHub snapshot as of: **2026-09-30**
+> GitHub snapshot as of: **2026-10-01**
 
 最近のpublic Repository実装を、明示的なConventional Commit scopeだけでtheme groupingして表示します。scopeが無いeventは無理にまとめません。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。
 
@@ -52,17 +52,17 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 | `ivRooom/Herta` | scope `birthday` | **9** | [fix(birthday): 未登録Guildメンバーの自己登録を許可](https://github.com/ivRooom/Herta/pull/301) | 2026-08-21 |
 | `ivRooom/Herta` | scope `ops` | **4** | [docs(ops): SSM hybrid activation登録完了をRunbookへ反映する](https://github.com/ivRooom/Herta/pull/407) | 2026-09-23 |
 | `ivRooom/Herta` | scope `moderation` | **4** | [feat(moderation): 設定画面をNGワード・自動検知中心に再編](https://github.com/ivRooom/Herta/pull/274) | 2026-08-18 |
+| `ivRooom/Herta` | scope `community` | **3** | [feat(community): Community Pointsを新設し、放置/個人プレイで稼げる指標を弱く設計する](https://github.com/ivRooom/Herta/pull/436) | 2026-09-30 |
 | `ivRooom/Herta` | scope `mbti` | **3** | [feat(mbti): 診断完了時にMBTI結果をivrm-webへfire-and-forgetで同期する](https://github.com/ivRooom/Herta/pull/426) | 2026-09-27 |
 | `ivRooom/Herta` | scope `mini-games` | **3** | [feat(mini-games): MBTI診断の質問をSVG画像カード表示にする](https://github.com/ivRooom/Herta/pull/415) | 2026-09-25 |
-| `mizzz-ivr/ivmz-home` | scope `ops` | **3** | [docs(ops): record Netlify credit recovery for issue #38](https://github.com/mizzz-ivr/ivmz-home/pull/42) | 2026-09-17 |
 
-Raw untracked evidence **215件** → deterministic theme **120件**。Compression: **1.79x**。
+Raw untracked evidence **207件** → deterministic theme **110件**。Compression: **1.88x**。
 
 Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repository内の明示scopeでgrouping、scope無しはsingleton。AI semantic clustering / significance scoreは使いません。
 
 ## Source Freshness
 
-> Freshness as of: **2026-09-30**
+> Freshness as of: **2026-10-01**
 
 技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
 
@@ -73,9 +73,9 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/published/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/personal-dev-pr-ci.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 33d | 0 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 26d | 2 |
-| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/published/260831-runner-scale-to-zero-design/article.md) | Verified | 2026-09-15 | 15d | 3 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 34d | 0 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 27d | 2 |
+| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/published/260831-runner-scale-to-zero-design/article.md) | Verified | 2026-09-15 | 16d | 3 |
 
 ## Portfolio Coverage
 
@@ -104,7 +104,7 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
 | [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) | qiita | likes 0 · stocks 0 · comments 0 · page_views 287 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 247 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 248 |
 | [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 258 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 239 |
 | [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 352 |
@@ -112,10 +112,10 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 
 ## Trend Readiness
 
-- Snapshot count: **35**
+- Snapshot count: **36**
 - First snapshot: **2026-08-27**
-- Latest snapshot: **2026-09-30**
-- Observed span: **34 days**
+- Latest snapshot: **2026-10-01**
+- Observed span: **35 days**
 
 | Window | Status |
 | --- | --- |
