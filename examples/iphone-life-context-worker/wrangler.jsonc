@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "life-iphone-context",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-16",
+  "workers_dev": true,
+  "secrets": {
+    "required": [
+      "NOTION_TOKEN",
+      "NOTION_DATA_SOURCE_ID",
+      "INGEST_SECRET"
+    ]
+  }
+}
