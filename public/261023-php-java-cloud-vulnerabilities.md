@@ -6,17 +6,17 @@ tags:
   - Java
   - AWS
   - CVE
-private: false
+private: true
 updated_at: ""
 id: null
 organization_url_name: null
 slide: false
-ignorePublish: true
+ignorePublish: false
 posting_campaign_uuid: null
 agreed_posting_campaign_term: false
 ---
 
-> **情報確認日：2026年10月23日（JST）／未公開の下書き**
+> **情報確認日：2026年10月23日（JST）／限定共有**
 >
 > 本文はPHP Project、Apache Tomcat Security Team、Spring Security、CERT-EU、JPCERT/CCなどの公表情報をもとにしています。**「製品の深刻度」と「自分の環境における対応優先度」は別物**です。脆弱性情報は更新されるため、作業前にリンク先の最新版を確認してください。攻撃手順の再現ではなく、防御と運用判断に焦点を当てています。
 
