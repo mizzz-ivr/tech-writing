@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-10-25 13:41 JST
+> Generated: 2026-10-26 13:47 JST
 
 ## Overview
 
@@ -36,7 +36,7 @@ Latest snapshot. Metrics stay platform-specific; no combined popularity score is
 - [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 281
 - [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 257
 - [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — qiita: likes 1 · stocks 1 · comments 0 · page views 381
-- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views 475
+- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views 476
 
 `0` means an observed zero. `unavailable` means the snapshot explicitly contains `null`; `not collected` means the field is absent. `page_views: null` is a normal state.
 
