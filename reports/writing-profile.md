@@ -1,6 +1,6 @@
 # Writing Profile / Analytics
 
-> Generated: 2026-11-06 15:44 JST
+> Generated: 2026-11-07 14:57 JST
 
 ## Overview
 
@@ -33,10 +33,10 @@ Latest snapshot. Metrics stay platform-specific; no combined popularity score is
 - [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) — zenn: likes 1 · bookmarks 0 · comments 0 · page views unavailable
 - [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) — qiita: likes 0 · stocks 0 · comments 0 · page views 328
 - [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) — qiita: likes 0 · stocks 0 · comments 0 · page views 328
-- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 296
+- [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) — qiita: likes 0 · stocks 2 · comments 0 · page views 297
 - [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) — qiita: likes 0 · stocks 0 · comments 0 · page views 278
-- [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — qiita: likes 1 · stocks 1 · comments 0 · page views 390
-- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views 481
+- [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) — qiita: likes 1 · stocks 1 · comments 0 · page views 391
+- [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) — qiita: likes 0 · stocks 0 · comments 0 · page views 483
 
 `0` means an observed zero. `unavailable` means the snapshot explicitly contains `null`; `not collected` means the field is absent. `page_views: null` is a normal state.
 
