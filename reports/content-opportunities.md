@@ -1,6 +1,6 @@
 # Content Gap / Next Article Opportunities
 
-> As of: 2026-11-24
+> As of: 2026-11-25
 
 Repository metadataから再生成するderived reportです。本文やbacklog自由文から技術分類を推測せず、明示されたmetadataだけを使います。
 
@@ -27,76 +27,76 @@ external reactionは4番目の補助情報で、反応が良いテーマだけ�
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| 個人開発 | 4 | 2026-09-08 | 77d | — | ✓ | ✓ |
-| ci | 3 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| GitHub | 3 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| GitHubActions | 3 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| Python | 3 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| aws | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| github | 2 | 2026-09-08 | 77d | — | ✓ | ✓ |
-| github-actions | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| GitHubAPI | 2 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| individual-development | 2 | 2026-09-04 | 81d | — | ✓ | ✓ |
-| self-hosted-runner | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| 生成ai | 2 | 2026-09-08 | 77d | — | ✓ | ✓ |
-| ai-development | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| architecture | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| githubactions | 1 | 2026-09-08 | 77d | — | ✓ | ✓ |
-| openai | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| OSS | 1 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| security | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| terraform | 1 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| typescript | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
+| 個人開発 | 4 | 2026-09-08 | 78d | — | ✓ | ✓ |
+| ci | 3 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| GitHub | 3 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| GitHubActions | 3 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| aws | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| github | 2 | 2026-09-08 | 78d | — | ✓ | ✓ |
+| github-actions | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| GitHubAPI | 2 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| individual-development | 2 | 2026-09-04 | 82d | — | ✓ | ✓ |
+| self-hosted-runner | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| 生成ai | 2 | 2026-09-08 | 78d | — | ✓ | ✓ |
+| ai-development | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| architecture | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| githubactions | 1 | 2026-09-08 | 78d | — | ✓ | ✓ |
+| openai | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| OSS | 1 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| security | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| terraform | 1 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| typescript | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
 
 ### domains
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| devops | 5 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| developer-productivity | 4 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| ai | 2 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| infra | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
+| devops | 5 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| developer-productivity | 4 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| ai | 2 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| infra | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
 
 ### languages
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| Python | 3 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| TypeScript | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
+| Python | 3 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| TypeScript | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
 
 ### technologies
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| GitHub Actions | 6 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| AWS EC2 | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| GitHub API | 2 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| Terraform | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| Amazon Linux 2023 | 1 | 2026-09-04 | 81d | — | ✓ | ✓ |
-| AWS Graviton | 1 | 2026-09-04 | 81d | — | ✓ | ✓ |
-| AWS Lambda | 1 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| GitHub | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| GitHub Events API | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
-| GitHub Issues | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| GitHub Pull Requests | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| GitHub Releases | 1 | 2026-08-28 | 88d | — | ✓ | ✓ |
-| GitHub Search API | 1 | 2026-08-26 | 90d | — | ✓ | ✓ |
-| github-aws-runners | 1 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| OpenAI API | 1 | 2026-08-27 | 89d | — | ✓ | ✓ |
+| GitHub Actions | 6 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| AWS EC2 | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| GitHub API | 2 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| Terraform | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| Amazon Linux 2023 | 1 | 2026-09-04 | 82d | — | ✓ | ✓ |
+| AWS Graviton | 1 | 2026-09-04 | 82d | — | ✓ | ✓ |
+| AWS Lambda | 1 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| GitHub | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| GitHub Events API | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
+| GitHub Issues | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| GitHub Pull Requests | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| GitHub Releases | 1 | 2026-08-28 | 89d | — | ✓ | ✓ |
+| GitHub Search API | 1 | 2026-08-26 | 91d | — | — | ✓ |
+| github-aws-runners | 1 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| OpenAI API | 1 | 2026-08-27 | 90d | — | ✓ | ✓ |
 
 ### portfolio_signals
 
 | Value | Published | Last published | Age | 30d | 90d | 365d |
 | --- | ---: | --- | ---: | :---: | :---: | :---: |
-| architecture | 4 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| automation | 4 | 2026-09-04 | 81d | — | ✓ | ✓ |
-| infrastructure | 2 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| ai-assisted-development | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| ci | 1 | 2026-09-04 | 81d | — | ✓ | ✓ |
-| ci-cd | 1 | 2026-08-26 | 90d | — | ✓ | ✓ |
-| cost-optimization | 1 | 2026-09-15 | 70d | — | ✓ | ✓ |
-| development-process | 1 | 2026-08-24 | 92d | — | — | ✓ |
-| oss | 1 | 2026-08-28 | 88d | — | ✓ | ✓ |
+| architecture | 4 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| automation | 4 | 2026-09-04 | 82d | — | ✓ | ✓ |
+| infrastructure | 2 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| ai-assisted-development | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| ci | 1 | 2026-09-04 | 82d | — | ✓ | ✓ |
+| ci-cd | 1 | 2026-08-26 | 91d | — | — | ✓ |
+| cost-optimization | 1 | 2026-09-15 | 71d | — | ✓ | ✓ |
+| development-process | 1 | 2026-08-24 | 93d | — | — | ✓ |
+| oss | 1 | 2026-08-28 | 89d | — | ✓ | ✓ |
 
 ## Pipeline-only Coverage Gaps
 
@@ -112,7 +112,7 @@ draft / reviewには存在するが、公開済み記事ではまだ示せてい
 - Status: `draft`
 - Portfolio gap: `communication`
 - Implementation evidence: `mizzz-ivr/tech-writing`
-- Coverage gap / recency: domains:developer-productivity (88d since last post); technologies:GitHub (92d since last post)
+- Coverage gap / recency: domains:developer-productivity (89d since last post); technologies:GitHub (93d since last post)
 - Related positive-reaction context: 2 published article(s)
 
 ## Backlog Hygiene / Overlap
@@ -154,10 +154,10 @@ backlog自由文にはclassificationを自動付与せず、タイトル類似�
 
 configured public repositoryのstored GitHub snapshotから、まだarticle/backlog titleと明示的に重複しない実装evidenceを可視化します。title overlap以外の意味的重複や重要度は推測しません。
 
-- Snapshot: **2026-11-23**
+- Snapshot: **2026-11-25**
 - Monitored repositories: **5**
-- Evidence rows: **328**
-- Untracked evidence: **328**
+- Evidence rows: **324**
+- Untracked evidence: **324**
 - Tracked by explicit title overlap: **0**
 
 | Repository | Kind | Evidence | Date | Tracking |
@@ -165,15 +165,15 @@ configured public repositoryのstored GitHub snapshotから、まだarticle/back
 | `ivRooom/Herta` | `release` | [v1.0.0](https://github.com/ivRooom/Herta/releases/tag/v1.0.0) | 2026-11-22 | untracked |
 | `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.4.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.4.0) | 2026-08-27 | untracked |
 | `mizzz-ivr/profile-signal` | `release` | [Profile Signal v0.3.0](https://github.com/mizzz-ivr/profile-signal/releases/tag/v0.3.0) | 2026-08-27 | untracked |
-| `mizzz-ivr/roomate-voice` | `release` | [RooMate Voice v0.1.0 (Preview)](https://github.com/mizzz-ivr/roomate-voice/releases/tag/v0.1.0) | 2026-08-26 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(birthday-role): ivrm-web 署名付きAPIからの設定・対象者取得に対応 (#961)](https://github.com/ivRooom/Herta/pull/969) | 2026-11-23 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(worker): アチーブメント解除通知の画像カード化 (#965)](https://github.com/ivRooom/Herta/pull/966) | 2026-11-22 | untracked |
-| `ivRooom/Herta` | `pull_request` | [docs: CHANGELOG.md を新設し v1.0.0 を開始点として記録する](https://github.com/ivRooom/Herta/pull/960) | 2026-11-22 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(daily-bonus): バンドル動画（契約v2・リンク方式）に対応する (#766 D3)](https://github.com/ivRooom/Herta/pull/957) | 2026-11-21 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(daily-bonus): クエスト確認ボタンとクエストボードリンクを追加する (#954)](https://github.com/ivRooom/Herta/pull/956) | 2026-11-21 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(daily-bonus): 配信時刻（scheduleTime）を可変化する (#766 Phase D2)](https://github.com/ivRooom/Herta/pull/953) | 2026-11-21 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(bot): /quest image card view (Q3) (#946)](https://github.com/ivRooom/Herta/pull/950) | 2026-11-21 | untracked |
-| `ivRooom/Herta` | `pull_request` | [feat(daily-bonus): TEST送信（要求キュー＋Bot送信）を追加する (#766 Phase D1 / #723)](https://github.com/ivRooom/Herta/pull/952) | 2026-11-21 | untracked |
+| `ivRooom/Herta` | `pull_request` | [fix(studio): community-game-stats read の期間クエリに ::date キャストを付ける (#999)](https://github.com/ivRooom/Herta/pull/1001) | 2026-11-25 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(studio): 誕生日カード完成形プレビューの署名付き描画APIを追加 (#991) [#993 作り直し]](https://github.com/ivRooom/Herta/pull/995) | 2026-11-25 | untracked |
+| `ivRooom/Herta` | `pull_request` | [refactor(birthday-card): レンダラーを @herta/birthday-card 共有パッケージへ切り出す (#989)](https://github.com/ivRooom/Herta/pull/992) | 2026-11-25 | untracked |
+| `ivRooom/Herta` | `pull_request` | [fix(daily-participation): 答え合わせのスキーマを API 現行形へ追随し解説メディアを表示する (#988)](https://github.com/ivRooom/Herta/pull/990) | 2026-11-25 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(bot): 誕生日カードの背景にAPIの backgroundUrl を使う (#986)](https://github.com/ivRooom/Herta/pull/987) | 2026-11-24 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(worker): アチーブメント通知は Discord 行きだけ claim する (#964)](https://github.com/ivRooom/Herta/pull/984) | 2026-11-24 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(activity-rules): ゲーム集計の除外リストとCompeting対応を追加 (#980)](https://github.com/ivRooom/Herta/pull/981) | 2026-11-24 | untracked |
+| `ivRooom/Herta` | `pull_request` | [feat(studio): community game stats read API for ivrm-web community tab (#979)](https://github.com/ivRooom/Herta/pull/982) | 2026-11-23 | untracked |
+| `ivRooom/Herta` | `pull_request` | [fix(bot): wire IVRM_API_DATABASE_URL to the bot service for the XP emitter status push (#1646)](https://github.com/ivRooom/Herta/pull/977) | 2026-11-23 | untracked |
 
 Priorityは `release` → `pull_request` → labeled `issue` → recency の明示ルールです。単一のAI significance scoreは作りません。
 
