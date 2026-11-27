@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-26",
+  "as_of": "2026-11-27",
   "overview": {
     "tracked_articles": 9,
     "published_articles": 8,
@@ -12,8 +12,8 @@
     "pipeline_only_coverage_gaps": 3,
     "freshness_needs_initial_verification": 5,
     "backlog_items": 48,
-    "github_untracked_evidence": 337,
-    "github_untracked_themes": 168
+    "github_untracked_evidence": 352,
+    "github_untracked_themes": 171
   },
   "pipeline": {
     "draft": 1,
@@ -22,10 +22,10 @@
     "archived": 0
   },
   "trend_readiness": {
-    "snapshot_count": 92,
+    "snapshot_count": 93,
     "first_snapshot_at": "2026-08-27",
-    "last_snapshot_at": "2026-11-26",
-    "observed_span_days": 91,
+    "last_snapshot_at": "2026-11-27",
+    "observed_span_days": 92,
     "windows": {
       "7": true,
       "30": true,
@@ -33,11 +33,11 @@
     }
   },
   "freshness": {
-    "as_of": "2026-11-26",
+    "as_of": "2026-11-27",
     "published_articles": 8,
     "verified_articles": 3,
     "needs_initial_verification": 5,
-    "oldest_verification_age_days": 90,
+    "oldest_verification_age_days": 91,
     "articles": [
       {
         "slug": "repository-is-source-of-truth",
@@ -90,7 +90,7 @@
         "path": "articles/published/profile-signal-github-action/article.md",
         "status": "verified",
         "verified_at": "2026-08-28",
-        "days_since_verified": 90,
+        "days_since_verified": 91,
         "source_ref_count": 0
       },
       {
@@ -99,7 +99,7 @@
         "path": "articles/published/260831-selfhosted-graviton-runner/article.md",
         "status": "verified",
         "verified_at": "2026-09-04",
-        "days_since_verified": 83,
+        "days_since_verified": 84,
         "source_ref_count": 2
       },
       {
@@ -108,7 +108,7 @@
         "path": "articles/published/260831-runner-scale-to-zero-design/article.md",
         "status": "verified",
         "verified_at": "2026-09-15",
-        "days_since_verified": 72,
+        "days_since_verified": 73,
         "source_ref_count": 3
       }
     ]
@@ -120,7 +120,7 @@
           "value": "個人開発",
           "published_count": 4,
           "last_published_at": "2026-09-08",
-          "days_since_last": 79,
+          "days_since_last": 80,
           "windows": {
             "30": false,
             "90": true,
@@ -131,7 +131,7 @@
           "value": "ci",
           "published_count": 3,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -142,10 +142,10 @@
           "value": "GitHub",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -153,10 +153,10 @@
           "value": "GitHubActions",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -164,10 +164,10 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -175,7 +175,7 @@
           "value": "aws",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -186,7 +186,7 @@
           "value": "github",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 79,
+          "days_since_last": 80,
           "windows": {
             "30": false,
             "90": true,
@@ -197,7 +197,7 @@
           "value": "github-actions",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -208,7 +208,7 @@
           "value": "GitHubAPI",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -219,7 +219,7 @@
           "value": "individual-development",
           "published_count": 2,
           "last_published_at": "2026-09-04",
-          "days_since_last": 83,
+          "days_since_last": 84,
           "windows": {
             "30": false,
             "90": true,
@@ -230,7 +230,7 @@
           "value": "self-hosted-runner",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -241,7 +241,7 @@
           "value": "生成ai",
           "published_count": 2,
           "last_published_at": "2026-09-08",
-          "days_since_last": 79,
+          "days_since_last": 80,
           "windows": {
             "30": false,
             "90": true,
@@ -252,7 +252,7 @@
           "value": "ai-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -263,7 +263,7 @@
           "value": "architecture",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -274,7 +274,7 @@
           "value": "githubactions",
           "published_count": 1,
           "last_published_at": "2026-09-08",
-          "days_since_last": 79,
+          "days_since_last": 80,
           "windows": {
             "30": false,
             "90": true,
@@ -285,7 +285,7 @@
           "value": "openai",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -296,10 +296,10 @@
           "value": "OSS",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -307,7 +307,7 @@
           "value": "security",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -318,7 +318,7 @@
           "value": "terraform",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -329,7 +329,7 @@
           "value": "typescript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -349,7 +349,7 @@
           "value": "devops",
           "published_count": 5,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -360,10 +360,10 @@
           "value": "developer-productivity",
           "published_count": 4,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -371,7 +371,7 @@
           "value": "ai",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -382,7 +382,7 @@
           "value": "infra",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -399,10 +399,10 @@
           "value": "Python",
           "published_count": 3,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -410,7 +410,7 @@
           "value": "TypeScript",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -427,7 +427,7 @@
           "value": "GitHub Actions",
           "published_count": 6,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -438,7 +438,7 @@
           "value": "AWS EC2",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -449,7 +449,7 @@
           "value": "GitHub API",
           "published_count": 2,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -460,7 +460,7 @@
           "value": "Terraform",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -471,7 +471,7 @@
           "value": "Amazon Linux 2023",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 83,
+          "days_since_last": 84,
           "windows": {
             "30": false,
             "90": true,
@@ -482,7 +482,7 @@
           "value": "AWS Graviton",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 83,
+          "days_since_last": 84,
           "windows": {
             "30": false,
             "90": true,
@@ -493,7 +493,7 @@
           "value": "AWS Lambda",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -504,7 +504,7 @@
           "value": "GitHub",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -515,7 +515,7 @@
           "value": "GitHub Events API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -526,7 +526,7 @@
           "value": "GitHub Issues",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -537,7 +537,7 @@
           "value": "GitHub Pull Requests",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -548,10 +548,10 @@
           "value": "GitHub Releases",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         },
@@ -559,7 +559,7 @@
           "value": "GitHub Search API",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 92,
+          "days_since_last": 93,
           "windows": {
             "30": false,
             "90": false,
@@ -570,7 +570,7 @@
           "value": "github-aws-runners",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -581,7 +581,7 @@
           "value": "OpenAI API",
           "published_count": 1,
           "last_published_at": "2026-08-27",
-          "days_since_last": 91,
+          "days_since_last": 92,
           "windows": {
             "30": false,
             "90": false,
@@ -598,7 +598,7 @@
           "value": "architecture",
           "published_count": 4,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -609,7 +609,7 @@
           "value": "automation",
           "published_count": 4,
           "last_published_at": "2026-09-04",
-          "days_since_last": 83,
+          "days_since_last": 84,
           "windows": {
             "30": false,
             "90": true,
@@ -620,7 +620,7 @@
           "value": "infrastructure",
           "published_count": 2,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -631,7 +631,7 @@
           "value": "ai-assisted-development",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -642,7 +642,7 @@
           "value": "ci",
           "published_count": 1,
           "last_published_at": "2026-09-04",
-          "days_since_last": 83,
+          "days_since_last": 84,
           "windows": {
             "30": false,
             "90": true,
@@ -653,7 +653,7 @@
           "value": "ci-cd",
           "published_count": 1,
           "last_published_at": "2026-08-26",
-          "days_since_last": 92,
+          "days_since_last": 93,
           "windows": {
             "30": false,
             "90": false,
@@ -664,7 +664,7 @@
           "value": "cost-optimization",
           "published_count": 1,
           "last_published_at": "2026-09-15",
-          "days_since_last": 72,
+          "days_since_last": 73,
           "windows": {
             "30": false,
             "90": true,
@@ -675,7 +675,7 @@
           "value": "development-process",
           "published_count": 1,
           "last_published_at": "2026-08-24",
-          "days_since_last": 94,
+          "days_since_last": 95,
           "windows": {
             "30": false,
             "90": false,
@@ -686,10 +686,10 @@
           "value": "oss",
           "published_count": 1,
           "last_published_at": "2026-08-28",
-          "days_since_last": 90,
+          "days_since_last": 91,
           "windows": {
             "30": false,
-            "90": true,
+            "90": false,
             "365": true
           }
         }
@@ -711,7 +711,7 @@
         "likes": 1,
         "stocks": 3,
         "comments": 0,
-        "page_views": 2301
+        "page_views": 2319
       }
     },
     "observations": [
@@ -742,7 +742,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 362
+          "page_views": 363
         }
       },
       {
@@ -753,7 +753,7 @@
           "likes": 0,
           "stocks": 0,
           "comments": 0,
-          "page_views": 361
+          "page_views": 365
         }
       },
       {
@@ -764,7 +764,7 @@
           "likes": 0,
           "stocks": 2,
           "comments": 0,
-          "page_views": 334
+          "page_views": 345
         }
       },
       {
@@ -786,7 +786,7 @@
           "likes": 1,
           "stocks": 1,
           "comments": 0,
-          "page_views": 423
+          "page_views": 425
         }
       },
       {
@@ -813,10 +813,10 @@
         "communication"
       ],
       "coverage_gaps": [
-        "domains:developer-productivity (90d since last post)",
-        "technologies:GitHub (94d since last post)"
+        "domains:developer-productivity (91d since last post)",
+        "technologies:GitHub (95d since last post)"
       ],
-      "oldest_gap_age_days": 94,
+      "oldest_gap_age_days": 95,
       "source_evidence_recorded": true,
       "source_repository_count": 1,
       "related_positive_reaction_articles": 2,
@@ -1177,7 +1177,7 @@
     }
   ],
   "github_writing_funnel": {
-    "as_of": "2026-11-26",
+    "as_of": "2026-11-27",
     "snapshot_available": true,
     "monitored_repositories": [
       "ivRooom/Herta",
@@ -1186,10 +1186,22 @@
       "mizzz-ivr/ivmz-home",
       "mizzz-ivr/mizzz-ivr"
     ],
-    "evidence_count": 337,
-    "untracked_count": 337,
+    "evidence_count": 352,
+    "untracked_count": 352,
     "tracked_count": 0,
     "candidates": [
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "release",
+        "source_id": "v1.1.0",
+        "title": "v1.1.0",
+        "url": "https://github.com/ivRooom/Herta/releases/tag/v1.1.0",
+        "occurred_at": "2026-11-27T04:15:32Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.059
+      },
       {
         "repository": "ivRooom/Herta",
         "kind": "release",
@@ -1205,140 +1217,140 @@
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1032",
-        "title": "fix(compose): worker に HERTA_TICKET_SECRET を配線する (#1031)",
-        "url": "https://github.com/ivRooom/Herta/pull/1032",
-        "occurred_at": "2026-11-26T08:11:04Z",
+        "source_id": "#1057",
+        "title": "fix(daily-bonus): 受取失敗 (unavailable) の理由を保持してログ・台帳に残す (#1056)",
+        "url": "https://github.com/ivRooom/Herta/pull/1057",
+        "occurred_at": "2026-11-27T06:01:58Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.286
+        "title_similarity": 0.2
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1024",
-        "title": "feat(studio): ivrm向け guild channels 中継窓口を追加する (#1022)",
-        "url": "https://github.com/ivRooom/Herta/pull/1024",
-        "occurred_at": "2026-11-26T07:40:20Z",
+        "source_id": "#1059",
+        "title": "feat(bot): メンバー別プリセットの描画に対応する (#1029)",
+        "url": "https://github.com/ivRooom/Herta/pull/1059",
+        "occurred_at": "2026-11-27T05:38:06Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.227
+        "title_similarity": 0.2
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1025",
-        "title": "feat(achievements): tier 互換を廃止し rank 必須化する U3 (ivrm-web#1918)",
-        "url": "https://github.com/ivRooom/Herta/pull/1025",
-        "occurred_at": "2026-11-26T07:03:53Z",
+        "source_id": "#1051",
+        "title": "feat(bot): 誕生日配信サイクルに配信時刻ゲートを追加する (#1027)",
+        "url": "https://github.com/ivRooom/Herta/pull/1051",
+        "occurred_at": "2026-11-27T05:05:00Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.225
+        "title_similarity": 0.189
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1020",
-        "title": "feat(tickets): 添付ファイルの実体転送と Web 添付の Discord 配送 (#1013)",
-        "url": "https://github.com/ivRooom/Herta/pull/1020",
-        "occurred_at": "2026-11-26T05:34:04Z",
+        "source_id": "#1053",
+        "title": "feat(valorant): トロールガチャ (縛り) を /valorant random へ合流する (#1047)",
+        "url": "https://github.com/ivRooom/Herta/pull/1053",
+        "occurred_at": "2026-11-27T04:22:02Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.276
+        "title_similarity": 0.234
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1018",
-        "title": "feat(studio): community-game-stats read API 契約 v2 拡張 (activity セクション追加, #998)",
-        "url": "https://github.com/ivRooom/Herta/pull/1018",
-        "occurred_at": "2026-11-26T04:26:24Z",
+        "source_id": "#1055",
+        "title": "feat(studio): コミュニティ統計 read API に契約 v4（チャンネル内訳＋発言量）を追加する (#1054)",
+        "url": "https://github.com/ivRooom/Herta/pull/1055",
+        "occurred_at": "2026-11-27T03:53:04Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.217
+        "title_similarity": 0.211
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1011",
-        "title": "feat(bot): /game progress（原神）を画像カード化する (#1010)",
-        "url": "https://github.com/ivRooom/Herta/pull/1011",
-        "occurred_at": "2026-11-26T03:22:37Z",
+        "source_id": "#1052",
+        "title": "feat(studio): MemberActivityEvent の Admin 向け read-only projection API を追加する (#1040)",
+        "url": "https://github.com/ivRooom/Herta/pull/1052",
+        "occurred_at": "2026-11-26T23:41:48Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.262
+        "title_similarity": 0.308
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1017",
-        "title": "feat(worker): アチーブメント通知に登録バッジ画像を反映する (#1016)",
-        "url": "https://github.com/ivRooom/Herta/pull/1017",
-        "occurred_at": "2026-11-26T00:05:23Z",
+        "source_id": "#1042",
+        "title": "feat(studio): community-game-stats read API 契約 v3 拡張 (insights / game モード, #1041)",
+        "url": "https://github.com/ivRooom/Herta/pull/1042",
+        "occurred_at": "2026-11-26T22:45:36Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.156
+        "title_similarity": 0.253
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1015",
-        "title": "feat(tickets): bot プラグインの表示を Embed 化する (#1012)",
-        "url": "https://github.com/ivRooom/Herta/pull/1015",
-        "occurred_at": "2026-11-25T18:51:04Z",
+        "source_id": "#1034",
+        "title": "feat(achievements): 8段化に追随し platinum を追加する (ivrm-web#1943)",
+        "url": "https://github.com/ivRooom/Herta/pull/1034",
+        "occurred_at": "2026-11-26T22:26:24Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.226
+        "title_similarity": 0.215
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1014",
-        "title": "fix(studio): community-game-stats read の SUM 集計に ::bigint キャストを付与 (#1004)",
-        "url": "https://github.com/ivRooom/Herta/pull/1014",
-        "occurred_at": "2026-11-25T18:03:26Z",
+        "source_id": "#1044",
+        "title": "feat(bot): /game progress カードのエリア別探索度に各国アイコンを追加する (#1043)",
+        "url": "https://github.com/ivRooom/Herta/pull/1044",
+        "occurred_at": "2026-11-26T22:01:20Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.206
+        "title_similarity": 0.247
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1008",
-        "title": "feat(worker): アチーブメント通知の表示を rank 優先にする U2 (#1005)",
-        "url": "https://github.com/ivRooom/Herta/pull/1008",
-        "occurred_at": "2026-11-25T16:38:53Z",
+        "source_id": "#1045",
+        "title": "feat(activity-log): チャンネル権限上書き変更の収集を追加する (#1040)",
+        "url": "https://github.com/ivRooom/Herta/pull/1045",
+        "occurred_at": "2026-11-26T21:45:50Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.174
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#1009",
-        "title": "fix(deploy): wire ticket env vars into bot/worker compose services (#1006)",
-        "url": "https://github.com/ivRooom/Herta/pull/1009",
-        "occurred_at": "2026-11-25T13:40:33Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.214
+        "title_similarity": 0.146
       }
     ],
     "untracked_candidates": [
       {
         "repository": "ivRooom/Herta",
         "kind": "release",
+        "source_id": "v1.1.0",
+        "title": "v1.1.0",
+        "url": "https://github.com/ivRooom/Herta/releases/tag/v1.1.0",
+        "occurred_at": "2026-11-27T04:15:32Z",
+        "tracking_status": "untracked",
+        "matched_source": null,
+        "matched_title": null,
+        "title_similarity": 0.059
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "kind": "release",
         "source_id": "v1.0.0",
         "title": "v1.0.0",
         "url": "https://github.com/ivRooom/Herta/releases/tag/v1.0.0",
@@ -1351,139 +1363,155 @@
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1032",
-        "title": "fix(compose): worker に HERTA_TICKET_SECRET を配線する (#1031)",
-        "url": "https://github.com/ivRooom/Herta/pull/1032",
-        "occurred_at": "2026-11-26T08:11:04Z",
+        "source_id": "#1057",
+        "title": "fix(daily-bonus): 受取失敗 (unavailable) の理由を保持してログ・台帳に残す (#1056)",
+        "url": "https://github.com/ivRooom/Herta/pull/1057",
+        "occurred_at": "2026-11-27T06:01:58Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.286
+        "title_similarity": 0.2
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1024",
-        "title": "feat(studio): ivrm向け guild channels 中継窓口を追加する (#1022)",
-        "url": "https://github.com/ivRooom/Herta/pull/1024",
-        "occurred_at": "2026-11-26T07:40:20Z",
+        "source_id": "#1059",
+        "title": "feat(bot): メンバー別プリセットの描画に対応する (#1029)",
+        "url": "https://github.com/ivRooom/Herta/pull/1059",
+        "occurred_at": "2026-11-27T05:38:06Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.227
+        "title_similarity": 0.2
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1025",
-        "title": "feat(achievements): tier 互換を廃止し rank 必須化する U3 (ivrm-web#1918)",
-        "url": "https://github.com/ivRooom/Herta/pull/1025",
-        "occurred_at": "2026-11-26T07:03:53Z",
+        "source_id": "#1051",
+        "title": "feat(bot): 誕生日配信サイクルに配信時刻ゲートを追加する (#1027)",
+        "url": "https://github.com/ivRooom/Herta/pull/1051",
+        "occurred_at": "2026-11-27T05:05:00Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.225
+        "title_similarity": 0.189
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1020",
-        "title": "feat(tickets): 添付ファイルの実体転送と Web 添付の Discord 配送 (#1013)",
-        "url": "https://github.com/ivRooom/Herta/pull/1020",
-        "occurred_at": "2026-11-26T05:34:04Z",
+        "source_id": "#1053",
+        "title": "feat(valorant): トロールガチャ (縛り) を /valorant random へ合流する (#1047)",
+        "url": "https://github.com/ivRooom/Herta/pull/1053",
+        "occurred_at": "2026-11-27T04:22:02Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.276
+        "title_similarity": 0.234
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1018",
-        "title": "feat(studio): community-game-stats read API 契約 v2 拡張 (activity セクション追加, #998)",
-        "url": "https://github.com/ivRooom/Herta/pull/1018",
-        "occurred_at": "2026-11-26T04:26:24Z",
+        "source_id": "#1055",
+        "title": "feat(studio): コミュニティ統計 read API に契約 v4（チャンネル内訳＋発言量）を追加する (#1054)",
+        "url": "https://github.com/ivRooom/Herta/pull/1055",
+        "occurred_at": "2026-11-27T03:53:04Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.217
+        "title_similarity": 0.211
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1011",
-        "title": "feat(bot): /game progress（原神）を画像カード化する (#1010)",
-        "url": "https://github.com/ivRooom/Herta/pull/1011",
-        "occurred_at": "2026-11-26T03:22:37Z",
+        "source_id": "#1052",
+        "title": "feat(studio): MemberActivityEvent の Admin 向け read-only projection API を追加する (#1040)",
+        "url": "https://github.com/ivRooom/Herta/pull/1052",
+        "occurred_at": "2026-11-26T23:41:48Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.262
+        "title_similarity": 0.308
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1017",
-        "title": "feat(worker): アチーブメント通知に登録バッジ画像を反映する (#1016)",
-        "url": "https://github.com/ivRooom/Herta/pull/1017",
-        "occurred_at": "2026-11-26T00:05:23Z",
+        "source_id": "#1042",
+        "title": "feat(studio): community-game-stats read API 契約 v3 拡張 (insights / game モード, #1041)",
+        "url": "https://github.com/ivRooom/Herta/pull/1042",
+        "occurred_at": "2026-11-26T22:45:36Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.156
+        "title_similarity": 0.253
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1015",
-        "title": "feat(tickets): bot プラグインの表示を Embed 化する (#1012)",
-        "url": "https://github.com/ivRooom/Herta/pull/1015",
-        "occurred_at": "2026-11-25T18:51:04Z",
+        "source_id": "#1034",
+        "title": "feat(achievements): 8段化に追随し platinum を追加する (ivrm-web#1943)",
+        "url": "https://github.com/ivRooom/Herta/pull/1034",
+        "occurred_at": "2026-11-26T22:26:24Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.226
+        "title_similarity": 0.215
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1014",
-        "title": "fix(studio): community-game-stats read の SUM 集計に ::bigint キャストを付与 (#1004)",
-        "url": "https://github.com/ivRooom/Herta/pull/1014",
-        "occurred_at": "2026-11-25T18:03:26Z",
+        "source_id": "#1044",
+        "title": "feat(bot): /game progress カードのエリア別探索度に各国アイコンを追加する (#1043)",
+        "url": "https://github.com/ivRooom/Herta/pull/1044",
+        "occurred_at": "2026-11-26T22:01:20Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.206
+        "title_similarity": 0.247
       },
       {
         "repository": "ivRooom/Herta",
         "kind": "pull_request",
-        "source_id": "#1008",
-        "title": "feat(worker): アチーブメント通知の表示を rank 優先にする U2 (#1005)",
-        "url": "https://github.com/ivRooom/Herta/pull/1008",
-        "occurred_at": "2026-11-25T16:38:53Z",
+        "source_id": "#1045",
+        "title": "feat(activity-log): チャンネル権限上書き変更の収集を追加する (#1040)",
+        "url": "https://github.com/ivRooom/Herta/pull/1045",
+        "occurred_at": "2026-11-26T21:45:50Z",
         "tracking_status": "untracked",
         "matched_source": null,
         "matched_title": null,
-        "title_similarity": 0.174
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "kind": "pull_request",
-        "source_id": "#1009",
-        "title": "fix(deploy): wire ticket env vars into bot/worker compose services (#1006)",
-        "url": "https://github.com/ivRooom/Herta/pull/1009",
-        "occurred_at": "2026-11-25T13:40:33Z",
-        "tracking_status": "untracked",
-        "matched_source": null,
-        "matched_title": null,
-        "title_similarity": 0.214
+        "title_similarity": 0.146
       }
     ],
-    "untracked_theme_count": 168,
-    "compression_ratio": 2.01,
+    "untracked_theme_count": 171,
+    "compression_ratio": 2.06,
     "theme_groups": [
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "release",
+        "scope": null,
+        "label": "v1.1.0",
+        "event_count": 1,
+        "latest_at": "2026-11-27T04:15:32Z",
+        "kinds": [
+          "release"
+        ],
+        "representative": {
+          "kind": "release",
+          "source_id": "v1.1.0",
+          "title": "v1.1.0",
+          "url": "https://github.com/ivRooom/Herta/releases/tag/v1.1.0",
+          "occurred_at": "2026-11-27T04:15:32Z"
+        },
+        "evidence": [
+          {
+            "kind": "release",
+            "source_id": "v1.1.0",
+            "title": "v1.1.0",
+            "url": "https://github.com/ivRooom/Herta/releases/tag/v1.1.0",
+            "occurred_at": "2026-11-27T04:15:32Z"
+          }
+        ],
+        "identity": "v1.1.0"
+      },
       {
         "repository": "ivRooom/Herta",
         "grouping": "release",
@@ -1517,39 +1545,39 @@
         "grouping": "explicit_scope",
         "scope": "bot",
         "label": "bot",
-        "event_count": 42,
-        "latest_at": "2026-11-26T03:22:37Z",
+        "event_count": 47,
+        "latest_at": "2026-11-27T05:38:06Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#1011",
-          "title": "feat(bot): /game progress（原神）を画像カード化する (#1010)",
-          "url": "https://github.com/ivRooom/Herta/pull/1011",
-          "occurred_at": "2026-11-26T03:22:37Z"
+          "source_id": "#1059",
+          "title": "feat(bot): メンバー別プリセットの描画に対応する (#1029)",
+          "url": "https://github.com/ivRooom/Herta/pull/1059",
+          "occurred_at": "2026-11-27T05:38:06Z"
         },
         "evidence": [
           {
             "kind": "pull_request",
-            "source_id": "#1011",
-            "title": "feat(bot): /game progress（原神）を画像カード化する (#1010)",
-            "url": "https://github.com/ivRooom/Herta/pull/1011",
-            "occurred_at": "2026-11-26T03:22:37Z"
+            "source_id": "#1059",
+            "title": "feat(bot): メンバー別プリセットの描画に対応する (#1029)",
+            "url": "https://github.com/ivRooom/Herta/pull/1059",
+            "occurred_at": "2026-11-27T05:38:06Z"
           },
           {
             "kind": "pull_request",
-            "source_id": "#1007",
-            "title": "feat(bot): デコガチャプラグインを追加 (おみくじ＋プロフィールカード, #1002)",
-            "url": "https://github.com/ivRooom/Herta/pull/1007",
-            "occurred_at": "2026-11-25T13:22:42Z"
+            "source_id": "#1051",
+            "title": "feat(bot): 誕生日配信サイクルに配信時刻ゲートを追加する (#1027)",
+            "url": "https://github.com/ivRooom/Herta/pull/1051",
+            "occurred_at": "2026-11-27T05:05:00Z"
           },
           {
             "kind": "pull_request",
-            "source_id": "#1003",
-            "title": "feat(bot): 申請審査プラグイン submission-review を追加 (#996)",
-            "url": "https://github.com/ivRooom/Herta/pull/1003",
-            "occurred_at": "2026-11-25T11:21:36Z"
+            "source_id": "#1044",
+            "title": "feat(bot): /game progress カードのエリア別探索度に各国アイコンを追加する (#1043)",
+            "url": "https://github.com/ivRooom/Herta/pull/1044",
+            "occurred_at": "2026-11-26T22:01:20Z"
           }
         ],
         "identity": "bot"
@@ -1601,39 +1629,39 @@
         "grouping": "explicit_scope",
         "scope": "studio",
         "label": "studio",
-        "event_count": 18,
-        "latest_at": "2026-11-26T07:40:20Z",
+        "event_count": 21,
+        "latest_at": "2026-11-27T03:53:04Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#1024",
-          "title": "feat(studio): ivrm向け guild channels 中継窓口を追加する (#1022)",
-          "url": "https://github.com/ivRooom/Herta/pull/1024",
-          "occurred_at": "2026-11-26T07:40:20Z"
+          "source_id": "#1055",
+          "title": "feat(studio): コミュニティ統計 read API に契約 v4（チャンネル内訳＋発言量）を追加する (#1054)",
+          "url": "https://github.com/ivRooom/Herta/pull/1055",
+          "occurred_at": "2026-11-27T03:53:04Z"
         },
         "evidence": [
           {
             "kind": "pull_request",
-            "source_id": "#1024",
-            "title": "feat(studio): ivrm向け guild channels 中継窓口を追加する (#1022)",
-            "url": "https://github.com/ivRooom/Herta/pull/1024",
-            "occurred_at": "2026-11-26T07:40:20Z"
+            "source_id": "#1055",
+            "title": "feat(studio): コミュニティ統計 read API に契約 v4（チャンネル内訳＋発言量）を追加する (#1054)",
+            "url": "https://github.com/ivRooom/Herta/pull/1055",
+            "occurred_at": "2026-11-27T03:53:04Z"
           },
           {
             "kind": "pull_request",
-            "source_id": "#1018",
-            "title": "feat(studio): community-game-stats read API 契約 v2 拡張 (activity セクション追加, #998)",
-            "url": "https://github.com/ivRooom/Herta/pull/1018",
-            "occurred_at": "2026-11-26T04:26:24Z"
+            "source_id": "#1052",
+            "title": "feat(studio): MemberActivityEvent の Admin 向け read-only projection API を追加する (#1040)",
+            "url": "https://github.com/ivRooom/Herta/pull/1052",
+            "occurred_at": "2026-11-26T23:41:48Z"
           },
           {
             "kind": "pull_request",
-            "source_id": "#1014",
-            "title": "fix(studio): community-game-stats read の SUM 集計に ::bigint キャストを付与 (#1004)",
-            "url": "https://github.com/ivRooom/Herta/pull/1014",
-            "occurred_at": "2026-11-25T18:03:26Z"
+            "source_id": "#1042",
+            "title": "feat(studio): community-game-stats read API 契約 v3 拡張 (insights / game モード, #1041)",
+            "url": "https://github.com/ivRooom/Herta/pull/1042",
+            "occurred_at": "2026-11-26T22:45:36Z"
           }
         ],
         "identity": "studio"
@@ -1643,19 +1671,26 @@
         "grouping": "explicit_scope",
         "scope": "valorant",
         "label": "valorant",
-        "event_count": 18,
-        "latest_at": "2026-11-04T00:58:58Z",
+        "event_count": 19,
+        "latest_at": "2026-11-27T04:22:02Z",
         "kinds": [
           "pull_request"
         ],
         "representative": {
           "kind": "pull_request",
-          "source_id": "#798",
-          "title": "feat(valorant): Studioに登録日別勝率推移グラフを追加 (#786 #796)",
-          "url": "https://github.com/ivRooom/Herta/pull/798",
-          "occurred_at": "2026-11-04T00:58:58Z"
+          "source_id": "#1053",
+          "title": "feat(valorant): トロールガチャ (縛り) を /valorant random へ合流する (#1047)",
+          "url": "https://github.com/ivRooom/Herta/pull/1053",
+          "occurred_at": "2026-11-27T04:22:02Z"
         },
         "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#1053",
+            "title": "feat(valorant): トロールガチャ (縛り) を /valorant random へ合流する (#1047)",
+            "url": "https://github.com/ivRooom/Herta/pull/1053",
+            "occurred_at": "2026-11-27T04:22:02Z"
+          },
           {
             "kind": "pull_request",
             "source_id": "#798",
@@ -1669,16 +1704,51 @@
             "title": "feat(valorant): safe private /valorant picks stats for self and Guild staff (#785)",
             "url": "https://github.com/ivRooom/Herta/pull/793",
             "occurred_at": "2026-11-03T18:59:58Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#790",
-            "title": "fix(valorant): validate manual match result scores and unique agent lineup (#786)",
-            "url": "https://github.com/ivRooom/Herta/pull/790",
-            "occurred_at": "2026-11-03T18:14:19Z"
           }
         ],
         "identity": "valorant"
+      },
+      {
+        "repository": "ivRooom/Herta",
+        "grouping": "explicit_scope",
+        "scope": "daily-bonus",
+        "label": "daily-bonus",
+        "event_count": 9,
+        "latest_at": "2026-11-27T06:01:58Z",
+        "kinds": [
+          "pull_request"
+        ],
+        "representative": {
+          "kind": "pull_request",
+          "source_id": "#1057",
+          "title": "fix(daily-bonus): 受取失敗 (unavailable) の理由を保持してログ・台帳に残す (#1056)",
+          "url": "https://github.com/ivRooom/Herta/pull/1057",
+          "occurred_at": "2026-11-27T06:01:58Z"
+        },
+        "evidence": [
+          {
+            "kind": "pull_request",
+            "source_id": "#1057",
+            "title": "fix(daily-bonus): 受取失敗 (unavailable) の理由を保持してログ・台帳に残す (#1056)",
+            "url": "https://github.com/ivRooom/Herta/pull/1057",
+            "occurred_at": "2026-11-27T06:01:58Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#957",
+            "title": "feat(daily-bonus): バンドル動画（契約v2・リンク方式）に対応する (#766 D3)",
+            "url": "https://github.com/ivRooom/Herta/pull/957",
+            "occurred_at": "2026-11-21T08:39:18Z"
+          },
+          {
+            "kind": "pull_request",
+            "source_id": "#956",
+            "title": "feat(daily-bonus): クエスト確認ボタンとクエストボードリンクを追加する (#954)",
+            "url": "https://github.com/ivRooom/Herta/pull/956",
+            "occurred_at": "2026-11-21T07:25:59Z"
+          }
+        ],
+        "identity": "daily-bonus"
       },
       {
         "repository": "ivRooom/Herta",
@@ -1721,48 +1791,6 @@
           }
         ],
         "identity": "release"
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "grouping": "explicit_scope",
-        "scope": "daily-bonus",
-        "label": "daily-bonus",
-        "event_count": 8,
-        "latest_at": "2026-11-21T08:39:18Z",
-        "kinds": [
-          "pull_request"
-        ],
-        "representative": {
-          "kind": "pull_request",
-          "source_id": "#957",
-          "title": "feat(daily-bonus): バンドル動画（契約v2・リンク方式）に対応する (#766 D3)",
-          "url": "https://github.com/ivRooom/Herta/pull/957",
-          "occurred_at": "2026-11-21T08:39:18Z"
-        },
-        "evidence": [
-          {
-            "kind": "pull_request",
-            "source_id": "#957",
-            "title": "feat(daily-bonus): バンドル動画（契約v2・リンク方式）に対応する (#766 D3)",
-            "url": "https://github.com/ivRooom/Herta/pull/957",
-            "occurred_at": "2026-11-21T08:39:18Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#956",
-            "title": "feat(daily-bonus): クエスト確認ボタンとクエストボードリンクを追加する (#954)",
-            "url": "https://github.com/ivRooom/Herta/pull/956",
-            "occurred_at": "2026-11-21T07:25:59Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#953",
-            "title": "feat(daily-bonus): 配信時刻（scheduleTime）を可変化する (#766 Phase D2)",
-            "url": "https://github.com/ivRooom/Herta/pull/953",
-            "occurred_at": "2026-11-21T07:05:27Z"
-          }
-        ],
-        "identity": "daily-bonus"
       },
       {
         "repository": "ivRooom/Herta",
@@ -1931,48 +1959,6 @@
           }
         ],
         "identity": "db"
-      },
-      {
-        "repository": "ivRooom/Herta",
-        "grouping": "explicit_scope",
-        "scope": "mbti",
-        "label": "mbti",
-        "event_count": 5,
-        "latest_at": "2026-10-15T18:29:18Z",
-        "kinds": [
-          "pull_request"
-        ],
-        "representative": {
-          "kind": "pull_request",
-          "source_id": "#484",
-          "title": "feat(mbti): 可愛いちびHertaのタイプ別画像へ差し替え",
-          "url": "https://github.com/ivRooom/Herta/pull/484",
-          "occurred_at": "2026-10-15T18:29:18Z"
-        },
-        "evidence": [
-          {
-            "kind": "pull_request",
-            "source_id": "#484",
-            "title": "feat(mbti): 可愛いちびHertaのタイプ別画像へ差し替え",
-            "url": "https://github.com/ivRooom/Herta/pull/484",
-            "occurred_at": "2026-10-15T18:29:18Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#483",
-            "title": "feat(mbti): タイプ別イラストで診断レポートと保存画像を改善",
-            "url": "https://github.com/ivRooom/Herta/pull/483",
-            "occurred_at": "2026-10-15T18:11:24Z"
-          },
-          {
-            "kind": "pull_request",
-            "source_id": "#481",
-            "title": "feat(mbti): 520問の診断・詳細レポート・画像保存とURL共有を追加",
-            "url": "https://github.com/ivRooom/Herta/pull/481",
-            "occurred_at": "2026-10-15T12:56:27Z"
-          }
-        ],
-        "identity": "mbti"
       }
     ]
   }

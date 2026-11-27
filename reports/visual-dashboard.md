@@ -1,6 +1,6 @@
 # Writing Analytics — Decision Dashboard
 
-> Analytics as of: 2026-11-26 · Freshness as of: 2026-11-26 · Derived from Repository metadata / publication registry / stored metric snapshots
+> Analytics as of: 2026-11-27 · Freshness as of: 2026-11-27 · Derived from Repository metadata / publication registry / stored metric snapshots
 
 ## まず見る
 
@@ -10,19 +10,19 @@
 | Pipeline | Draft **1** / Review **0** |
 | Last published | **2026-09-15** |
 | Source freshness | Initial verification **5** / Verified **3** |
-| Metric snapshots | **92** / observed span **91d** |
+| Metric snapshots | **93** / observed span **92d** |
 | Data Quality | **3件 — 下のData Qualityを確認** |
 | Pipeline-only coverage gaps | **3** |
-| GitHub → Writing Funnel | Themes **168** / Events **337** |
+| GitHub → Writing Funnel | Themes **171** / Events **352** |
 | 次の記事候補 | [技術記事を書いていたら、「コードの外側」の方が気になってきた](../articles/draft/260827-engineer-thinking-place/article.md) (`draft`) |
 
 ### 今の判断
 
-- GitHub実装の未記事化evidence **337件** を、明示scopeで **168 themes** に整理しています。先頭theme: `ivRooom/Herta` / v1.0.0（1 events、代表: v1.0.0）。
+- GitHub実装の未記事化evidence **352件** を、明示scopeで **171 themes** に整理しています。先頭theme: `ivRooom/Herta` / v1.1.0（1 events、代表: v1.1.0）。
 - Published記事 **5件** はinitial verification未記録です。過去の確認日は推測せず、次回実確認時に `verified_at` を記録します。
 - 7日Trendを実データだけで分析できる状態です。
 - Data Quality findingが **3件** あります。記事追加より先に、必要ならmetadata整備対象として確認できます。
-- 次記事候補の主な根拠: `communication`, `domains:developer-productivity (90d since last post)`, `technologies:GitHub (94d since last post)`
+- 次記事候補の主な根拠: `communication`, `domains:developer-productivity (91d since last post)`, `technologies:GitHub (95d since last post)`
 
 ## Editorial Pipeline
 
@@ -37,32 +37,32 @@ draft / reviewにはあるが、公開済みPortfolioではまだ示せていな
 
 ## GitHub → Writing Funnel
 
-> GitHub snapshot as of: **2026-11-26**
+> GitHub snapshot as of: **2026-11-27**
 
 最近のpublic Repository実装を、明示的なConventional Commit scopeだけでtheme groupingして表示します。scopeが無いeventは無理にまとめません。tracked evidenceを含む監査用全件はContent Opportunities / Data Martで確認します。意味的な重複や重要度は推測しません。
 
 | Repository | Theme | Events | Representative evidence | Latest |
 | --- | --- | ---: | --- | --- |
+| `ivRooom/Herta` | release | **1** | [v1.1.0](https://github.com/ivRooom/Herta/releases/tag/v1.1.0) | 2026-11-27 |
 | `ivRooom/Herta` | release | **1** | [v1.0.0](https://github.com/ivRooom/Herta/releases/tag/v1.0.0) | 2026-11-22 |
-| `ivRooom/Herta` | scope `bot` | **42** | [feat(bot): /game progress（原神）を画像カード化する (#1010)](https://github.com/ivRooom/Herta/pull/1011) | 2026-11-26 |
+| `ivRooom/Herta` | scope `bot` | **47** | [feat(bot): メンバー別プリセットの描画に対応する (#1029)](https://github.com/ivRooom/Herta/pull/1059) | 2026-11-27 |
 | `ivRooom/Herta` | scope `vc-recap` | **26** | [test(vc-recap): AWS/Whisper同一音声CER・RTFの非公開オフライン集計を追加 (#577)](https://github.com/ivRooom/Herta/pull/807) | 2026-11-04 |
-| `ivRooom/Herta` | scope `studio` | **18** | [feat(studio): ivrm向け guild channels 中継窓口を追加する (#1022)](https://github.com/ivRooom/Herta/pull/1024) | 2026-11-26 |
-| `ivRooom/Herta` | scope `valorant` | **18** | [feat(valorant): Studioに登録日別勝率推移グラフを追加 (#786 #796)](https://github.com/ivRooom/Herta/pull/798) | 2026-11-04 |
+| `ivRooom/Herta` | scope `studio` | **21** | [feat(studio): コミュニティ統計 read API に契約 v4（チャンネル内訳＋発言量）を追加する (#1054)](https://github.com/ivRooom/Herta/pull/1055) | 2026-11-27 |
+| `ivRooom/Herta` | scope `valorant` | **19** | [feat(valorant): トロールガチャ (縛り) を /valorant random へ合流する (#1047)](https://github.com/ivRooom/Herta/pull/1053) | 2026-11-27 |
+| `ivRooom/Herta` | scope `daily-bonus` | **9** | [fix(daily-bonus): 受取失敗 (unavailable) の理由を保持してログ・台帳に残す (#1056)](https://github.com/ivRooom/Herta/pull/1057) | 2026-11-27 |
 | `ivRooom/Herta` | scope `release` | **9** | [fix(release): VALORANT predeploy fence を external DB の適用済み確認に対応](https://github.com/ivRooom/Herta/pull/845) | 2026-11-10 |
-| `ivRooom/Herta` | scope `daily-bonus` | **8** | [feat(daily-bonus): バンドル動画（契約v2・リンク方式）に対応する (#766 D3)](https://github.com/ivRooom/Herta/pull/957) | 2026-11-21 |
 | `ivRooom/Herta` | scope `ai` | **8** | [feat(ai): Guild単位の月次AI予算上限を追加する](https://github.com/ivRooom/Herta/pull/543) | 2026-10-21 |
 | `ivRooom/Herta` | scope `worker` | **7** | [feat(worker): アチーブメント通知に登録バッジ画像を反映する (#1016)](https://github.com/ivRooom/Herta/pull/1017) | 2026-11-26 |
 | `ivRooom/Herta` | scope `daily` | **7** | [feat(daily): 受取・回答失敗時に運営通知ボタンとポータル誘導を追加する (#896)](https://github.com/ivRooom/Herta/pull/897) | 2026-11-14 |
 | `ivRooom/Herta` | scope `db` | **6** | [feat(db): anniversary_events テーブルを撤去する (#880)](https://github.com/ivRooom/Herta/pull/938) | 2026-11-19 |
-| `ivRooom/Herta` | scope `mbti` | **5** | [feat(mbti): 可愛いちびHertaのタイプ別画像へ差し替え](https://github.com/ivRooom/Herta/pull/484) | 2026-10-15 |
 
-Raw untracked evidence **337件** → deterministic theme **168件**。Compression: **2.01x**。
+Raw untracked evidence **352件** → deterministic theme **171件**。Compression: **2.06x**。
 
 Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repository内の明示scopeでgrouping、scope無しはsingleton。AI semantic clustering / significance scoreは使いません。
 
 ## Source Freshness
 
-> Freshness as of: **2026-11-26**
+> Freshness as of: **2026-11-27**
 
 技術的事実を最後に再確認した記録です。未記録の記事へ過去日付を推測して補完しません。現段階では任意のstale thresholdも置かず、initial verificationと経過日数をそのまま表示します。
 
@@ -73,9 +73,9 @@ Grouping: `release`は独立theme、`feat(scope)` / `fix(scope)`等は同一Repo
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](../articles/published/github-profile-live-dashboard/article.md) | Needs initial verification | - | - | 0 |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](../articles/personal-dev-pr-ci.md) | Needs initial verification | - | - | 0 |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](../articles/ai-runtime-safety-boundary.md) | Needs initial verification | - | - | 0 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 90d | 0 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 83d | 2 |
-| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/published/260831-runner-scale-to-zero-design/article.md) | Verified | 2026-09-15 | 72d | 3 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](../articles/published/profile-signal-github-action/article.md) | Verified | 2026-08-28 | 91d | 0 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](../articles/published/260831-selfhosted-graviton-runner/article.md) | Verified | 2026-09-04 | 84d | 2 |
+| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](../articles/published/260831-runner-scale-to-zero-design/article.md) | Verified | 2026-09-15 | 73d | 3 |
 
 ## Portfolio Coverage
 
@@ -103,19 +103,19 @@ reaction chartはlikes / stocks / bookmarks / commentsのみを描画します�
 | --- | --- | --- |
 | [生成AIをAPI呼び出しで終わらせない — Secret・Quota・Kill Switchを分けるAI Runtime設計](https://zenn.dev/mizzz-ivr/articles/ai-runtime-safety-boundary) | zenn | metrics error |
 | [完成したと思ったコードが、PRを開いたら完成じゃなくなった](https://zenn.dev/mizzz/articles/personal-dev-pr-ci) | zenn | likes 1 · bookmarks 0 · comments 0 · page_views unavailable |
-| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) | qiita | likes 0 · stocks 0 · comments 0 · page_views 362 |
-| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 361 |
-| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 334 |
+| [CI runnerを0台にしたかっただけなのに、2GBの壁とTerraformの「正解」にぶつかった](https://qiita.com/mizzz-ivr/items/a9f22a303c22b774963c) | qiita | likes 0 · stocks 0 · comments 0 · page_views 363 |
+| [GitHub Actionsの無料枠が尽きたので、AWSにセルフホストのGraviton runnerを立てた](https://qiita.com/mizzz-ivr/items/e4c663c7f5d3f82fd0a9) | qiita | likes 0 · stocks 0 · comments 0 · page_views 365 |
+| [GitHubプロフィールREADMEに「今日の開発活動」を自動表示してみた](https://qiita.com/mizzz-ivr/items/73bd3a3874aa8adacc1a) | qiita | likes 0 · stocks 2 · comments 0 · page_views 345 |
 | [GitHubプロフィールをライブな開発ダッシュボードにしてみた](https://qiita.com/mizzz-ivr/items/b5cc51f17c9d9e69f630) | qiita | likes 0 · stocks 0 · comments 0 · page_views 309 |
-| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 423 |
+| [自作GitHubプロフィールWidgetをStandalone OSSとして配布してみた](https://qiita.com/mizzz-ivr/items/f20a2d58f623097a5904) | qiita | likes 1 · stocks 1 · comments 0 · page_views 425 |
 | [AI開発エージェントを「Repository is the Source of Truth」で動かしたら個人開発がかなり変わった話](https://qiita.com/mizzz-ivr/items/44cd3077d732eea1bf6e) | qiita | likes 0 · stocks 0 · comments 0 · page_views 512 |
 
 ## Trend Readiness
 
-- Snapshot count: **92**
+- Snapshot count: **93**
 - First snapshot: **2026-08-27**
-- Latest snapshot: **2026-11-26**
-- Observed span: **91 days**
+- Latest snapshot: **2026-11-27**
+- Observed span: **92 days**
 
 | Window | Status |
 | --- | --- |
